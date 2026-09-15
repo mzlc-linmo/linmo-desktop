@@ -143,6 +143,21 @@ EOF
   # 卷名避免与「已安装应用」混淆；挂载后为 /Volumes/Linmo-Installer（只读映像，不是 /Applications）
   hdiutil create -volname "Linmo-Installer" -srcfolder "${DMG_TMP}" -ov -format UDZO "${DMG}"
   rm -rf "${DMG_TMP}"
+
+  # 签名 + 公证 + staple DMG（gon 0.2.5 内置的 altool 已弃用，改用现代 notarytool）
+  if [[ "${LIMNO_GON:-0}" = "1" ]]; then
+    echo "==> codesign: ${DMG}"
+    codesign --force --options runtime --timestamp --sign "${IDENTITY}" "${DMG}"
+    echo "==> notarytool: 提交公证（${DMG}）..."
+    xcrun notarytool submit "${DMG}" \
+      --apple-id "${AC_USERNAME}" \
+      --team-id "${AC_TEAM_ID}" \
+      --password "${AC_PASSWORD}" \
+      --wait
+    echo "==> stapler: staple ${DMG}"
+    xcrun stapler staple "${DMG}"
+    echo "==> 公证完成: ${DMG}"
+  fi
   echo "Built: ${DMG}"
   echo ""
   echo "用户使用：双击 .dmg → Finder 打开安装窗口 → 拖入「应用程序」或双击应用并按提示安装"
