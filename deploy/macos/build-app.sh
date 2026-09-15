@@ -140,8 +140,26 @@ Linmo 安装说明
 
 安装完成后可从「启动台」或「应用程序」打开；可将磁盘映像推出。
 EOF
-  # 卷名避免与「已安装应用」混淆；挂载后为 /Volumes/Linmo-Installer（只读映像，不是 /Applications）
-  hdiutil create -volname "Linmo-Installer" -srcfolder "${DMG_TMP}" -ov -format UDZO "${DMG}"
+  # 稳健两步 DMG：显式大小创建读写映像 → 挂载复制 → 卸载 → 转 UDZO
+  # （-srcfolder 在 CI 上会因自动尺寸计算过小而报 No space left on device）
+  DMG_RW="${DMG%.dmg}.rw.dmg"
+  rm -f "${DMG_RW}"
+  SRC_MB=$(du -sm "${DMG_TMP}" 2>/dev/null | awk '{print int($1 * 1.5) + 400}')
+  echo "==> 创建临时读写映像（约 ${SRC_MB} MB）..."
+  hdiutil create -size "${SRC_MB}m" -volname "Linmo-Installer" -fs HFS+ -format UDRW -ov -quiet "${DMG_RW}"
+  hdiutil detach "/Volumes/Linmo-Installer" -quiet 2>/dev/null || true
+  hdiutil attach "${DMG_RW}" -nobrowse -noautoopen -mountpoint "/Volumes/Linmo-Installer" -quiet
+  echo "==> 复制文件到映像..."
+  ditto "${DMG_TMP}/Linmo.app" "/Volumes/Linmo-Installer/Linmo.app"
+  ln -sf /Applications "/Volumes/Linmo-Installer/Applications"
+  if [[ -f "${DMG_TMP}/安装说明.txt" ]]; then
+    cp "${DMG_TMP}/安装说明.txt" "/Volumes/Linmo-Installer/"
+  fi
+  echo "==> 卸载映像..."
+  hdiutil detach "/Volumes/Linmo-Installer" -quiet
+  echo "==> 转换为压缩 UDZO..."
+  hdiutil convert "${DMG_RW}" -format UDZO -o "${DMG}" -ov -quiet
+  rm -f "${DMG_RW}"
   rm -rf "${DMG_TMP}"
 
   # 签名 + 公证 + staple DMG（gon 0.2.5 内置的 altool 已弃用，改用现代 notarytool）
