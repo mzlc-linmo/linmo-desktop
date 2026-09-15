@@ -43,6 +43,16 @@ jobs:
       - name: Install gon
         run: brew install mitchellh/gon/gon
 
+      - name: Free up disk space
+        run: |
+          df -h /
+          echo "清理 Xcode 模拟器运行时与缓存..."
+          sudo rm -rf /Library/Developer/CoreSimulator 2>/dev/null || true
+          sudo rm -rf "$HOME/Library/Developer/Xcode/DerivedData" 2>/dev/null || true
+          sudo rm -rf "$HOME/Library/Caches/org.swift.swiftpm" 2>/dev/null || true
+          brew cleanup --prune=all 2>/dev/null || true
+          df -h /
+
       - name: Import Apple signing certificate
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
