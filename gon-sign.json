@@ -7,7 +7,7 @@
     "provider": "@env:AC_TEAM_ID"
   },
   "sign": {
-    "application_identity": "Developer ID Application: Jeen Tsway (LN7XF9MWY3)",
+    "application_identity": "1904129462E4284A33E9E1B8454BD87641A6CC28",
     "entitlements_file": "./src/build/darwin/entitlements.plist"
   }
 }

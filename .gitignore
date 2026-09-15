@@ -31,6 +31,7 @@ ui/package-lock.json
 ui/package.json
 
 # Runtime and test data
+.env.local
 .state/
 .playwright-mcp/
 src/.playwright-mcp/

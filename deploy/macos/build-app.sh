@@ -146,7 +146,7 @@ EOF
   rm -f "${DMG_RW}"
   SRC_MB=$(du -sm "${DMG_TMP}" 2>/dev/null | awk '{print int($1 * 1.5) + 400}')
   echo "==> 创建临时读写映像（约 ${SRC_MB} MB）..."
-  hdiutil create -size "${SRC_MB}m" -volname "Linmo-Installer" -fs HFS+ -format UDRW -ov -quiet "${DMG_RW}"
+  hdiutil create -size "${SRC_MB}m" -volname "Linmo-Installer" -fs HFS+ -ov -quiet "${DMG_RW}"
   hdiutil detach "/Volumes/Linmo-Installer" -quiet 2>/dev/null || true
   hdiutil attach "${DMG_RW}" -nobrowse -noautoopen -mountpoint "/Volumes/Linmo-Installer" -quiet
   echo "==> 复制文件到映像..."
