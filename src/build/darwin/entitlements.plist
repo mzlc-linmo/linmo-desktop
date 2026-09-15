@@ -8,5 +8,8 @@
 	<!-- 允许监听端口（Gateway 需要） -->
 	<key>com.apple.security.network.server</key>
 	<true/>
+	<!-- 允许加载运行时 dlopen 的 libffi（缓存副本与主进程 Team ID 不一致时仍可加载） -->
+	<key>com.apple.security.cs.disable-library-validation</key>
+	<true/>
 </dict>
 </plist>

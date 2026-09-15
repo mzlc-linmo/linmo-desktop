@@ -115,6 +115,7 @@ if [[ "${LIMNO_GON:-0}" = "1" ]]; then
 fi
 
 mkdir -p "${MAC_DIST}"
+rm -rf "${MAC_DIST}/Linmo.app"
 cp -R "${APP}" "${MAC_DIST}/"
 echo "Built: ${MAC_DIST}/Linmo.app"
 
