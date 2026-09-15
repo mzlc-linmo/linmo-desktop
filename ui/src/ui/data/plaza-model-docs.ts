@@ -32,7 +32,7 @@ export const PLAZA_DOCS: Record<string, PlazaDocSection> = {
 • Q8_0 — 8 bit，质量极好，文件较大
 • F16 — 16 bit 全精度，体积最大
 
-OpenOcta 模型广场默认以 Q4_K_M 估算显存占用与推荐等级。`,
+Linmo 模型广场默认以 Q4_K_M 估算显存占用与推荐等级。`,
   },
   vram: {
     id: "vram",

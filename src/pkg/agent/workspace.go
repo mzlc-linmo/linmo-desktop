@@ -12,9 +12,9 @@ import (
 
 // ResolveAgentWorkspaceDir returns the workspace directory for an agent.
 // Priority: agents.list[].workspace for the agent > agents.defaults.workspace (if default agent) >
-// ~/.openocta/workspace or ~/.openocta/workspace-{profile} (default agent) > ~/.openocta/agents/<id>/workspace.
-// env is used for OPENOCTA_PROFILE, OPENOCTA_STATE_DIR, HOME (e.g. os.Getenv).
-func ResolveAgentWorkspaceDir(cfg *config.OpenOctaConfig, agentID string, env func(string) string) string {
+// ~/.linmo/workspace or ~/.linmo/workspace-{profile} (default agent) > ~/.linmo/agents/<id>/workspace.
+// env is used for LIMNO_PROFILE, LIMNO_STATE_DIR, HOME (e.g. os.Getenv).
+func ResolveAgentWorkspaceDir(cfg *config.LinmoConfig, agentID string, env func(string) string) string {
 	id := strings.TrimSpace(strings.ToLower(agentID))
 	if id == "" {
 		id = "main"
@@ -34,8 +34,8 @@ func ResolveAgentWorkspaceDir(cfg *config.OpenOctaConfig, agentID string, env fu
 				return expandUserPath(w, env)
 			}
 		}
-		// OPENOCTA_PROFILE → workspace-{profile}, else workspace
-		profile := strings.TrimSpace(env("OPENOCTA_PROFILE"))
+		// LIMNO_PROFILE → workspace-{profile}, else workspace
+		profile := strings.TrimSpace(env("LIMNO_PROFILE"))
 		if profile != "" && strings.ToLower(profile) != "default" {
 			return filepath.Join(paths.ResolveStateDir(env), "workspace-"+profile)
 		}
@@ -47,7 +47,7 @@ func ResolveAgentWorkspaceDir(cfg *config.OpenOctaConfig, agentID string, env fu
 }
 
 // resolveDefaultAgentID returns the default agent ID (first with default=true, or first in list).
-func resolveDefaultAgentID(cfg *config.OpenOctaConfig) string {
+func resolveDefaultAgentID(cfg *config.LinmoConfig) string {
 	if cfg == nil || cfg.Agents == nil || len(cfg.Agents.List) == 0 {
 		return "main"
 	}

@@ -11,7 +11,7 @@ const bundledAssetsDirName = "bundled"
 
 // ResolveAssetsDir returns the directory containing shipped peekaboo / inner_skills assets.
 // Resolution order:
-//  1. OPENOCTA_BUNDLED_ASSETS_DIR
+//  1. LIMNO_BUNDLED_ASSETS_DIR
 //  2. <executable>/bundled
 //  3. macOS .app: ../Resources/bundled
 //  4. Dev: <cwd>/deploy (repo layout)
@@ -19,7 +19,7 @@ func ResolveAssetsDir(env func(string) string) string {
 	if env == nil {
 		env = os.Getenv
 	}
-	if override := strings.TrimSpace(env("OPENOCTA_BUNDLED_ASSETS_DIR")); override != "" {
+	if override := strings.TrimSpace(env("LIMNO_BUNDLED_ASSETS_DIR")); override != "" {
 		if info, err := os.Stat(override); err == nil && info.IsDir() {
 			return override
 		}

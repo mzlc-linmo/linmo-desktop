@@ -19,7 +19,7 @@ const (
 	maxBytes        = 1_000_000
 )
 
-var rollingLogRE = regexp.MustCompile(`^openocta-\d{4}-\d{2}-\d{2}\.log$`)
+var rollingLogRE = regexp.MustCompile(`^linmo-\d{4}-\d{2}-\d{2}\.log$`)
 
 // LogsTailResult matches TS logs.tail response shape (logs-chat.ts LogsTailResultSchema).
 // Lines is the raw line array from the file (string[]), same as TS readLogSlice.
@@ -47,7 +47,7 @@ func isRollingLogFile(name string) bool {
 }
 
 // resolveLogFile returns the file path to read. If the configured file exists, returns it.
-// If it's a rolling log (openocta-YYYY-MM-DD.log) and doesn't exist, finds the most recent
+// If it's a rolling log (linmo-YYYY-MM-DD.log) and doesn't exist, finds the most recent
 func resolveLogFile(file string) string {
 	if _, err := os.Stat(file); err == nil {
 		return file
@@ -271,7 +271,7 @@ func LogsTailHandler(opts HandlerOpts) error {
 	}
 
 	env := func(k string) string { return os.Getenv(k) }
-	// Default: rolling path openocta-YYYY-MM-DD.log in preferred log dir (same as Node)
+	// Default: rolling path linmo-YYYY-MM-DD.log in preferred log dir (same as Node)
 	settings := logging.GetResolvedLoggerSettings(env, "")
 	configuredFile := settings.File
 

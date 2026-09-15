@@ -19,7 +19,7 @@ describe("extractReferencedAttachmentPaths", () => {
   });
 
   it("matches absolute paths in backticks inside A2UI markdown", () => {
-    const path = "/Users/zhanbei/.openocta/workspace/sample_data.csv";
+    const path = "/Users/zhanbei/.linmo/workspace/sample_data.csv";
     const text = `这是文件 \`${path}\` 的内容`;
     expect(extractReferencedAttachmentPaths(text)).toEqual([path]);
   });
@@ -27,7 +27,7 @@ describe("extractReferencedAttachmentPaths", () => {
 
 describe("extractReferencedPathsFromGroup", () => {
   it("extracts paths from A2UI updateDataModel in assistant messages", () => {
-    const path = "/Users/zhanbei/.openocta/workspace/sample_data.csv";
+    const path = "/Users/zhanbei/.linmo/workspace/sample_data.csv";
     const group = [
       {
         message: {

@@ -108,7 +108,7 @@ describe("setup wizard", () => {
     localStorage.clear();
   });
 
-  it("reads completion from openocta.json wizard.setup", () => {
+  it("reads completion from linmo.json wizard.setup", () => {
     localStorage.clear();
     const config = {
       wizard: {
@@ -123,7 +123,7 @@ describe("setup wizard", () => {
     expect(shouldShowSetupWizard("v9.9.9", config)).toBe(true);
   });
 
-  it("reads skipped status from openocta.json wizard.setup", () => {
+  it("reads skipped status from linmo.json wizard.setup", () => {
     localStorage.clear();
     const config = {
       wizard: {
@@ -146,7 +146,7 @@ describe("setup wizard", () => {
     localStorage.clear();
   });
 
-  it("hides wizard while skip-all is pending sync to openocta.json", () => {
+  it("hides wizard while skip-all is pending sync to linmo.json", () => {
     localStorage.clear();
     markSetupWizardCompleted(APP_VERSION);
     markSetupWizardSkipPendingConfigSync(APP_VERSION);

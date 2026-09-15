@@ -20,10 +20,10 @@ func DefaultEnv(key string) string {
 
 // Load reads and parses the config file.
 // Loads .env from the current working directory first so declared env vars are visible.
-// If the config file does not exist, initializes from embedded openocta.json.example
+// If the config file does not exist, initializes from embedded linmo.json.example
 // (writes it to the config path so the user can edit it).
 // Returns default config if file is empty.
-func Load(env EnvGetter) (*OpenOctaConfig, error) {
+func Load(env EnvGetter) (*LinmoConfig, error) {
 	_ = LoadEnvFromCurrentDir() // best-effort: .env from cwd
 	if env == nil {
 		env = DefaultEnv
@@ -34,11 +34,11 @@ func Load(env EnvGetter) (*OpenOctaConfig, error) {
 	data, err := os.ReadFile(configPath)
 	if err != nil {
 		if os.IsNotExist(err) {
-			// Initialize from embedded openocta.json.example
+			// Initialize from embedded linmo.json.example
 			example, eErr := embed.ConfigExampleJSON()
 			if eErr == nil && len(example) > 0 {
 				if mkErr := os.MkdirAll(stateDir, 0700); mkErr == nil {
-					var ex OpenOctaConfig
+					var ex LinmoConfig
 					if json.Unmarshal(example, &ex) == nil {
 						if normalizeDesktopGatewayAuth(&ex, env) {
 							if b, mErr := json.MarshalIndent(&ex, "", "  "); mErr == nil {
@@ -50,13 +50,13 @@ func Load(env EnvGetter) (*OpenOctaConfig, error) {
 				}
 				data = example
 			} else {
-				return &OpenOctaConfig{}, nil
+				return &LinmoConfig{}, nil
 			}
 		} else {
 			return nil, err
 		}
 	}
-	var cfg OpenOctaConfig
+	var cfg LinmoConfig
 	if len(data) == 0 {
 		return &cfg, nil
 	}
@@ -77,7 +77,7 @@ const DefaultGatewayToken = "edc146993b5ae0b1544c3137cc888f94436cf11e1952cff6"
 
 // normalizeDesktopGatewayAuth forces gateway.auth.token to DefaultGatewayToken in desktop run mode
 // when using token auth (not password). Existing non-default tokens are overwritten; persists via Load.
-func normalizeDesktopGatewayAuth(cfg *OpenOctaConfig, env EnvGetter) bool {
+func normalizeDesktopGatewayAuth(cfg *LinmoConfig, env EnvGetter) bool {
 	if env == nil {
 		env = DefaultEnv
 	}
@@ -115,7 +115,7 @@ func normalizeDesktopGatewayAuth(cfg *OpenOctaConfig, env EnvGetter) bool {
 	return changed
 }
 
-// EnsureDefaultConfig ensures ~/.openocta/openocta.json exists; if not, creates the dir and writes minimal default config with DefaultGatewayToken.
+// EnsureDefaultConfig ensures ~/.linmo/linmo.json exists; if not, creates the dir and writes minimal default config with DefaultGatewayToken.
 func EnsureDefaultConfig(env EnvGetter) error {
 	if env == nil {
 		env = DefaultEnv
@@ -134,7 +134,7 @@ func EnsureDefaultConfig(env EnvGetter) error {
 	modeOff := "off"
 	port := 18900
 	resetOnExit := false
-	cfg := &OpenOctaConfig{
+	cfg := &LinmoConfig{
 		Meta: &ConfigMeta{
 			LastTouchedVersion: "2026.2.9",
 			LastTouchedAt:      time.Now().UTC().Format(time.RFC3339Nano),

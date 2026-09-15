@@ -13,7 +13,7 @@ const (
 	manifestName = "manifest.json"
 )
 
-// ResolveModelsDir returns ~/.openocta/embedded-models for GGUF weights.
+// ResolveModelsDir returns ~/.linmo/embedded-models for GGUF weights.
 func ResolveModelsDir(env func(string) string) string {
 	if env == nil {
 		env = os.Getenv
@@ -21,7 +21,7 @@ func ResolveModelsDir(env func(string) string) string {
 	return filepath.Join(paths.ResolveStateDir(env), modelsSubdir)
 }
 
-// ResolveLibDir returns ~/.openocta/yzma-lib for llama.cpp prebuilt libraries.
+// ResolveLibDir returns ~/.linmo/yzma-lib for llama.cpp prebuilt libraries.
 func ResolveLibDir(env func(string) string) string {
 	if env == nil {
 		env = os.Getenv
@@ -29,7 +29,7 @@ func ResolveLibDir(env func(string) string) string {
 	return filepath.Join(paths.ResolveStateDir(env), libSubdir)
 }
 
-// ResolveManifestPath returns ~/.openocta/embedded-models/manifest.json.
+// ResolveManifestPath returns ~/.linmo/embedded-models/manifest.json.
 func ResolveManifestPath(env func(string) string) string {
 	return filepath.Join(ResolveModelsDir(env), manifestName)
 }

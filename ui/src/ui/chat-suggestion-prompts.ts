@@ -295,8 +295,8 @@ function resolveCategories(extraPrompts?: string[]): ChatSuggestionCategory[] {
   ];
 }
 
-@customElement("openocta-chat-suggestions")
-export class OpenOctaChatSuggestions extends LitElement {
+@customElement("linmo-chat-suggestions")
+export class LinmoChatSuggestions extends LitElement {
   @property({ type: Boolean }) disabled = false;
   @property({ attribute: false }) extraPrompts?: string[];
   @state() private activeCategoryId = "recommended";
@@ -375,6 +375,6 @@ export class OpenOctaChatSuggestions extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "openocta-chat-suggestions": OpenOctaChatSuggestions;
+    "linmo-chat-suggestions": LinmoChatSuggestions;
   }
 }

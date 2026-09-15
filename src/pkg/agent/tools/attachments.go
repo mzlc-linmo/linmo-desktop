@@ -2,10 +2,10 @@ package tools
 
 import "strings"
 
-const openOctaAttachmentsMarker = "@@OPENOCTA_ATTACHMENTS@@"
+const openOctaAttachmentsMarker = "@@LIMNO_ATTACHMENTS@@"
 
-// StripOpenOctaAttachmentsMarker removes legacy inline attachment JSON from tool output text.
-func StripOpenOctaAttachmentsMarker(text string) string {
+// StripLinmoAttachmentsMarker removes legacy inline attachment JSON from tool output text.
+func StripLinmoAttachmentsMarker(text string) string {
 	idx := strings.Index(text, openOctaAttachmentsMarker)
 	if idx < 0 {
 		return text

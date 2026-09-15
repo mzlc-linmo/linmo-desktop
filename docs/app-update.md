@@ -1,6 +1,6 @@
-# OpenOcta 应用自动更新
+# Linmo 应用自动更新
 
-本文档说明 OpenOcta **桌面应用（Wails）** 与 **Linux 服务端（systemd）** 共用的版本检查、跳过记录与安装能力。桌面端与服务端使用同一套 Gateway API 与 UI 交互，差异仅在安装方式（dmg/exe vs deb/rpm）。
+本文档说明 Linmo **桌面应用（Wails）** 与 **Linux 服务端（systemd）** 共用的版本检查、跳过记录与安装能力。桌面端与服务端使用同一套 Gateway API 与 UI 交互，差异仅在安装方式（dmg/exe vs deb/rpm）。
 
 ---
 
@@ -10,7 +10,7 @@
 |------|------|
 | **每日自动检查** | 连接本机 Gateway 后，若距上次检查已超过 24 小时，则请求平台最新版本；有新版本且未被跳过时弹出更新对话框 |
 | **手动检查** | 顶部栏「检查更新」按钮（位于「配置引导」左侧）；已是最新则提示，有更新则弹框（**不受跳过记录影响**） |
-| **跳过版本** | 「跳过此版本」写入 `openocta.json` 的 `update.skippedVersions`；后续自动检查不再提示 |
+| **跳过版本** | 「跳过此版本」写入 `linmo.json` 的 `update.skippedVersions`；后续自动检查不再提示 |
 | **自动安装（方案 A）** | 支持的平台一键下载并安装（deb/rpm/dmg/exe） |
 | **手动安装（方案 C）** | 自动安装失败或无 sudo 权限时，对话框展示 deb/rpm/tar.gz 命令，支持复制与打开下载链接 |
 
@@ -18,7 +18,7 @@
 
 「检查更新」在以下情况可用（逻辑一致）：
 
-- Wails 桌面壳（`OPENOCTA_RUN_MODE=desktop`）
+- Wails 桌面壳（`LIMNO_RUN_MODE=desktop`）
 - 浏览器访问 **本机** Gateway（`127.0.0.1` / `localhost` / 与页面同 hostname）
 
 连接远程服务器 IP 时不显示该按钮（避免误在客户端触发服务端安装）。
@@ -37,11 +37,11 @@
 
 | 平台 | 架构 | 自动安装 | 下载包 |
 |------|------|----------|--------|
-| macOS | arm64 | dmg | `OpenOcta-arm64.dmg` |
-| macOS | amd64 | dmg | `OpenOcta-amd64.dmg` |
-| Windows | amd64 | exe (`/S`) | `OpenOcta-amd64-installer.exe` |
-| Linux | amd64 | deb 或 rpm | `openocta_linux_amd64.deb` / `.rpm` |
-| Linux | arm64 | deb 或 rpm | `openocta_linux_arm64.deb` / `.rpm` |
+| macOS | arm64 | dmg | `Linmo-arm64.dmg` |
+| macOS | amd64 | dmg | `Linmo-amd64.dmg` |
+| Windows | amd64 | exe (`/S`) | `Linmo-amd64-installer.exe` |
+| Linux | amd64 | deb 或 rpm | `linmo_linux_amd64.deb` / `.rpm` |
+| Linux | arm64 | deb 或 rpm | `linmo_linux_arm64.deb` / `.rpm` |
 | Linux | amd64/arm64 | 手动 | `.tar.gz`（对话框内命令） |
 
 Linux 自动安装包类型按环境检测：已安装 deb/rpm 包 → 同类型升级；否则 Debian 系优先 deb，RHEL 系优先 rpm。
@@ -56,8 +56,8 @@ Linux 自动安装包类型按环境检测：已安装 deb/rpm 包 → 同类型
 sequenceDiagram
   participant UI as UI（桌面或本机浏览器）
   participant GW as Gateway
-  participant Platform as openocta.com
-  participant Config as openocta.json
+  participant Platform as linmo.xin
+  participant Config as linmo.json
 
   UI->>GW: GET /api/desktop/update/check?dailyOnly=1&record=1
   GW->>Config: 读取 lastCheckAt / skippedVersions
@@ -92,24 +92,24 @@ sequenceDiagram
 **Linux（deb/rpm，方案 A）**：
 
 1. 下载对应 `.deb` 或 `.rpm`
-2. `sudo systemctl stop openocta`
+2. `sudo systemctl stop linmo`
 3. `sudo dpkg -i` 或 `sudo rpm -Uvh`（使用 `sudo -n`，需已配置免密 sudo）
-4. `sudo systemctl start openocta`，当前进程退出
+4. `sudo systemctl start linmo`，当前进程退出
 
 **Linux（方案 C，自动失败或无 sudo）**：对话框展示完整命令，例如：
 
 ```bash
-curl -fLO https://openocta.com/pkg/openocta_linux_amd64.deb
-sudo systemctl stop openocta
-sudo dpkg -i openocta_linux_amd64.deb
-sudo systemctl start openocta
+curl -fLO https://linmo.xin/pkg/linmo_linux_amd64.deb
+sudo systemctl stop linmo
+sudo dpkg -i linmo_linux_amd64.deb
+sudo systemctl start linmo
 ```
 
 安装进度：`GET /api/desktop/update/status`（前端约每 1.5 秒轮询）。
 
 ---
 
-## 三、配置（openocta.json）
+## 三、配置（linmo.json）
 
 ```json
 {
@@ -125,7 +125,7 @@ sudo systemctl start openocta
 | `skippedVersions` | 自动检查忽略的版本号 |
 | `lastCheckAt` | 上次检查时间（RFC3339），24 小时间隔 |
 
-路径：`~/.openocta/openocta.json`（Windows 为 `%APPDATA%\openocta\openocta.json`）。详见 [配置说明](./configuration.md)。
+路径：`~/.linmo/linmo.json`（Windows 为 `%APPDATA%\linmo\linmo.json`）。详见 [配置说明](./configuration.md)。
 
 ---
 
@@ -149,14 +149,14 @@ GET /api/desktop/update/check?force=0&record=1&dailyOnly=0
   "hasUpdate": true,
   "skipped": false,
   "downloadSupported": true,
-  "downloadUrl": "https://openocta.com/pkg/openocta_linux_amd64.deb",
+  "downloadUrl": "https://linmo.xin/pkg/linmo_linux_amd64.deb",
   "autoInstallSupported": true,
   "installAllowed": true,
   "packageFormat": "deb",
   "downloadUrls": {
-    "deb": "https://openocta.com/pkg/openocta_linux_amd64.deb",
-    "rpm": "https://openocta.com/pkg/openocta_linux_amd64.rpm",
-    "tar.gz": "https://openocta.com/pkg/openocta_linux_amd64.tar.gz"
+    "deb": "https://linmo.xin/pkg/linmo_linux_amd64.deb",
+    "rpm": "https://linmo.xin/pkg/linmo_linux_amd64.rpm",
+    "tar.gz": "https://linmo.xin/pkg/linmo_linux_amd64.tar.gz"
   },
   "manualInstallHint": "若自动安装失败…",
   "desktopMode": false

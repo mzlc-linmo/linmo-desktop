@@ -25,14 +25,14 @@ const (
 
 // Adapter sends messages via DingTalk robot batchSend API.
 type Adapter struct {
-	loadConfig func() (*config.OpenOctaConfig, error)
+	loadConfig func() (*config.LinmoConfig, error)
 	tokenMu    sync.Mutex
 	token      string
 	tokenExp   time.Time
 }
 
 // NewAdapter creates a DingTalk outbound adapter.
-func NewAdapter(loadConfig func() (*config.OpenOctaConfig, error)) *Adapter {
+func NewAdapter(loadConfig func() (*config.LinmoConfig, error)) *Adapter {
 	return &Adapter{loadConfig: loadConfig}
 }
 

@@ -1,5 +1,5 @@
-const SETUP_WIZARD_STORAGE_KEY = "openocta.setup-wizard.completed.v1";
-const SETUP_WIZARD_SKIP_PENDING_KEY = "openocta.setup-wizard.skip-pending.v1";
+const SETUP_WIZARD_STORAGE_KEY = "linmo.setup-wizard.completed.v1";
+const SETUP_WIZARD_SKIP_PENDING_KEY = "linmo.setup-wizard.skip-pending.v1";
 
 type SetupWizardHelloSource = {
   server?: { version?: string };
@@ -144,7 +144,7 @@ export function setupWizardStepDescription(step: SetupWizardStepId): string {
     case "environment":
       return "选择需要初始化的运行组件，本步骤可跳过。";
     case "models":
-      return "请至少配置一个 AI 模型来为您的 OpenOcta 提供智能能力，您稍后可以在设置里添加更多模型。";
+      return "请至少配置一个 AI 模型来为您的 Linmo 提供智能能力，您稍后可以在设置里添加更多模型。";
     case "resources":
       return "按需安装技能、数字员工、MCP 工具，或配置 IM 通道；本步骤可跳过。";
     case "scenarios":
@@ -215,11 +215,11 @@ export function shouldShowSetupWizard(
     return true;
   }
   if (fromConfig === null && config != null) {
-    // 全部跳过后若尚未写入 openocta.json，仍视为已完成，等待 flush 同步
+    // 全部跳过后若尚未写入 linmo.json，仍视为已完成，等待 flush 同步
     if (hasSetupWizardSkipPendingConfigSync(normalizedVersion)) {
       return false;
     }
-    // 配置已加载但无 wizard.setup（如删除/重建 openocta.json）— 以配置文件为准，应再次引导
+    // 配置已加载但无 wizard.setup（如删除/重建 linmo.json）— 以配置文件为准，应再次引导
     return true;
   }
   if (config === undefined) {
@@ -317,7 +317,7 @@ export function markSetupWizardCompleted(version: string): void {
   );
 }
 
-/** 用 openocta.json 中的 wizard.setup 同步 localStorage，避免配置删除后仍被缓存拦截 */
+/** 用 linmo.json 中的 wizard.setup 同步 localStorage，避免配置删除后仍被缓存拦截 */
 export function syncSetupWizardCompletionCache(
   config: Record<string, unknown> | null | undefined,
 ): void {

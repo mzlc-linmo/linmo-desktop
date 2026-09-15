@@ -19,7 +19,7 @@ const (
 )
 
 func main() {
-	appinstance.KillOtherOpenOctaProcesses()
+	appinstance.KillOtherLinmoProcesses()
 
 	port := defaultPort
 	addr := fmt.Sprintf("127.0.0.1:%d", port)
@@ -28,21 +28,21 @@ func main() {
 	selfDir, _ := os.Executable()
 	binDir := filepath.Dir(selfDir)
 
-	openoctaPath := filepath.Join(binDir, binaryName("openocta"))
-	if _, err := os.Stat(openoctaPath); err != nil {
+	linmoPath := filepath.Join(binDir, binaryName("linmo"))
+	if _, err := os.Stat(linmoPath); err != nil {
 		// Fallback: rely on PATH
-		openoctaPath = binaryName("openocta")
+		linmoPath = binaryName("linmo")
 	}
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
 	// Start gateway in desktop mode.
-	cmd := exec.CommandContext(ctx, openoctaPath, "gateway", "run", "--port", fmt.Sprintf("%d", port))
-	cmd.Env = append(os.Environ(), "OPENOCTA_RUN_MODE=desktop")
+	cmd := exec.CommandContext(ctx, linmoPath, "gateway", "run", "--port", fmt.Sprintf("%d", port))
+	cmd.Env = append(os.Environ(), "LIMNO_RUN_MODE=desktop")
 	if stateDir := resolveInstallStateDir(); stateDir != "" {
 		_ = os.MkdirAll(stateDir, 0755)
-		cmd.Env = append(cmd.Env, "OPENOCTA_STATE_DIR="+stateDir)
+		cmd.Env = append(cmd.Env, "LIMNO_STATE_DIR="+stateDir)
 	}
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr

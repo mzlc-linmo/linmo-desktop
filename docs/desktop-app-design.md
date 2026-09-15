@@ -1,6 +1,6 @@
-# OpenOcta PC 端桌面应用设计方案
+# Linmo PC 端桌面应用设计方案
 
-本文档描述将 OpenOcta 构建为跨平台 PC 端应用的完整设计方案与改动计划。
+本文档描述将 Linmo 构建为跨平台 PC 端应用的完整设计方案与改动计划。
 
 **打包策略确认**：
 
@@ -55,7 +55,7 @@
 
 ┌────────────────────────────────────────────────────────────────────────────┐
 │  Linux：无桌面壳，直接 systemd 服务                                        │
-│  - openocta gateway run（service 模式，0.0.0.0:18900）                     │
+│  - linmo gateway run（service 模式，0.0.0.0:18900）                     │
 │  - 用户通过浏览器访问 http://<IP>:18900                                    │
 └────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -65,7 +65,7 @@
 #### 2.2.1 Gateway 地址绑定
 
 - **新增**：`pkg/paths` 中 `ResolveGatewayAddr(port int, mode string) string`；
-- **新增**：`ResolveRunMode(env, cfg) string`，优先级：`OPENOCTA_RUN_MODE` > `gateway.mode` > 平台默认；
+- **新增**：`ResolveRunMode(env, cfg) string`，优先级：`LIMNO_RUN_MODE` > `gateway.mode` > 平台默认；
 - **平台默认**：`darwin` / `windows` → `desktop`，`linux` → `service`；
 - **修改**：`gateway.go` 中 `addr` 使用 `ResolveGatewayAddr`。
 
@@ -78,8 +78,8 @@
 
 #### 2.2.3 Linux 系统服务
 
-- **沿用**：`deploy/openocta.service`、`deploy/scripts/postinstall.sh`、`postremove.sh`；
-- **修改**：`openocta.service` 中增加 `Environment=OPENOCTA_RUN_MODE=service`，确保绑定 `0.0.0.0:18900`；
+- **沿用**：`deploy/linmo.service`、`deploy/scripts/postinstall.sh`、`postremove.sh`；
+- **修改**：`linmo.service` 中增加 `Environment=LIMNO_RUN_MODE=service`，确保绑定 `0.0.0.0:18900`；
 - **打包**：沿用 GoReleaser nfpms，不引入 Wails。
 
 ---
@@ -95,11 +95,11 @@
 | 1.1 | 新增 `ResolveRunMode` | `src/pkg/paths/paths.go` | 解析 env、config，返回 `desktop` / `service` |
 | 1.2 | 新增 `ResolveGatewayAddr` | `src/pkg/paths/paths.go` | `desktop` → `127.0.0.1:port`，`service` → `:port` |
 | 1.3 | 配置 schema 扩展 | `src/pkg/config/schema.go` | `GatewayConfig.Mode` 增加 `desktop` / `service` 语义 |
-| 1.4 | 修改 gateway run | `src/cmd/openocta/commands/gateway.go` | 使用 `ResolveRunMode` + `ResolveGatewayAddr` 构建 addr |
-| 1.5 | 修改 systemd 服务 | `deploy/openocta.service` | 增加 `Environment=OPENOCTA_RUN_MODE=service` |
+| 1.4 | 修改 gateway run | `src/cmd/linmo/commands/gateway.go` | 使用 `ResolveRunMode` + `ResolveGatewayAddr` 构建 addr |
+| 1.5 | 修改 systemd 服务 | `deploy/linmo.service` | 增加 `Environment=LIMNO_RUN_MODE=service` |
 | 1.6 | 单元测试 | `src/pkg/paths/paths_test.go` | 覆盖不同 mode 下的地址解析 |
 
-**验收**：`OPENOCTA_RUN_MODE=desktop openocta gateway run` 仅监听 `127.0.0.1`；`OPENOCTA_RUN_MODE=service` 或 Linux 下监听 `0.0.0.0`。
+**验收**：`LIMNO_RUN_MODE=desktop linmo gateway run` 仅监听 `127.0.0.1`；`LIMNO_RUN_MODE=service` 或 Linux 下监听 `0.0.0.0`。
 
 ---
 
@@ -127,7 +127,7 @@ OctopusClaw/
 │   ├── go.mod              # replace => ../src
 │   └── frontend/           # 可选：开发时用 vite 或直接引用 ui
 ├── src/
-│   ├── cmd/openocta/       # 现有 CLI 入口
+│   ├── cmd/linmo/       # 现有 CLI 入口
 │   ├── pkg/
 │   └── embed/frontend/     # 现有 UI 构建产物
 ├── ui/                     # 现有前端
@@ -145,7 +145,7 @@ OctopusClaw/
 | 序号 | 任务 | 涉及文件 | 说明 |
 |------|------|----------|------|
 | 3.1 | Gateway 启动前等待 | `app/main.go` | 先启动 Gateway goroutine，等待 `http://127.0.0.1:18900/health` 就绪后再创建窗口 |
-| 3.2 | 环境变量 | `app/main.go` | 启动前设置 `OPENOCTA_RUN_MODE=desktop` |
+| 3.2 | 环境变量 | `app/main.go` | 启动前设置 `LIMNO_RUN_MODE=desktop` |
 | 3.3 | 退出时关闭 Gateway | `app/main.go` | 监听 Wails 退出事件，调用 `srv.Shutdown` |
 | 3.4 | 端口冲突处理 | `app/main.go` 或 `pkg/infra` | 若 18900 被占用，可尝试动态端口或提示用户 |
 
@@ -199,8 +199,8 @@ cd app && wails build -platform darwin/arm64
 | `src/pkg/paths/paths.go` | 新增 `ResolveRunMode`、`ResolveGatewayAddr` |
 | `src/pkg/paths/paths_test.go` | 新增测试 |
 | `src/pkg/config/schema.go` | `GatewayConfig.Mode` 文档/扩展（若已有可忽略） |
-| `src/cmd/openocta/commands/gateway.go` | 使用 `ResolveRunMode`、`ResolveGatewayAddr` |
-| `deploy/openocta.service` | 增加 `Environment=OPENOCTA_RUN_MODE=service` |
+| `src/cmd/linmo/commands/gateway.go` | 使用 `ResolveRunMode`、`ResolveGatewayAddr` |
+| `deploy/linmo.service` | 增加 `Environment=LIMNO_RUN_MODE=service` |
 
 ### 4.2 阶段二、三
 
@@ -240,7 +240,7 @@ cd app && wails build -platform darwin/arm64
 
 ## 六、参考文档
 
-- [architecture.md](./architecture.md) - OpenOcta 整体架构
+- [architecture.md](./architecture.md) - Linmo 整体架构
 - [configuration.md](./configuration.md) - 配置说明
 - [app-update.md](./app-update.md) - 桌面应用自动更新
 - [deploy/dist-README.md](../../deploy/dist-README.md) - 安装与快速访问指南
@@ -279,6 +279,6 @@ cd app && wails build -platform darwin/arm64
 ### 7.3 环境变量覆盖
 
 ```bash
-OPENOCTA_RUN_MODE=desktop openocta gateway run   # 仅本机
-OPENOCTA_RUN_MODE=service openocta gateway run  # 可远程
+LIMNO_RUN_MODE=desktop linmo gateway run   # 仅本机
+LIMNO_RUN_MODE=service linmo gateway run  # 可远程
 ```

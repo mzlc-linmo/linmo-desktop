@@ -8,7 +8,7 @@ import (
 	"golang.org/x/sys/windows/registry"
 )
 
-const regPath = `SOFTWARE\OpenOcta`
+const regPath = `SOFTWARE\Linmo`
 const regValue = "InstallDir"
 
 // resolveInstallStateDir returns the state directory when installed via NSIS.

@@ -39,11 +39,11 @@ func MaybePromptInstallFromDMG() {
 		return
 	}
 
-	dst := "/Applications/OpenOcta.app"
+	dst := "/Applications/Linmo.app"
 	if err := dittoWithAdmin(bundle, dst); err != nil {
 		_ = displayAlert(
 			"安装失败",
-			fmt.Sprintf("无法复制到「应用程序」：%s\n\n请尝试将窗口中的 OpenOcta 图标拖入右侧「应用程序」文件夹。", err),
+			fmt.Sprintf("无法复制到「应用程序」：%s\n\n请尝试将窗口中的 Linmo 图标拖入右侧「应用程序」文件夹。", err),
 		)
 		return
 	}
@@ -66,7 +66,7 @@ func macOSAppBundlePath(exe string) string {
 func installChoice() bool {
 	script := `
 try
-	set r to button returned of (display dialog "OpenOcta 正从磁盘映像运行。" & return & return & "是否将 OpenOcta 安装到「应用程序」文件夹？" & return & return & "（安装后可在启动台或「应用程序」中打开。）" buttons {"稍后", "安装"} default button 2 with title "安装 OpenOcta" with icon note)
+	set r to button returned of (display dialog "Linmo 正从磁盘映像运行。" & return & return & "是否将 Linmo 安装到「应用程序」文件夹？" & return & return & "（安装后可在启动台或「应用程序」中打开。）" buttons {"稍后", "安装"} default button 2 with title "安装 Linmo" with icon note)
 	if r is "安装" then
 		"yes"
 	else

@@ -51,7 +51,7 @@ var builtInProviders = map[string]builtInProvider{
 	"volces_ark":        {"https://ark.cn-beijing.volces.com/api/coding/v3", false, "VOLCES_ARK_API_KEY", "ark-code-latest"},
 }
 
-func getEnvVar(cfg *config.OpenOctaConfig, key, modelRef string) string {
+func getEnvVar(cfg *config.LinmoConfig, key, modelRef string) string {
 	if modelRef != "" && cfg != nil && cfg.Env != nil && cfg.Env.ModelEnv != nil {
 		if m, ok := cfg.Env.ModelEnv[modelRef]; ok && m != nil {
 			if val, ok := m[key]; ok && val != "" {
@@ -67,7 +67,7 @@ func getEnvVar(cfg *config.OpenOctaConfig, key, modelRef string) string {
 	return os.Getenv(key)
 }
 
-func resolveProviderAPIKey(cfg *config.OpenOctaConfig, provider, apiKeyFromConfig, modelRef string) string {
+func resolveProviderAPIKey(cfg *config.LinmoConfig, provider, apiKeyFromConfig, modelRef string) string {
 	apiKey := strings.TrimSpace(apiKeyFromConfig)
 	if apiKey != "" {
 		if strings.HasPrefix(apiKey, "$") {
@@ -153,7 +153,7 @@ func buildChatModel(ctx context.Context, useAnthropic bool, modelName, apiKey, b
 	return openai.NewChatModel(ctx, cfg)
 }
 
-func createEmbeddedChatModelFactory(cfg *config.OpenOctaConfig, provider, modelID string) (ChatModelFactory, error) {
+func createEmbeddedChatModelFactory(cfg *config.LinmoConfig, provider, modelID string) (ChatModelFactory, error) {
 	if provider == embeddedmodels.EmbeddedEmbeddingProviderKey {
 		return nil, fmt.Errorf("provider %q is for embedding models; use %q for chat", provider, embeddedmodels.EmbeddedChatProviderKey)
 	}
@@ -180,7 +180,7 @@ func createEmbeddedChatModelFactory(cfg *config.OpenOctaConfig, provider, modelI
 	}), nil
 }
 
-func createChatModelFactory(cfg *config.OpenOctaConfig, provider, modelID string) (ChatModelFactory, error) {
+func createChatModelFactory(cfg *config.LinmoConfig, provider, modelID string) (ChatModelFactory, error) {
 	if embeddedmodels.IsEmbeddedProvider(provider) {
 		return createEmbeddedChatModelFactory(cfg, provider, modelID)
 	}
@@ -279,14 +279,14 @@ func createChatModelFactory(cfg *config.OpenOctaConfig, provider, modelID string
 	}
 }
 
-// CreateModelFactoryFromConfig builds a ChatModelFactory from OpenOcta config.
-func CreateModelFactoryFromConfig(cfg *config.OpenOctaConfig, modelRef string) (ChatModelFactory, error) {
+// CreateModelFactoryFromConfig builds a ChatModelFactory from Linmo config.
+func CreateModelFactoryFromConfig(cfg *config.LinmoConfig, modelRef string) (ChatModelFactory, error) {
 	provider, modelID := resolveModelFromConfig(modelRef)
 	return createChatModelFactory(cfg, provider, modelID)
 }
 
 // CreateModelFactoryForModelRef builds a factory for an explicit model reference.
-func CreateModelFactoryForModelRef(cfg *config.OpenOctaConfig, modelRef string) (ChatModelFactory, error) {
+func CreateModelFactoryForModelRef(cfg *config.LinmoConfig, modelRef string) (ChatModelFactory, error) {
 	provider, modelID := resolveModelFromConfig(strings.TrimSpace(modelRef))
 	return createChatModelFactory(cfg, provider, modelID)
 }

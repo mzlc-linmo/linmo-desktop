@@ -24,7 +24,7 @@ func installPackageForPlatform(ctx context.Context, path string, report func(Ins
 		return err
 	}
 
-	dst := "/Applications/OpenOcta.app"
+	dst := "/Applications/Linmo.app"
 	setInstallProgress(report, "install", 95, "正在复制到「应用程序」…")
 	if err := dittoWithAdmin(appBundle, dst); err != nil {
 		return err
@@ -78,7 +78,7 @@ func findAppBundle(root string) (string, error) {
 		return nil
 	})
 	if found == "" {
-		return "", fmt.Errorf("在更新包中未找到 OpenOcta.app")
+		return "", fmt.Errorf("在更新包中未找到 Linmo.app")
 	}
 	return found, nil
 }

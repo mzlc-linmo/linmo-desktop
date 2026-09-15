@@ -76,7 +76,7 @@ type Context struct {
 	// AgentRunSeq tracks sequence numbers for agent/chat events (map[runId]seq)
 	AgentRunSeq map[string]int64
 	// Config holds the loaded configuration (cached for performance)
-	Config *config.OpenOctaConfig
+	Config *config.LinmoConfig
 	// MCPTools returns agent tools from configured MCP servers (prometheus, etc.). Nil if MCP not configured.
 	MCPTools func(ctx context.Context) ([]tool.Tool, error)
 	// InvokeMethod synchronously invokes a gateway method (used by agent tools). Set by server after registry is built.

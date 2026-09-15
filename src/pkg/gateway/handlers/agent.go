@@ -68,7 +68,7 @@ func AgentHandler(opts HandlerOpts) error {
 		}
 	}
 	projectRoot := "."
-	var runtimeConfig *config.OpenOctaConfig
+	var runtimeConfig *config.LinmoConfig
 	if opts.Context != nil && opts.Context.Config != nil {
 		runtimeConfig = opts.Context.Config
 		projectRoot = agent.ResolveAgentWorkspaceDir(opts.Context.Config, "main", os.Getenv)

@@ -37,7 +37,7 @@ func TestCozeLoopConfigIsEnabled(t *testing.T) {
 func TestResolveCozeLoopSettingsDefaultsWhenMissing(t *testing.T) {
 	t.Parallel()
 
-	enabled, token, ws, base := resolveCozeLoopSettings(&config.OpenOctaConfig{})
+	enabled, token, ws, base := resolveCozeLoopSettings(&config.LinmoConfig{})
 	if !enabled {
 		t.Fatal("expected enabled=true when cozeloop is not configured")
 	}
@@ -60,7 +60,7 @@ func TestResolveCozeLoopSettingsFromConfig(t *testing.T) {
 	workspaceID := "ws"
 	apiBaseURL := "http://example.test"
 
-	enabled, token, ws, base := resolveCozeLoopSettings(&config.OpenOctaConfig{
+	enabled, token, ws, base := resolveCozeLoopSettings(&config.LinmoConfig{
 		CozeLoop: &config.CozeLoopConfig{
 			Enable:      &trueVal,
 			APIToken:    &apiToken,

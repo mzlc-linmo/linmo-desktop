@@ -31,7 +31,7 @@ func extractHooksToken(r *http.Request) string {
 	if strings.HasPrefix(auth, "Bearer ") {
 		return strings.TrimSpace(strings.TrimPrefix(auth, "Bearer "))
 	}
-	if got := strings.TrimSpace(r.Header.Get("X-OpenOcta-Token")); got != "" {
+	if got := strings.TrimSpace(r.Header.Get("X-Linmo-Token")); got != "" {
 		return got
 	}
 	if got := strings.TrimSpace(r.URL.Query().Get("token")); got != "" {

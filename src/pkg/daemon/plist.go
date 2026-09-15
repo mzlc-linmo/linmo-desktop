@@ -23,7 +23,7 @@ func BuildLaunchAgentPlist(opts struct {
 	}
 	comment := opts.Comment
 	if comment == "" {
-		comment = "OpenOcta Gateway"
+		comment = "Linmo Gateway"
 	}
 
 	argsXML := ""

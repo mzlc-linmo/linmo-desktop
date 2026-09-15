@@ -646,11 +646,11 @@ func ProviderConfig(port int, modelID string) map[string]interface{} {
 		contextWindow, maxOutput = catalogLimits(entry)
 	}
 	baseURL := fmt.Sprintf("http://127.0.0.1:%d/v1", port)
-	providerKey := "openocta-embedded-chat"
+	providerKey := "linmo-embedded-chat"
 	displayPrefix := "内嵌对话"
 	capabilities := "chat"
 	if kind == ModelKindEmbedding {
-		providerKey = "openocta-embedded-embedding"
+		providerKey = "linmo-embedded-embedding"
 		displayPrefix = "内嵌向量"
 		capabilities = "embedding"
 	}

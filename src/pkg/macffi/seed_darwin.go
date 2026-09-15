@@ -77,7 +77,7 @@ func bundledLibFFIPath(exe string) (string, bool) {
 	if err == nil {
 		exe = resolved
 	}
-	// OpenOcta.app/Contents/MacOS/OpenOcta → ../Frameworks/libffi.8.dylib
+	// Linmo.app/Contents/MacOS/Linmo → ../Frameworks/libffi.8.dylib
 	candidate := filepath.Clean(filepath.Join(filepath.Dir(exe), "..", "Frameworks", "libffi.8.dylib"))
 	if st, err := os.Stat(candidate); err == nil && !st.IsDir() {
 		return candidate, true

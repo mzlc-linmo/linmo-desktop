@@ -30,9 +30,9 @@ import {
   stripMarkdownLocalImageRefs,
 } from "./attachment-images.ts";
 import {
-  parseOpenOctaAttachmentsFromText,
-  stripOpenOctaAttachmentsMarker,
-} from "./openocta-attachments.ts";
+  parseLinmoAttachmentsFromText,
+  stripLinmoAttachmentsMarker,
+} from "./linmo-attachments.ts";
 import { extractGroupMeta, formatTokenSummary } from "./message-meta.ts";
 import type { GatewayBrowserClient } from "../gateway.ts";
 import "../components/chat-a2ui-panel.ts";
@@ -169,7 +169,7 @@ function extractImages(message: unknown): ImageBlock[] {
   const images: ImageBlock[] = [];
 
   if (typeof content === "string") {
-    for (const img of parseOpenOctaAttachmentsFromText(content)) {
+    for (const img of parseLinmoAttachmentsFromText(content)) {
       pushUniqueImage(images, img);
     }
     for (const ref of parseMarkdownLocalImageRefs(content)) {
@@ -224,7 +224,7 @@ function extractImages(message: unknown): ImageBlock[] {
           pushUniqueImage(images, { url: imageUrl.url });
         }
       } else if (b.type === "text" && typeof b.text === "string") {
-        for (const img of parseOpenOctaAttachmentsFromText(b.text)) {
+        for (const img of parseLinmoAttachmentsFromText(b.text)) {
           pushUniqueImage(images, img);
         }
         for (const ref of parseMarkdownLocalImageRefs(b.text)) {
@@ -732,7 +732,7 @@ function extractToolOutputText(doc: string): string {
       output = doc;
     }
   }
-  return stripOpenOctaAttachmentsMarker(output);
+  return stripLinmoAttachmentsMarker(output);
 }
 
 function formatToolRunLabel(cards: ToolCard[]): string {

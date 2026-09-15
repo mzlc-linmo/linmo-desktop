@@ -75,7 +75,7 @@ type JSONLineWriter struct {
 // NewJSONLineWriter creates a writer that formats each Write as a JSON log line with _meta and time.
 func NewJSONLineWriter(w io.Writer, name string) *JSONLineWriter {
 	if name == "" {
-		name = "openocta"
+		name = "linmo"
 	}
 	return &JSONLineWriter{w: w, name: name}
 }
@@ -109,7 +109,7 @@ func (j *JSONLineWriter) WriteLine(levelName string, levelID int, message string
 	return err
 }
 
-// FileLogger writes JSON log lines to a file (rolling path openocta-YYYY-MM-DD.log compatible with Node).
+// FileLogger writes JSON log lines to a file (rolling path linmo-YYYY-MM-DD.log compatible with Node).
 type FileLogger struct {
 	w  *JSONLineWriter
 	f  *os.File
@@ -126,7 +126,7 @@ func NewFileLogger(path string) (*FileLogger, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &FileLogger{w: NewJSONLineWriter(f, "openocta"), f: f}, nil
+	return &FileLogger{w: NewJSONLineWriter(f, "linmo"), f: f}, nil
 }
 
 // Close closes the underlying log file.

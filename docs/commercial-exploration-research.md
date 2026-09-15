@@ -1,7 +1,7 @@
 # Skill-Driven 商业探索调研报告
 
 > 调研日期：2026-07-09  
-> 涉及项目：`daily-task`（Skill + OKR 编排 + 内容分发）× `openocta`（企业级 AI Agent 运行时）  
+> 涉及项目：`daily-task`（Skill + OKR 编排 + 内容分发）× `linmo`（企业级 AI Agent 运行时）  
 > 目的：评估当前商业方向价值，并基于「写 Skill 进行探索」的方法论扩展可落地的产品方向。
 
 ---
@@ -10,18 +10,18 @@
 
 **核心发现**
 
-1. **现有能力已形成可复用的「探索—编排—交付—分发」闭环**：`daily-task` 的 Epic/OKR 拓扑 + Loop 编排 + 质量闸门 + 渠道发布 Skill，已在 OpenOcta SEO 增长 Epic 中跑通真实链路（调研 → 策略 → 10 篇 CSDN 文章 → 用户发布）。
-2. **OpenOcta 提供产品化底座**：单一二进制 Agent 运行时、数字员工、Agent Swarm、知识库、Cron、Channels、Skill 创意中心、内嵌本地模型——可将 daily-task 的「文件系统 + 外部 Agent」模式升级为「可部署、可集成、可售卖」的平台。
-3. **当前方向（DevRel/SEO 内容增长）验证成本低、与 OpenOcta 自身 GTM 高度协同**，但天花板偏窄、竞品分散、渠道发布强依赖人工。
-4. **最具协同的扩展方向**：① DevRel Growth OS（产品化当前路径）；② 产品/创业 Idea 验证流水线；③ 企业知识运营与垂直数字员工（OpenOcta 主战场）。
+1. **现有能力已形成可复用的「探索—编排—交付—分发」闭环**：`daily-task` 的 Epic/OKR 拓扑 + Loop 编排 + 质量闸门 + 渠道发布 Skill，已在 Linmo SEO 增长 Epic 中跑通真实链路（调研 → 策略 → 10 篇 CSDN 文章 → 用户发布）。
+2. **Linmo 提供产品化底座**：单一二进制 Agent 运行时、数字员工、Agent Swarm、知识库、Cron、Channels、Skill 创意中心、内嵌本地模型——可将 daily-task 的「文件系统 + 外部 Agent」模式升级为「可部署、可集成、可售卖」的平台。
+3. **当前方向（DevRel/SEO 内容增长）验证成本低、与 Linmo 自身 GTM 高度协同**，但天花板偏窄、竞品分散、渠道发布强依赖人工。
+4. **最具协同的扩展方向**：① DevRel Growth OS（产品化当前路径）；② 产品/创业 Idea 验证流水线；③ 企业知识运营与垂直数字员工（Linmo 主战场）。
 
 **Top 3 推荐（详见第六节）**
 
 | 优先级 | 方向 | 理由 |
 |--------|------|------|
-| 🥇 | DevRel / OSS 增长工作台 | 已验证、Skill 资产现成、直接服务 OpenOcta GTM |
+| 🥇 | DevRel / OSS 增长工作台 | 已验证、Skill 资产现成、直接服务 Linmo GTM |
 | 🥈 | Idea → OKR → 调研验证流水线 | 方法论原生匹配 daily-task Epic 机制 |
-| 🥉 | 企业知识运营 + 数字员工场景包 | OpenOcta 差异化强、客单价高、可复用 Skill 模式 |
+| 🥉 | 企业知识运营 + 数字员工场景包 | Linmo 差异化强、客单价高、可复用 Skill 模式 |
 
 ---
 
@@ -47,7 +47,7 @@
 | **reddit-publish** | Reddit 自推 weekly thread + 社区倾听 | 海外社区 |
 | **html-offline-pack** | HTML 成稿 + 图片打 zip 离线包 | 内审/客户预览 |
 
-**组合模式（已在 OpenOcta SEO Epic 验证）**
+**组合模式（已在 Linmo SEO Epic 验证）**
 
 ```
 愿景/requirement.md
@@ -73,9 +73,9 @@
 
 ---
 
-### 1.2 openocta：核心能力
+### 1.2 linmo：核心能力
 
-项目路径：`~/GoProjects/openocta/openocta`  
+项目路径：`~/GoProjects/linmo/linmo`  
 定位：**开源企业级 AI Agent；单一 Go 二进制，Gateway + Agent + Channels + Cron + 内嵌 UI**（README）。
 
 #### 架构与模块
@@ -97,7 +97,7 @@
 
 #### 与 daily-task 的能力映射
 
-| daily-task 概念 | OpenOcta 对应 |
+| daily-task 概念 | Linmo 对应 |
 |-----------------|---------------|
 | Loop 编排 Agent | Agent Swarm 根协调者 + Cron/Webhook 触发 |
 | Subagent 叶子任务 | Swarm 子 Agent 或数字员工会话 |
@@ -113,9 +113,9 @@
 
 ### 2.1 方向描述
 
-**「OKR 拆分 + Idea 调研 + 文章/营销内容生成」** — 以 OpenOcta 公域 SEO 增长 Epic 为样板：
+**「OKR 拆分 + Idea 调研 + 文章/营销内容生成」** — 以 Linmo 公域 SEO 增长 Epic 为样板：
 
-- **输入**：产品愿景（如「优化 OpenOcta 国产开源智能体搜索曝光」）+ 源码路径
+- **输入**：产品愿景（如「优化 Linmo 国产开源智能体搜索曝光」）+ 源码路径
 - **过程**：SEO/竞品调研 → 10 篇系列策略 → Agent 写稿（80% 竞品引流 + 20% 品牌）→ 用户 CSDN 发布
 - **输出**：HTML 成稿、quality-evidence、发布清单、SEO 追踪
 
@@ -147,7 +147,7 @@ flowchart LR
 | 开源项目 Maintainer / Indie Hacker | 缺 DevRel 人力，不懂 SEO 和内容节奏 | 中（更愿用免费工具 + 自己时间） |
 | 技术型初创市场负责人 | 要大量技术内容但团队小 | 中高 |
 | Developer Advocate / 技术布道师 | 多项目、多渠道重复劳动 | 中 |
-| 软件厂商（如 DataBuff/OpenOcta） | 自有产品 GTM | 高（内部预算） |
+| 软件厂商（如 DataBuff/Linmo） | 自有产品 GTM | 高（内部预算） |
 
 ### 2.4 竞品格局
 
@@ -164,14 +164,14 @@ flowchart LR
 - **Skill 即 SOP**：把踩坑经验（CSDN 图床、掘金 API、Reddit Rule 4）编码为可复用资产
 - **OKR + Loop**：不是一次性 prompt，而是可演化、可暂停、可人机分工的长任务
 - **代码锚点质量闸门**：L2/L3 深度强制读 `projectPath`，减少「AI 胡编」
-- **与 OpenOcta 深度结合后**：Cron 排期、Channels 审批、Swarm 并行写稿、Vault 品牌知识库
+- **与 Linmo 深度结合后**：Cron 排期、Channels 审批、Swarm 并行写稿、Vault 品牌知识库
 
 ### 2.5 当前方向 SWOT
 
 | | |
 |---|---|
 | **S** 已有跑通 Epic、10+ 发布 Skill、HTML 模板与闸门 | **W** 发布依赖人工；编排在外部 Agent；难多租户 |
-| **O** OpenOcta 开源受众增长；国产开源智能体 SEO 窗口 | **T** 平台规则变化；AI 内容泛滥导致 SEO 贬值；GPL 许可约束商业化 |
+| **O** Linmo 开源受众增长；国产开源智能体 SEO 窗口 | **T** 平台规则变化；AI 内容泛滥导致 SEO 贬值；GPL 许可约束商业化 |
 
 ---
 
@@ -210,10 +210,10 @@ flowchart LR
 | **Pack Skill** | 离线包、发布包、launch-pack 目录结构 | 交付给客户/合伙人 |
 | **Orchestrator Skill** | daily-task Epic 规范 | 任何 multi-step 商业项目 |
 
-### 3.4 与 OpenOcta 结合的产品形态（远期）
+### 3.4 与 Linmo 结合的产品形态（远期）
 
 ```
-OpenOcta Gateway
+Linmo Gateway
 ├── 数字员工「商业探索顾问」（Epic 编排 Skill）
 ├── 数字员工「内容写手」「SEO 分析师」
 ├── Agent Swarm 房间 = 一个 Epic
@@ -239,7 +239,7 @@ OpenOcta Gateway
 | 9 | 在线课程/content 工厂 | 知识博主、培训公司 | ★★★☆☆ | 中 | 中 | 大 |
 | 10 | 招聘 JD / 面试包生成 | HR、Tech Lead | ★★☆☆☆ | 低 | 低 | 中 |
 | 11 | 跨境 GTM / 本地化 | 出海软件 | ★★★★☆ | 高 | 高 | 中大 |
-| 12 | 垂直 Skill  marketplace | OpenOcta 生态开发者 | ★★★★★ | 高 | 中 | 中长期大 |
+| 12 | 垂直 Skill  marketplace | Linmo 生态开发者 | ★★★★★ | 高 | 中 | 中长期大 |
 
 ---
 
@@ -254,9 +254,9 @@ OpenOcta Gateway
 | **目标用户/场景** | 开源 Maintainer；Launch 前 90 天内容矩阵；Star/SEO/社区倾听 |
 | **可复用 Skill 模式** | 直接迁移 daily-task Epic 模板 + 10 个 publish Skill；新增 `github-readme-optimize`、`hn-launch`、`star-tracking` |
 | **市场规模** | GitHub 活跃开源项目 100 万+；付费 DevRel 工具市场分散，单项目愿付 $50–500/月（推断） |
-| **协同/差异化** | 与当前 OpenOcta SEO Epic 100% 重叠；OpenOcta 自身即案例；竞品缺 OKR+代码锚点 |
-| **落地难度** | **低** — MVP：daily-task UI + Skill 模板打包；v2 迁入 OpenOcta Swarm |
-| **MVP 路径** | ① 抽象「OSS Launch Epic」topology 模板 ② Skill 市场 ZIP ③ 一键导入 OpenOcta 数字员工 |
+| **协同/差异化** | 与当前 Linmo SEO Epic 100% 重叠；Linmo 自身即案例；竞品缺 OKR+代码锚点 |
+| **落地难度** | **低** — MVP：daily-task UI + Skill 模板打包；v2 迁入 Linmo Swarm |
+| **MVP 路径** | ① 抽象「OSS Launch Epic」topology 模板 ② Skill 市场 ZIP ③ 一键导入 Linmo 数字员工 |
 | **潜在风险** | 平台反作弊；AI 内容 SEO 权重下降；GPL 衍生作品合规 |
 
 ### 方向 2：Idea → OKR → 调研验证流水线
@@ -275,14 +275,14 @@ OpenOcta Gateway
 
 ### 方向 3：企业知识运营 + 垂直数字员工场景包
 
-**一句话**：OpenOcta 场景初始化 + 数字员工 + Vault，打包「运维/SRE/安全」等垂直知识运营方案。
+**一句话**：Linmo 场景初始化 + 数字员工 + Vault，打包「运维/SRE/安全」等垂直知识运营方案。
 
 | 维度 | 内容 |
 |------|------|
 | **目标用户/场景** | 企业 IT、运维团队；Runbook 编写；值班 Agent；内网知识沉淀 |
-| **可复用 Skill 模式** | openocta `deploy/scenarios/*`；Knowledge Vault；daily-task 的文档生产闸门用于 Runbook 质量 |
+| **可复用 Skill 模式** | linmo `deploy/scenarios/*`；Knowledge Vault；daily-task 的文档生产闸门用于 Runbook 质量 |
 | **市场规模** | 企业 AI Agent 市场 2026 估计数百亿美元（Gartner 企业 GenAI 支出趋势）；国内信创/私有化需求强 |
-| **协同/差异化** | OpenOcta 主定位「企业级 Agent」；单一二进制私有化；vs Copilot Studio 更开源可控 |
+| **协同/差异化** | Linmo 主定位「企业级 Agent」；单一二进制私有化；vs Copilot Studio 更开源可控 |
 | **落地难度** | **中** — 场景包已有雏形；需销售/交付体系 |
 | **MVP 路径** | ① host-inspection + k8s-incident 场景商业化 ② 配套 Runbook 生成 Skill ③ 企业 POC 模板 |
 | **潜在风险** | 销售周期长；与大厂云 Agent 竞争；GPL 商业授权需处理（README 已提供 sales@databuff.com） |
@@ -299,7 +299,7 @@ OpenOcta Gateway
 | 9 | 在线课程内容工厂 | 「10 讲技术课」Epic + 习题生成 Skill | 中 |
 | 10 | 招聘 JD / 面试包 | 单 Skill `jd-from-repo`，3 天交付 | 低 |
 | 11 | 跨境 GTM | 「Day 0–7 Launch Epic」中英双语 deliverable | 高 |
-| 12 | Skill Marketplace | 官方 5 场景包 + 社区提交规范 + openocta.com API | 中 |
+| 12 | Skill Marketplace | 官方 5 场景包 + 社区提交规范 + linmo.xin API | 中 |
 
 ---
 
@@ -307,10 +307,10 @@ OpenOcta Gateway
 
 ### 🥇 第一优先：DevRel / OSS 增长工作台
 
-1. **已验证**：OpenOcta SEO Epic 正在执行，topology、成稿、闸门、CSDN Skill 均已落地。
+1. **已验证**：Linmo SEO Epic 正在执行，topology、成稿、闸门、CSDN Skill 均已落地。
 2. **资产现成**：10 个 publish Skill + daily-task 编排规范可直接打包为产品模板。
-3. **战略协同**：直接服务 OpenOcta/DataBuff GTM，即使暂不对外售卖也有内部 ROI。
-4. **MVP 最快**：无需改 OpenOcta 核心，先卖/送「Epic 模板 + Skill 包 + 部署指南」。
+3. **战略协同**：直接服务 Linmo/DataBuff GTM，即使暂不对外售卖也有内部 ROI。
+4. **MVP 最快**：无需改 Linmo 核心，先卖/送「Epic 模板 + Skill 包 + 部署指南」。
 
 ### 🥈 第二优先：Idea → OKR → 调研验证流水线
 
@@ -320,7 +320,7 @@ OpenOcta Gateway
 
 ### 🥉 第三优先：企业知识运营 + 垂直数字员工场景包
 
-1. **OpenOcta 主定位契合**：README 明确「企业级 AI Agent」，单一二进制私有化是硬优势。
+1. **Linmo 主定位契合**：README 明确「企业级 AI Agent」，单一二进制私有化是硬优势。
 2. **客单价高**：企业 POC → 部署 → 场景包订阅，优于个人 DevRel 工具。
 3. **已有内置 Skill**：host-inspection、k8s-incident、news-summary 等 inner_skills。
 
@@ -334,34 +334,34 @@ OpenOcta Gateway
 
 | 行动 | 产出 |
 |------|------|
-| 完成 OpenOcta SEO Epic 首轮发布 | ≥10 篇 CSDN 链接 + seo-tracking 基线 |
+| 完成 Linmo SEO Epic 首轮发布 | ≥10 篇 CSDN 链接 + seo-tracking 基线 |
 | 抽象「OSS Launch Epic」topology 模板 | 可复制的 `topology.template.json` + requirement 模板 |
 | 编写 `commercial-exploration` Skill | 将本报告方法论编码为 SKILL.md |
-| OpenOcta 集成 Spike | Cron 发布提醒 + Vault 竞品库 + 飞书 UserAction 推送 POC |
+| Linmo 集成 Spike | Cron 发布提醒 + Vault 竞品库 + 飞书 UserAction 推送 POC |
 
 ### 7.2 中期（1–3 月）
 
 | 行动 | 产出 |
 |------|------|
-| DevRel 工作台 MVP | daily-task UI 打包 + Skill ZIP + OpenOcta 导入文档 |
+| DevRel 工作台 MVP | daily-task UI 打包 + Skill ZIP + Linmo 导入文档 |
 | Idea 验证 Epic 模板 | 7 天 Sprint topology + 3 个 Research Skill |
-| 数字员工「内容增长顾问」 | OpenOcta manifest + 绑定 publish Skills |
+| 数字员工「内容增长顾问」 | Linmo manifest + 绑定 publish Skills |
 | 外部试点 | 2–3 个开源 Maintainer 免费试用 → 案例研究 |
 
 ### 7.3 决策检查点
 
 1. **许可策略**：GPLv3 下对外 SaaS vs 商业授权（sales@databuff.com）的边界。
-2. **编排引擎**：继续外部 Agent（Cursor/Codex）vs OpenOcta Swarm 自包含。
+2. **编排引擎**：继续外部 Agent（Cursor/Codex）vs Linmo Swarm 自包含。
 3. **发布自动化边界**：Skill 明确 user 节点 vs 浏览器自动化 R&D 的 ROI。
 4. **首个付费客户画像**：开源 Maintainer（低 ARPU 高传播）vs 企业 IT（高 ARPU 长周期）。
 
 ### 7.4 建议的 Epic 结构（商业探索下一阶段）
 
 ```
-O: 确定 OpenOcta × daily-task 首个商业化产品
+O: 确定 Linmo × daily-task 首个商业化产品
 ├── KR1: 完成 DevRel 工作台 MVP 定义与原型
 ├── KR2: 完成 3 个外部用户访谈（开源 Maintainer）
-├── KR3: OpenOcta 集成 POC（Cron + Vault + 数字员工）
+├── KR3: Linmo 集成 POC（Cron + Vault + 数字员工）
 ├── KR4: 定价与许可方案草案
 └── KR5: Go/No-Go 决策（user 节点）
 ```
@@ -374,13 +374,13 @@ O: 确定 OpenOcta × daily-task 首个商业化产品
 |------|------|------|
 | daily-task 核心 Skill | `daily-task/skills/daily-task/SKILL.md` | OKR/Loop/闸门规范 |
 | 发布 Skill 族 | `daily-task/skills/*-publish/SKILL.md` | 9 个渠道 |
-| OpenOcta SEO Epic | `daily-task/tasks/20260708-openocta-.../` | 真实商业探索样板 |
-| OpenOcta README | `openocta/README.md` | 产品定位 |
-| OpenOcta 架构 | `openocta/docs/architecture.md` | 技术分层 |
-| 数字员工 | `openocta/docs/digital-employees.md` | 垂直角色 |
-| Agent Swarm | `openocta/docs/agent-swarm.md` | 多 Agent 编排 |
-| Skill 创意中心 | `openocta/docs/skill-create-guide.md` | Skill 生产工具 |
-| 场景包 | `openocta/docs/scenarios.md` | 垂直场景商业化 |
+| Linmo SEO Epic | `daily-task/tasks/20260708-linmo-.../` | 真实商业探索样板 |
+| Linmo README | `linmo/README.md` | 产品定位 |
+| Linmo 架构 | `linmo/docs/architecture.md` | 技术分层 |
+| 数字员工 | `linmo/docs/digital-employees.md` | 垂直角色 |
+| Agent Swarm | `linmo/docs/agent-swarm.md` | 多 Agent 编排 |
+| Skill 创意中心 | `linmo/docs/skill-create-guide.md` | Skill 生产工具 |
+| 场景包 | `linmo/docs/scenarios.md` | 垂直场景商业化 |
 
 ---
 
@@ -393,7 +393,7 @@ O: 确定 OpenOcta × daily-task 首个商业化产品
 | Skill | SKILL.md 编码的领域工作流，Agent 可读可执行 |
 | 质量闸门 | 产出必须含 quality-evidence.md，编排 Agent 逐条核验 |
 | driver=user | 必须人工完成的节点（发布、确认、付款等） |
-| 数字员工 | OpenOcta 垂直 Agent 角色，绑定专属 Skill/MCP |
+| 数字员工 | Linmo 垂直 Agent 角色，绑定专属 Skill/MCP |
 
 ---
 

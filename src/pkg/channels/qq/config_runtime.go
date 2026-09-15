@@ -7,7 +7,7 @@ import (
 )
 
 // NewRuntimeFromConfig 基于 channels.qq 的原始配置创建 QQ Runtime。
-// raw 通常来源于 OpenOctaConfig.Channels.GetChannelConfig("qq")。
+// raw 通常来源于 LinmoConfig.Channels.GetChannelConfig("qq")。
 //
 // 约定配置结构示例（与 Feishu 类似）：
 //

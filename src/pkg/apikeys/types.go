@@ -7,8 +7,8 @@ const (
 
 // DefaultAllowedPaths are pre-filled path prefixes for new API keys.
 var DefaultAllowedPaths = []string{
-	"/openocta/open/v1/ping",
-	"/openocta/open/v1/completion",
+	"/linmo/open/v1/ping",
+	"/linmo/open/v1/completion",
 }
 
 // Record is the persisted API key (secret hash only).

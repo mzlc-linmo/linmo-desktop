@@ -111,7 +111,7 @@ export const SCENARIO_TEMPLATES: ScenarioTemplate[] = [
           id: "server-patrol",
           name: "Server Patrol",
           description: "服务器巡检：主机健康检查与巡检报告生成",
-          downloadUrl: "https://openocta.com/api/v1/skills/server-patrol/download",
+          downloadUrl: "https://linmo.xin/api/v1/skills/server-patrol/download",
           category: "运维",
         },
       },

@@ -85,7 +85,7 @@ import {
 } from "./navigation.ts";
 import { renderSetupWizard } from "./views/setup-wizard.ts";
 import { nativeAlert, nativeConfirm, nativePrompt } from "./native-dialog-bridge.ts";
-import { UNIX_OPENOCTA_WORKSPACE, WIN_OPENOCTA_WORKSPACE } from "./platform-paths.ts";
+import { UNIX_LIMNO_WORKSPACE, WIN_LIMNO_WORKSPACE } from "./platform-paths.ts";
 import { t } from "./strings.js";
 
 /** 从 session key 提取数字员工 ID，如 agent:main:employee:xxx:run:uuid -> xxx */
@@ -581,7 +581,7 @@ export function renderApp(state: AppViewState) {
         ...state.apiKeysForm,
         allowedPaths: defaults.length
           ? defaults
-          : ["/openocta/open/v1/ping", "/openocta/open/v1/completion"],
+          : ["/linmo/open/v1/ping", "/linmo/open/v1/completion"],
       };
     },
   });
@@ -691,7 +691,7 @@ export function renderApp(state: AppViewState) {
             <div class="brand-logo">
               <img
                 src=${basePath ? `${basePath}/logo_h.png` : "/logo_h.png"}
-                alt="OpenOcta"
+                alt="Linmo"
               />
             </div>
           </div>
@@ -701,12 +701,8 @@ export function renderApp(state: AppViewState) {
           ${[
             { tab: "message", label: "消息" },
             { tab: "scheduledTasks", label: "定时任务" },
-            { tab: "employeeMarket", label: "员工市场" },
-            { tab: "skillLibrary", label: "技能库" },
             { tab: "knowledgeVault", label: "知识库" },
-            { tab: "toolLibrary", label: "工具库" },
             { tab: "modelLibrary", label: "模型" },
-            { tab: "tutorials", label: "教程" },
             { tab: "config", label: "配置" },
           ].map((item) => {
             const tab = (item as any).tab;
@@ -799,43 +795,6 @@ export function renderApp(state: AppViewState) {
             >
               <span class="topbar-link__icon" aria-hidden="true">${icons.helpCircle}</span>
               <span class="topbar-link__label">配置引导</span>
-            </button>
-          </div>
-          <div class="pill pill--link topbar__no-drag">
-            <button
-              type="button"
-              title="打开 OpenOcta 企业版"
-              class="topbar-link topbar__no-drag"
-              @click=${() =>
-                void openExternalUrl("https://demo.openocta.com", {
-                  gatewayHost: state.settings.gatewayUrl,
-                  gatewayToken: state.settings.token,
-                })}
-            >
-              <img
-                class="topbar-link__img"
-                src="/logo.png"
-                alt=""
-                width="16"
-                height="16"
-                aria-hidden="true"
-              />
-              <span class="topbar-link__label">企业版演示</span>
-            </button>
-          </div>
-          <div class="pill pill--link topbar__no-drag">
-            <button
-              type="button"
-              title="打开 GitHub 仓库"
-              class="topbar-link topbar__no-drag"
-              @click=${() =>
-                void openExternalUrl("https://github.com/openocta/openocta.git", {
-                  gatewayHost: state.settings.gatewayUrl,
-                  gatewayToken: state.settings.token,
-                })}
-            >
-              <span class="topbar-link__icon" aria-hidden="true">${icons.github}</span>
-              <span class="topbar-link__label">GitHub</span>
             </button>
           </div>
         </div>
@@ -2372,7 +2331,7 @@ export function renderApp(state: AppViewState) {
                 clearWorkspaceError: state.aboutClearWorkspaceError,
                 onClearWorkspace: async () => {
                   const ok = await nativeConfirm(
-                    `将删除本机默认工作区目录内的全部内容（macOS / Linux 一般为 ${UNIX_OPENOCTA_WORKSPACE}，Windows 一般为 ${WIN_OPENOCTA_WORKSPACE}）。\n\n此操作不可恢复，请先备份重要文稿。是否继续？`,
+                    `将删除本机默认工作区目录内的全部内容（macOS / Linux 一般为 ${UNIX_LIMNO_WORKSPACE}，Windows 一般为 ${WIN_LIMNO_WORKSPACE}）。\n\n此操作不可恢复，请先备份重要文稿。是否继续？`,
                   );
                   if (!ok) return;
                   const gw = state.settings?.gatewayUrl?.trim();

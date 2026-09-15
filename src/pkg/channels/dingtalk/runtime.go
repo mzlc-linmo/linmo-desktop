@@ -265,7 +265,7 @@ func (r *Runtime) sendTypingIndicator(sessionWebhook string) error {
 	}
 	replier := chatbot.NewChatbotReplier()
 	content := []byte("🖐️ 正在处理...")
-	title := []byte("OpenOcta...")
+	title := []byte("Linmo...")
 	return replier.SimpleReplyMarkdown(context.Background(), sessionWebhook, title, content)
 }
 
@@ -284,7 +284,7 @@ func (r *Runtime) sendDirectReply(sessionWebhook, content string) error {
 	replier := chatbot.NewChatbotReplier()
 
 	contentBytes := []byte(content)
-	titleBytes := []byte("OpenOcta...")
+	titleBytes := []byte("Linmo...")
 
 	if err := replier.SimpleReplyMarkdown(
 		context.Background(),

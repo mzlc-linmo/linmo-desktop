@@ -12,7 +12,7 @@ import (
 
 var errEmptyCommand = errors.New("empty command")
 
-// ValidateCommandWithConfig validates a shell command string using OpenOcta sandbox.validator rules.
+// ValidateCommandWithConfig validates a shell command string using Linmo sandbox.validator rules.
 // It is intentionally conservative: blocks control chars and shell metacharacters by default.
 func ValidateCommandWithConfig(command string, cfg *config.SandboxValidatorConfig) error {
 	cmd := strings.TrimSpace(command)

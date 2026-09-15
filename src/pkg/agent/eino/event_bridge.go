@@ -73,7 +73,7 @@ func mergeCurrentRequestIntoHistory(history []*schema.Message, req types.Request
 	return append(out, cur), nil
 }
 
-// BuildUserMessages converts an OpenOcta request into Eino user messages.
+// BuildUserMessages converts an Linmo request into Eino user messages.
 func BuildUserMessages(req types.Request) ([]*schema.Message, error) {
 	if len(req.ContentBlocks) == 0 {
 		prompt := strings.TrimSpace(req.Prompt)
@@ -148,7 +148,7 @@ func BuildUserMessages(req types.Request) ([]*schema.Message, error) {
 	return []*schema.Message{{Role: schema.User, MultiContent: parts}}, nil
 }
 
-// mapFinishReasonToStopReason maps Eino schema.ResponseMeta.FinishReason to OpenOcta stop reasons
+// mapFinishReasonToStopReason maps Eino schema.ResponseMeta.FinishReason to Linmo stop reasons
 // consumed by gateway chat handlers (tool_use = intermediate turn, end_turn = final text turn).
 func mapFinishReasonToStopReason(finishReason string) string {
 	switch strings.ToLower(strings.TrimSpace(finishReason)) {
@@ -296,7 +296,7 @@ func emitAssistantMessageEvents(
 	return emitTurnStopFromResponseMeta(out, sessionID, msg.ResponseMeta, textStream)
 }
 
-// StreamEventsFromIterator converts Eino agent events into OpenOcta stream events.
+// StreamEventsFromIterator converts Eino agent events into Linmo stream events.
 func StreamEventsFromIterator(ctx context.Context, sessionID, runID string, iter *adk.AsyncIterator[*adk.AgentEvent]) <-chan stream.StreamEvent {
 	out := make(chan stream.StreamEvent, 64)
 	go func() {

@@ -59,7 +59,7 @@ func ConnectStdio(ctx context.Context, key string, command string, args []string
 	log.Printf("Env: %v", cmd.Env)
 
 	transport := &mcp.CommandTransport{Command: cmd}
-	client := mcp.NewClient(&mcp.Implementation{Name: "openocta-mcp-client", Version: "0.1.0"}, nil)
+	client := mcp.NewClient(&mcp.Implementation{Name: "linmo-mcp-client", Version: "0.1.0"}, nil)
 	session, err := client.Connect(ctx, transport, nil)
 	if err != nil {
 		log.Printf("MCP Connection failed. Server stderr output:\n%s", stderrBuf.String())
@@ -82,7 +82,7 @@ func ConnectURL(ctx context.Context, key string, url string) (*Client, error) {
 	}
 
 	transport := pickURLTransport(u, raw)
-	client := mcp.NewClient(&mcp.Implementation{Name: "openocta-mcp-client", Version: "0.1.0"}, nil)
+	client := mcp.NewClient(&mcp.Implementation{Name: "linmo-mcp-client", Version: "0.1.0"}, nil)
 	session, err := client.Connect(ctx, transport, nil)
 	if err != nil {
 		// If transport auto-detection picked streamable and it fails, try SSE as fallback.

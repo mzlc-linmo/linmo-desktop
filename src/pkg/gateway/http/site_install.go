@@ -418,7 +418,7 @@ func installEmployee(zipData []byte, typeVal, fromVal string, env func(string) s
 	}
 	// 写入 README.md
 	_ = os.WriteFile(filepath.Join(dir, "README.md"), readmeData, 0644)
-	// 若有 skill.zip，解压到 ~/.openocta/employee_skills/<employeeId>/<skillName>/
+	// 若有 skill.zip，解压到 ~/.linmo/employee_skills/<employeeId>/<skillName>/
 	if len(skillZipData) > 0 {
 		stateDir := paths.ResolveStateDir(env)
 		employeeSkillsRoot := filepath.Join(stateDir, "employee_skills", m.ID)
@@ -525,10 +525,10 @@ func installSkill(zipData []byte, zipName, typeVal, fromVal string, env func(str
 		_ = os.WriteFile(dest, data, 0644)
 	}
 
-	// 写入 .openocta-meta.json 记录 type/from
+	// 写入 .linmo-meta.json 记录 type/from
 	meta := map[string]string{"type": typeVal, "from": fromVal}
 	metaData, _ := json.MarshalIndent(meta, "", "  ")
-	_ = os.WriteFile(filepath.Join(targetDir, ".openocta-meta.json"), metaData, 0644)
+	_ = os.WriteFile(filepath.Join(targetDir, ".linmo-meta.json"), metaData, 0644)
 
 	return skillName, nil
 }
@@ -598,7 +598,7 @@ func installMcp(zipData []byte, typeVal, fromVal string, env func(string) string
 	}
 	mcpEntry.Enabled = enabled
 
-	// 合并到 openocta.json
+	// 合并到 linmo.json
 	stateDir := paths.ResolveStateDir(env)
 	configPath := paths.ResolveConfigPath(env, stateDir)
 	snap, err := handlers.LoadConfigSnapshot(env)

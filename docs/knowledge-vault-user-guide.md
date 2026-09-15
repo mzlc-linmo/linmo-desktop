@@ -1,7 +1,7 @@
 # 知识库（Knowledge Vault）用户使用手册
 
 > **文档版本**：UI 工作台版（2026-07）  
-> **适用产品**：OpenOcta / DataBuff 桌面端 · 顶栏「知识库」标签页  
+> **适用产品**：Linmo / DataBuff 桌面端 · 顶栏「知识库」标签页  
 > **前置条件**：Gateway 已连接  
 > **延伸阅读**：[知识库产品说明](./knowledge-vault.md)（架构、Agent 工具、配置项）
 
@@ -9,7 +9,7 @@
 
 ## 1. 知识库是什么
 
-知识库是一套 **Obsidian 风格的 Markdown 笔记工作台**：你在本地维护 `.md` 笔记，在 OpenOcta 界面中浏览、编辑、检索；对话中的 Agent 则通过 **`memory_search`** 工具检索同一份索引，回答 Runbook、架构说明等问题。
+知识库是一套 **Obsidian 风格的 Markdown 笔记工作台**：你在本地维护 `.md` 笔记，在 Linmo 界面中浏览、编辑、检索；对话中的 Agent 则通过 **`memory_search`** 工具检索同一份索引，回答 Runbook、架构说明等问题。
 
 | 你能做什么 | Agent 能做什么 |
 |------------|----------------|
@@ -60,7 +60,7 @@
 
 ## 3. 快速上手（5 分钟）
 
-1. 打开顶栏 **「知识库」**，确认底栏已显示 Vault 路径（默认多为 `<workspace>/vault` 或 `~/.openocta/vault`）。
+1. 打开顶栏 **「知识库」**，确认底栏已显示 Vault 路径（默认多为 `<workspace>/vault` 或 `~/.linmo/vault`）。
 2. 点击 **「新建笔记」**，输入名称、选择父级目录（默认根目录），创建第一篇笔记。
 3. 在右侧选择 **「编辑」**，写入 Markdown 内容，按 **`Ctrl+S`**（Mac：`⌘+S`）保存。
 4. 点击 **「同步索引」**，等待底栏索引块数更新。
@@ -108,7 +108,7 @@
 
 1. 用 Obsidian **「Open folder as vault」** 打开同一目录；
 2. 在 Obsidian 中编辑保存；
-3. 回到 OpenOcta 点击 **「刷新」** 与 **「同步索引」**。
+3. 回到 Linmo 点击 **「刷新」** 与 **「同步索引」**。
 
 `.obsidian/` 配置目录不会被索引，不影响检索。
 
@@ -191,7 +191,7 @@
 
 | 操作 | 建议 |
 |------|------|
-| 在 OpenOcta 界面保存笔记 | 保存后会 **自动触发同步**（可留意顶栏绿色提示） |
+| 在 Linmo 界面保存笔记 | 保存后会 **自动触发同步**（可留意顶栏绿色提示） |
 | 在 Obsidian / 外部编辑器改文件 | 回到知识库点 **刷新** + **同步索引** |
 | 新建 / 删除 / 移动笔记 | 完成后点 **同步索引** |
 | Agent 搜不到刚写的内容 | 先同步索引，再在对话里 **新发一条消息** |
@@ -216,10 +216,10 @@ Agent 使用工具 **`memory_search`**（不是自动读整个 Vault）。检索
 
 1. 点击顶栏 **「配置目录」**。
 2. 输入 **绝对路径** 作为新的 Vault 根目录。
-3. **留空并确认** 可恢复为默认路径（`workspace/vault` 或 `~/.openocta/vault`）。
+3. **留空并确认** 可恢复为默认路径（`workspace/vault` 或 `~/.linmo/vault`）。
 4. 修改后会自动刷新列表并同步索引。
 
-也可在 `openocta.json` 中配置：
+也可在 `linmo.json` 中配置：
 
 ```json
 {
@@ -263,7 +263,7 @@ Agent 使用工具 **`memory_search`**（不是自动读整个 Vault）。检索
 ### Q6：索引文件要提交 Git 吗？
 
 - **要提交**：`vault/` 下的 `.md` 笔记  
-- **不要提交**：`~/.openocta/knowledge-index/`（本地自动重建）
+- **不要提交**：`~/.linmo/knowledge-index/`（本地自动重建）
 
 ### Q7：和「记忆 / Memory」插件配置冲突吗？
 
@@ -284,7 +284,7 @@ Knowledge Vault 由 `agents.defaults.knowledge` 控制，与顶层 `memory` 插�
 | 看笔记关系 | 顶栏「图谱」 |
 | 从图谱打开笔记 | 点击节点（自动回文档视图） |
 | 让 Agent 能搜到新内容 | 保存 →「同步索引」→ 对话新发消息 |
-| 换 Vault 目录 |「配置目录」或改 `openocta.json` |
+| 换 Vault 目录 |「配置目录」或改 `linmo.json` |
 
 ---
 

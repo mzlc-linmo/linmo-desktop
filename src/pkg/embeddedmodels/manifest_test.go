@@ -8,7 +8,7 @@ import (
 
 func TestIsInstalledEmptyCatalogFiles(t *testing.T) {
 	env := func(key string) string {
-		if key == "OPENOCTA_STATE_DIR" {
+		if key == "LIMNO_STATE_DIR" {
 			return t.TempDir()
 		}
 		return os.Getenv(key)
@@ -21,7 +21,7 @@ func TestIsInstalledEmptyCatalogFiles(t *testing.T) {
 func TestIsInstalledUsesManifestFiles(t *testing.T) {
 	root := t.TempDir()
 	env := func(key string) string {
-		if key == "OPENOCTA_STATE_DIR" {
+		if key == "LIMNO_STATE_DIR" {
 			return root
 		}
 		return os.Getenv(key)

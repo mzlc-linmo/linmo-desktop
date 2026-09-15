@@ -1,6 +1,6 @@
 # 扩展自定义 Channel 指南
 
-本指南说明如何在 OpenOcta 中新增一个自定义 IM 通道（例如 `myim`），并与现有架构对齐。
+本指南说明如何在 Linmo 中新增一个自定义 IM 通道（例如 `myim`），并与现有架构对齐。
 
 ## 步骤一：准备 Plugin 元数据
 
@@ -125,7 +125,7 @@ if raw := cfg.Channels.GetChannelConfig("myim"); raw != nil {
 
 ## 步骤四：配置文件示例
 
-在 `openocta.json` 中新增：
+在 `linmo.json` 中新增：
 
 ```json5
 {

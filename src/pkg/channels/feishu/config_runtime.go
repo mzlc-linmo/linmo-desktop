@@ -7,7 +7,7 @@ import (
 )
 
 // NewRuntimeFromConfig 基于 channels.feishu 的原始配置创建 Feishu Runtime。
-// raw 通常来源于 OpenOctaConfig.Channels.GetChannelConfig("feishu")。
+// raw 通常来源于 LinmoConfig.Channels.GetChannelConfig("feishu")。
 func NewRuntimeFromConfig(raw map[string]interface{}, sink channels.InboundSink) (channels.RuntimeChannel, error) {
 	if raw == nil {
 		return nil, fmt.Errorf("feishu: channels.feishu not configured")

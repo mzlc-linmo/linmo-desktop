@@ -1,6 +1,6 @@
-const OPENOCTA_ATTACHMENTS_MARKER = "@@OPENOCTA_ATTACHMENTS@@";
+const LIMNO_ATTACHMENTS_MARKER = "@@LIMNO_ATTACHMENTS@@";
 
-export type ParsedOpenOctaImage = {
+export type ParsedLinmoImage = {
   url: string;
   filename?: string;
   alt?: string;
@@ -14,27 +14,27 @@ type RawAttachment = {
   url?: string;
 };
 
-export function stripOpenOctaAttachmentsMarker(text: string): string {
-  const idx = text.indexOf(OPENOCTA_ATTACHMENTS_MARKER);
+export function stripLinmoAttachmentsMarker(text: string): string {
+  const idx = text.indexOf(LIMNO_ATTACHMENTS_MARKER);
   if (idx < 0) {
     return text;
   }
   return text.slice(0, idx).trimEnd();
 }
 
-export type ParsedOpenOctaFile = {
+export type ParsedLinmoFile = {
   filename: string;
   mimeType: string;
   url: string;
   sizeBytes?: number;
 };
 
-export function parseOpenOctaFileAttachmentsFromText(text: string): ParsedOpenOctaFile[] {
-  const idx = text.indexOf(OPENOCTA_ATTACHMENTS_MARKER);
+export function parseLinmoFileAttachmentsFromText(text: string): ParsedLinmoFile[] {
+  const idx = text.indexOf(LIMNO_ATTACHMENTS_MARKER);
   if (idx < 0) {
     return [];
   }
-  const raw = text.slice(idx + OPENOCTA_ATTACHMENTS_MARKER.length).trim();
+  const raw = text.slice(idx + LIMNO_ATTACHMENTS_MARKER.length).trim();
   if (!raw) {
     return [];
   }
@@ -48,7 +48,7 @@ export function parseOpenOctaFileAttachmentsFromText(text: string): ParsedOpenOc
     return [];
   }
 
-  const files: ParsedOpenOctaFile[] = [];
+  const files: ParsedLinmoFile[] = [];
   for (const item of attachments) {
     const kind = (item.type ?? "").toLowerCase();
     if (kind !== "file" && kind !== "document" && kind !== "attachment") {
@@ -69,12 +69,12 @@ export function parseOpenOctaFileAttachmentsFromText(text: string): ParsedOpenOc
   return files;
 }
 
-export function parseOpenOctaAttachmentsFromText(text: string): ParsedOpenOctaImage[] {
-  const idx = text.indexOf(OPENOCTA_ATTACHMENTS_MARKER);
+export function parseLinmoAttachmentsFromText(text: string): ParsedLinmoImage[] {
+  const idx = text.indexOf(LIMNO_ATTACHMENTS_MARKER);
   if (idx < 0) {
     return [];
   }
-  const raw = text.slice(idx + OPENOCTA_ATTACHMENTS_MARKER.length).trim();
+  const raw = text.slice(idx + LIMNO_ATTACHMENTS_MARKER.length).trim();
   if (!raw) {
     return [];
   }
@@ -88,7 +88,7 @@ export function parseOpenOctaAttachmentsFromText(text: string): ParsedOpenOctaIm
     return [];
   }
 
-  const images: ParsedOpenOctaImage[] = [];
+  const images: ParsedLinmoImage[] = [];
   for (const item of attachments) {
     if ((item.type ?? "").toLowerCase() !== "image") {
       continue;

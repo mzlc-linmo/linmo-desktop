@@ -14,7 +14,7 @@ import (
 	"github.com/hybridgroup/yzma/pkg/download"
 )
 
-// EnsureLibraries installs llama.cpp prebuilt libs into ~/.openocta/yzma-lib if missing.
+// EnsureLibraries installs llama.cpp prebuilt libs into ~/.linmo/yzma-lib if missing.
 func EnsureLibraries(env func(string) string) error {
 	// Fail early on Windows when MSVC runtime is missing — same requirement as
 	// loading ggml.dll, and clearer than a generic LoadLibrary failure later.
@@ -93,7 +93,7 @@ func DownloadStatus() map[string]interface{} {
 	return out
 }
 
-// StartDownloadAsync downloads a catalog model into ~/.openocta/embedded-models/{id}/.
+// StartDownloadAsync downloads a catalog model into ~/.linmo/embedded-models/{id}/.
 func StartDownloadAsync(env func(string) string, modelID string) (started bool, err error) {
 	entry, ok := FindCatalogEntry(modelID)
 	if !ok {

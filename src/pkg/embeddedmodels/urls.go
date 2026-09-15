@@ -12,7 +12,7 @@ const (
 
 // GitHubDownloadURLs returns candidate download URLs for a GitHub release asset.
 // By default uses gh-proxy.com only (no direct GitHub fallback).
-// Set OPENOCTA_GITHUB_PROXY=off to use only the original URL; a custom value overrides the default.
+// Set LIMNO_GITHUB_PROXY=off to use only the original URL; a custom value overrides the default.
 func GitHubDownloadURLs(raw string, env func(string) string) []string {
 	raw = strings.TrimSpace(raw)
 	if raw == "" {
@@ -46,7 +46,7 @@ func ApplyGitHubProxy(raw string, env func(string) string) string {
 
 func resolveGitHubProxies(env func(string) string) []string {
 	if env != nil {
-		if v := strings.TrimSpace(env("OPENOCTA_GITHUB_PROXY")); v != "" {
+		if v := strings.TrimSpace(env("LIMNO_GITHUB_PROXY")); v != "" {
 			if strings.EqualFold(v, "off") || strings.EqualFold(v, "false") || v == "0" {
 				return nil
 			}
@@ -79,7 +79,7 @@ func rewriteGitHubProxy(raw, proxy string) string {
 
 // DownloadURLs returns the download URL for a catalog file.
 // By default rewrites huggingface.co links to hf-mirror.com (faster in China).
-// Set OPENOCTA_HF_MIRROR=off to use the catalog URL as-is; HF_ENDPOINT overrides the mirror host.
+// Set LIMNO_HF_MIRROR=off to use the catalog URL as-is; HF_ENDPOINT overrides the mirror host.
 func DownloadURLs(catalogURL string, env func(string) string) []string {
 	if catalogURL == "" {
 		return nil
@@ -95,7 +95,7 @@ func DownloadURLs(catalogURL string, env func(string) string) []string {
 
 func resolveHFMirror(env func(string) string) string {
 	if env != nil {
-		if v := strings.TrimSpace(env("OPENOCTA_HF_MIRROR")); v != "" {
+		if v := strings.TrimSpace(env("LIMNO_HF_MIRROR")); v != "" {
 			if strings.EqualFold(v, "off") || strings.EqualFold(v, "false") || v == "0" {
 				return ""
 			}

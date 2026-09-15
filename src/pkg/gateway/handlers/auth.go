@@ -5,10 +5,10 @@ import (
 	"strings"
 )
 
-const envGatewayToken = "OPENOCTA_GATEWAY_TOKEN"
+const envGatewayToken = "LIMNO_GATEWAY_TOKEN"
 
 // GetExpectedGatewayToken returns the gateway token from config or env.
-// When loadSnapshot is nil or returns no token, falls back to OPENOCTA_GATEWAY_TOKEN.
+// When loadSnapshot is nil or returns no token, falls back to LIMNO_GATEWAY_TOKEN.
 func GetExpectedGatewayToken(loadSnapshot func() (*ConfigSnapshot, error)) string {
 	if loadSnapshot != nil {
 		snap, err := loadSnapshot()

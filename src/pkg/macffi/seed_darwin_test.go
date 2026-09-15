@@ -23,7 +23,7 @@ func TestSeedSignedLibFFI(t *testing.T) {
 	if err := os.WriteFile(src, payload, 0755); err != nil {
 		t.Fatal(err)
 	}
-	exe := filepath.Join(macos, "OpenOcta")
+	exe := filepath.Join(macos, "Linmo")
 	if err := os.WriteFile(exe, []byte("#!/bin/sh\n"), 0755); err != nil {
 		t.Fatal(err)
 	}

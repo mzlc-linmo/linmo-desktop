@@ -1,6 +1,6 @@
 import { gatewayHttpBase } from "../gateway-url.ts";
 
-const OPENOCTA_SITE_ORIGIN = "https://openocta.com";
+const LIMNO_SITE_ORIGIN = "https://linmo.xin";
 
 function getBaseUrl(gatewayHost?: string): string {
   if (typeof window === "undefined") return "";
@@ -14,10 +14,10 @@ function getBaseUrl(gatewayHost?: string): string {
 }
 
 async function directSiteGet<T>(path: string): Promise<T> {
-  const url = `${OPENOCTA_SITE_ORIGIN}${path.startsWith("/") ? path : `/${path}`}`;
+  const url = `${LIMNO_SITE_ORIGIN}${path.startsWith("/") ? path : `/${path}`}`;
   const res = await fetch(url, { headers: { Accept: "application/json" } });
   if (!res.ok) {
-    throw new Error(`OpenOcta 官网 API ${res.status} for ${path}`);
+    throw new Error(`Linmo 官网 API ${res.status} for ${path}`);
   }
   return (await res.json()) as T;
 }
@@ -53,7 +53,7 @@ async function localGet<T>(path: string, gatewayHost?: string, token?: string): 
   }
 }
 
-/** 优先走 Gateway 代理（同源），失败时回退 openocta.com 官网 API */
+/** 优先走 Gateway 代理（同源），失败时回退 linmo.xin 官网 API */
 async function siteGet<T>(path: string, opts?: RemoteMarketOptions): Promise<T> {
   try {
     return await localGet<T>(path, opts?.gatewayHost, opts?.token);
@@ -293,7 +293,7 @@ export type InstallResponse = {
 
 /**
  * 从官网安装插件（数字员工/技能/MCP）
- * 后端会调用 OPENOCTA_SITE_API_BASE_URL 下载 zip，解压并保存到本地，写入 type 和 from 标识
+ * 后端会调用 LIMNO_SITE_API_BASE_URL 下载 zip，解压并保存到本地，写入 type 和 from 标识
  */
 export async function installFromSite(req: InstallRequest, opts?: RemoteMarketOptions): Promise<InstallResponse> {
   const base = getBaseUrl(opts?.gatewayHost);

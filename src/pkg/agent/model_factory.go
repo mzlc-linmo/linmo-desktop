@@ -23,7 +23,7 @@ func ResolveSessionAgentID(sessionKey string) string {
 	return "main"
 }
 
-func resolveAgentConfig(cfg *config.OpenOctaConfig, agentID string) *config.AgentConfig {
+func resolveAgentConfig(cfg *config.LinmoConfig, agentID string) *config.AgentConfig {
 	if cfg == nil || cfg.Agents == nil || len(cfg.Agents.List) == 0 {
 		return nil
 	}
@@ -56,7 +56,7 @@ func resolveModelFromConfig(modelRef string) (provider string, modelID string) {
 	return "anthropic", strings.TrimSpace(modelRef)
 }
 
-func resolveAgentModelRef(cfg *config.OpenOctaConfig, agentID string) string {
+func resolveAgentModelRef(cfg *config.LinmoConfig, agentID string) string {
 	agentCfg := resolveAgentConfig(cfg, agentID)
 	if agentCfg != nil && agentCfg.Model != nil {
 		if modelStr, ok := agentCfg.Model.(string); ok && modelStr != "" {
@@ -77,18 +77,18 @@ func resolveAgentModelRef(cfg *config.OpenOctaConfig, agentID string) string {
 }
 
 // ResolveAgentModelRef returns the primary model reference from agent config or defaults.
-func ResolveAgentModelRef(cfg *config.OpenOctaConfig, agentID string) string {
+func ResolveAgentModelRef(cfg *config.LinmoConfig, agentID string) string {
 	return resolveAgentModelRef(cfg, agentID)
 }
 
 // CreateModelFactoryFromConfig creates a ModelFactory from config.
-func CreateModelFactoryFromConfig(cfg *config.OpenOctaConfig, agentID string) (ModelFactory, error) {
+func CreateModelFactoryFromConfig(cfg *config.LinmoConfig, agentID string) (ModelFactory, error) {
 	modelRef := resolveAgentModelRef(cfg, agentID)
 	return eino.CreateModelFactoryFromConfig(cfg, modelRef)
 }
 
 // CreateModelFactoryForModelRef creates a ModelFactory for an explicit model reference.
-func CreateModelFactoryForModelRef(cfg *config.OpenOctaConfig, modelRef string) (ModelFactory, error) {
+func CreateModelFactoryForModelRef(cfg *config.LinmoConfig, modelRef string) (ModelFactory, error) {
 	return eino.CreateModelFactoryForModelRef(cfg, modelRef)
 }
 
@@ -106,7 +106,7 @@ func modelDefFromProviderCfg(prov config.ModelProvider, resolvedModelID string) 
 }
 
 // TokenLimitForSessionHistory returns conversation history trim budget from config.
-func TokenLimitForSessionHistory(cfg *config.OpenOctaConfig, agentID string, modelRefOverride string) int {
+func TokenLimitForSessionHistory(cfg *config.LinmoConfig, agentID string, modelRefOverride string) int {
 	if cfg == nil {
 		return 0
 	}

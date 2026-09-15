@@ -9,13 +9,13 @@ import (
 	"github.com/openocta/openocta/pkg/paths"
 )
 
-const VaultReadmeTemplate = "# OpenOcta Knowledge Vault\n\n" +
+const VaultReadmeTemplate = "# Linmo Knowledge Vault\n\n" +
 	"This folder is your Obsidian-compatible knowledge base. Add .md notes here; the agent indexes them for memory_search.\n\n" +
 	"- Open this directory in [Obsidian](https://obsidian.md) to browse and edit notes.\n" +
 	"- Subfolders are supported; .obsidian/ is ignored by the indexer.\n"
 
 // ResolveVaultDir returns the Obsidian-compatible vault directory for an agent.
-func ResolveVaultDir(cfg *config.OpenOctaConfig, agentID string, env func(string) string) string {
+func ResolveVaultDir(cfg *config.LinmoConfig, agentID string, env func(string) string) string {
 	if env == nil {
 		env = os.Getenv
 	}

@@ -85,14 +85,14 @@ func sanitizeVaultFilePath(baseDir, relPath string) (string, error) {
 	return absTarget, nil
 }
 
-func loadVaultConfig(env func(string) string) (*config.OpenOctaConfig, error) {
+func loadVaultConfig(env func(string) string) (*config.LinmoConfig, error) {
 	if env == nil {
 		env = func(k string) string { return os.Getenv(k) }
 	}
 	return config.Load(env)
 }
 
-func resolveVaultDirFromParams(cfg *config.OpenOctaConfig, params map[string]interface{}, env func(string) string) (string, error) {
+func resolveVaultDirFromParams(cfg *config.LinmoConfig, params map[string]interface{}, env func(string) string) (string, error) {
 	agentID := ""
 	if v, ok := params["agentId"].(string); ok {
 		agentID = strings.TrimSpace(v)

@@ -9,7 +9,7 @@ import (
 func TestScanSideloadedModels(t *testing.T) {
 	root := t.TempDir()
 	env := func(key string) string {
-		if key == "OPENOCTA_STATE_DIR" {
+		if key == "LIMNO_STATE_DIR" {
 			return root
 		}
 		return os.Getenv(key)
@@ -44,7 +44,7 @@ func TestScanSideloadedModels(t *testing.T) {
 func TestScanSideloadedEmbeddingKind(t *testing.T) {
 	root := t.TempDir()
 	env := func(key string) string {
-		if key == "OPENOCTA_STATE_DIR" {
+		if key == "LIMNO_STATE_DIR" {
 			return root
 		}
 		return os.Getenv(key)
@@ -72,7 +72,7 @@ func TestScanSideloadedEmbeddingKind(t *testing.T) {
 func TestListCatalogIncludesSideloadedOnly(t *testing.T) {
 	root := t.TempDir()
 	env := func(key string) string {
-		if key == "OPENOCTA_STATE_DIR" {
+		if key == "LIMNO_STATE_DIR" {
 			return root
 		}
 		return os.Getenv(key)

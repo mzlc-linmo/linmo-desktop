@@ -5,7 +5,7 @@ import {
   renderReadingProps,
   renderSvgDefs,
   renderTorsoCover,
-} from "./openocta-mascot-scenes.ts";
+} from "./linmo-mascot-scenes.ts";
 
 const POKE_MESSAGES = [
   "我在呢～",
@@ -28,10 +28,10 @@ function mascotAsset(base: string, name: string) {
 }
 
 /**
- * Floating OpenOcta octopus — idle: reading; busy: typing on laptop.
+ * Floating Linmo octopus — idle: reading; busy: typing on laptop.
  */
-@customElement("openocta-mascot")
-export class OpenOctaMascot extends LitElement {
+@customElement("linmo-mascot")
+export class LinmoMascot extends LitElement {
   createRenderRoot() {
     return this;
   }
@@ -141,7 +141,7 @@ export class OpenOctaMascot extends LitElement {
         class="octo-mascot ${this.busy ? "octo-mascot--busy" : "octo-mascot--idle"} ${this.poke ? "octo-mascot--poke" : ""} ${this.dragging ? "octo-mascot--dragging" : ""}"
         style=${style}
         role="img"
-        aria-label=${this.busy ? "OpenOcta 八爪鱼助手正在敲键盘" : "OpenOcta 八爪鱼助手正在看书"}
+        aria-label=${this.busy ? "Linmo 八爪鱼助手正在敲键盘" : "Linmo 八爪鱼助手正在看书"}
         @pointerdown=${this.#onPointerDown}
         @click=${this.#onClick}
       >
@@ -175,6 +175,6 @@ export class OpenOctaMascot extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "openocta-mascot": OpenOctaMascot;
+    "linmo-mascot": LinmoMascot;
   }
 }

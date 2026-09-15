@@ -11,7 +11,7 @@ import (
 )
 
 func deriveStoreKey(storePath string) []byte {
-	sum := sha256.Sum256([]byte("openocta-apikeys-v1:" + storePath))
+	sum := sha256.Sum256([]byte("linmo-apikeys-v1:" + storePath))
 	return sum[:]
 }
 

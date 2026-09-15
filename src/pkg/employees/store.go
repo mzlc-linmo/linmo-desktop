@@ -72,7 +72,7 @@ func ListSummaries(env func(string) string) ([]Summary, error) {
 	return out, nil
 }
 
-// LoadManifest 从 ~/.openocta/employees/<id>/manifest.json 加载指定 ID 的数字员工 manifest。
+// LoadManifest 从 ~/.linmo/employees/<id>/manifest.json 加载指定 ID 的数字员工 manifest。
 func LoadManifest(id string, env func(string) string) (*Manifest, error) {
 	id = strings.TrimSpace(id)
 	if id == "" {
@@ -94,7 +94,7 @@ func LoadManifest(id string, env func(string) string) (*Manifest, error) {
 	return &m, nil
 }
 
-// SaveManifest 在 ~/.openocta/employees/<id>/ 下写入 manifest.json。
+// SaveManifest 在 ~/.linmo/employees/<id>/ 下写入 manifest.json。
 func SaveManifest(m *Manifest, env func(string) string) error {
 	if m == nil {
 		return nil

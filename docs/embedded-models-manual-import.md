@@ -1,6 +1,6 @@
 # 内嵌模型手动导入
 
-本文说明如何**自行下载 GGUF 权重**，放入 OpenOcta 指定目录，在**模型广场**点击「刷新」后识别、启动、停止与删除。
+本文说明如何**自行下载 GGUF 权重**，放入 Linmo 指定目录，在**模型广场**点击「刷新」后识别、启动、停止与删除。
 
 > 适用场景：HuggingFace / ModelScope / 其他渠道下载的 GGUF，或广场目录中暂不支持「内嵌下载」的模型（若该模型 ID 已在广场列表中，也可用手动放置文件代替在线下载）。在 **模型广场** 点击 **「手动导入」** 可查看完整说明。
 
@@ -8,10 +8,10 @@
 
 ## 一、目录位置
 
-默认状态目录为 `~/.openocta`（Windows：`%APPDATA%\openocta`）。内嵌模型权重统一放在：
+默认状态目录为 `~/.linmo`（Windows：`%APPDATA%\linmo`）。内嵌模型权重统一放在：
 
 ```text
-~/.openocta/embedded-models/
+~/.linmo/embedded-models/
 ├── manifest.json                 # 安装与运行状态（自动维护，勿手动改）
 ├── qwen3-0.6b/                   # 示例：与广场 catalog 相同的 ID
 │   └── Qwen3-0.6B-Q4_K_M.gguf
@@ -19,7 +19,7 @@
     └── My-Local-Qwen-Q4_K_M.gguf
 ```
 
-可通过环境变量 **`OPENOCTA_STATE_DIR`** 修改状态根目录；内嵌模型子目录始终为 `{OPENOCTA_STATE_DIR}/embedded-models/`。
+可通过环境变量 **`LIMNO_STATE_DIR`** 修改状态根目录；内嵌模型子目录始终为 `{LIMNO_STATE_DIR}/embedded-models/`。
 
 ---
 
@@ -42,7 +42,7 @@
 ### 2. 下载并放置 GGUF
 
 1. 从 HuggingFace、ModelScope 等获取 **GGUF** 文件（非 Ollama blob、非 safetensors）。
-2. 创建目录：`~/.openocta/embedded-models/<模型ID>/`
+2. 创建目录：`~/.linmo/embedded-models/<模型ID>/`
 3. 将 `.gguf` 文件放入该目录（可直接放根目录，不必嵌套多层）。
 
 **对话模型（Chat）**
@@ -60,7 +60,7 @@
 - 除主权重外，将 `mmproj-*.gguf` 放在同一目录。
 - 示例（广场模型 `qwen2.5-vl-3b`）：
   ```text
-  ~/.openocta/embedded-models/qwen2.5-vl-3b/
+  ~/.linmo/embedded-models/qwen2.5-vl-3b/
   ├── Qwen2.5-VL-3B-Instruct-Q4_K_M.gguf
   └── mmproj-Qwen2.5-VL-3B-Instruct-Q4_K_M.gguf
   ```
@@ -80,7 +80,7 @@
 
 与在线下载的模型相同：
 
-1. **启动** — 加载 GGUF，分配本地端口，并写入 `openocta.json` 的 `openocta-embedded-chat` / `openocta-embedded-embedding` provider
+1. **启动** — 加载 GGUF，分配本地端口，并写入 `linmo.json` 的 `linmo-embedded-chat` / `linmo-embedded-embedding` provider
 2. **停止** — 释放该实例内存
 3. **删除** — 停止服务并**删除整个模型目录**（不可恢复）
 
@@ -89,10 +89,10 @@
 启动 Chat 模型后，在主聊天或模型配置中选择：
 
 ```text
-openocta-embedded-chat/<模型ID>
+linmo-embedded-chat/<模型ID>
 ```
 
-例如：`openocta-embedded-chat/my-local-qwen`
+例如：`linmo-embedded-chat/my-local-qwen`
 
 ---
 
@@ -100,8 +100,8 @@ openocta-embedded-chat/<模型ID>
 
 | 系统 | 状态目录 | 内嵌模型目录 |
 |------|----------|--------------|
-| macOS / Linux | `~/.openocta` | `~/.openocta/embedded-models/` |
-| Windows | `%APPDATA%\openocta` | `%APPDATA%\openocta\embedded-models\` |
+| macOS / Linux | `~/.linmo` | `~/.linmo/embedded-models/` |
+| Windows | `%APPDATA%\linmo` | `%APPDATA%\linmo\embedded-models\` |
 
 ---
 
@@ -120,7 +120,7 @@ openocta-embedded-chat/<模型ID>
 
 **Q: 与 Ollama 下载的模型能否共用？**
 
-- 不能。Ollama 使用 blob 存储，OpenOcta 内嵌推理需要**裸 GGUF 文件**。若已用 Ollama，请在「模型配置」中添加 Ollama Provider，无需手动导入。
+- 不能。Ollama 使用 blob 存储，Linmo 内嵌推理需要**裸 GGUF 文件**。若已用 Ollama，请在「模型配置」中添加 Ollama Provider，无需手动导入。
 
 **Q: Embedding 模型能否用于主聊天？**
 

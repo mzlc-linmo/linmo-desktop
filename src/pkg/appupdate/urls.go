@@ -5,10 +5,10 @@ import (
 	"runtime"
 )
 
-const pkgCDNBase = "https://openocta.com/pkg"
+const pkgCDNBase = "https://linmo.xin/pkg"
 
 // LatestVersionURL is the platform API for newest release tag.
-const LatestVersionURL = "https://openocta.com/api/v1/pkg/latest-version"
+const LatestVersionURL = "https://linmo.xin/api/v1/pkg/latest-version"
 
 // PackageFormat identifies the install artifact type.
 type PackageFormat string
@@ -46,9 +46,9 @@ func linuxPackageURLs(arch string) map[string]string {
 		return nil
 	}
 	return map[string]string{
-		string(FormatDEB):   fmt.Sprintf("%s/openocta_linux_%s.deb", pkgCDNBase, arch),
-		string(FormatRPM):   fmt.Sprintf("%s/openocta_linux_%s.rpm", pkgCDNBase, arch),
-		string(FormatTarGz): fmt.Sprintf("%s/openocta_linux_%s.tar.gz", pkgCDNBase, arch),
+		string(FormatDEB):   fmt.Sprintf("%s/linmo_linux_%s.deb", pkgCDNBase, arch),
+		string(FormatRPM):   fmt.Sprintf("%s/linmo_linux_%s.rpm", pkgCDNBase, arch),
+		string(FormatTarGz): fmt.Sprintf("%s/linmo_linux_%s.tar.gz", pkgCDNBase, arch),
 	}
 }
 
@@ -59,9 +59,9 @@ func ResolvePlatformTarget() PlatformTarget {
 		url := ""
 		switch runtime.GOARCH {
 		case "arm64":
-			url = pkgCDNBase + "/OpenOcta-arm64.dmg"
+			url = pkgCDNBase + "/Linmo-arm64.dmg"
 		case "amd64":
-			url = pkgCDNBase + "/OpenOcta-amd64.dmg"
+			url = pkgCDNBase + "/Linmo-amd64.dmg"
 		}
 		if url == "" {
 			return PlatformTarget{}
@@ -78,7 +78,7 @@ func ResolvePlatformTarget() PlatformTarget {
 		if runtime.GOARCH != "amd64" {
 			return PlatformTarget{}
 		}
-		url := pkgCDNBase + "/OpenOcta-amd64-installer.exe"
+		url := pkgCDNBase + "/Linmo-amd64-installer.exe"
 		return PlatformTarget{
 			HasDownload:          true,
 			PrimaryURL:           url,

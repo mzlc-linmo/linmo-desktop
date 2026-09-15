@@ -111,7 +111,7 @@ MCP 配置样例,允许配置多个：
 }
 ```
 
-技能文件会存储到 `~/.openocta/employee_skills/<员工ID>/<技能名>/` 下，仅在该数字员工的会话中加载。
+技能文件会存储到 `~/.linmo/employee_skills/<员工ID>/<技能名>/` 下，仅在该数字员工的会话中加载。
 
 > **建议**：每个数字员工配置 2～6 个与该角色强相关的技能即可，避免堆砌过多技能导致 token 消耗增加和模型决策干扰。
 
@@ -131,7 +131,7 @@ MCP 配置样例,允许配置多个：
 2. 系统会为该员工创建或复用专属会话（session key 形如 `agent:main:employee:<员工ID>:run:<会话ID>`）
 3. 自动跳转到聊天页，并加载该员工的：
    - **Prompt**（人设）
-   - **专属 Skills**（`~/.openocta/employee_skills/<员工ID>/` 下的技能）
+   - **专属 Skills**（`~/.linmo/employee_skills/<员工ID>/` 下的技能）
    - **专属 MCP**（manifest 中配置的 `mcpServers`）
 4. 首次进入时，若为新会话，助手会按人设进行简短问候
 
@@ -148,8 +148,8 @@ MCP 配置样例,允许配置多个：
 
 | 路径 | 说明 |
 |------|------|
-| `~/.openocta/employees/<员工ID>/manifest.json` | 员工元数据（名称、描述、Prompt、MCP、skillIds 等） |
-| `~/.openocta/employee_skills/<员工ID>/<技能名>/` | 该员工专属技能（SKILL.md 及附属文件） |
+| `~/.linmo/employees/<员工ID>/manifest.json` | 员工元数据（名称、描述、Prompt、MCP、skillIds 等） |
+| `~/.linmo/employee_skills/<员工ID>/<技能名>/` | 该员工专属技能（SKILL.md 及附属文件） |
 
 ### 4.2 技能加载优先级（数字员工会话）
 
@@ -157,8 +157,8 @@ MCP 配置样例,允许配置多个：
 
 1. **Workspace Skills**（基础池，供 manifest.skillIds 过滤）
 2. **embed/employee_skills/<员工ID>**（内置员工技能，若构建时已嵌入）
-3. **~/.openocta/employees/<员工ID>/skills**（旧路径，兼容）
-4. **~/.openocta/employee_skills/<员工ID>**（新路径，上传的专属技能）
+3. **~/.linmo/employees/<员工ID>/skills**（旧路径，兼容）
+4. **~/.linmo/employee_skills/<员工ID>**（新路径，上传的专属技能）
 
 若 manifest 中配置了 `skillIds`，则仅保留 manifest 指定的技能 + 员工专属技能，其余 workspace 技能会被过滤。
 

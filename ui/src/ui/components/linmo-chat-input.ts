@@ -35,8 +35,8 @@ function findActiveMention(text: string, caret: number): MentionMatch | null {
 /**
  * Draft input with local state so keystrokes do not re-render the whole chat page.
  */
-@customElement("openocta-chat-input")
-export class OpenOctaChatInput extends LitElement {
+@customElement("linmo-chat-input")
+export class LinmoChatInput extends LitElement {
   createRenderRoot() {
     return this;
   }
@@ -307,6 +307,6 @@ export class OpenOctaChatInput extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "openocta-chat-input": OpenOctaChatInput;
+    "linmo-chat-input": LinmoChatInput;
   }
 }

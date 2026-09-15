@@ -1,14 +1,14 @@
 {
   "$schema": "https://wails.io/schemas/config.v2.json",
-  "name": "OpenOcta",
-  "outputfilename": "OpenOcta",
+  "name": "Linmo",
+  "outputfilename": "Linmo",
   "icon": "build/appicon.ico",
   "info": {
-    "companyName": "OpenOcta",
-    "productName": "OpenOcta",
+    "companyName": "linmo.xin",
+    "productName": "Linmo",
     "productVersion": "0.2.0",
-    "copyright": "OpenOcta - GPLv3. 本仓库遵循 GPLv3 开源限制。",
-    "comments": "OpenOcta Desktop - Built with Wails"
+    "copyright": "Linmo - GPLv3. 本仓库遵循 GPLv3 开源限制。",
+    "comments": "Linmo Desktop - Built with Wails"
   },
   "frontend:dir": "wails-bootstrap",
   "assetdir": "wails-bootstrap",

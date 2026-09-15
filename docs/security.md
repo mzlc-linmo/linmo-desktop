@@ -1,6 +1,6 @@
 # 安全策略（Sandbox / Validator / Approval Queue）技术文档
 
-本文档描述 OpenOcta 的安全策略能力（Sandbox / Validator / Approval Queue），包括配置结构、运行时行为、审批队列与 SDK 集成方式，适合需要做深度集成和排障的开发者。
+本文档描述 Linmo 的安全策略能力（Sandbox / Validator / Approval Queue），包括配置结构、运行时行为、审批队列与 SDK 集成方式，适合需要做深度集成和排障的开发者。
 
 ---
 
@@ -21,14 +21,14 @@
 2. **Validator**：命令与参数校验  
 3. **Approval Queue**：人工审批队列（human-in-the-loop）
 
-OpenOcta 的 `security.sandbox` / `security.validator` / `security.approvalQueue` 与这三层一一对应，并在 Runtime 中通过 middleware 和 `ApprovalQueue` 与 SDK 集成。
+Linmo 的 `security.sandbox` / `security.validator` / `security.approvalQueue` 与这三层一一对应，并在 Runtime 中通过 middleware 和 `ApprovalQueue` 与 SDK 集成。
 
 **特性：**
 
-- **根级配置**：在 `openocta.json` 根下使用 `security` 字段，与 gateway/agents 等平级
+- **根级配置**：在 `linmo.json` 根下使用 `security` 字段，与 gateway/agents 等平级
 - **文件与网络**：允许路径（allowedPaths）、网络白名单（networkAllow）
 - **命令校验**：禁止命令/参数/关键词熔断/长度限制（validator）
-- **审批队列**：默认存储于 `~/.openocta/agents/approvals/approvals.json`，可配置
+- **审批队列**：默认存储于 `~/.linmo/agents/approvals/approvals.json`，可配置
 
 ---
 
@@ -36,7 +36,7 @@ OpenOcta 的 `security.sandbox` / `security.validator` / `security.approvalQueue
 
 ### 2.1 配置项
 
-在 `openocta.json` 根级增加 `security`：
+在 `linmo.json` 根级增加 `security`：
 
 ```json
 {
@@ -51,7 +51,7 @@ OpenOcta 的 `security.sandbox` / `security.validator` / `security.approvalQueue
         "maxMemoryBytes": 1073741824,
         "maxDiskBytes": 1073741824
       },
-      "approvalStore": "~/.openocta/agents/approvals"
+      "approvalStore": "~/.linmo/agents/approvals"
     },
     "approvalQueue": {
       "enabled": true,
@@ -113,8 +113,8 @@ OpenOcta 的 `security.sandbox` / `security.validator` / `security.approvalQueue
 
 ### 2.3 Windows 路径
 
-- 配置路径：默认 `%APPDATA%\openocta\openocta.json`
-- 审批存储：默认 `%APPDATA%\openocta\agents\approvals\approvals.json`
+- 配置路径：默认 `%APPDATA%\linmo\linmo.json`
+- 审批存储：默认 `%APPDATA%\linmo\agents\approvals\approvals.json`
 - 使用 `paths.ResolveStateDir(env)` 解析状态目录，避免硬编码 `~`
 
 ---
@@ -144,7 +144,7 @@ OpenOcta 的 `security.sandbox` / `security.validator` / `security.approvalQueue
 - 运行时：
   - 若 `security.validator.enabled == true` 或未显式设置：
     - 使用 `WrapToolWithCommandValidation` 包装 Bash 工具（tool 级防护）
-    - 在 agentsdk-go middleware 链中注入 `openocta-command-validator`（BeforeTool 阶段）
+    - 在 agentsdk-go middleware 链中注入 `linmo-command-validator`（BeforeTool 阶段）
   - 若 `enabled == false`，则不会挂载上述两层校验逻辑。
 
 - 校验内容（`ValidateCommandWithConfig`）：
@@ -156,7 +156,7 @@ OpenOcta 的 `security.sandbox` / `security.validator` / `security.approvalQueue
 
 ### 3.3 审批队列（Approval Queue）
 
-- 默认路径：`~/.openocta/agents/approvals/approvals.json`（Windows：`%APPDATA%\openocta\agents\approvals\approvals.json`）
+- 默认路径：`~/.linmo/agents/approvals/approvals.json`（Windows：`%APPDATA%\linmo\agents\approvals\approvals.json`）
 - 文件格式：`{ "records": [...], "whitelist": {...} }`
   - `records`：审批记录（pending/approved/denied）
   - `whitelist`：会话 TTL 白名单（批准时可选 ttlSeconds，将该 session 在 TTL 内免审）
@@ -179,9 +179,9 @@ agentsdk-go 定义了 6 个安全检查点：
 5. `AfterTool` – 工具结果审查、错误脱敏、输出截断  
 6. `AfterAgent` – 审计日志、合规检查
 
-当前 OpenOcta 的实现重点利用了：
+当前 Linmo 的实现重点利用了：
 
-- `BeforeTool`：通过 `openocta-command-validator` 对 Bash 命令做黑名单 + 长度校验（对应 Validator 层）
+- `BeforeTool`：通过 `linmo-command-validator` 对 Bash 命令做黑名单 + 长度校验（对应 Validator 层）
 - 其他 Hook 点可按需在未来版本中扩展（例如统一的 Prompt 注入检测、输出审查等），实现方式参考 agentsdk-go 示例代码。
 
 ---

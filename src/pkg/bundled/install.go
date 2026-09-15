@@ -20,7 +20,7 @@ import (
 
 const (
 	builtinType = "内置"
-	builtinFrom = "openocta-bundled"
+	builtinFrom = "linmo-bundled"
 )
 
 type mcpSiteConfig map[string]mcpSiteEntry
@@ -322,7 +322,7 @@ func installSkillZip(zipData []byte, zipName string, env func(string) string) (s
 func writeSkillMeta(skillDir string) {
 	meta := map[string]string{"type": builtinType, "from": builtinFrom}
 	metaData, _ := json.MarshalIndent(meta, "", "  ")
-	_ = os.WriteFile(filepath.Join(skillDir, ".openocta-meta.json"), metaData, 0644)
+	_ = os.WriteFile(filepath.Join(skillDir, ".linmo-meta.json"), metaData, 0644)
 }
 
 func copyFile(src, dest string, mode os.FileMode) error {

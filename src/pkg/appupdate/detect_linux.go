@@ -40,7 +40,7 @@ func installedLinuxPackage(kind string) bool {
 		if _, err := exec.LookPath("dpkg-query"); err != nil {
 			return false
 		}
-		out, err := exec.Command("dpkg-query", "-W", "-f=${Status}", "openocta").CombinedOutput()
+		out, err := exec.Command("dpkg-query", "-W", "-f=${Status}", "linmo").CombinedOutput()
 		if err != nil {
 			return false
 		}
@@ -49,7 +49,7 @@ func installedLinuxPackage(kind string) bool {
 		if _, err := exec.LookPath("rpm"); err != nil {
 			return false
 		}
-		err := exec.Command("rpm", "-q", "openocta").Run()
+		err := exec.Command("rpm", "-q", "linmo").Run()
 		return err == nil
 	default:
 		return false

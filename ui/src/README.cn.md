@@ -4,19 +4,19 @@
 
 <p align="center">
   <a href="https://github.com/openocta/openocta/stargazers">
-    <img src="https://img.shields.io/github/stars/openocta/openocta?style=flat&logo=github" alt="GitHub stars">
+    <img src="https://img.shields.io/github/stars/linmo/linmo?style=flat&logo=github" alt="GitHub stars">
   </a>
   <a href="https://github.com/openocta/openocta/forks">
-    <img src="https://img.shields.io/github/forks/openocta/openocta?style=flat&logo=github" alt="GitHub forks">
+    <img src="https://img.shields.io/github/forks/linmo/linmo?style=flat&logo=github" alt="GitHub forks">
   </a>
   <a href="https://github.com/openocta/openocta/releases/latest">
-    <img src="https://img.shields.io/github/v/release/openocta/openocta?label=release" alt="Latest release">
+    <img src="https://img.shields.io/github/v/release/linmo/linmo?label=release" alt="Latest release">
   </a>
   <img src="https://img.shields.io/badge/Go-1.24+-00ADD8?logo=go&logoColor=white" alt="Go 1.24+">
 </p>
 
 <p align="center">
-  <b>OpenOcta 八爪鱼</b> — <b>中国首个开源个人桌面级智能体</b>
+  <b>Linmo 八爪鱼</b> — <b>中国首个开源个人桌面级智能体</b>
 </p>
 
 
@@ -24,14 +24,14 @@
 
 
 <p align="center">
-  <a href="https://openocta.com">官网</a> ·
+  <a href="https://linmo.xin">官网</a> ·
   <a href="README.en.md">English</a>
 </p>
 <p align="center">
   <sub>双击安装 · 本机运行 · 毫秒启动 · 数据留在本机</sub>
 </p>
 
-**OpenOcta 八爪鱼** 是中国首个开源的个人桌面级 AI 智能体，电脑端双击安装，一个运行在你自己电脑上、由你完全掌控的 Agent，用自然语言即可实现电脑办公、IT运维、推广运营、经营分析、软件测试。
+**Linmo 八爪鱼** 是中国首个开源的个人桌面级 AI 智能体，电脑端双击安装，一个运行在你自己电脑上、由你完全掌控的 Agent，用自然语言即可实现电脑办公、IT运维、推广运营、经营分析、软件测试。
 
 **最新版本 [v1.0.5](https://github.com/openocta/openocta/releases/tag/v1.0.5)**（2026-07-02）— 全平台安装包 · 修复工具调用历史消息异常 · 单一 Go 二进制内嵌 Control UI
 
@@ -51,7 +51,7 @@
 
 🔧 **Go 完全自研**：Gateway、Agent、Channels 均为 Go 原生实现 — 单一二进制内嵌 Control UI。
 
-🔌 **Skills & MCP**：内置工具 + MCP 协议 + [技能市场](https://resource.openocta.com) — 按需扩展数字员工能力。
+🔌 **Skills & MCP**：内置工具 + MCP 协议 + [技能市场](https://resource.linmo.xin) — 按需扩展数字员工能力。
 
 💬 **IM 远程指挥**：支持微信、企业微信、钉钉、飞书 — 随时随地下达任务。
 
@@ -63,9 +63,9 @@
 
 ## 与 OpenClaw、Hermes 对比
 
-OpenOcta 面向**个人桌面**：双击安装、完整客户端 UI、本土 IM 与国产模型生态。相对 OpenClaw（Node / Gateway 自托管）与 Hermes（Python / CLI 导向），OpenOcta 以 **Go 单一二进制**实现运行时完全自研，并内置 **L4 自主进化**与 **Knowledge Vault 本地知识库**。
+Linmo 面向**个人桌面**：双击安装、完整客户端 UI、本土 IM 与国产模型生态。相对 OpenClaw（Node / Gateway 自托管）与 Hermes（Python / CLI 导向），Linmo 以 **Go 单一二进制**实现运行时完全自研，并内置 **L4 自主进化**与 **Knowledge Vault 本地知识库**。
 
-| | OpenOcta | OpenClaw | Hermes |
+| | Linmo | OpenClaw | Hermes |
 |---|:---:|:---:|:---:|
 | 上手方式 | 双击安装 | CLI 部署 | CLI 部署 |
 | 运行时 | Go 自研 · 单二进制 | Node.js | Python |
@@ -80,7 +80,7 @@ OpenOcta 面向**个人桌面**：双击安装、完整客户端 UI、本土 IM 
 
 ## 功能一览
 
-直观感受 OpenOcta 桌面客户端的主要界面：
+直观感受 Linmo 桌面客户端的主要界面：
 
 <table>
 <tr>
@@ -115,7 +115,7 @@ OpenOcta 面向**个人桌面**：双击安装、完整客户端 UI、本土 IM 
 </tr>
 </table>
 
-客户端还提供 **工具库、定时任务、IM 通道** 等模块；更多能力可在 [openocta.com](https://openocta.com) 下载体验。
+客户端还提供 **工具库、定时任务、IM 通道** 等模块；更多能力可在 [linmo.xin](https://linmo.xin) 下载体验。
 
 ---
 
@@ -136,13 +136,13 @@ OpenOcta 面向**个人桌面**：双击安装、完整客户端 UI、本土 IM 
 **开发协作** — 读代码、改项目、跑命令、对接工具链。  
 *例：「读这个仓库的 README 并列出待改项」*
 
-更多案例见 [openocta.com/cases](https://openocta.com/cases) 与 [使用场景文档](./docs/scenarios.md)。
+更多案例见 [linmo.xin/cases](https://linmo.xin/cases) 与 [使用场景文档](./docs/scenarios.md)。
 
 ---
 
 ## 30秒启动
 
-1. **下载** — 前往 [GitHub Releases](https://github.com/openocta/openocta/releases/latest) 或 [openocta.com 下载页](https://openocta.com/#download)
+1. **下载** — 前往 [GitHub Releases](https://github.com/openocta/openocta/releases/latest) 或 [linmo.xin 下载页](https://linmo.xin/#download)
 2. **安装并打开** — 双击安装桌面客户端（约 30 秒）
 3. **开始对话** — 在「消息」Tab 描述任务，Agent 将连接文件、终端与工具执行
 
@@ -169,8 +169,8 @@ OpenOcta 面向**个人桌面**：双击安装、完整客户端 UI、本土 IM 
 
 | 平台 | 配置文件路径 |
 |------|----------------|
-| Linux / macOS | `~/.openocta/openocta.json` |
-| Windows | `%APPDATA%\openocta\openocta.json` |
+| Linux / macOS | `~/.linmo/linmo.json` |
+| Windows | `%APPDATA%\linmo\linmo.json` |
 
 最小示例（[Moonshot 国内端点](https://platform.moonshot.cn/)；DeepSeek / 千问 / 豆包等见 [大模型配置说明](./docs/model-providers.md)）：
 
@@ -195,7 +195,7 @@ OpenOcta 面向**个人桌面**：双击安装、完整客户端 UI、本土 IM 
 
 ---
 
-## 为什么选择 OpenOcta
+## 为什么选择 Linmo
 
 | | |
 |---|---|
@@ -207,36 +207,36 @@ OpenOcta 面向**个人桌面**：双击安装、完整客户端 UI、本土 IM 
 | **Skills & MCP** | 内置工具 + MCP 协议 + 技能市场，可按场景扩展数字员工能力 |
 | **四级记忆 + L4 进化** | **Knowledge Vault** 知识库与 **L4 Evolution** 自主沉淀偏好；与会话记忆、Skills 构成分层体系（[说明](./docs/knowledge-vault.md)） |
 
-> OpenOcta 在架构上借鉴 [OpenClaw](https://github.com/openclaw/openclaw) 的 Gateway 协议与 Control UI 体验，由国内团队使用 Go **完全自研**实现。
+> Linmo 在架构上借鉴 [OpenClaw](https://github.com/openclaw/openclaw) 的 Gateway 协议与 Control UI 体验，由国内团队使用 Go **完全自研**实现。
 
 ---
 
 ## 下载安装
 
-访问 **[openocta.com 下载页](https://openocta.com/#download)**，选择对应平台安装包：
+访问 **[linmo.xin 下载页](https://linmo.xin/#download)**，选择对应平台安装包：
 
 | 平台 | 安装包 |
 |------|--------|
-| Windows | `OpenOcta-amd64-installer.exe` |
-| macOS (Apple Silicon) | `OpenOcta-arm64.dmg` |
-| macOS (Intel) | `OpenOcta-amd64.dmg` |
+| Windows | `Linmo-amd64-installer.exe` |
+| macOS (Apple Silicon) | `Linmo-arm64.dmg` |
+| macOS (Intel) | `Linmo-amd64.dmg` |
 | Linux | `.deb` / `.rpm` / `.tar.gz`（amd64 / arm64） |
 
 安装后打开应用即可使用 Control UI。首次运行会自动初始化配置目录：
 
 | 平台 | 默认配置目录 |
 |------|----------------|
-| Linux / macOS | `~/.openocta/openocta.json` |
-| Windows | `%APPDATA%\openocta\openocta.json` |
+| Linux / macOS | `~/.linmo/linmo.json` |
+| Windows | `%APPDATA%\linmo\linmo.json` |
 
 macOS 用户请从 `.dmg` 拖入「应用程序」安装，详见 [`deploy/dist-README.md`](./deploy/dist-README.md)。
 
 **在线资源**
 
-- **官网**：https://openocta.com
+- **官网**：https://linmo.xin
 - **快速入门**：见官网下载区各平台「快速开始」链接
-- **技能 / MCP / 数字员工市场**：https://resource.openocta.com
-- **企业版 AMC**：https://amc.openocta.com
+- **技能 / MCP / 数字员工市场**：https://resource.linmo.xin
+- **企业版 AMC**：https://amc.linmo.xin
 
 ---
 
@@ -254,7 +254,7 @@ macOS 用户请从 `.dmg` 拖入「应用程序」安装，详见 [`deploy/dist-
 
 ```bash
 make build          # 构建（推荐）
-./openocta gateway run
+./linmo gateway run
 ```
 
 Gateway 默认监听 `http://127.0.0.1:18900`；HTTP 与 WebSocket 共用同一端口，**前端通过 go:embed 内嵌在二进制中**，浏览器直接访问即可使用 Control UI。
@@ -262,7 +262,7 @@ Gateway 默认监听 `http://127.0.0.1:18900`；HTTP 与 WebSocket 共用同一�
 ### 开发模式（前端热更新）
 
 ```bash
-./openocta gateway run    # 终端 1
+./linmo gateway run    # 终端 1
 make run-ui               # 终端 2 → http://localhost:5173
 ```
 
@@ -270,7 +270,7 @@ make run-ui               # 终端 2 → http://localhost:5173
 
 ```bash
 export ANTHROPIC_API_KEY=your-key
-./openocta agent -m "Hello, echo test"
+./linmo agent -m "Hello, echo test"
 ```
 
 ---
@@ -307,7 +307,7 @@ export ANTHROPIC_API_KEY=your-key
 ## 项目结构
 
 ```text
-OpenOcta/
+Linmo/
 ├── src/                    # Go 后端（Gateway、Agent、Channels、Cron 等）
 ├── ui/                     # Control UI（Lit + Vite）
 ├── deploy/                 # 安装包、Docker、systemd 等
@@ -321,16 +321,16 @@ OpenOcta/
 
 ## 参与共建
 
-- **Star 支持**：如果 OpenOcta 对你有帮助，欢迎 [⭐ Star 本仓库](https://github.com/openocta/openocta/stargazers) 并 Watch 获取更新
+- **Star 支持**：如果 Linmo 对你有帮助，欢迎 [⭐ Star 本仓库](https://github.com/openocta/openocta/stargazers) 并 Watch 获取更新
 - **Good first issues**：[适合新手的 Issue](https://github.com/openocta/openocta/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
 - **贡献代码**：阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)，欢迎 Pull Request
 - **问题反馈**：[GitHub Issues](https://github.com/openocta/openocta/issues)
-- **讨论与交流**：扫码加入微信群，或访问 [openocta.com](https://openocta.com)
+- **讨论与交流**：扫码加入微信群，或访问 [linmo.xin](https://linmo.xin)
 
 <p align="center">
-  <img src="./imgs/wechat.png" alt="OpenOcta 讨论群二维码（待补充截图）" width="220" height="220">
+  <img src="./imgs/wechat.png" alt="Linmo 讨论群二维码（待补充截图）" width="220" height="220">
   <br/>
-  <sub>扫码加入 OpenOcta 讨论群，获取最新动态与问题支持</sub>
+  <sub>扫码加入 Linmo 讨论群，获取最新动态与问题支持</sub>
 </p>
 
 ---

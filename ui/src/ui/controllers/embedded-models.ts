@@ -52,7 +52,7 @@ export type EmbeddedModelEntry = {
   downloadable?: boolean;
   featured?: boolean;
   hfUrl?: string;
-  /** True when discovered from ~/.openocta/embedded-models scan (manual import). */
+  /** True when discovered from ~/.linmo/embedded-models scan (manual import). */
   sideloaded?: boolean;
 };
 

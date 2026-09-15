@@ -1,6 +1,6 @@
 # Changelog
 
-OpenOcta 版本更新记录。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)。
+Linmo 版本更新记录。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)。
 
 ## [1.2.0] - 2026-07-08
 
@@ -21,8 +21,8 @@ v1.2.0 在 v1.0.5 基础上聚焦 **本地模型** 与 **发布运维**，核心
 
 - 新增 **模型广场**（模型库 → 模型广场）：集成 CanIRun.ai 风格目录（约 77 个模型条目），本地 S–F 推荐分级与硬件适配说明
 - 支持 **内嵌下载** 内置 GGUF 模型（如 Qwen3-0.6B、Qwen3-Embedding、Qwen2.5-VL-3B、SmolLM2-135M 等），带进度条与取消
-- 本地 **Chat / Embedding** 推理：权重存于 `~/.openocta/embedded-models/`，多模型可并行运行，经 Gateway `/api/embedded-models/v1` 统一代理
-- 启动后自动合并 `openocta.json` 的 `openocta-embedded-chat` / `openocta-embedded-embedding` provider；Gateway 重启后按 manifest 自动恢复运行中模型
+- 本地 **Chat / Embedding** 推理：权重存于 `~/.linmo/embedded-models/`，多模型可并行运行，经 Gateway `/api/embedded-models/v1` 统一代理
+- 启动后自动合并 `linmo.json` 的 `linmo-embedded-chat` / `linmo-embedded-embedding` provider；Gateway 重启后按 manifest 自动恢复运行中模型
 - 模型广场 **测试对话** 弹窗，可验证单模型推理路由
 - 新增 **手动导入**：扫描 `embedded-models/<模型ID>/` 下用户放置的 GGUF，刷新后出现在列表（自定义 ID 标记「手动导入」）
 - 模型广场 **「手动导入」** 说明弹框，与 [embedded-models-manual-import.md](./docs/embedded-models-manual-import.md) 内容一致
@@ -59,13 +59,13 @@ v1.2.0 在 v1.0.5 基础上聚焦 **本地模型** 与 **发布运维**，核心
 
 ### Fixed
 
-- **内嵌模型对话**：修复选用 `openocta-embedded-chat/...` 时仍请求 `api.anthropic.com` 的问题；未知 provider 不再静默回退 Anthropic
+- **内嵌模型对话**：修复选用 `linmo-embedded-chat/...` 时仍请求 `api.anthropic.com` 的问题；未知 provider 不再静默回退 Anthropic
 - **会话模型展示**：修复 `resolveSessionModelRef` 中 defaults 覆盖 Agent 专属模型配置的问题
 
 ### 升级建议
 
-1. 首次使用内嵌模型：打开 **模型 → 模型广场**，下载或手动导入 GGUF 后点击 **刷新**，再 **启动** 并在对话中选择 `openocta-embedded-chat/<modelId>`
-2. 若曾手动编辑 `openocta.json` 中内嵌 provider 的 `baseUrl` 为旧版直连端口（如 `18902`），请重新启动内嵌模型或打开模型广场以同步为 Gateway 代理地址
+1. 首次使用内嵌模型：打开 **模型 → 模型广场**，下载或手动导入 GGUF 后点击 **刷新**，再 **启动** 并在对话中选择 `linmo-embedded-chat/<modelId>`
+2. 若曾手动编辑 `linmo.json` 中内嵌 provider 的 `baseUrl` 为旧版直连端口（如 `18902`），请重新启动内嵌模型或打开模型广场以同步为 Gateway 代理地址
 3. 自行下载 GGUF 时，目录名即为模型 ID；完整步骤见模型广场 **「手动导入」** 弹框
 4. 桌面用户可在顶部栏使用 **检查更新**；Linux 服务端自动安装需配置无密码 `sudo`
 5. 从 v1.0.5 升级后若多轮 tool 对话仍异常，请确认 Gateway 版本不低于 v1.0.5（含工具历史水合修复）
@@ -74,10 +74,10 @@ v1.2.0 在 v1.0.5 基础上聚焦 **本地模型** 与 **发布运维**，核心
 
 ```bash
 git clone https://github.com/openocta/openocta.git
-cd openocta
+cd linmo
 git checkout v1.2.0
 make build
-./openocta gateway run
+./linmo gateway run
 ```
 
 - GitHub Release：[v1.2.0](https://github.com/openocta/openocta/releases/tag/v1.2.0)
@@ -89,7 +89,7 @@ make build
 
 ### 亮点
 
-v1.0.0 是 OpenOcta 的首个正式大版本，在 v0.3.0 基础上完成控制台改版、开放接入与协同能力升级，核心围绕五件事：
+v1.0.0 是 Linmo 的首个正式大版本，在 v0.3.0 基础上完成控制台改版、开放接入与协同能力升级，核心围绕五件事：
 
 1. **控制台全新视觉** — 更偏技术感的界面风格，支持明暗主题切换
 2. **开放 API 接入** — API Key 管理与第三方 HTTP 对话接口，可绑定员工与资源组合
@@ -196,10 +196,10 @@ v1.0.0 是 OpenOcta 的首个正式大版本，在 v0.3.0 基础上完成控制�
 
 ```bash
 git clone https://github.com/openocta/openocta.git
-cd openocta
+cd linmo
 git checkout v1.0.0
 make build
-./openocta gateway run
+./linmo gateway run
 ```
 
 - GitHub Release：[v1.0.0](https://github.com/openocta/openocta/releases/tag/v1.0.0)
@@ -264,7 +264,7 @@ v0.3.0 是一次体验与能力并重的版本更新，核心围绕四件事：
 
 #### 配置与文档
 
-- 内置完整配置参考模板 `openocta.json.example` 与 `CONFIG.md` 配置指南（`src/prompt/prompt-zh/`）
+- 内置完整配置参考模板 `linmo.json.example` 与 `CONFIG.md` 配置指南（`src/prompt/prompt-zh/`）
 - 新增 [knowledge-vault.md](./docs/knowledge-vault.md)、[skill-create-guide.md](./docs/skill-create-guide.md)
 - 内置 AMC 企业版对比 Skill，便于在社区版与企业版能力之间做准确引导
 - 控制台顶部新增企业版入口链接
@@ -316,16 +316,16 @@ v0.3.0 是一次体验与能力并重的版本更新，核心围绕四件事：
 
 1. 若曾依赖旧版 Memory，请在 `<workspace>/vault/` 或配置的 Vault 路径中维护 Markdown 笔记，并在知识库页点击「同步索引」
 2. 首次打开 v0.3.0 建议完成安装引导，一次性配置模型、浏览器与常用资源
-3. 配置文件可参考新版 `openocta.json.example` 与 `CONFIG.md` 补充 `agents.defaults.knowledge` 等字段
+3. 配置文件可参考新版 `linmo.json.example` 与 `CONFIG.md` 补充 `agents.defaults.knowledge` 等字段
 
 ### 获取方式
 
 ```bash
 git clone https://github.com/openocta/openocta.git
-cd openocta
+cd linmo
 git checkout v0.3.0
 make build
-./openocta gateway run
+./linmo gateway run
 ```
 
 - GitHub Release：[v0.3.0](https://github.com/openocta/openocta/releases/tag/v0.3.0)

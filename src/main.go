@@ -1,4 +1,4 @@
-// OpenOcta Wails desktop app: starts gateway in-process and loads http://127.0.0.1:18900 in webview.
+// Linmo Wails desktop app: starts gateway in-process and loads http://127.0.0.1:18900 in webview.
 package main
 
 import (
@@ -37,7 +37,7 @@ func writeStartupLog(msg string) {
 	// macOS: 弹窗提示用户查看日志
 	if runtime.GOOS == "darwin" {
 		esc := escapeForAppleScript(msg)
-		_ = exec.Command("osascript", "-e", fmt.Sprintf("display alert \"OpenOcta 启动失败\" message \"%s\" & return & \"详见: %s\" as critical", esc, escapeForAppleScript(logPath))).Run()
+		_ = exec.Command("osascript", "-e", fmt.Sprintf("display alert \"Linmo 启动失败\" message \"%s\" & return & \"详见: %s\" as critical", esc, escapeForAppleScript(logPath))).Run()
 	}
 }
 
@@ -58,7 +58,7 @@ func main() {
 	// 从 .dmg 首次启动时提示安装到「应用程序」（macOS）；若已安装并重启则直接退出本实例
 	desktop.MaybePromptInstallFromDMG()
 
-	appinstance.KillOtherOpenOctaProcesses()
+	appinstance.KillOtherLinmoProcesses()
 
 	// Start gateway in goroutine before creating window
 	srv, err := desktop.StartGateway()
@@ -105,7 +105,7 @@ func main() {
 			defer func() { _ = recover() }()
 			_ = srv.Shutdown(ctx)
 		},
-		Title:     "OpenOcta",
+		Title:     "Linmo",
 		Width:     1280,
 		Height:    800,
 		MinWidth:  800,

@@ -19,7 +19,7 @@ copy_tree() {
   fi
 }
 
-APP="${ROOT}/src/build/bin/OpenOcta.app"
+APP="${ROOT}/src/build/bin/Linmo.app"
 if [[ -d "${APP}" ]]; then
   DEST="${APP}/Contents/Resources/bundled"
   echo "==> Copy bundled assets to ${DEST}"
@@ -27,7 +27,7 @@ if [[ -d "${APP}" ]]; then
 fi
 
 BIN_DIR="${ROOT}/src/build/bin"
-if [[ -f "${BIN_DIR}/OpenOcta.exe" ]]; then
+if [[ -f "${BIN_DIR}/Linmo.exe" ]]; then
   DEST="${BIN_DIR}/bundled"
   echo "==> Copy bundled assets to ${DEST}"
   copy_tree "${DEST}"

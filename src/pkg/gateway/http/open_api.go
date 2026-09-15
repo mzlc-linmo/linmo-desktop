@@ -19,10 +19,10 @@ func extractOpenAPIToken(r *http.Request) string {
 	if strings.HasPrefix(auth, "Bearer ") {
 		return strings.TrimSpace(strings.TrimPrefix(auth, "Bearer "))
 	}
-	if got := strings.TrimSpace(r.Header.Get("X-OpenOcta-Api-Key")); got != "" {
+	if got := strings.TrimSpace(r.Header.Get("X-Linmo-Api-Key")); got != "" {
 		return got
 	}
-	if got := strings.TrimSpace(r.Header.Get("X-OpenOcta-Token")); got != "" {
+	if got := strings.TrimSpace(r.Header.Get("X-Linmo-Token")); got != "" {
 		return got
 	}
 	return ""
@@ -41,7 +41,7 @@ func writeOpenAPIError(w http.ResponseWriter, status int, message string) {
 func resolveOpenAPIPath(r *http.Request) string {
 	path := normalizeOpenAPIPath(r.URL.Path)
 	if path == "/ping" {
-		return "/openocta/open/v1/ping"
+		return "/linmo/open/v1/ping"
 	}
 	return path
 }
@@ -95,7 +95,7 @@ func (s *Server) handleOpenAPI(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	subpath := strings.TrimPrefix(fullPath, "/openocta/open/v1")
+	subpath := strings.TrimPrefix(fullPath, "/linmo/open/v1")
 	subpath = strings.TrimPrefix(subpath, "/")
 	subpath = strings.ToLower(subpath)
 	if subpath == "" && fullPath == "/ping" {

@@ -19,7 +19,7 @@ type InstalledState struct {
 	LastError   string    `json:"lastError,omitempty"`
 }
 
-// Manifest persists installed embedded models under ~/.openocta/embedded-models/.
+// Manifest persists installed embedded models under ~/.linmo/embedded-models/.
 type Manifest struct {
 	Models map[string]InstalledState `json:"models"`
 }

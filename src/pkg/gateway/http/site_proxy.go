@@ -22,7 +22,7 @@ import (
 )
 
 const (
-	siteAPIEnvKey         = "OPENOCTA_SITE_API_BASE_URL"
+	siteAPIEnvKey         = "LIMNO_SITE_API_BASE_URL"
 	siteAPIDefaultTimeout = 3 * time.Second
 )
 
@@ -31,7 +31,7 @@ var (
 	siteAPITransportOnce sync.Once
 )
 
-// siteAPIRoundTripper returns a shared transport for OPENOCTA_SITE_API_BASE_URL requests.
+// siteAPIRoundTripper returns a shared transport for LIMNO_SITE_API_BASE_URL requests.
 // TLS verification is skipped so self-signed or misconfigured HTTPS dev/staging hosts still work.
 func siteAPIRoundTripper() http.RoundTripper {
 	siteAPITransportOnce.Do(func() {
@@ -55,7 +55,7 @@ func siteAPIRoundTripper() http.RoundTripper {
 	return siteAPITransport
 }
 
-// newSiteAPIHTTPClient is used for outbound requests to OPENOCTA_SITE_API_BASE_URL.
+// newSiteAPIHTTPClient is used for outbound requests to LIMNO_SITE_API_BASE_URL.
 // 市场列表/详情/透传使用 siteAPIDefaultTimeout；安装包下载在 site_install.go 中单独设置更长超时。
 func newSiteAPIHTTPClient(timeout time.Duration) *http.Client {
 	return &http.Client{
@@ -109,7 +109,7 @@ func (s *Server) siteAPIBaseURL() string {
 	return strings.TrimRight(raw, "/")
 }
 
-// mergeSkillsListWithLocalManaged 合并官网技能列表与 ~/.openocta/skills 下本地技能（含用户上传），并刷新 installed。
+// mergeSkillsListWithLocalManaged 合并官网技能列表与 ~/.linmo/skills 下本地技能（含用户上传），并刷新 installed。
 func mergeSkillsListWithLocalManaged(skills []map[string]interface{}, env func(string) string) []map[string]interface{} {
 	if skills == nil {
 		skills = []map[string]interface{}{}
@@ -135,7 +135,7 @@ func mergeSkillsListWithLocalManaged(skills []map[string]interface{}, env func(s
 			skills[i]["installed"] = true
 		}
 	}
-	entries, err := agentSkills.LoadEntriesFromDir(managedDir, "openocta-managed")
+	entries, err := agentSkills.LoadEntriesFromDir(managedDir, "linmo-managed")
 	if err != nil || len(entries) == 0 {
 		return skills
 	}
@@ -181,7 +181,7 @@ func mergeSkillsListWithLocalManaged(skills []map[string]interface{}, env func(s
 	return append(skills, extras...)
 }
 
-// resolveInstalledMcpServerKey 将 .install-metadata.json 中的 localId 对齐到 openocta.json 里实际存在的 mcp.servers 键，
+// resolveInstalledMcpServerKey 将 .install-metadata.json 中的 localId 对齐到 linmo.json 里实际存在的 mcp.servers 键，
 // 避免工具库卡片携带错误 serverKey 导致编辑弹窗读不到配置。
 func resolveInstalledMcpServerKey(snap *handlers.ConfigSnapshot, metaKey string) string {
 	metaKey = strings.TrimSpace(metaKey)

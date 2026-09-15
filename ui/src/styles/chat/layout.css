@@ -1051,8 +1051,8 @@
   display: none;
 }
 
-/* openocta-chat-input hosts the textarea; stretch to full compose width */
-.chat-compose__field > openocta-chat-input {
+/* linmo-chat-input hosts the textarea; stretch to full compose width */
+.chat-compose__field > linmo-chat-input {
   display: block;
   flex: 1 1 auto;
   width: 100%;
@@ -1060,7 +1060,7 @@
 }
 
 .chat-compose__field > .textarea,
-.chat-compose__field openocta-chat-input .textarea {
+.chat-compose__field linmo-chat-input .textarea {
   display: flex;
   flex: 1 1 auto;
   width: 100%;

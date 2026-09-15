@@ -25,18 +25,18 @@ func installPackageForPlatform(ctx context.Context, path string, report func(Ins
 }
 
 func installLinuxDeb(ctx context.Context, path string, report func(InstallProgress)) error {
-	setInstallProgress(report, "install", 93, "正在停止 openocta 服务…")
-	_ = runSudo(ctx, "systemctl", "stop", "openocta")
+	setInstallProgress(report, "install", 93, "正在停止 linmo 服务…")
+	_ = runSudo(ctx, "systemctl", "stop", "linmo")
 
 	setInstallProgress(report, "install", 95, "正在安装 deb 包（可能需要管理员权限）…")
 	if err := runSudo(ctx, "dpkg", "-i", path); err != nil {
 		return manualInstallError(fmt.Sprintf("deb 安装失败: %v", err))
 	}
 
-	setInstallProgress(report, "install", 98, "正在启动 openocta 服务…")
+	setInstallProgress(report, "install", 98, "正在启动 linmo 服务…")
 	_ = runSudo(ctx, "systemctl", "daemon-reload")
-	_ = runSudo(ctx, "systemctl", "enable", "openocta")
-	if err := runSudo(ctx, "systemctl", "start", "openocta"); err != nil {
+	_ = runSudo(ctx, "systemctl", "enable", "linmo")
+	if err := runSudo(ctx, "systemctl", "start", "linmo"); err != nil {
 		return manualInstallError(fmt.Sprintf("服务启动失败: %v", err))
 	}
 	scheduleServiceExit()
@@ -44,18 +44,18 @@ func installLinuxDeb(ctx context.Context, path string, report func(InstallProgre
 }
 
 func installLinuxRpm(ctx context.Context, path string, report func(InstallProgress)) error {
-	setInstallProgress(report, "install", 93, "正在停止 openocta 服务…")
-	_ = runSudo(ctx, "systemctl", "stop", "openocta")
+	setInstallProgress(report, "install", 93, "正在停止 linmo 服务…")
+	_ = runSudo(ctx, "systemctl", "stop", "linmo")
 
 	setInstallProgress(report, "install", 95, "正在安装 rpm 包（可能需要管理员权限）…")
 	if err := runSudo(ctx, "rpm", "-Uvh", path); err != nil {
 		return manualInstallError(fmt.Sprintf("rpm 安装失败: %v", err))
 	}
 
-	setInstallProgress(report, "install", 98, "正在启动 openocta 服务…")
+	setInstallProgress(report, "install", 98, "正在启动 linmo 服务…")
 	_ = runSudo(ctx, "systemctl", "daemon-reload")
-	_ = runSudo(ctx, "systemctl", "enable", "openocta")
-	if err := runSudo(ctx, "systemctl", "start", "openocta"); err != nil {
+	_ = runSudo(ctx, "systemctl", "enable", "linmo")
+	if err := runSudo(ctx, "systemctl", "start", "linmo"); err != nil {
 		return manualInstallError(fmt.Sprintf("服务启动失败: %v", err))
 	}
 	scheduleServiceExit()

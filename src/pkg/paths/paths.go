@@ -9,22 +9,22 @@ import (
 )
 
 const (
-	newStateDirname      = ".openocta"
-	newStateDirnameWin   = "openocta"
-	configFilename       = "openocta.json"
+	newStateDirname      = ".linmo"
+	newStateDirnameWin   = "linmo"
+	configFilename       = "linmo.json"
 	defaultGatewayPort   = 18900
 	legacyStateDirname   = ".clawdbot"
 	legacyConfigClawdbot = "clawdbot.json"
 )
 
 // ResolveStateDir returns the state directory for mutable data (sessions, logs, caches).
-// Override via OPENOCTA_STATE_DIR or CLAWDBOT_STATE_DIR.
-// Default: ~/.openocta on Linux/macOS, %APPDATA%\openocta on Windows.
+// Override via LIMNO_STATE_DIR or CLAWDBOT_STATE_DIR.
+// Default: ~/.linmo on Linux/macOS, %APPDATA%\linmo on Windows.
 func ResolveStateDir(env func(string) string) string {
 	if env == nil {
 		env = os.Getenv
 	}
-	override := strings.TrimSpace(env("OPENOCTA_STATE_DIR"))
+	override := strings.TrimSpace(env("LIMNO_STATE_DIR"))
 	if override == "" {
 		override = strings.TrimSpace(env("CLAWDBOT_STATE_DIR"))
 	}
@@ -63,13 +63,13 @@ func ResolveStateDir(env func(string) string) string {
 }
 
 // ResolveConfigPath returns the active config file path.
-// Override via OPENOCTA_CONFIG_PATH or CLAWDBOT_CONFIG_PATH.
-// Default: $STATE_DIR/openocta.json
+// Override via LIMNO_CONFIG_PATH or CLAWDBOT_CONFIG_PATH.
+// Default: $STATE_DIR/linmo.json
 func ResolveConfigPath(env func(string) string, stateDir string) string {
 	if env == nil {
 		env = os.Getenv
 	}
-	override := strings.TrimSpace(env("OPENOCTA_CONFIG_PATH"))
+	override := strings.TrimSpace(env("LIMNO_CONFIG_PATH"))
 	if override == "" {
 		override = strings.TrimSpace(env("CLAWDBOT_CONFIG_PATH"))
 	}
@@ -93,7 +93,7 @@ func ResolveCanonicalConfigPath(env func(string) string, stateDir string) string
 	if env == nil {
 		env = os.Getenv
 	}
-	override := strings.TrimSpace(env("OPENOCTA_CONFIG_PATH"))
+	override := strings.TrimSpace(env("LIMNO_CONFIG_PATH"))
 	if override == "" {
 		override = strings.TrimSpace(env("CLAWDBOT_CONFIG_PATH"))
 	}
@@ -113,7 +113,7 @@ func ResolveGatewayPort(portFromConfig *int, env func(string) string) int {
 	if env == nil {
 		env = os.Getenv
 	}
-	envRaw := strings.TrimSpace(env("OPENOCTA_GATEWAY_PORT"))
+	envRaw := strings.TrimSpace(env("LIMNO_GATEWAY_PORT"))
 	if envRaw == "" {
 		envRaw = strings.TrimSpace(env("CLAWDBOT_GATEWAY_PORT"))
 	}
@@ -134,7 +134,7 @@ func ResolveOAuthDir(env func(string) string, stateDir string) string {
 	if env == nil {
 		env = os.Getenv
 	}
-	override := strings.TrimSpace(env("OPENOCTA_OAUTH_DIR"))
+	override := strings.TrimSpace(env("LIMNO_OAUTH_DIR"))
 	if override != "" {
 		return expandUserPath(override, env)
 	}
@@ -145,7 +145,7 @@ func resolveHomeDir(env func(string) string) string {
 	if env == nil {
 		env = os.Getenv
 	}
-	home := env("OPENOCTA_HOME")
+	home := env("LIMNO_HOME")
 	if home == "" {
 		home = env("HOME")
 	}
@@ -199,12 +199,12 @@ func pathExists(p string) bool {
 // ResolveRunMode resolves the gateway run mode: "desktop" or "service".
 //
 // Priority:
-// 1) OPENOCTA_RUN_MODE (desktop|service)
+// 1) LIMNO_RUN_MODE (desktop|service)
 // 2) gateway.mode in config (desktop|service|auto|local|remote)
 // 3) platform default: darwin/windows => desktop, linux => service
 func ResolveRunMode(env func(string) string, gatewayModeFromConfig *string) string {
 	if env != nil {
-		raw := strings.TrimSpace(env("OPENOCTA_RUN_MODE"))
+		raw := strings.TrimSpace(env("LIMNO_RUN_MODE"))
 		switch strings.ToLower(raw) {
 		case "desktop":
 			return "desktop"

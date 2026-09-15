@@ -54,13 +54,13 @@ func TestChatMessagesToYzmaToolRoles(t *testing.T) {
 
 func TestSetRuntimeStateAllowsMultipleRunning(t *testing.T) {
 	dir := t.TempDir()
-	orig := os.Getenv("OPENOCTA_STATE_DIR")
-	t.Setenv("OPENOCTA_STATE_DIR", dir)
+	orig := os.Getenv("LIMNO_STATE_DIR")
+	t.Setenv("LIMNO_STATE_DIR", dir)
 	defer func() {
 		if orig == "" {
-			_ = os.Unsetenv("OPENOCTA_STATE_DIR")
+			_ = os.Unsetenv("LIMNO_STATE_DIR")
 		} else {
-			t.Setenv("OPENOCTA_STATE_DIR", orig)
+			t.Setenv("LIMNO_STATE_DIR", orig)
 		}
 	}()
 

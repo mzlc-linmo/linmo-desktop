@@ -18,7 +18,7 @@ function pngDimensions(buf) {
   const w = readU32BE(buf, 16);
   const h = readU32BE(buf, 20);
   if (!w || !h || w > 256 || h > 256) {
-    throw new Error(`PNG 宽、高均须 ≤256（当前 ${w}×${h}）。请先缩放，例如: sips -Z 256 imgs/openocta_logo.png --out imgs/openocta_logo_wails.png`);
+    throw new Error(`PNG 宽、高均须 ≤256（当前 ${w}×${h}）。请先缩放，例如: sips -Z 256 imgs/linmo_logo.png --out imgs/linmo_logo_wails.png`);
   }
   return { w, h };
 }

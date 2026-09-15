@@ -163,7 +163,7 @@ const CONFIG_FIELD_HELP: Record<Locale, Record<string, string>> = {
     "agents.defaults.knowledge":
       "Obsidian-compatible vault indexing for memory_search (vault path and index are auto-managed).",
     "agents.defaults.knowledge.vaultDir":
-      "Absolute path to the Vault directory; when empty, uses workspace/vault or ~/.openocta/vault.",
+      "Absolute path to the Vault directory; when empty, uses workspace/vault or ~/.linmo/vault.",
     memory: "Memory backend configuration (global).",
     "memory.backend": 'Memory backend ("builtin" for OpenClaw embeddings, "qmd" for QMD sidecar).',
     "memory.citations": 'Default citation behavior ("auto", "on", or "off").',
@@ -455,7 +455,7 @@ const CONFIG_FIELD_HELP: Record<Locale, Record<string, string>> = {
     "agents.defaults.knowledge":
       "Obsidian 兼容 Vault 索引，供 memory_search 使用（Vault 与索引路径自动管理）。",
     "agents.defaults.knowledge.vaultDir":
-      "Vault 目录绝对路径；留空则使用 workspace/vault 或 ~/.openocta/vault。",
+      "Vault 目录绝对路径；留空则使用 workspace/vault 或 ~/.linmo/vault。",
     memory: "记忆后端配置（全局）。",
     "memory.backend": '记忆后端（"builtin" 用于 OpenClaw 嵌入，"qmd" 用于 QMD 侧车）。',
     "memory.citations": '默认引用行为（"auto"、"on" 或 "off"）。',

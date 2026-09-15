@@ -31,7 +31,7 @@ func TestPercentTrackerUsesExpectedSizeWhenHTTPTotalUnknown(t *testing.T) {
 func TestCleanupCancelledDownload(t *testing.T) {
 	root := t.TempDir()
 	env := func(key string) string {
-		if key == "OPENOCTA_STATE_DIR" {
+		if key == "LIMNO_STATE_DIR" {
 			return root
 		}
 		return os.Getenv(key)

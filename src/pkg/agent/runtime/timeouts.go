@@ -9,11 +9,11 @@ import (
 )
 
 // DefaultAgentRunDuration returns the configured agent run timeout.
-func DefaultAgentRunDuration(env func(string) string, cfg *config.OpenOctaConfig) time.Duration {
+func DefaultAgentRunDuration(env func(string) string, cfg *config.LinmoConfig) time.Duration {
 	if env == nil {
 		env = os.Getenv
 	}
-	if v := strings.TrimSpace(env("OPENOCTA_AGENT_RUN_TIMEOUT")); v != "" {
+	if v := strings.TrimSpace(env("LIMNO_AGENT_RUN_TIMEOUT")); v != "" {
 		if d, err := time.ParseDuration(v); err == nil && d > 0 {
 			return d
 		}

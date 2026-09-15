@@ -28,7 +28,7 @@ export function buildTierListText(
 ): string {
   const grouped = groupByTier(recommendations);
   const lines: string[] = [
-    "OpenOcta 模型推荐分级表",
+    "Linmo 模型推荐分级表",
     formatHardwareSummary(hw),
     "量化基准：Q4_K_M · 实际表现因环境而异",
     "",
@@ -97,7 +97,7 @@ function roundRect(
 export function downloadTierListImage(
   recommendations: ModelRecommendation[],
   hw: LocalHardwareProfile,
-  filename = "openocta-tier-list.png",
+  filename = "linmo-tier-list.png",
 ): void {
   const grouped = groupByTier(recommendations);
   const width = 920;
@@ -135,7 +135,7 @@ export function downloadTierListImage(
 
   ctx.fillStyle = "#111827";
   ctx.font = "bold 20px system-ui, sans-serif";
-  ctx.fillText("OpenOcta 模型分级", pad + 8, pad + 28);
+  ctx.fillText("Linmo 模型分级", pad + 8, pad + 28);
   ctx.fillStyle = "#6b7280";
   ctx.font = "12px system-ui, sans-serif";
   const summary = formatHardwareSummary(hw);

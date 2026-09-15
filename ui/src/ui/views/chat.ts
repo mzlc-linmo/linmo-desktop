@@ -15,9 +15,9 @@ import "../chat-suggestion-prompts.ts";
 import "../components/resizable-divider.ts";
 import "../components/chat-file-preview.ts";
 import { renderMarkdownSidebar } from "./markdown-sidebar.ts";
-import "../components/openocta-chat-thread.ts";
-import "../components/openocta-chat-input.ts";
-import "../components/openocta-local-agent-picker.ts";
+import "../components/linmo-chat-thread.ts";
+import "../components/linmo-chat-input.ts";
+import "../components/linmo-local-agent-picker.ts";
 import type { LocalAgentProbeResult } from "../local-agents.ts";
 
 export type CompactionIndicatorStatus = {
@@ -896,7 +896,7 @@ export function renderChat(props: ChatProps) {
     : nothing;
   const emptyPrompts = isEmptyThread
     ? html`
-        <openocta-chat-suggestions
+        <linmo-chat-suggestions
           .extraPrompts=${quickPrompts}
           ?disabled=${!props.connected}
           @suggestion-select=${(e: CustomEvent<{ prompt: string }>) => {
@@ -907,18 +907,18 @@ export function renderChat(props: ChatProps) {
             }
             props.onSend(prompt);
           }}
-        ></openocta-chat-suggestions>
+        ></linmo-chat-suggestions>
         ${
           (props.localAgents?.length ?? 0) > 0
             ? html`
                 <div class="chat-local-agents-empty">
                   <div class="chat-local-agents-empty__hint muted">${t("chatLocalAgentsHint")}</div>
-                  <openocta-local-agent-picker
+                  <linmo-local-agent-picker
                     .agents=${props.localAgents ?? []}
                     ?disabled=${!props.connected}
                     @agent-insert=${(e: CustomEvent<{ mention: string }>) =>
                       props.onComposeInsert?.(e.detail.mention)}
-                  ></openocta-local-agent-picker>
+                  ></linmo-local-agent-picker>
                 </div>
               `
             : nothing
@@ -926,7 +926,7 @@ export function renderChat(props: ChatProps) {
       `
     : nothing;
   const thread = html`
-    <openocta-chat-thread
+    <linmo-chat-thread
       .sessionKey=${props.sessionKey}
       .loading=${props.loading}
       .canAbort=${Boolean(props.canAbort)}
@@ -949,7 +949,7 @@ export function renderChat(props: ChatProps) {
       @file-preview=${(e: CustomEvent<{ req: FilePreviewRequest }>) => props.onFilePreview?.(e.detail.req)}
       @a2ui-action=${(e: CustomEvent<{ action: import("@a2ui/web_core/v0_9").A2uiClientAction }>) =>
         props.onA2UIAction?.(e.detail.action)}
-    ></openocta-chat-thread>
+    ></linmo-chat-thread>
   `;
   const visibleQueue = props.queue.filter((item) => item.sessionKey === props.sessionKey);
 
@@ -1094,7 +1094,7 @@ export function renderChat(props: ChatProps) {
         <div class="chat-compose__inner">
           <label class="field chat-compose__field">
             <span>Message</span>
-            <openocta-chat-input
+            <linmo-chat-input
               .disabled=${!canCompose}
               .placeholder=${composePlaceholder}
               .clearToken=${props.composeClearToken ?? 0}
@@ -1106,7 +1106,7 @@ export function renderChat(props: ChatProps) {
                 props.onComposeDraftChange?.(e.detail.hasText)}
               @compose-paste=${(e: CustomEvent<{ event: ClipboardEvent }>) =>
                 handlePaste(e.detail.event, props)}
-            ></openocta-chat-input>
+            ></linmo-chat-input>
         </label>
           <div class="chat-compose__row">
           <div class="chat-compose__meta">
@@ -1169,12 +1169,12 @@ export function renderChat(props: ChatProps) {
             ${
               (props.localAgents?.length ?? 0) > 0
                 ? html`
-                    <openocta-local-agent-picker
+                    <linmo-local-agent-picker
                       .agents=${props.localAgents ?? []}
                       ?disabled=${!canCompose}
                       @agent-insert=${(e: CustomEvent<{ mention: string }>) =>
                         props.onComposeInsert?.(e.detail.mention)}
-                    ></openocta-local-agent-picker>
+                    ></linmo-local-agent-picker>
                   `
                 : nothing
             }
@@ -1236,7 +1236,7 @@ export function renderChat(props: ChatProps) {
               ?disabled=${!canSubmit}
               @click=${(e: Event) => {
                 const compose = (e.currentTarget as HTMLElement).closest(".chat-compose");
-                const input = compose?.querySelector("openocta-chat-input") as
+                const input = compose?.querySelector("linmo-chat-input") as
                   | { requestSend?: () => void }
                   | null;
                 input?.requestSend?.();

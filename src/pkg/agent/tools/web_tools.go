@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	defaultWebUserAgent     = "Mozilla/5.0 (compatible; OpenOcta/1.0)"
+	defaultWebUserAgent     = "Mozilla/5.0 (compatible; Linmo/1.0)"
 	defaultSearchMaxResults = 5
 	defaultFetchMaxChars    = 12000
 	defaultHTTPTimeout      = 25 * time.Second
@@ -48,11 +48,11 @@ func FilterOutWebTools(tools []tool.Tool) []tool.Tool {
 const webToolsEnabled = false
 
 // WebToolsFromConfig returns enabled web_search and web_fetch tools.
-func WebToolsFromConfig(cfg *config.OpenOctaConfig, projectRoot string) []tool.Tool {
+func WebToolsFromConfig(cfg *config.LinmoConfig, projectRoot string) []tool.Tool {
 	if !webToolsEnabled {
 		return nil
 	}
-	webCfg := webToolsConfigFromOpenOcta(cfg)
+	webCfg := webToolsConfigFromLinmo(cfg)
 	root := strings.TrimSpace(projectRoot)
 	if root == "" {
 		root = "."
@@ -78,7 +78,7 @@ type webToolsConfig struct {
 	UserAgent      string
 }
 
-func webToolsConfigFromOpenOcta(cfg *config.OpenOctaConfig) *webToolsConfig {
+func webToolsConfigFromLinmo(cfg *config.LinmoConfig) *webToolsConfig {
 	out := &webToolsConfig{}
 	if cfg == nil || cfg.Tools == nil || cfg.Tools.Web == nil {
 		return out

@@ -1,5 +1,5 @@
 // Package embed provides embedded frontend and config assets for the single-binary distribution.
-// Build order: 1) cd ui && npm run build 2) cp src/config-schema.json src/openocta.json.example src/.env src/embed/ 3) go build
+// Build order: 1) cd ui && npm run build 2) cp src/config-schema.json src/linmo.json.example src/.env src/embed/ 3) go build
 package embed
 
 import (
@@ -10,13 +10,13 @@ import (
 	"strings"
 )
 
-// Assets embeds frontend, config-schema, openocta.json.example, .env.
+// Assets embeds frontend, config-schema, linmo.json.example, .env.
 //
 //go:embed frontend .env
 var assets embed.FS
 
 func init() {
-	// Load embedded .env at startup so OPENOCTA_BUNDLED_VERSION etc. are set before version.Version is read.
+	// Load embedded .env at startup so LIMNO_BUNDLED_VERSION etc. are set before version.Version is read.
 	loadEnvFromEmbedded()
 }
 
@@ -59,7 +59,7 @@ func ConfigSchemaJSON() ([]byte, error) {
 	return fs.ReadFile(assets, "config-schema.json")
 }
 
-// ConfigExampleJSON returns the embedded openocta.json.example for initializing new configs.
+// ConfigExampleJSON returns the embedded linmo.json.example for initializing new configs.
 func ConfigExampleJSON() ([]byte, error) {
-	return fs.ReadFile(assets, "openocta.json.example")
+	return fs.ReadFile(assets, "linmo.json.example")
 }

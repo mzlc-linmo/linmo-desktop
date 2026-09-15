@@ -185,7 +185,7 @@ function mcpEntryLooksConfigured(e: McpServerEntry | undefined): boolean {
 }
 
 /**
- * 工具库卡片上的 serverKey 来自 .install-metadata 的 localId，可能与 openocta.json 里 mcp.servers 的真实键不一致；
+ * 工具库卡片上的 serverKey 来自 .install-metadata 的 localId，可能与 linmo.json 里 mcp.servers 的真实键不一致；
  * 不解析则编辑弹窗用错 key，表单与 raw JSON 会一直像「空配置」。
  */
 function resolveMcpServerKeyAndEntry(

@@ -10,9 +10,9 @@ import (
 
 // RootCmd is the root command.
 var RootCmd = &cobra.Command{
-	Use:   "openocta",
-	Short: "OpenOcta CLI",
-	Long:  "OpenOcta - AI agent gateway and CLI.",
+	Use:   "linmo",
+	Short: "Linmo CLI",
+	Long:  "Linmo - AI agent gateway and CLI.",
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		return cmd.Help()
 	},
@@ -21,7 +21,7 @@ var RootCmd = &cobra.Command{
 // Execute runs the root command.
 func Execute() {
 	if err := RootCmd.Execute(); err != nil {
-		fmt.Fprintf(os.Stderr, "openocta: %v\n", err)
+		fmt.Fprintf(os.Stderr, "linmo: %v\n", err)
 		os.Exit(1)
 	}
 }

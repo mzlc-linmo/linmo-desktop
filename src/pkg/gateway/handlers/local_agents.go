@@ -12,7 +12,7 @@ import (
 	"github.com/openocta/openocta/pkg/localagents"
 )
 
-func applyLocalAgentsConfig(cfg *config.OpenOctaConfig) {
+func applyLocalAgentsConfig(cfg *config.LinmoConfig) {
 	if cfg == nil || cfg.LocalAgents == nil || len(cfg.LocalAgents.CustomPaths) == 0 {
 		return
 	}
@@ -28,7 +28,7 @@ func localAgentsConfigFromContext(ctx *Context) *config.LocalAgentsConfig {
 }
 
 // AppendLocalAgentToolsForSession adds local_agent when delegation is enabled.
-func AppendLocalAgentToolsForSession(base []octool.Tool, cfg *config.OpenOctaConfig, agentID string, env func(string) string) []octool.Tool {
+func AppendLocalAgentToolsForSession(base []octool.Tool, cfg *config.LinmoConfig, agentID string, env func(string) string) []octool.Tool {
 	if env == nil {
 		env = os.Getenv
 	}

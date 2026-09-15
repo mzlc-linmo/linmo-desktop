@@ -136,7 +136,7 @@ func canonicalSkillEntryConfigKey(e SkillEntry) string {
 
 // resolveWorkspaceSkillConfigKey maps a client id (e.g. market folder) to the config entry key, or returns id if unknown.
 // Searches across all skill sources: workspace, managed, and extra directories.
-func resolveWorkspaceSkillConfigKey(cfg *config.OpenOctaConfig, env func(string) string, clientKey string) string {
+func resolveWorkspaceSkillConfigKey(cfg *config.LinmoConfig, env func(string) string, clientKey string) string {
 	clientKey = strings.TrimSpace(clientKey)
 	if cfg == nil || clientKey == "" {
 		return clientKey
@@ -151,7 +151,7 @@ func resolveWorkspaceSkillConfigKey(cfg *config.OpenOctaConfig, env func(string)
 		}
 	}
 
-	// 2. Search managed skills directory (~/.openocta/skills)
+	// 2. Search managed skills directory (~/.linmo/skills)
 	managedDir := ResolveManagedSkillsDir(env)
 	for _, e := range loadWorkspaceSkillEntries(managedDir, cfg) {
 		if skillEntryMatchesClientKey(e, clientKey) {
@@ -300,7 +300,7 @@ func parseSkillsUpdateParams(params map[string]interface{}) (*SkillsUpdateParams
 // normalizeAgentID and resolveDefaultAgentID are defined in sessions.go
 
 // listAgentIDs lists all agent IDs from config.
-func listAgentIDs(cfg *config.OpenOctaConfig) []string {
+func listAgentIDs(cfg *config.LinmoConfig) []string {
 	if cfg == nil || cfg.Agents == nil || len(cfg.Agents.List) == 0 {
 		return []string{"main"}
 	}
@@ -321,12 +321,12 @@ func listAgentIDs(cfg *config.OpenOctaConfig) []string {
 }
 
 // resolveAgentWorkspaceDir resolves workspace directory for an agent (delegates to agent package).
-func resolveAgentWorkspaceDir(cfg *config.OpenOctaConfig, agentID string, env func(string) string) string {
+func resolveAgentWorkspaceDir(cfg *config.LinmoConfig, agentID string, env func(string) string) string {
 	return agent.ResolveAgentWorkspaceDir(cfg, agentID, env)
 }
 
 // listWorkspaceDirs lists all workspace directories from config.
-func listWorkspaceDirs(cfg *config.OpenOctaConfig, env func(string) string) []string {
+func listWorkspaceDirs(cfg *config.LinmoConfig, env func(string) string) []string {
 	dirs := make(map[string]bool)
 	agentIDs := listAgentIDs(cfg)
 	for _, agentID := range agentIDs {
@@ -346,7 +346,7 @@ func listWorkspaceDirs(cfg *config.OpenOctaConfig, env func(string) string) []st
 }
 
 // loadWorkspaceSkillEntries loads skill entries from a workspace directory.
-func loadWorkspaceSkillEntries(workspaceDir string, cfg *config.OpenOctaConfig) []SkillEntry {
+func loadWorkspaceSkillEntries(workspaceDir string, cfg *config.LinmoConfig) []SkillEntry {
 	opts := &agentSkills.LoadOptions{
 		Config:           cfg,
 		ManagedSkillsDir: "",
@@ -464,7 +464,7 @@ func hasBinary(bin string) bool {
 }
 
 // resolveSkillConfig resolves skill configuration from config.
-func resolveSkillConfig(cfg *config.OpenOctaConfig, skillKey string) *config.SkillConfig {
+func resolveSkillConfig(cfg *config.LinmoConfig, skillKey string) *config.SkillConfig {
 	if cfg == nil || cfg.Skills == nil || cfg.Skills.Entries == nil {
 		return nil
 	}
@@ -476,7 +476,7 @@ func resolveSkillConfig(cfg *config.OpenOctaConfig, skillKey string) *config.Ski
 }
 
 // resolveBundledAllowlist resolves the bundled skills allowlist from config.
-func resolveBundledAllowlist(cfg *config.OpenOctaConfig) []string {
+func resolveBundledAllowlist(cfg *config.LinmoConfig) []string {
 	if cfg == nil || cfg.Skills == nil || len(cfg.Skills.AllowBundled) == 0 {
 		return nil
 	}
@@ -509,7 +509,7 @@ func isBundledSkillAllowed(skillName string, skillKey string, source string, all
 }
 
 // resolveConfigPath resolves a config path value (e.g., "browser.enabled").
-func resolveConfigPath(cfg *config.OpenOctaConfig, pathStr string) interface{} {
+func resolveConfigPath(cfg *config.LinmoConfig, pathStr string) interface{} {
 	if cfg == nil || pathStr == "" {
 		return nil
 	}
@@ -547,7 +547,7 @@ func resolveConfigPath(cfg *config.OpenOctaConfig, pathStr string) interface{} {
 }
 
 // isConfigPathTruthy checks if a config path value is truthy.
-func isConfigPathTruthy(cfg *config.OpenOctaConfig, pathStr string) bool {
+func isConfigPathTruthy(cfg *config.LinmoConfig, pathStr string) bool {
 	value := resolveConfigPath(cfg, pathStr)
 	if value == nil {
 		// Check default values
@@ -573,7 +573,7 @@ func isConfigPathTruthy(cfg *config.OpenOctaConfig, pathStr string) bool {
 }
 
 // resolveSkillsInstallPreferences resolves skill installation preferences from config.
-func resolveSkillsInstallPreferences(cfg *config.OpenOctaConfig) (preferBrew bool, nodeManager string) {
+func resolveSkillsInstallPreferences(cfg *config.LinmoConfig) (preferBrew bool, nodeManager string) {
 	preferBrew = true
 	nodeManager = "npm"
 
@@ -603,7 +603,7 @@ func resolveRuntimePlatform() string {
 	return runtime.GOOS
 }
 
-// ResolveManagedSkillsDir resolves the managed skills directory path (~/.openocta/skills).
+// ResolveManagedSkillsDir resolves the managed skills directory path (~/.linmo/skills).
 func ResolveManagedSkillsDir(env func(string) string) string {
 	stateDir := paths.ResolveStateDir(env)
 	return filepath.Join(stateDir, "skills")
@@ -794,7 +794,7 @@ func buildInstallOption(spec *SkillInstallSpec, index int, nodeManager string) S
 }
 
 // buildSkillStatus builds a skill status entry from a skill entry.
-func buildSkillStatus(entry SkillEntry, cfg *config.OpenOctaConfig, preferBrew bool, nodeManager string) SkillStatusEntry {
+func buildSkillStatus(entry SkillEntry, cfg *config.LinmoConfig, preferBrew bool, nodeManager string) SkillStatusEntry {
 	skillKey := entry.Name
 	if entry.Metadata != nil && entry.Metadata.SkillKey != "" {
 		skillKey = entry.Metadata.SkillKey
@@ -977,7 +977,7 @@ func buildSkillStatus(entry SkillEntry, cfg *config.OpenOctaConfig, preferBrew b
 }
 
 // buildWorkspaceSkillStatus builds a skill status report for a workspace.
-func buildWorkspaceSkillStatus(workspaceDir string, cfg *config.OpenOctaConfig, env func(string) string) SkillStatusReport {
+func buildWorkspaceSkillStatus(workspaceDir string, cfg *config.LinmoConfig, env func(string) string) SkillStatusReport {
 	managedSkillsDir := ResolveManagedSkillsDir(env)
 	entries := loadWorkspaceSkillEntries(workspaceDir, cfg)
 
@@ -1180,7 +1180,7 @@ func SkillsGetDocHandler(opts HandlerOpts) error {
 // SkillsBinsHandler handles "skills.bins".
 func SkillsBinsHandler(opts HandlerOpts) error {
 	// Load config
-	var cfg *config.OpenOctaConfig
+	var cfg *config.LinmoConfig
 	if opts.Context != nil && opts.Context.Config != nil {
 		cfg = opts.Context.Config
 	} else {
@@ -1364,7 +1364,7 @@ func SkillsDeleteHandler(opts HandlerOpts) error {
 		return nil
 	}
 
-	var cfg *config.OpenOctaConfig
+	var cfg *config.LinmoConfig
 	if opts.Context != nil && opts.Context.Config != nil {
 		cfg = opts.Context.Config
 	} else {
@@ -1518,7 +1518,7 @@ func isBlockedDir(name string) bool {
 }
 
 // resolveSkillBaseDir finds a skill's base directory by skillKey across all workspaces.
-func resolveSkillBaseDir(cfg *config.OpenOctaConfig, skillKey string, env func(string) string) (string, error) {
+func resolveSkillBaseDir(cfg *config.LinmoConfig, skillKey string, env func(string) string) (string, error) {
 	workspaceDirs := listWorkspaceDirs(cfg, env)
 	for _, workspaceDir := range workspaceDirs {
 		entries := loadWorkspaceSkillEntries(workspaceDir, cfg)
@@ -1833,7 +1833,7 @@ func SkillsSaveFileHandler(opts HandlerOpts) error {
 	}
 
 	// Backup original file if it exists
-	backupPath := absPath + ".openocta-backup"
+	backupPath := absPath + ".linmo-backup"
 	originalExists := false
 	if _, err := os.Stat(absPath); err == nil {
 		originalExists = true

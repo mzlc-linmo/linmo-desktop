@@ -7,12 +7,12 @@ description: Use when the user @mentions or asks to delegate work to local CLI a
 
 ## 概述
 
-OpenOcta 可探测并委派任务到本机已安装的 CLI 智能体。用户可通过 `@cursor`、`@codex` 等方式提及工具。
+Linmo 可探测并委派任务到本机已安装的 CLI 智能体。用户可通过 `@cursor`、`@codex` 等方式提及工具。
 
 **强制工作流：**
 
 1. **理解意图** — 结合对话上下文，把模糊需求扩展为完整、可独立执行的任务描述。
-2. **调用 `local_agent` 工具** — 由 OpenOcta 代为执行 CLI，**禁止**在 bash/shell 中直接运行下列命令。
+2. **调用 `local_agent` 工具** — 由 Linmo 代为执行 CLI，**禁止**在 bash/shell 中直接运行下列命令。
 3. **汇总结果** — 将工具输出整理成用户可读的回答。
 
 ## 工具 API
@@ -53,7 +53,7 @@ OpenOcta 可探测并委派任务到本机已安装的 CLI 智能体。用户可
 
 ### OpenClaw (`@openclaw` / `@claw`)
 
-- **适用**：OpenClaw 生态内的本地 agent 任务、与 OpenOcta 同体系的工作流。
+- **适用**：OpenClaw 生态内的本地 agent 任务、与 Linmo 同体系的工作流。
 - **CLI 形态**：`openclaw agent --local --agent main --message "<task>" --json`
 - **任务建议**：说明 agent 名称、是否需 JSON 输出、工作区路径。
 

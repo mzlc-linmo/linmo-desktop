@@ -3,11 +3,11 @@
 <plist version="1.0">
   <dict>
     <key>CFBundleName</key>
-    <string>OpenOcta</string>
+    <string>Linmo</string>
     <key>CFBundleDisplayName</key>
-    <string>OpenOcta</string>
+    <string>Linmo</string>
     <key>CFBundleIdentifier</key>
-    <string>com.openocta.desktop</string>
+    <string>xin.linmo.desktop</string>
     <key>CFBundleVersion</key>
     <string>1</string>
     <key>CFBundleShortVersionString</key>
@@ -15,7 +15,7 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleExecutable</key>
-    <string>OpenOcta</string>
+    <string>Linmo</string>
   </dict>
 </plist>
 

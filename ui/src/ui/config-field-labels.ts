@@ -304,7 +304,7 @@ const CONFIG_FIELD_LABELS: Record<Locale, Record<string, string>> = {
     "gateway.remote.token": "远程网关令牌",
     "gateway.remote.password": "远程网关密码",
     "gateway.remote.tlsFingerprint": "远程网关 TLS 指纹",
-    "gateway.auth.token": "网关令牌(访问远程服务需要从~/.openocta/openocta.json中获取)",
+    "gateway.auth.token": "网关令牌(访问远程服务需要从~/.linmo/linmo.json中获取)",
     "gateway.auth.password": "网关密码",
     "tools.media.image.enabled": "启用图像理解",
     "tools.media.image.maxBytes": "图像理解最大字节",

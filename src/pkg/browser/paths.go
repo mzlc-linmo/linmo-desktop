@@ -17,11 +17,11 @@ const bundledChromiumDirName = "chromium"
 // ResolveChromiumExecutable returns the path to the bundled Chromium/Chrome binary.
 // Resolution order:
 //  1. browser.executablePath in config
-//  2. OPENOCTA_BUNDLED_CHROMIUM_DIR env (file or directory)
+//  2. LIMNO_BUNDLED_CHROMIUM_DIR env (file or directory)
 //  3. Directory next to executable: chromium/
 //  4. macOS .app bundle: ../Resources/chromium/
 //  5. Dev cwd: ./chromium/ or ./resources/chromium/
-func ResolveChromiumExecutable(cfg *config.OpenOctaConfig, env func(string) string) (string, error) {
+func ResolveChromiumExecutable(cfg *config.LinmoConfig, env func(string) string) (string, error) {
 	if env == nil {
 		env = os.Getenv
 	}
@@ -37,7 +37,7 @@ func ResolveChromiumExecutable(cfg *config.OpenOctaConfig, env func(string) stri
 			return abs, nil
 		}
 	}
-	if override := strings.TrimSpace(env("OPENOCTA_BUNDLED_CHROMIUM_DIR")); override != "" {
+	if override := strings.TrimSpace(env("LIMNO_BUNDLED_CHROMIUM_DIR")); override != "" {
 		if p, err := resolveFromDirOrFile(override, env); err == nil {
 			if err := validateChromiumExecutable(p); err != nil {
 				return "", err
@@ -54,7 +54,7 @@ func ResolveChromiumExecutable(cfg *config.OpenOctaConfig, env func(string) stri
 			return p, nil
 		}
 	}
-	return "", fmt.Errorf("bundled Chromium not found; run Setup Wizard → 环境初始化 to download Chromium (Rod), or place binaries under one of: %v (or set OPENOCTA_BUNDLED_CHROMIUM_DIR / browser.executablePath)", candidates)
+	return "", fmt.Errorf("bundled Chromium not found; run Setup Wizard → 环境初始化 to download Chromium (Rod), or place binaries under one of: %v (or set LIMNO_BUNDLED_CHROMIUM_DIR / browser.executablePath)", candidates)
 }
 
 func bundledDirCandidates(env func(string) string) []string {
@@ -173,13 +173,13 @@ func ResolveUserDataDir(env func(string) string) string {
 	if env == nil {
 		env = os.Getenv
 	}
-	if override := strings.TrimSpace(env("OPENOCTA_BROWSER_PROFILE_DIR")); override != "" {
+	if override := strings.TrimSpace(env("LIMNO_BROWSER_PROFILE_DIR")); override != "" {
 		return expandUserPath(override, env)
 	}
 	return filepath.Join(paths.ResolveStateDir(env), "browser", "profile")
 }
 
-func headlessFromConfig(cfg *config.OpenOctaConfig, env func(string) string) bool {
+func headlessFromConfig(cfg *config.LinmoConfig, env func(string) string) bool {
 	if cfg != nil && cfg.Browser != nil && cfg.Browser.Headless != nil {
 		return *cfg.Browser.Headless
 	}
@@ -191,7 +191,7 @@ func headlessFromConfig(cfg *config.OpenOctaConfig, env func(string) string) boo
 	return runMode != "desktop"
 }
 
-func gatewayMode(cfg *config.OpenOctaConfig) *string {
+func gatewayMode(cfg *config.LinmoConfig) *string {
 	if cfg == nil || cfg.Gateway == nil {
 		return nil
 	}
@@ -228,7 +228,7 @@ func absPath(p string, env func(string) string) (string, error) {
 }
 
 // validateChromiumExecutable rejects system browsers and broken paths.
-// OpenOcta must only drive Chrome for Testing / bundled Chromium, not the user's daily browser.
+// Linmo must only drive Chrome for Testing / bundled Chromium, not the user's daily browser.
 func validateChromiumExecutable(path string) error {
 	path = strings.TrimSpace(path)
 	if path == "" {

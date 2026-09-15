@@ -363,7 +363,7 @@ func setFrontmatterField(content []byte, field, value string) []byte {
 }
 
 // handleEmployeeSkillsUpload handles POST /api/employee-skills/upload (multipart: employeeId, name, file).
-// Skills are stored under ~/.openocta/employee_skills/<employeeId>/<skillName>/..., using ResolveStateDir
+// Skills are stored under ~/.linmo/employee_skills/<employeeId>/<skillName>/..., using ResolveStateDir
 // to remain compatible with Windows and other platforms.
 func (s *Server) handleEmployeeSkillsUpload(w http.ResponseWriter, r *http.Request) {
 	// CORS: 允许跨域请求（UI 可能与 Gateway 不同源）

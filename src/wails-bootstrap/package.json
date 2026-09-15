@@ -1,5 +1,5 @@
 {
-  "name": "openocta-wails-bootstrap",
+  "name": "linmo-wails-bootstrap",
   "private": true,
   "scripts": {
     "build": "echo Bootstrap ready"

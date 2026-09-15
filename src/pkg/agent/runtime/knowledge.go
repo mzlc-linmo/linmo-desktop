@@ -10,7 +10,7 @@ import (
 	"github.com/openocta/openocta/pkg/paths"
 )
 
-func resolveKnowledgeOptions(cfg *config.OpenOctaConfig, env func(string) string, agentID string) *KnowledgeOptions {
+func resolveKnowledgeOptions(cfg *config.LinmoConfig, env func(string) string, agentID string) *KnowledgeOptions {
 	if env == nil {
 		env = os.Getenv
 	}
@@ -29,7 +29,7 @@ func resolveKnowledgeOptions(cfg *config.OpenOctaConfig, env func(string) string
 }
 
 // BuildSystemPromptKnowledgeSection returns agent instructions for vault retrieval.
-func BuildSystemPromptKnowledgeSection(cfg *config.OpenOctaConfig, agentID string, env func(string) string) string {
+func BuildSystemPromptKnowledgeSection(cfg *config.LinmoConfig, agentID string, env func(string) string) string {
 	if env == nil {
 		env = os.Getenv
 	}

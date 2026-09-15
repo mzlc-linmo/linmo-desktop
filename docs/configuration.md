@@ -1,13 +1,13 @@
-# OpenOcta 配置说明
+# Linmo 配置说明
 
-本文档介绍如何配置 OpenOcta Gateway，包括配置文件的格式、各个配置项的含义以及不同场景下的配置示例。
+本文档介绍如何配置 Linmo Gateway，包括配置文件的格式、各个配置项的含义以及不同场景下的配置示例。
 
 ## 配置文件位置
 
-OpenOcta 的配置文件默认位于：
+Linmo 的配置文件默认位于：
 
-- **默认路径**: `~/.openocta/openocta.json`
-- **环境变量覆盖**: 可通过 `OPENOCTA_CONFIG_PATH` 环境变量指定自定义路径
+- **默认路径**: `~/.linmo/linmo.json`
+- **环境变量覆盖**: 可通过 `LIMNO_CONFIG_PATH` 环境变量指定自定义路径
 
 配置文件使用标准 JSON 格式（也支持 JSON5 格式，允许注释和尾随逗号）。
 
@@ -21,7 +21,7 @@ OpenOcta 的配置文件默认位于：
 {
   "agents": {
     "defaults": {
-      "workspace": "~/.openocta/workspace"
+      "workspace": "~/.linmo/workspace"
     }
   },
   "channels": {
@@ -32,7 +32,7 @@ OpenOcta 的配置文件默认位于：
 }
 ```
 
-保存到 `~/.openocta/openocta.json`，你就可以从该号码私信机器人了。
+保存到 `~/.linmo/linmo.json`，你就可以从该号码私信机器人了。
 
 ### 推荐的入门配置
 
@@ -40,14 +40,14 @@ OpenOcta 的配置文件默认位于：
 {
   "agents": {
     "defaults": {
-      "workspace": "~/.openocta/workspace"
+      "workspace": "~/.linmo/workspace"
     },
     "list": [
       {
         "id": "default",
         "default": true,
         "name": "Clawd",
-        "workspace": "~/.openocta/workspace",
+        "workspace": "~/.linmo/workspace",
         "model": "anthropic/claude-sonnet-4-5"
       }
     ]
@@ -84,7 +84,7 @@ OpenOcta 的配置文件默认位于：
 ```json
 {
   "logging": {
-    "file": "/tmp/openocta/openocta.log"
+    "file": "/tmp/linmo/linmo.log"
   }
 }
 ```
@@ -161,14 +161,14 @@ OpenOcta 的配置文件默认位于：
 {
   "agents": {
     "defaults": {
-      "workspace": "~/.openocta/workspace"
+      "workspace": "~/.linmo/workspace"
     },
     "list": [
       {
         "id": "default",
         "default": true,
         "name": "Default Agent",
-        "workspace": "~/.openocta/workspace",
+        "workspace": "~/.linmo/workspace",
         "model": "anthropic/claude-sonnet-4-5",
         "skills": []
       }
@@ -329,7 +329,7 @@ OpenOcta 的配置文件默认位于：
 {
   "cron": {
     "enabled": true,
-    "store": "~/.openocta/cron/cron.json",
+    "store": "~/.linmo/cron/cron.json",
     "maxConcurrentRuns": 2,
     "sessionRetention": "7d"
   }
@@ -418,7 +418,7 @@ OpenOcta 的配置文件默认位于：
       "includeDefault": true,
       "paths": [
         {
-          "path": "~/.openocta/workspace",
+          "path": "~/.linmo/workspace",
           "name": "Workspace",
           "pattern": "**/*.md"
         }
@@ -446,7 +446,7 @@ OpenOcta 的配置文件默认位于：
 {
   "agents": {
     "defaults": {
-      "workspace": "~/.openocta/workspace"
+      "workspace": "~/.linmo/workspace"
     }
   },
   "channels": {
@@ -478,14 +478,14 @@ OpenOcta 的配置文件默认位于：
 {
   "agents": {
     "defaults": {
-      "workspace": "~/work-openocta"
+      "workspace": "~/work-linmo"
     },
     "list": [
       {
         "id": "work",
         "default": true,
         "name": "WorkBot",
-        "workspace": "~/work-openocta"
+        "workspace": "~/work-linmo"
       }
     ]
   },
@@ -516,7 +516,7 @@ OpenOcta 的配置文件默认位于：
 {
   "agents": {
     "defaults": {
-      "workspace": "~/.openocta/workspace"
+      "workspace": "~/.linmo/workspace"
     },
     "list": [
       {
@@ -551,7 +551,7 @@ OpenOcta 的配置文件默认位于：
 ```json
 {
   "logging": {
-    "file": "/var/log/openocta/openocta.log"
+    "file": "/var/log/linmo/linmo.log"
   },
   "env": {
     "vars": {
@@ -564,14 +564,14 @@ OpenOcta 的配置文件默认位于：
   },
   "agents": {
     "defaults": {
-      "workspace": "~/.openocta/workspace"
+      "workspace": "~/.linmo/workspace"
     },
     "list": [
       {
         "id": "default",
         "default": true,
         "name": "Production Agent",
-        "workspace": "~/.openocta/workspace",
+        "workspace": "~/.linmo/workspace",
         "model": "anthropic/claude-sonnet-4-5"
       }
     ]
@@ -608,7 +608,7 @@ OpenOcta 的配置文件默认位于：
   },
   "cron": {
     "enabled": true,
-    "store": "~/.openocta/cron/cron.json",
+    "store": "~/.linmo/cron/cron.json",
     "maxConcurrentRuns": 2
   },
   "hooks": {
@@ -628,7 +628,7 @@ OpenOcta 的配置文件默认位于：
 
 你可以通过以下方式检查配置：
 
-1. **启动 Gateway**: 运行 `openocta gateway run`，如果配置有误会显示错误信息
+1. **启动 Gateway**: 运行 `linmo gateway run`，如果配置有误会显示错误信息
 2. **查看日志**: 检查日志文件中的配置加载信息
 3. **使用 API**: 通过 Gateway API 的 `config.get` 方法获取当前配置快照
 
@@ -645,9 +645,9 @@ Gateway 支持配置热重载，无需重启即可应用配置更改。通过 `g
 
 某些配置项可以通过环境变量覆盖：
 
-- `OPENOCTA_STATE_DIR`: 状态目录路径
-- `OPENOCTA_CONFIG_PATH`: 配置文件路径
-- `OPENOCTA_GATEWAY_PORT`: Gateway 端口
+- `LIMNO_STATE_DIR`: 状态目录路径
+- `LIMNO_CONFIG_PATH`: 配置文件路径
+- `LIMNO_GATEWAY_PORT`: Gateway 端口
 
 ## 注意事项
 
@@ -674,7 +674,7 @@ Gateway 支持配置热重载，无需重启即可应用配置更改。通过 `g
 ## 参考资源
 
 - [桌面应用自动更新](./app-update.md) - 版本检查、跳过与自动安装
-- [配置示例文档](https://docs.openocta.ai/zh-CN/gateway/configuration-examples)
-- [完整配置参考](https://docs.openocta.ai/gateway/configuration)
-- [渠道配置文档](https://docs.openocta.ai/channels/whatsapp)
-- [故障排除指南](https://docs.openocta.ai/gateway/troubleshooting)
+- [配置示例文档](https://docs.linmo.ai/zh-CN/gateway/configuration-examples)
+- [完整配置参考](https://docs.linmo.ai/gateway/configuration)
+- [渠道配置文档](https://docs.linmo.ai/channels/whatsapp)
+- [故障排除指南](https://docs.linmo.ai/gateway/troubleshooting)

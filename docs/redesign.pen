@@ -9,7 +9,7 @@
       "name": "Redesign Brief",
       "width": 1200,
       "height": 280,
-      "content": "OpenOcta UI Redesign — Tech Style\n\nCanvas layout (all frames spread out, no overlap):\n  Row 0  y=0     Brief (this note)\n  Row 1  y=300   Message 1440×900 | Overview 1440×900 | Components 3060+\n  Row 2  y=1280  Tokens 680×520 | Light 680×420 | Layout note\n\nGoal: Keep shell layout unchanged. Tech/developer-tool visual language.\n\nReference: http://localhost:5173/message\n\nCanvas layout (all frames spread, no overlap):\n  Row 0  y=0     Brief (900×280)\n  Row 1  y=300   Message 1440×900 | Overview 1440×900 | Components 3060+\n  Row 2  y=1280  Tokens 680×520 | Light 680×420 | Layout note 460×200\n\nImplementation: ui/src/styles/base.css + tech-theme.css"
+      "content": "Linmo UI Redesign — Tech Style\n\nCanvas layout (all frames spread out, no overlap):\n  Row 0  y=0     Brief (this note)\n  Row 1  y=300   Message 1440×900 | Overview 1440×900 | Components 3060+\n  Row 2  y=1280  Tokens 680×520 | Light 680×420 | Layout note\n\nGoal: Keep shell layout unchanged. Tech/developer-tool visual language.\n\nReference: http://localhost:5173/message\n\nCanvas layout (all frames spread, no overlap):\n  Row 0  y=0     Brief (900×280)\n  Row 1  y=300   Message 1440×900 | Overview 1440×900 | Components 3060+\n  Row 2  y=1280  Tokens 680×520 | Light 680×420 | Layout note 460×200\n\nImplementation: ui/src/styles/base.css + tech-theme.css"
     },
     {
       "type": "text",
@@ -123,7 +123,7 @@
                   "type": "text",
                   "id": "msg-brand-text",
                   "fill": "$color.textPrimary",
-                  "content": "OpenOcta",
+                  "content": "Linmo",
                   "fontFamily": "$font.mono",
                   "fontSize": 14,
                   "fontWeight": "600"
@@ -620,7 +620,7 @@
               "type": "text",
               "id": "ov-brand",
               "fill": "$color.textPrimary",
-              "content": "OpenOcta  0.3.0",
+              "content": "Linmo  0.3.0",
               "fontFamily": "$font.mono",
               "fontSize": 14,
               "fontWeight": "600"

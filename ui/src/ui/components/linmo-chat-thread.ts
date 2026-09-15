@@ -21,8 +21,8 @@ export type ChatThreadAssistantIdentity = {
 /**
  * Isolated message list: parent draft/compose updates do not re-render this tree.
  */
-@customElement("openocta-chat-thread")
-export class OpenOctaChatThread extends LitElement {
+@customElement("linmo-chat-thread")
+export class LinmoChatThread extends LitElement {
   createRenderRoot() {
     return this;
   }
@@ -177,6 +177,6 @@ export class OpenOctaChatThread extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "openocta-chat-thread": OpenOctaChatThread;
+    "linmo-chat-thread": LinmoChatThread;
   }
 }

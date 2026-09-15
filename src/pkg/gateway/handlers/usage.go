@@ -178,7 +178,7 @@ func usageCostTotalsFromSession(t session.CostUsageTotals) UsageCostTotals {
 func UsageCostHandler(opts HandlerOpts) error {
 	cfg := loadConfigFromContext(opts.Context)
 	if cfg == nil {
-		cfg = &config.OpenOctaConfig{}
+		cfg = &config.LinmoConfig{}
 	}
 	startMs, endMs := parseUsageCostDateRange(opts.Params)
 	env := func(k string) string { return os.Getenv(k) }

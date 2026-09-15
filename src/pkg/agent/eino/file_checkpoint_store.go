@@ -9,7 +9,7 @@ import (
 	"github.com/openocta/openocta/pkg/paths"
 )
 
-// FileCheckPointStore persists Eino checkpoints under ~/.openocta/checkpoints/.
+// FileCheckPointStore persists Eino checkpoints under ~/.linmo/checkpoints/.
 type FileCheckPointStore struct {
 	dir string
 	mu  sync.RWMutex

@@ -165,13 +165,13 @@ func downloadPackage(ctx context.Context, url, latestVersion string, report func
 	if ext == "" {
 		ext = ".pkg"
 	}
-	dir, err := os.MkdirTemp("", "openocta-update-*")
+	dir, err := os.MkdirTemp("", "linmo-update-*")
 	if err != nil {
 		return "", err
 	}
 	baseName := filepath.Base(strings.Split(url, "?")[0])
 	if baseName == "" || baseName == "." || baseName == "/" {
-		baseName = "OpenOcta-" + sanitizeFilename(latestVersion) + ext
+		baseName = "Linmo-" + sanitizeFilename(latestVersion) + ext
 	}
 	dest := filepath.Join(dir, baseName)
 

@@ -27,8 +27,8 @@ func (s *Server) handleDesktopClearWorkspaceOptions(w http.ResponseWriter, r *ht
 }
 
 // handleDesktopClearWorkspace removes all files and subdirectories under the default agent workspace
-// directory: <stateDir>/workspace (e.g. ~/.openocta/workspace, or %APPDATA%\openocta\workspace on Windows).
-// Requires gateway token. Allowed when OPENOCTA_RUN_MODE=desktop or OPENOCTA_ALLOW_UNINSTALL=1.
+// directory: <stateDir>/workspace (e.g. ~/.linmo/workspace, or %APPDATA%\linmo\workspace on Windows).
+// Requires gateway token. Allowed when LIMNO_RUN_MODE=desktop or LIMNO_ALLOW_UNINSTALL=1.
 func (s *Server) handleDesktopClearWorkspace(w http.ResponseWriter, r *http.Request) {
 	setSiteProxyCORSHeaders(w)
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")

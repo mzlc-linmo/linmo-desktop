@@ -9,9 +9,9 @@ import (
 	"github.com/openocta/openocta/pkg/config"
 )
 
-// ResolveSkillsDir merges OpenOcta skill sources into a single directory path for Eino skill middleware.
+// ResolveSkillsDir merges Linmo skill sources into a single directory path for Eino skill middleware.
 // When multiple sources exist, prefers workspace skills directory.
-func ResolveSkillsDir(projectRoot string, cfg *config.OpenOctaConfig, employeeID string, skillFilter *[]string, env func(string) string) string {
+func ResolveSkillsDir(projectRoot string, cfg *config.LinmoConfig, employeeID string, skillFilter *[]string, env func(string) string) string {
 	if env == nil {
 		env = os.Getenv
 	}

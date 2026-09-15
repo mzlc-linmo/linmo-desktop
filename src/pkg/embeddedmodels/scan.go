@@ -135,7 +135,7 @@ func scanSideloadedModels(env func(string) string) map[string]CatalogEntry {
 			ID:            id,
 			Kind:          kind,
 			Name:          sideloadDisplayName(id, primary),
-			Description:   "手动导入的本地 GGUF 模型。将权重放入 ~/.openocta/embedded-models/" + id + "/ 后点击「刷新」即可识别。",
+			Description:   "手动导入的本地 GGUF 模型。将权重放入 ~/.linmo/embedded-models/" + id + "/ 后点击「刷新」即可识别。",
 			Tags:          []string{"手动导入", "本地"},
 			Sideloaded:    true,
 			Downloadable:  false,
@@ -147,7 +147,7 @@ func scanSideloadedModels(env func(string) string) map[string]CatalogEntry {
 	return out
 }
 
-// RefreshSideloadCatalog rescans ~/.openocta/embedded-models for user-placed GGUF directories.
+// RefreshSideloadCatalog rescans ~/.linmo/embedded-models for user-placed GGUF directories.
 func RefreshSideloadCatalog(env func(string) string) {
 	if env == nil {
 		env = os.Getenv

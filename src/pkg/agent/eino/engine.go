@@ -41,7 +41,7 @@ type BuildConfig struct {
 	EnableApproval  bool
 	CheckPointStore adk.CheckPointStore
 	Env             func(string) string
-	Config          *config.OpenOctaConfig
+	Config          *config.LinmoConfig
 	TokenLimit      int
 	AgentID         string
 	TokenTracking   bool
@@ -114,8 +114,8 @@ func NewEngine(ctx context.Context, cfg BuildConfig) (*Engine, error) {
 	}
 
 	deepCfg := &deep.Config{
-		Name:              "openocta-agent",
-		Description:       "OpenOcta DeepAgent (filesystem, shell, sub-agents)",
+		Name:              "linmo-agent",
+		Description:       "Linmo DeepAgent (filesystem, shell, sub-agents)",
 		ChatModel:         cm,
 		Instruction:       cfg.Instruction,
 		Backend:           fsBackend,
@@ -158,7 +158,7 @@ func deepAgentTodosEnabled(env func(string) string) bool {
 	if env == nil {
 		env = os.Getenv
 	}
-	v := strings.TrimSpace(strings.ToLower(env("OPENOCTA_DEEP_AGENT_TODOS")))
+	v := strings.TrimSpace(strings.ToLower(env("LIMNO_DEEP_AGENT_TODOS")))
 	return v == "1" || v == "true" || v == "yes"
 }
 

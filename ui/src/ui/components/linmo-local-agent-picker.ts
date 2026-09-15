@@ -12,8 +12,8 @@ import { t } from "../strings.js";
 /**
  * Compact dropdown for picking local CLI agents in the chat compose bar.
  */
-@customElement("openocta-local-agent-picker")
-export class OpenOctaLocalAgentPicker extends LitElement {
+@customElement("linmo-local-agent-picker")
+export class LinmoLocalAgentPicker extends LitElement {
   createRenderRoot() {
     return this;
   }
@@ -120,6 +120,6 @@ export class OpenOctaLocalAgentPicker extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "openocta-local-agent-picker": OpenOctaLocalAgentPicker;
+    "linmo-local-agent-picker": LinmoLocalAgentPicker;
   }
 }

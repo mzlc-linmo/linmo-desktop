@@ -8,7 +8,7 @@ dist-mac/
 /src/embed/frontend/
 !./src/embed/frontend/.gitkeep
 ./src/embed/config-schema.json
-./src/embed/openocta.json.example
+./src/embed/linmo.json.example
 ./ui/.idea/
 ./src/.claude/
 ./src/.idea/
@@ -17,7 +17,7 @@ dist-mac/
 ./src/chromium/
 ./.claude-trace/
 ./.idea/
-./openocta
+./linmo
 .DS_Store
 ./docs/
 __screenshots__
@@ -39,9 +39,9 @@ logs/
 *.exe
 *.exe.old
 *.exe~
-openocta
-openocta-launcher
-src/openocta_test.exe
+linmo
+linmo-launcher
+src/linmo_test.exe
 src/build/bin/
 src/build/windows/
 

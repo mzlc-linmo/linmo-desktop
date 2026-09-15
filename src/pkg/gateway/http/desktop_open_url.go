@@ -32,7 +32,7 @@ func (s *Server) handleDesktopOpenURLOptions(w http.ResponseWriter, r *http.Requ
 }
 
 // handleDesktopOpenURL opens the given http(s) URL in the system default browser.
-// Requires gateway token. Only when OPENOCTA_RUN_MODE=desktop.
+// Requires gateway token. Only when LIMNO_RUN_MODE=desktop.
 func (s *Server) handleDesktopOpenURL(w http.ResponseWriter, r *http.Request) {
 	setSiteProxyCORSHeaders(w)
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
@@ -44,7 +44,7 @@ func (s *Server) handleDesktopOpenURL(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if strings.TrimSpace(os.Getenv("OPENOCTA_RUN_MODE")) != "desktop" {
+	if strings.TrimSpace(os.Getenv("LIMNO_RUN_MODE")) != "desktop" {
 		w.WriteHeader(http.StatusForbidden)
 		_ = json.NewEncoder(w).Encode(desktopOpenURLResponse{
 			OK:      false,

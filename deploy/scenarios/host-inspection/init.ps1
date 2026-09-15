@@ -1,8 +1,8 @@
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ScenarioJson = Join-Path $Root "scenario.json"
-$GatewayUrl = if ($env:OPENOCTA_GATEWAY_URL) { $env:OPENOCTA_GATEWAY_URL } else { "http://127.0.0.1:18900" }
-$Token = $env:OPENOCTA_GATEWAY_TOKEN
+$GatewayUrl = if ($env:LIMNO_GATEWAY_URL) { $env:LIMNO_GATEWAY_URL } else { "http://127.0.0.1:18900" }
+$Token = $env:LIMNO_GATEWAY_TOKEN
 
 if (-not (Test-Path $ScenarioJson)) { throw "missing scenario.json" }
 $scenario = Get-Content $ScenarioJson -Raw | ConvertFrom-Json

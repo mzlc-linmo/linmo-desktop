@@ -64,7 +64,7 @@
   },
   "agents": {
     "defaults": {
-      "workspace": "~/.openocta/workspace",
+      "workspace": "~/.linmo/workspace",
       "repoRoot": "",
       "userTimezone": "Asia/Shanghai",
       "timeFormat": "24",
@@ -90,12 +90,12 @@
       {
         "id": "main",
         "default": true,
-        "name": "OpenOcta",
-        "workspace": "~/.openocta/workspace",
+        "name": "Linmo",
+        "workspace": "~/.linmo/workspace",
         "model": "anthropic/claude-sonnet-4-5-20250929",
         "skills": [],
         "identity": {
-          "name": "OpenOcta",
+          "name": "Linmo",
           "emoji": "🐙"
         }
       }
@@ -268,7 +268,7 @@
   },
   "cron": {
     "enabled": true,
-    "store": "~/.openocta/cron/cron.json",
+    "store": "~/.linmo/cron/cron.json",
     "maxConcurrentRuns": 2
   },
   "commands": {
@@ -289,7 +289,7 @@
   "ui": {
     "seamColor": "#24ba51",
     "assistant": {
-      "name": "OpenOcta"
+      "name": "Linmo"
     }
   },
   "wizard": {

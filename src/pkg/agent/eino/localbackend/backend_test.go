@@ -23,9 +23,9 @@ func TestBackendExecuteEcho(t *testing.T) {
 	var cmd string
 	switch runtime.GOOS {
 	case "windows":
-		cmd = "echo openocta-shell"
+		cmd = "echo linmo-shell"
 	default:
-		cmd = "echo openocta-shell"
+		cmd = "echo linmo-shell"
 	}
 
 	resp, err := backend.Execute(ctx, &filesystem.ExecuteRequest{Command: cmd})
@@ -38,7 +38,7 @@ func TestBackendExecuteEcho(t *testing.T) {
 	if resp.ExitCode == nil || *resp.ExitCode != 0 {
 		t.Fatalf("unexpected exit code: %v", resp.ExitCode)
 	}
-	if !strings.Contains(strings.ToLower(resp.Output), "openocta-shell") {
+	if !strings.Contains(strings.ToLower(resp.Output), "linmo-shell") {
 		t.Fatalf("unexpected output: %q", resp.Output)
 	}
 }

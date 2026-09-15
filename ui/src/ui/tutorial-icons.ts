@@ -1,6 +1,6 @@
 import { html, type TemplateResult } from "lit";
 
-/** Icon class to SVG mapping - matches openocta_site iconfont (octa-icon-plane, grass, cap, combat) */
+/** Icon class to SVG mapping - matches linmo_site iconfont (octa-icon-plane, grass, cap, combat) */
 const TUTORIAL_ICON_SVGS: Record<string, TemplateResult> = {
   "octa-icon-plane": html`
     <svg viewBox="0 0 1024 1024">

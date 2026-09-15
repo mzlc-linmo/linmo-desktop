@@ -57,9 +57,9 @@ func TestAppendLocalAgentToolDedupes(t *testing.T) {
 	}
 }
 
-func testConfigWithLocalAgentsEnabled() *config.OpenOctaConfig {
+func testConfigWithLocalAgentsEnabled() *config.LinmoConfig {
 	enabled := true
-	return &config.OpenOctaConfig{
+	return &config.LinmoConfig{
 		LocalAgents: &config.LocalAgentsConfig{Enabled: &enabled},
 	}
 }

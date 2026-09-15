@@ -22,7 +22,7 @@ type configPatchResponse struct {
 	OK     bool                   `json:"ok"`
 	Path   string                 `json:"path,omitempty"`
 	Error  string                 `json:"error,omitempty"`
-	Config *config.OpenOctaConfig `json:"config,omitempty"`
+	Config *config.LinmoConfig `json:"config,omitempty"`
 }
 
 // configGetResponse is the JSON response for GET /api/config.
@@ -31,7 +31,7 @@ type configGetResponse struct {
 	Exists bool                   `json:"exists"`
 	Hash   string                 `json:"hash,omitempty"`
 	Valid  bool                   `json:"valid"`
-	Config *config.OpenOctaConfig `json:"config,omitempty"`
+	Config *config.LinmoConfig `json:"config,omitempty"`
 	Issues []interface{}          `json:"issues,omitempty"`
 }
 
@@ -121,8 +121,8 @@ func (s *Server) handleConfigEnv(w http.ResponseWriter, r *http.Request) {
 
 // handleConfigPatch handles POST /api/config/patch.
 // Accepts JSON body: { "patch": {...}, "baseHash": "..." }.
-// Patch is merged into current config, validated, and written to ~/.openocta/openocta.json
-// (or %APPDATA%\openocta\openocta.json on Windows).
+// Patch is merged into current config, validated, and written to ~/.linmo/linmo.json
+// (or %APPDATA%\linmo\linmo.json on Windows).
 func (s *Server) handleConfigPatch(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost && r.Method != http.MethodPatch {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
@@ -177,7 +177,7 @@ func (s *Server) handleConfigPatch(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var cfg config.OpenOctaConfig
+	var cfg config.LinmoConfig
 	_ = json.Unmarshal(data, &cfg) // best-effort for response; extra keys ignored
 	s.ctx.Config = &cfg
 	// 若 patch 包含 channels，热重载渠道运行时

@@ -2,13 +2,13 @@ package tools
 
 import "testing"
 
-func TestStripOpenOctaAttachmentsMarker(t *testing.T) {
-	input := "summary\n@@OPENOCTA_ATTACHMENTS@@\n[{\"type\":\"file\"}]"
-	got := StripOpenOctaAttachmentsMarker(input)
+func TestStripLinmoAttachmentsMarker(t *testing.T) {
+	input := "summary\n@@LIMNO_ATTACHMENTS@@\n[{\"type\":\"file\"}]"
+	got := StripLinmoAttachmentsMarker(input)
 	if got != "summary" {
 		t.Fatalf("got %q want summary", got)
 	}
-	if StripOpenOctaAttachmentsMarker("plain text") != "plain text" {
+	if StripLinmoAttachmentsMarker("plain text") != "plain text" {
 		t.Fatal("expected plain text unchanged")
 	}
 }

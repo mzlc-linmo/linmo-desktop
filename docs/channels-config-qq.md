@@ -1,6 +1,6 @@
 # QQ 通道配置说明
 
-本文说明如何在 `openocta.json` 中配置 QQ 官方开放平台 Bot 通道，并与 Runtime 对应起来。
+本文说明如何在 `linmo.json` 中配置 QQ 官方开放平台 Bot 通道，并与 Runtime 对应起来。
 
 ## 配置位置
 
@@ -54,7 +54,7 @@ QQ 通道使用 **WebSocket** 模式：
 
 1. 在[QQ 开放平台](https://q.qq.com/)创建机器人应用，获取 `appId` 与 `appSecret`。
 2. 在应用配置中开通所需能力（私聊、群聊、频道等）。
-3. 在 `openocta.json` 中填入 `channels.qq.credentials`，并设置 `enabled: true`。
-4. 启动 Gateway：`make run` 或 `go run ./cmd/openocta gateway run`。
+3. 在 `linmo.json` 中填入 `channels.qq.credentials`，并设置 `enabled: true`。
+4. 启动 Gateway：`make run` 或 `go run ./cmd/linmo gateway run`。
 5. 在 Control UI 中确认 `channels.status` 返回的列表中包含 `qq`。
 6. 在 QQ 中向机器人发送消息，检查 Agent 是否能够收到并回复。

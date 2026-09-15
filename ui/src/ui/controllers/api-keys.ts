@@ -58,7 +58,7 @@ export function formFromApiKeyEntry(entry: ApiKeyEntry): ApiKeyFormState {
     name: entry.name,
     allowedPaths: entry.allowedPaths?.length
       ? [...entry.allowedPaths]
-      : ["/openocta/open/v1/ping", "/openocta/open/v1/completion"],
+      : ["/linmo/open/v1/ping", "/linmo/open/v1/completion"],
     bindingMode: entry.bindingMode === "employee" ? "employee" : "resources",
     allowedModels: [...(entry.allowedModels ?? [])],
     skillKeys: [...(entry.skillKeys ?? [])],
@@ -98,7 +98,7 @@ export async function loadApiKeyDefaults(state: ApiKeysState): Promise<string[]>
     const res = await state.client.request<{ allowedPaths?: string[] }>("apiKeys.defaults", {});
     return Array.isArray(res.allowedPaths) ? res.allowedPaths : [];
   } catch {
-    return ["/openocta/open/v1/ping", "/openocta/open/v1/completion"];
+    return ["/linmo/open/v1/ping", "/linmo/open/v1/completion"];
   }
 }
 

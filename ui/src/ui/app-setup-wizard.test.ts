@@ -79,7 +79,7 @@ describe("setup wizard skip-all persistence", () => {
     saveConfigPatchMock.mockResolvedValue(undefined);
   });
 
-  it("writes wizard.setup with skipped status to openocta.json when connected", async () => {
+  it("writes wizard.setup with skipped status to linmo.json when connected", async () => {
     const state = createState();
     await persistSetupWizardSkipped(state);
 
@@ -96,7 +96,7 @@ describe("setup wizard skip-all persistence", () => {
     expect(hasSetupWizardSkipPendingConfigSync(APP_VERSION)).toBe(false);
   });
 
-  it("still patches openocta.json when configForm already has skipped but snapshot does not", async () => {
+  it("still patches linmo.json when configForm already has skipped but snapshot does not", async () => {
     const state = createState({
       configForm: {
         wizard: {
@@ -132,7 +132,7 @@ describe("setup wizard skip-all persistence", () => {
     expect(hasSetupWizardSkipPendingConfigSync(APP_VERSION)).toBe(true);
   });
 
-  it("flushes pending skip to openocta.json after gateway connects", async () => {
+  it("flushes pending skip to linmo.json after gateway connects", async () => {
     markSetupWizardCompleted(APP_VERSION);
     markSetupWizardSkipPendingConfigSync(APP_VERSION);
     const state = createState();

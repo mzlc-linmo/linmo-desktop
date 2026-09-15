@@ -1,24 +1,24 @@
-# CONFIG.md - OpenOcta 配置指南
+# CONFIG.md - Linmo 配置指南
 
-本文说明 OpenOcta 主配置文件 `openocta.json` 的位置、结构与修改方式。同目录下的 `openocta.json.example` 是**完整参考模板**，可按需裁剪。
+本文说明 Linmo 主配置文件 `linmo.json` 的位置、结构与修改方式。同目录下的 `linmo.json.example` 是**完整参考模板**，可按需裁剪。
 
 ## 配置文件位置
 
 | 平台 | 默认路径 |
 |------|----------|
-| Linux / macOS | `~/.openocta/openocta.json` |
-| Windows | `%APPDATA%\openocta\openocta.json` |
+| Linux / macOS | `~/.linmo/linmo.json` |
+| Windows | `%APPDATA%\linmo\linmo.json` |
 
 覆盖方式：
 
-- 环境变量 `OPENOCTA_CONFIG_PATH`：指定配置文件绝对路径
-- 环境变量 `OPENOCTA_STATE_DIR`：状态目录（配置默认在其下的 `openocta.json`）
+- 环境变量 `LIMNO_CONFIG_PATH`：指定配置文件绝对路径
+- 环境变量 `LIMNO_STATE_DIR`：状态目录（配置默认在其下的 `linmo.json`）
 
 配置文件为 JSON（也支持 JSON5：注释、尾随逗号）。权限建议 `600`。
 
 ## 对话中修改配置（Agent 必读）
 
-当用户在聊天中要求**改配置、加模型、开通道、写环境变量**等，你**可以直接修改** `openocta.json`，无需让用户手动编辑。
+当用户在聊天中要求**改配置、加模型、开通道、写环境变量**等，你**可以直接修改** `linmo.json`，无需让用户手动编辑。
 
 ### 推荐方式：使用 `gateway_config` 工具
 
@@ -62,7 +62,7 @@
 
 ### 禁止方式
 
-- **不要**用 `write`/`edit` 直接改 `~/.openocta/openocta.json`（绕过校验与 hash 锁）。
+- **不要**用 `write`/`edit` 直接改 `~/.linmo/linmo.json`（绕过校验与 hash 锁）。
 - **不要**在未获用户同意时修改 gateway 认证 token、安全策略的 deny 规则。
 
 ## 配置顶层结构速查
@@ -100,7 +100,7 @@
 ```json
 {
   "agents": {
-    "defaults": { "workspace": "~/.openocta/workspace" }
+    "defaults": { "workspace": "~/.linmo/workspace" }
   },
   "gateway": { "port": 18900, "bind": "loopback" }
 }
@@ -198,10 +198,10 @@ API Key 优先放在 `env.vars`（如 `ANTHROPIC_API_KEY`）。自定义 Base UR
 
 | 变量 | 作用 |
 |------|------|
-| `OPENOCTA_CONFIG_PATH` | 配置文件路径 |
-| `OPENOCTA_STATE_DIR` | 状态目录 |
-| `OPENOCTA_GATEWAY_PORT` | 网关端口 |
-| `OPENOCTA_RUN_MODE` | `desktop` / `service` |
+| `LIMNO_CONFIG_PATH` | 配置文件路径 |
+| `LIMNO_STATE_DIR` | 状态目录 |
+| `LIMNO_GATEWAY_PORT` | 网关端口 |
+| `LIMNO_RUN_MODE` | `desktop` / `service` |
 
 ## 场景环境变量
 
@@ -209,7 +209,7 @@ API Key 优先放在 `env.vars`（如 `ANTHROPIC_API_KEY`）。自定义 Base UR
 
 ## 完整模板
 
-见同目录 **`openocta.json.example`**。首次安装时，若配置文件不存在，Gateway 也会从嵌入的示例初始化一份到用户目录。
+见同目录 **`linmo.json.example`**。首次安装时，若配置文件不存在，Gateway 也会从嵌入的示例初始化一份到用户目录。
 
 ## 故障排查
 
@@ -220,4 +220,4 @@ API Key 优先放在 `env.vars`（如 `ANTHROPIC_API_KEY`）。自定义 Base UR
 
 ---
 
-用户提出配置需求时：**先确认意图 → get → 构造最小 patch → patch → 简要说明改了什么**。完整字段以 `openocta.json.example` 与官方文档为准。
+用户提出配置需求时：**先确认意图 → get → 构造最小 patch → patch → 简要说明改了什么**。完整字段以 `linmo.json.example` 与官方文档为准。

@@ -3,11 +3,11 @@
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>com.openocta.launcher</string>
+    <string>com.linmo.launcher</string>
 
     <key>ProgramArguments</key>
     <array>
-      <string>/Applications/OpenOcta.app/Contents/MacOS/OpenOcta</string>
+      <string>/Applications/Linmo.app/Contents/MacOS/Linmo</string>
     </array>
 
     <key>RunAtLoad</key>
@@ -16,9 +16,9 @@
     <false/>
 
     <key>StandardOutPath</key>
-    <string>/tmp/openocta-launcher.out</string>
+    <string>/tmp/linmo-launcher.out</string>
     <key>StandardErrorPath</key>
-    <string>/tmp/openocta-launcher.err</string>
+    <string>/tmp/linmo-launcher.err</string>
   </dict>
 </plist>
 

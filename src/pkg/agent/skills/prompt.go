@@ -49,7 +49,7 @@ func BuildPrompt(entries []Entry) string {
 // ResolvePromptForRun resolves the skills prompt for an agent run.
 func ResolvePromptForRun(params struct {
 	Entries      []Entry
-	Config       *config.OpenOctaConfig
+	Config       *config.LinmoConfig
 	WorkspaceDir string
 }) string {
 	if len(params.Entries) == 0 {
@@ -61,6 +61,6 @@ func ResolvePromptForRun(params struct {
 }
 
 // FilterForRun filters skill entries for agent run (excludes disabled, checks eligibility).
-func FilterForRun(entries []Entry, cfg *config.OpenOctaConfig, eligibility *EligibilityContext) []Entry {
+func FilterForRun(entries []Entry, cfg *config.LinmoConfig, eligibility *EligibilityContext) []Entry {
 	return FilterEntries(entries, cfg, eligibility)
 }

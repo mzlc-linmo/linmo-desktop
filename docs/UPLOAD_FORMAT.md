@@ -188,10 +188,10 @@ prometheus-agent.zip
 
 | 内容 | 目标路径 |
 |------|----------|
-| manifest.json、README.md、其他附属文件 | `~/.openocta/employees/<id>/` |
-| skill.zip 内的各技能 | `~/.openocta/employee_skills/<id>/<技能名>/` |
+| manifest.json、README.md、其他附属文件 | `~/.linmo/employees/<id>/` |
+| skill.zip 内的各技能 | `~/.linmo/employee_skills/<id>/<技能名>/` |
 
-`skill.zip` 中的每个 `xxx.zip` 会解压到 `~/.openocta/employee_skills/<员工ID>/xxx/`，技能名由 zip 文件名（去掉 `.zip`）决定。`config.json` 中的 `skillIds` 应与这些技能名对应，以便正确加载。
+`skill.zip` 中的每个 `xxx.zip` 会解压到 `~/.linmo/employee_skills/<员工ID>/xxx/`，技能名由 zip 文件名（去掉 `.zip`）决定。`config.json` 中的 `skillIds` 应与这些技能名对应，以便正确加载。
 
 ---
 

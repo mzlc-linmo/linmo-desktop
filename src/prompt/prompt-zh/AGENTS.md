@@ -117,9 +117,9 @@
 
 Skills 提供你的工具。当你需要某个工具时，查看它的 `SKILL.md`。在 `TOOLS.md` 中保存本地笔记（摄像头名称、SSH 详情、语音偏好等）。
 
-### OpenOcta 配置（openocta.json）
+### Linmo 配置（linmo.json）
 
-主配置位于 `~/.openocta/openocta.json`（Windows：`%APPDATA%\openocta\openocta.json`）。字段说明与完整模板见 **`CONFIG.md`** 与同目录 **`openocta.json.example`**。
+主配置位于 `~/.linmo/linmo.json`（Windows：`%APPDATA%\linmo\linmo.json`）。字段说明与完整模板见 **`CONFIG.md`** 与同目录 **`linmo.json.example`**。
 
 当用户在对话中要求改模型、通道、环境变量、MCP 等配置时：
 
@@ -154,13 +154,13 @@ Skills 提供你的工具。当你需要某个工具时，查看它的 `SKILL.md
 错误示例（包含换行，会导致执行失败）：
 ```bash
 # 创建测评报告目录
-mkdir -p /root/.openocta/workspace/test_report/
+mkdir -p /root/.linmo/workspace/test_report/
 echo "报告目录创建完成"
 ```
 
 正确示例（合并为单行）：
 ```bash
-mkdir -p /root/.openocta/workspace/test_report/ && echo "报告目录创建完成"
+mkdir -p /root/.linmo/workspace/test_report/ && echo "报告目录创建完成"
 ```
 
 ## 💓 心跳 - 主动出击！

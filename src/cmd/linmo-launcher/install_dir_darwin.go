@@ -14,7 +14,7 @@ func resolveInstallStateDir() string {
 	if err != nil {
 		return ""
 	}
-	// self = .../OpenOcta.app/Contents/MacOS/OpenOcta
+	// self = .../Linmo.app/Contents/MacOS/Linmo
 	macosDir := filepath.Dir(self)
 	contentsDir := filepath.Join(macosDir, "..")
 	return filepath.Join(contentsDir, "Resources", "data")

@@ -1,6 +1,6 @@
 # WeWork 通道配置说明
 
-本文说明如何在 `openocta.json` 中配置 WeWork（企业微信）通道，并与 Runtime 对应起来。
+本文说明如何在 `linmo.json` 中配置 WeWork（企业微信）通道，并与 Runtime 对应起来。
 
 ## 配置位置
 
@@ -69,8 +69,8 @@
 1. 在[企业微信管理后台](https://work.weixin.qq.com/)创建自建应用，获取 `corpId`、`agentId`、`secret`。
 2. 在应用配置中设置「接收消息」：填写 Token、EncodingAESKey，以及 Webhook URL（如 `http://your-server:8766/wework/webhook`）。
 3. 确保 Gateway 所在机器端口 `webhookPort` 可被企业微信服务器访问（公网需备案域名，或使用内网穿透）。
-4. 在 `openocta.json` 中填入 `channels.wework.credentials` 及 `webhookPort`，并设置 `enabled: true`。
-5. 启动 Gateway：`make run` 或 `go run ./cmd/openocta gateway run`。
+4. 在 `linmo.json` 中填入 `channels.wework.credentials` 及 `webhookPort`，并设置 `enabled: true`。
+5. 启动 Gateway：`make run` 或 `go run ./cmd/linmo gateway run`。
 6. 在 Control UI 中确认 `channels.status` 返回的列表中包含 `wework`。
 7. 在企业微信中向应用发送消息，检查 Agent 是否能够收到并回复。
 

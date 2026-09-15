@@ -1,4 +1,4 @@
-# OpenOcta Go Backend
+# Linmo Go Backend
 
 Go 实现的后端，迁移自 TypeScript/Node.js。与前端 Control UI 及 Gateway WebSocket 协议兼容。
 
@@ -10,20 +10,20 @@ Go 实现的后端，迁移自 TypeScript/Node.js。与前端 Control UI 及 Gat
 ## 构建
 
 ```bash
-go build -o openocta ./cmd/openocta
+go build -o linmo ./cmd/linmo
 ```
 
 ## 运行
 
 ```bash
 # 显示帮助
-go run ./cmd/openocta --help
+go run ./cmd/linmo --help
 
 # 启动 Gateway（默认端口 18900）
-go run ./cmd/openocta gateway run
+go run ./cmd/linmo gateway run
 
 # 运行 Agent（需 ANTHROPIC_API_KEY）
-go run ./cmd/openocta agent -m "Hello, echo test"
+go run ./cmd/linmo agent -m "Hello, echo test"
 ```
 
 ## 命令
@@ -38,11 +38,11 @@ go run ./cmd/openocta agent -m "Hello, echo test"
 
 | 变量 | 说明 |
 |------|------|
-| `OPENOCTA_STATE_DIR` | 状态目录（默认 `~/.openocta`） |
-| `OPENOCTA_CONFIG_PATH` | 配置文件路径 |
-| `OPENOCTA_SKIP_CHANNELS` | 设为 `1` 跳过 channel 加载 |
-| `OPENOCTA_SKIP_CRON` | 设为 `1` 跳过 Cron 服务 |
-| `OPENOCTA_SKIP_PROVIDERS` | 同 `SKIP_CHANNELS` 的兼容别名 |
+| `LIMNO_STATE_DIR` | 状态目录（默认 `~/.linmo`） |
+| `LIMNO_CONFIG_PATH` | 配置文件路径 |
+| `LIMNO_SKIP_CHANNELS` | 设为 `1` 跳过 channel 加载 |
+| `LIMNO_SKIP_CRON` | 设为 `1` 跳过 Cron 服务 |
+| `LIMNO_SKIP_PROVIDERS` | 同 `SKIP_CHANNELS` 的兼容别名 |
 | `ANTHROPIC_API_KEY` | Agent 模型认证（agent 命令必填） |
 
 ## 测试
@@ -57,7 +57,7 @@ go test ./...
 
 ```
 src_go/
-├── cmd/openocta/          # CLI 入口与子命令
+├── cmd/linmo/          # CLI 入口与子命令
 ├── pkg/
 │   ├── agent/             # Agent Runtime（agentsdk-go）+ 工具桥接
 │   ├── acp/               # ACP server/client 骨架
@@ -83,11 +83,11 @@ src_go/
 | Agent | `pkg/agent/` | Runtime 封装、EchoTool、DefaultTools |
 | Channels | `pkg/channels/` | 内置 Discord/Telegram/Slack/WhatsApp 插件 |
 | Cron | `pkg/cron/` | 任务 CRUD、存储、调度 |
-| Config | `pkg/config/` | OpenOctaConfig schema、JSON 解析 |
+| Config | `pkg/config/` | LinmoConfig schema、JSON 解析 |
 | Auto-reply | `pkg/autoreply/` | Dispatcher、ReplyPayload、串行队列 |
 | Knowledge | agentsdk `Knowledge` + `vault/` | Obsidian Vault 索引、`memory_search` / `session_search` |
 
 ## 文档链接
 
-- [docs.openocta.ai](https://docs.openocta.ai) — 官方文档
-- [Gateway 协议](https://docs.openocta.ai/gateway) — WebSocket 握手与 req/res 格式
+- [docs.linmo.ai](https://docs.linmo.ai) — 官方文档
+- [Gateway 协议](https://docs.linmo.ai/gateway) — WebSocket 握手与 req/res 格式

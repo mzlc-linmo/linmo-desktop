@@ -1,5 +1,5 @@
 // Package logging settings: log dir resolution and default rolling path.
-// Mirrors src/logging/logger.ts and src/infra/tmp-openocta-dir.ts.
+// Mirrors src/logging/logger.ts and src/infra/tmp-linmo-dir.ts.
 package logging
 
 import (
@@ -11,38 +11,38 @@ import (
 )
 
 const (
-	// LogPrefix is the rolling log file prefix (openocta-YYYY-MM-DD.log).
-	LogPrefix = "openocta"
+	// LogPrefix is the rolling log file prefix (linmo-YYYY-MM-DD.log).
+	LogPrefix = "linmo"
 	// LogSuffix is the rolling log file suffix.
 	LogSuffix = ".log"
 	// PosixOpenClawTmpDir is the preferred log directory on POSIX (same as Node).
-	PosixOpenClawTmpDir = "/tmp/openocta"
+	PosixOpenClawTmpDir = "/tmp/linmo"
 )
 
 // ResolvePreferredLogDir returns the preferred directory for log files.
-// Same logic as Node: /tmp/openocta if it exists and is writable, else os.TempDir()/openocta.
+// Same logic as Node: /tmp/linmo if it exists and is writable, else os.TempDir()/linmo.
 func ResolvePreferredLogDir() string {
 	info, err := os.Stat(PosixOpenClawTmpDir)
 	if err != nil {
 		if os.IsNotExist(err) {
-			return filepath.Join(os.TempDir(), "openocta")
+			return filepath.Join(os.TempDir(), "linmo")
 		}
-		return filepath.Join(os.TempDir(), "openocta")
+		return filepath.Join(os.TempDir(), "linmo")
 	}
 	if !info.IsDir() {
-		return filepath.Join(os.TempDir(), "openocta")
+		return filepath.Join(os.TempDir(), "linmo")
 	}
 	// Check writable
 	f, err := os.Create(filepath.Join(PosixOpenClawTmpDir, ".write-check"))
 	if err != nil {
-		return filepath.Join(os.TempDir(), "openocta")
+		return filepath.Join(os.TempDir(), "linmo")
 	}
 	f.Close()
 	_ = os.Remove(f.Name())
 	return PosixOpenClawTmpDir
 }
 
-// DefaultRollingLogPath returns the default log file path for today: openocta-YYYY-MM-DD.log.
+// DefaultRollingLogPath returns the default log file path for today: linmo-YYYY-MM-DD.log.
 // Mirrors Node defaultRollingPathForToday().
 func DefaultRollingLogPath(logDir string) string {
 	if logDir == "" {
@@ -63,10 +63,10 @@ func GetResolvedLoggerSettings(env func(string) string, logDirOverride string) R
 	if env == nil {
 		env = func(k string) string { return os.Getenv(k) }
 	}
-	// Optional: OPENOCTA_LOG_DIR to force log dir (e.g. state dir)
+	// Optional: LIMNO_LOG_DIR to force log dir (e.g. state dir)
 	logDir := strings.TrimSpace(logDirOverride)
 	if logDir == "" {
-		logDir = strings.TrimSpace(env("OPENOCTA_LOG_DIR"))
+		logDir = strings.TrimSpace(env("LIMNO_LOG_DIR"))
 	}
 	if logDir != "" {
 		return ResolvedSettings{File: DefaultRollingLogPath(logDir)}

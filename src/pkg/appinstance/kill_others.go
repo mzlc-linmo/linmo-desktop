@@ -1,4 +1,4 @@
-// Package appinstance handles single-instance style cleanup for packaged OpenOcta builds.
+// Package appinstance handles single-instance style cleanup for packaged Linmo builds.
 package appinstance
 
 import (
@@ -8,14 +8,14 @@ import (
 	"time"
 )
 
-// KillOtherOpenOctaProcesses terminates other running processes whose executable basename
-// matches packaged OpenOcta binaries (openocta, openocta-launcher, OpenOcta), excluding
-// this process and its parent (so a gateway child does not kill openocta-launcher on Windows).
+// KillOtherLinmoProcesses terminates other running processes whose executable basename
+// matches packaged Linmo binaries (linmo, linmo-launcher, Linmo), excluding
+// this process and its parent (so a gateway child does not kill linmo-launcher on Windows).
 // Used so exe/dmg/rpm upgrades can restart without file locks or port conflicts.
 //
-// Set OPENOCTA_SKIP_SINGLETON_KILL=1 to disable (e.g. local debugging).
-func KillOtherOpenOctaProcesses() {
-	if strings.TrimSpace(os.Getenv("OPENOCTA_SKIP_SINGLETON_KILL")) == "1" {
+// Set LIMNO_SKIP_SINGLETON_KILL=1 to disable (e.g. local debugging).
+func KillOtherLinmoProcesses() {
+	if strings.TrimSpace(os.Getenv("LIMNO_SKIP_SINGLETON_KILL")) == "1" {
 		return
 	}
 	self := os.Getpid()
@@ -35,5 +35,5 @@ func KillOtherOpenOctaProcesses() {
 
 func isOurProcessBase(argv0 string) bool {
 	b := strings.TrimSuffix(strings.ToLower(filepath.Base(strings.TrimSpace(argv0))), ".exe")
-	return b == "openocta" || b == "openocta-launcher"
+	return b == "linmo" || b == "linmo-launcher"
 }

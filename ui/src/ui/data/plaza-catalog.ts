@@ -27,7 +27,7 @@ export type PlazaCatalogItem = {
   builtin: boolean;
 };
 
-/** OpenOcta-only models not in CanIRun.ai static list. */
+/** Linmo-only models not in CanIRun.ai static list. */
 const EXTRA_CATALOG: PlazaCatalogItem[] = [
   {
     id: "qwen3-embedding-0.6b",

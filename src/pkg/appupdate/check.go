@@ -146,7 +146,7 @@ func Check(ctx context.Context, opts CheckOptions) CheckResult {
 	return out
 }
 
-// SkipVersion records a skipped release in openocta.json.
+// SkipVersion records a skipped release in linmo.json.
 func SkipVersion(version string) error {
 	return appendSkippedVersion(version)
 }

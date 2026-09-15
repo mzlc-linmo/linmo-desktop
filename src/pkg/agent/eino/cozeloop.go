@@ -25,7 +25,7 @@ var cozeLoop cozeLoopState
 
 // SetupCozeLoop registers the Eino global callback handler for CozeLoop trace export.
 // Safe to call multiple times; only the first successful setup takes effect.
-func SetupCozeLoop(cfg *config.OpenOctaConfig) {
+func SetupCozeLoop(cfg *config.LinmoConfig) {
 	enabled, apiToken, workspaceID, apiBaseURL := resolveCozeLoopSettings(cfg)
 	if !enabled {
 		return
@@ -78,7 +78,7 @@ func ShutdownCozeLoop(ctx context.Context) {
 	cozeLoop.client = nil
 }
 
-func resolveCozeLoopSettings(cfg *config.OpenOctaConfig) (enabled bool, apiToken, workspaceID, apiBaseURL string) {
+func resolveCozeLoopSettings(cfg *config.LinmoConfig) (enabled bool, apiToken, workspaceID, apiBaseURL string) {
 	if cfg != nil && cfg.CozeLoop != nil {
 		cl := cfg.CozeLoop
 		enabled = cl.IsEnabled()

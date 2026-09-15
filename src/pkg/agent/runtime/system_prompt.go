@@ -1,4 +1,4 @@
-// Package runtime: system prompt building from ~/.openocta/workspace/prompt and ./prompt markdown (deduped by basename).
+// Package runtime: system prompt building from ~/.linmo/workspace/prompt and ./prompt markdown (deduped by basename).
 package runtime
 
 import (
@@ -81,7 +81,7 @@ func loadPromptMarkdownFiles(workspaceDir, promptDir string) ([]PromptFile, erro
 
 // SystemPromptOptions configures BuildSystemPrompt.
 type SystemPromptOptions struct {
-	// WorkspaceDir is the default prompt dir (e.g. ~/.openocta/workspace).
+	// WorkspaceDir is the default prompt dir (e.g. ~/.linmo/workspace).
 	WorkspaceDir string
 	// ProjectRoot is the project root; prompt dir is ProjectRoot/prompt.
 	ProjectRoot string
@@ -100,8 +100,8 @@ func BuildSystemPrompt(opts SystemPromptOptions) (string, error) {
 	}
 
 	var b strings.Builder
-	// Fixed prefix per OpenOcta docs (identity + Tooling + Safety + Workspace).
-	b.WriteString("你是运行在 OpenOcta 中的个人助手。\n\n")
+	// Fixed prefix per Linmo docs (identity + Tooling + Safety + Workspace).
+	b.WriteString("你是运行在 Linmo 中的个人助手。\n\n")
 	b.WriteString("## 工具\n")
 	b.WriteString("工具按策略过滤后可用，工具名区分大小写，请严格按所列名称调用。\n\n")
 	b.WriteString("## Bash / execute 命令执行\n")

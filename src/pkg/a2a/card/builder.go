@@ -1,4 +1,4 @@
-// Package card builds A2A AgentCard values from OpenOcta agent/employee metadata.
+// Package card builds A2A AgentCard values from Linmo agent/employee metadata.
 package card
 
 import (
@@ -28,12 +28,12 @@ func Build(opts BuildOpts) *a2a.AgentCard {
 		} else if opts.AgentID != "" {
 			name = opts.AgentID
 		} else {
-			name = "openocta-agent"
+			name = "linmo-agent"
 		}
 	}
 	desc := strings.TrimSpace(opts.Description)
 	if desc == "" {
-		desc = fmt.Sprintf("OpenOcta agent %s", name)
+		desc = fmt.Sprintf("Linmo agent %s", name)
 	}
 	url := strings.TrimSpace(opts.URL)
 	if url == "" {

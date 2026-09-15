@@ -1,23 +1,23 @@
 <p align="center">
-  <img src="./imgs/readmePIC/QQ20260710-140337.png" alt="OpenOcta IT Ops Agent" width="250" height="320">
+  <img src="./imgs/readmePIC/QQ20260710-140337.png" alt="Linmo IT Ops Agent" width="250" height="320">
 </p>
 
 <p align="center">
   <a href="https://github.com/openocta/openocta/stargazers">
-    <img src="https://img.shields.io/github/stars/openocta/openocta?style=flat&logo=github" alt="GitHub stars">
+    <img src="https://img.shields.io/github/stars/linmo/linmo?style=flat&logo=github" alt="GitHub stars">
   </a>
   <a href="https://github.com/openocta/openocta/forks">
-    <img src="https://img.shields.io/github/forks/openocta/openocta?style=flat&logo=github" alt="GitHub forks">
+    <img src="https://img.shields.io/github/forks/linmo/linmo?style=flat&logo=github" alt="GitHub forks">
   </a>
   <a href="https://github.com/openocta/openocta/releases/latest">
-    <img src="https://img.shields.io/github/v/release/openocta/openocta?label=release" alt="Latest release">
+    <img src="https://img.shields.io/github/v/release/linmo/linmo?label=release" alt="Latest release">
   </a>
   <img src="https://img.shields.io/badge/Go-1.24+-00ADD8?logo=go&logoColor=white" alt="Go 1.24+">
   <img src="https://img.shields.io/badge/AIOps-IT%20Ops%20Agent-0A7B3E" alt="AIOps IT Ops Agent">
   <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="Apache-2.0">
 </p>
 
-<h1 align="center">OpenOcta 八爪鱼 — IT 运维智能体（AIOps Agent）</h1>
+<h1 align="center">Linmo 八爪鱼 — IT 运维智能体（AIOps Agent）</h1>
 
 <p align="center">
   <b>项目目标：最强 IT 运维智能体</b><br/>
@@ -25,9 +25,9 @@
 </p>
 
 <p align="center">
-  <a href="https://openocta.com">官网</a> ·
-  <a href="https://openocta.com/#download">下载</a> ·
-  <a href="https://resource.openocta.com">技能市场</a> ·
+  <a href="https://linmo.xin">官网</a> ·
+  <a href="https://linmo.xin/#download">下载</a> ·
+  <a href="https://resource.linmo.xin">技能市场</a> ·
   <a href="./docs/architecture.md">架构文档</a> ·
   <a href="README.en.md">English</a>
 </p>
@@ -38,7 +38,7 @@
 
 ## 一句话定位
 
-**OpenOcta（八爪鱼）是安装在 Windows / macOS 上的端侧 IT 运维智能体**：运维人员在本机双击安装、用自然语言下达任务；Agent 连接你的监控、日志、云平台、数据库与脚本工具链，完成**应用 / 服务器 / 网络 / 桌面 / DB / 云**等全场景运维作业——**装在 Windows / Mac，不限于只运维 Windows / Mac**。
+**Linmo（八爪鱼）是安装在 Windows / macOS 上的端侧 IT 运维智能体**：运维人员在本机双击安装、用自然语言下达任务；Agent 连接你的监控、日志、云平台、数据库与脚本工具链，完成**应用 / 服务器 / 网络 / 桌面 / DB / 云**等全场景运维作业——**装在 Windows / Mac，不限于只运维 Windows / Mac**。
 
 > 目标不是「又一个聊天机器人」，而是把 AI 用在真实运维闭环里：**自动巡检 → 告警分析 → 智能问数 → 处置建议 / 执行**。
 
@@ -52,7 +52,7 @@
 
 通用 Agent 擅长「写文档、改代码、聊两句」；运维要的是：**连得上现网工具、读得懂告警上下文、跑得了巡检与排障闭环**。
 
-| 运维痛点 | OpenOcta 怎么发挥 AI 优势 |
+| 运维痛点 | Linmo 怎么发挥 AI 优势 |
 |----------|---------------------------|
 | 告警风暴、根因难定位 | 聚合告警 + 关联指标 / 日志 / 变更，输出根因假设与处置步骤 |
 | 巡检靠人肉、结果难沉淀 | 自然语言定义巡检任务，定时执行并汇总风险清单 |
@@ -101,7 +101,7 @@
 
 🔧 **Go 完全自研运行时** — Gateway、Agent、Channels 原生实现；单一二进制内嵌 Control UI。
 
-🧩 **Skills & MCP 可扩展** — 内置工具 + MCP 协议 + [技能市场](https://resource.openocta.com)，按企业栈持续加装。
+🧩 **Skills & MCP 可扩展** — 内置工具 + MCP 协议 + [技能市场](https://resource.linmo.xin)，按企业栈持续加装。
 
 ---
 
@@ -120,9 +120,9 @@
 
 ## 与 OpenClaw、Hermes 对比
 
-OpenOcta 以 **IT 运维垂域** 为主线：端侧双击安装、完整客户端 UI、运维工具链适配、本土 IM 通道；把 AI 能力落到巡检、告警、问数等真实作业。相对 OpenClaw（Node / Gateway 自托管）与 Hermes（Python / CLI 导向），OpenOcta 以 **Go 单一二进制**自研运行时，并内置 **L4 自主进化**与 **Knowledge Vault**。
+Linmo 以 **IT 运维垂域** 为主线：端侧双击安装、完整客户端 UI、运维工具链适配、本土 IM 通道；把 AI 能力落到巡检、告警、问数等真实作业。相对 OpenClaw（Node / Gateway 自托管）与 Hermes（Python / CLI 导向），Linmo 以 **Go 单一二进制**自研运行时，并内置 **L4 自主进化**与 **Knowledge Vault**。
 
-| | OpenOcta | OpenClaw | Hermes |
+| | Linmo | OpenClaw | Hermes |
 |---|:---:|:---:|:---:|
 | 产品定位 | **IT 运维智能体 / AIOps Agent** | 通用 Gateway Agent | 通用 CLI Agent |
 | 安装形态 | Windows / macOS 双击安装 | CLI 部署 | CLI 部署 |
@@ -140,14 +140,14 @@ OpenOcta 以 **IT 运维垂域** 为主线：端侧双击安装、完整客户�
 
 ## 功能一览
 
-OpenOcta 把巡检、告警、问数、技能与知识沉淀放在同一个端侧客户端里，让运维闭环可装、可连、可干。
+Linmo 把巡检、告警、问数、技能与知识沉淀放在同一个端侧客户端里，让运维闭环可装、可连、可干。
 
 #### 智能体对话
 
 用自然语言下达巡检、告警分析、问数与处置任务，Agent 关联上下文并调用运维工具链。
 
 <p align="left">
-  <img alt="OpenOcta 智能体对话：自然语言驱动巡检、告警分析、问数与处置" src="./imgs/readmePIC/QQ20260709-211128.png" width="900">
+  <img alt="Linmo 智能体对话：自然语言驱动巡检、告警分析、问数与处置" src="./imgs/readmePIC/QQ20260709-211128.png" width="900">
 </p>
 
 了解更多：[使用场景](./docs/scenarios.md) · [架构概览](./docs/architecture.md)
@@ -157,7 +157,7 @@ OpenOcta 把巡检、告警、问数、技能与知识沉淀放在同一个端�
 一键安装 Zabbix SRE、Prometheus、MySQL DBA 等角色化数字员工，按场景组合能力，而不是从零拼 Prompt。
 
 <p align="left">
-  <img alt="OpenOcta 员工市场：一键安装运维数字员工" src="./imgs/readmePIC/QQ20260709-211216.png" width="900">
+  <img alt="Linmo 员工市场：一键安装运维数字员工" src="./imgs/readmePIC/QQ20260709-211216.png" width="900">
 </p>
 
 了解更多：[数字员工](./docs/digital-employees.md) · [内置员工](./docs/builtin-employees.md)
@@ -167,17 +167,17 @@ OpenOcta 把巡检、告警、问数、技能与知识沉淀放在同一个端�
 启用 766+ Skills，按监控告警 / DevOps / 数据库等分类对接现网工具栈，并通过 MCP 持续扩展。
 
 <p align="left">
-  <img alt="OpenOcta 技能库：监控告警、DevOps、数据库分类启用" src="./imgs/readmePIC/QQ20260709-211148.png" width="900">
+  <img alt="Linmo 技能库：监控告警、DevOps、数据库分类启用" src="./imgs/readmePIC/QQ20260709-211148.png" width="900">
 </p>
 
-了解更多：[Skills](./docs/skills.md) · [MCP 配置](./docs/mcp-configuration.md) · [技能市场](https://resource.openocta.com)
+了解更多：[Skills](./docs/skills.md) · [MCP 配置](./docs/mcp-configuration.md) · [技能市场](https://resource.linmo.xin)
 
 #### 知识库
 
 沉淀 Runbook、规范与历史案例，供 Agent 语义检索；越用越懂你的环境与处置偏好。
 
 <p align="left">
-  <img alt="OpenOcta 知识库：Runbook 与历史案例语义检索" src="./imgs/readmePIC/QQ20260709-211804.png" width="900">
+  <img alt="Linmo 知识库：Runbook 与历史案例语义检索" src="./imgs/readmePIC/QQ20260709-211804.png" width="900">
 </p>
 
 了解更多：[Knowledge Vault](./docs/knowledge-vault.md) · [用户指南](./docs/knowledge-vault-user-guide.md)
@@ -187,7 +187,7 @@ OpenOcta 把巡检、告警、问数、技能与知识沉淀放在同一个端�
 接入公有模型或本地模型，适配内网部署与数据合规；首次启动可通过配置引导快速完成。
 
 <p align="left">
-  <img alt="OpenOcta 模型配置：公有模型与本地模型接入" src="./imgs/readmePIC/QQ20260709-211248.png" width="900">
+  <img alt="Linmo 模型配置：公有模型与本地模型接入" src="./imgs/readmePIC/QQ20260709-211248.png" width="900">
 </p>
 
 了解更多：[大模型配置说明](./docs/model-providers.md)
@@ -197,12 +197,12 @@ OpenOcta 把巡检、告警、问数、技能与知识沉淀放在同一个端�
 Windows / Mac 快速上手与运维实战课程，帮助一线运维在约 30 秒装机后快速进入作业。
 
 <p align="left">
-  <img alt="OpenOcta 教程：Windows / Mac 快速上手与运维实战" src="./imgs/readmePIC/QQ20260709-211257.png" width="900">
+  <img alt="Linmo 教程：Windows / Mac 快速上手与运维实战" src="./imgs/readmePIC/QQ20260709-211257.png" width="900">
 </p>
 
-了解更多：[官网教程](https://openocta.com) · [30 秒启动](#30-秒启动windows--macos)
+了解更多：[官网教程](https://linmo.xin) · [30 秒启动](#30-秒启动windows--macos)
 
-还支持：[**工具系统**](./docs/tools.md)、[**定时巡检 / Cron**](./docs/configuration.md)、[**IM 通道**](./docs/channels-overview.md)、[**Webhooks**](./docs/webhooks.md)；更多能力见 [openocta.com](https://openocta.com)。
+还支持：[**工具系统**](./docs/tools.md)、[**定时巡检 / Cron**](./docs/configuration.md)、[**IM 通道**](./docs/channels-overview.md)、[**Webhooks**](./docs/webhooks.md)；更多能力见 [linmo.xin](https://linmo.xin)。
 
 ---
 
@@ -239,18 +239,18 @@ Windows / Mac 快速上手与运维实战课程，帮助一线运维在约 30 �
 **云运维** — 云资源、权限、账单与弹性扩缩相关排查。  
 *例：「列出近一周费用异常上涨的云资源并说明可能原因」*
 
-更多案例：[openocta.com/cases](https://openocta.com/cases) · [使用场景文档](./docs/scenarios.md)
+更多案例：[linmo.xin/cases](https://linmo.xin/cases) · [使用场景文档](./docs/scenarios.md)
 
 ---
 
 ## 30 秒启动（Windows / macOS）
 
-1. **下载** — [GitHub Releases](https://github.com/openocta/openocta/releases/latest) 或 [openocta.com 下载页](https://openocta.com/#download)
+1. **下载** — [GitHub Releases](https://github.com/openocta/openocta/releases/latest) 或 [linmo.xin 下载页](https://linmo.xin/#download)
 2. **安装并打开** — 双击安装桌面客户端（约 30 秒）
 3. **接入模型 → 开始运维对话** — 在「消息」中描述任务；再按需安装 Zabbix / Prometheus 等 Skills 或数字员工，对接你的现网工具
 
 <p align="left">
-  <img src="./imgs/screenshots/demo.gif" width="720" alt="OpenOcta IT Ops Agent demo">
+  <img src="./imgs/screenshots/demo.gif" width="720" alt="Linmo IT Ops Agent demo">
   <br/>
   <sub>产品演示 · 消息对话 → 技能库 → 知识库 → 运维 Agent（待补充）</sub>
 </p>
@@ -265,15 +265,15 @@ Windows / Mac 快速上手与运维实战课程，帮助一线运维在约 30 �
 打开客户端「**模型**」Tab，或跟随首次启动的「**配置引导**」，填入 API Key 并选择模型。
 
 <p align="left">
-  <img src="./imgs/readmePIC/QQ20260709-220423.png" width="780" alt="OpenOcta model setup wizard">
+  <img src="./imgs/readmePIC/QQ20260709-220423.png" width="780" alt="Linmo model setup wizard">
 </p>
 
 **方式 B — 编辑配置文件**
 
 | 平台 | 配置文件路径 |
 |------|----------------|
-| macOS | `~/.openocta/openocta.json` |
-| Windows | `%APPDATA%\openocta\openocta.json` |
+| macOS | `~/.linmo/linmo.json` |
+| Windows | `%APPDATA%\linmo\linmo.json` |
 
 最小示例（[Moonshot](https://platform.moonshot.cn/)；DeepSeek / 千问 / 豆包等见 [大模型配置说明](./docs/model-providers.md)）：
 
@@ -302,7 +302,7 @@ Windows / Mac 快速上手与运维实战课程，帮助一线运维在约 30 �
 
 ---
 
-## 为什么选择 OpenOcta
+## 为什么选择 Linmo
 
 | | |
 |---|---|
@@ -321,39 +321,39 @@ Windows / Mac 快速上手与运维实战课程，帮助一线运维在约 30 �
 
 ## 下载安装
 
-访问 **[openocta.com 下载页](https://openocta.com/#download)**：
+访问 **[linmo.xin 下载页](https://linmo.xin/#download)**：
 
 | 平台 | 安装包 |
 |------|--------|
-| Windows | `OpenOcta-amd64-installer.exe` |
-| macOS (Apple Silicon) | `OpenOcta-arm64.dmg` |
-| macOS (Intel) | `OpenOcta-amd64.dmg` |
+| Windows | `Linmo-amd64-installer.exe` |
+| macOS (Apple Silicon) | `Linmo-arm64.dmg` |
+| macOS (Intel) | `Linmo-amd64.dmg` |
 
 | 平台 | 默认配置目录 |
 |------|----------------|
-| macOS | `~/.openocta/openocta.json` |
-| Windows | `%APPDATA%\openocta\openocta.json` |
+| macOS | `~/.linmo/linmo.json` |
+| Windows | `%APPDATA%\linmo\linmo.json` |
 
 macOS：从 `.dmg` 拖入「应用程序」，详见 [`deploy/dist-README.md`](./deploy/dist-README.md)。
 
 **在线资源**
 
-- 官网：https://openocta.com  
-- 技能 / MCP / 数字员工市场：https://resource.openocta.com  
-- 企业版 AMC：https://amc.openocta.com  
+- 官网：https://linmo.xin  
+- 技能 / MCP / 数字员工市场：https://resource.linmo.xin  
+- 企业版 AMC：https://amc.linmo.xin  
 
 ---
 
 ## FAQ（便于检索与引用）
 
-**Q: OpenOcta 是什么？**  
-A: OpenOcta（八爪鱼）是开源的 **IT 运维智能体 / AIOps Agent**：在 Windows / macOS 端侧安装，用自然语言完成巡检、告警分析、智能问数等运维作业。
+**Q: Linmo 是什么？**  
+A: Linmo（八爪鱼）是开源的 **IT 运维智能体 / AIOps Agent**：在 Windows / macOS 端侧安装，用自然语言完成巡检、告警分析、智能问数等运维作业。
 
 **Q: 是不是只能运维 Windows / Mac？**  
 A: **不是。** 客户端装在 Windows / Mac；运维对象可以是 Linux 服务器、Kubernetes、数据库、网络与云资源等全栈 IT 资产。
 
 **Q: 和 ChatGPT / 通用 Agent 有什么区别？**  
-A: 通用 Agent 偏对话与办公；OpenOcta 面向运维闭环，强调对接 Zabbix、Prometheus 等工具链、数字员工、定时巡检、IM 值守与本地知识沉淀。
+A: 通用 Agent 偏对话与办公；Linmo 面向运维闭环，强调对接 Zabbix、Prometheus 等工具链、数字员工、定时巡检、IM 值守与本地知识沉淀。
 
 **Q: 能对接哪些运维系统？**  
 A: 通过 Skills、MCP 与数字员工扩展；常见包括 Zabbix、Prometheus、Grafana、Kubernetes、MySQL/PostgreSQL、Ansible、ELK/Loki 及云 API 等，可按企业环境继续加装。
@@ -362,7 +362,7 @@ A: 通过 Skills、MCP 与数字员工扩展；常见包括 Zabbix、Prometheus�
 A: 默认本地优先：会话与记忆留在本机；模型调用取决于你配置的公有 / 本地模型与网络策略，支持内网部署。
 
 **Q: 个人运维和团队怎么用？**  
-A: 个人直接装客户端即可；团队可通过技能市场统一能力，企业场景可关注 [AMC](https://amc.openocta.com)。
+A: 个人直接装客户端即可；团队可通过技能市场统一能力，企业场景可关注 [AMC](https://amc.linmo.xin)。
 
 ---
 
@@ -380,7 +380,7 @@ A: 个人直接装客户端即可；团队可通过技能市场统一能力，�
 
 ```bash
 make build
-./openocta gateway run
+./linmo gateway run
 ```
 
 Gateway 默认 `http://127.0.0.1:18900`；前端经 `go:embed` 内嵌，浏览器直接访问 Control UI。
@@ -388,7 +388,7 @@ Gateway 默认 `http://127.0.0.1:18900`；前端经 `go:embed` 内嵌，浏览�
 ### 开发模式
 
 ```bash
-./openocta gateway run    # 终端 1
+./linmo gateway run    # 终端 1
 make run-ui               # 终端 2 → http://localhost:5173
 ```
 
@@ -396,7 +396,7 @@ make run-ui               # 终端 2 → http://localhost:5173
 
 ```bash
 export ANTHROPIC_API_KEY=your-key
-./openocta agent -m "Hello, echo test"
+./linmo agent -m "Hello, echo test"
 ```
 
 ---
@@ -425,7 +425,7 @@ export ANTHROPIC_API_KEY=your-key
 ## 项目结构
 
 ```text
-OpenOcta/
+Linmo/
 ├── src/                    # Go 后端（Gateway、Agent、Channels、Cron）
 ├── ui/                     # Control UI（Lit + Vite）
 ├── deploy/                 # 安装包、Docker、systemd
@@ -445,12 +445,12 @@ OpenOcta/
 - 🐛 [反馈运维场景 Issue](https://github.com/openocta/openocta/issues)（告警、巡检、工具对接最有价值）  
 - 🔧 [Good first issues](https://github.com/openocta/openocta/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)  
 - 🤝 阅读 [CONTRIBUTING.md](./CONTRIBUTING.md) 提交 PR  
-- 💬 扫码进群或访问 [openocta.com](https://openocta.com)
+- 💬 扫码进群或访问 [linmo.xin](https://linmo.xin)
 
 <p align="center">
-  <img src="./imgs/wechat.png" alt="OpenOcta community WeChat QR" width="220" height="220">
+  <img src="./imgs/wechat.png" alt="Linmo community WeChat QR" width="220" height="220">
   <br/>
-  <sub>扫码加入 OpenOcta 讨论群 · 运维场景共建与问题支持</sub>
+  <sub>扫码加入 Linmo 讨论群 · 运维场景共建与问题支持</sub>
 </p>
 
 ---

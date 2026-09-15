@@ -9,10 +9,10 @@ import (
 
 func TestCreateModelFactoryFromConfig_EmbeddedChatWithoutProviderConfig(t *testing.T) {
 	port := 18900
-	cfg := &config.OpenOctaConfig{
+	cfg := &config.LinmoConfig{
 		Gateway: &config.GatewayConfig{Port: &port},
 	}
-	factory, err := CreateModelFactoryFromConfig(cfg, "openocta-embedded-chat/test-model")
+	factory, err := CreateModelFactoryFromConfig(cfg, "linmo-embedded-chat/test-model")
 	if err != nil {
 		t.Fatalf("CreateModelFactoryFromConfig: %v", err)
 	}
@@ -22,14 +22,14 @@ func TestCreateModelFactoryFromConfig_EmbeddedChatWithoutProviderConfig(t *testi
 }
 
 func TestCreateModelFactoryFromConfig_UnknownProvider(t *testing.T) {
-	_, err := CreateModelFactoryFromConfig(&config.OpenOctaConfig{}, "unknown-provider/some-model")
+	_, err := CreateModelFactoryFromConfig(&config.LinmoConfig{}, "unknown-provider/some-model")
 	if err == nil {
 		t.Fatal("expected error for unknown provider")
 	}
 }
 
 func TestCreateModelFactoryFromConfig_EmbeddedEmbeddingRejectedForChat(t *testing.T) {
-	_, err := CreateModelFactoryFromConfig(&config.OpenOctaConfig{}, "openocta-embedded-embedding/test-model")
+	_, err := CreateModelFactoryFromConfig(&config.LinmoConfig{}, "linmo-embedded-embedding/test-model")
 	if err == nil {
 		t.Fatal("expected error when using embedding provider for chat")
 	}
@@ -37,7 +37,7 @@ func TestCreateModelFactoryFromConfig_EmbeddedEmbeddingRejectedForChat(t *testin
 
 func TestCreateModelFactoryFromConfig_MiniMax(t *testing.T) {
 	t.Setenv("MINIMAX_API_KEY", "test-key")
-	cfg := &config.OpenOctaConfig{
+	cfg := &config.LinmoConfig{
 		Models: &config.ModelsConfig{
 			Providers: map[string]config.ModelProvider{
 				"minimax": {
@@ -57,7 +57,7 @@ func TestCreateModelFactoryFromConfig_MiniMax(t *testing.T) {
 
 func TestCreateModelFactoryFromConfig_NearAI(t *testing.T) {
 	t.Setenv("NEARAI_API_KEY", "test-key")
-	cfg := &config.OpenOctaConfig{
+	cfg := &config.LinmoConfig{
 		Models: &config.ModelsConfig{
 			Providers: map[string]config.ModelProvider{
 				"nearai": {

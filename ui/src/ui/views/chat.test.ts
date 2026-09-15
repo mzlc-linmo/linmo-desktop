@@ -117,7 +117,7 @@ describe("chat view", () => {
 
     expect(container.querySelector("section.chat.chat-empty")).not.toBeNull();
     expect(container.querySelector("div.chat-empty")).toBeNull();
-    expect(container.querySelector("openocta-chat-suggestions")).not.toBeNull();
+    expect(container.querySelector("linmo-chat-suggestions")).not.toBeNull();
     expect(container.textContent).toContain("推荐");
   });
 
@@ -391,7 +391,7 @@ describe("chat view", () => {
                   {
                     id: "root",
                     component: "Text",
-                    text: '文件已就绪\n@@OPENOCTA_ATTACHMENTS@@\n[{"type":"file","filename":"demo.txt","mimeType":"text/plain","data":"aGk="}]',
+                    text: '文件已就绪\n@@LIMNO_ATTACHMENTS@@\n[{"type":"file","filename":"demo.txt","mimeType":"text/plain","data":"aGk="}]',
                   },
                 ],
               },

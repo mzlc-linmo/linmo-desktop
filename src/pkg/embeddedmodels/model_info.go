@@ -64,7 +64,7 @@ func fetchHFJSON(env func(string) string, path string, dest any) error {
 		return err
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", "OpenOcta/1.0")
+	req.Header.Set("User-Agent", "Linmo/1.0")
 	resp, err := client.Do(req)
 	if err != nil {
 		return err
@@ -83,7 +83,7 @@ func fetchHFText(env func(string) string, url string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	req.Header.Set("User-Agent", "OpenOcta/1.0")
+	req.Header.Set("User-Agent", "Linmo/1.0")
 	resp, err := client.Do(req)
 	if err != nil {
 		return "", err

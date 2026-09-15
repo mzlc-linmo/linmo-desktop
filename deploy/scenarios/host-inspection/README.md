@@ -13,14 +13,14 @@
 ## 使用前配置
 
 1. 在 Gateway 或 `.env` 中设置 `SSH_HOST`、`SSH_USER`。
-2. 确保目标主机允许 SSH，并将密钥配置到 OpenOcta 运行环境。
+2. 确保目标主机允许 SSH，并将密钥配置到 Linmo 运行环境。
 3. （可选）使用 `bundled/` 下的离线 deb/rpm 安装 `openssh-clients`，无需外网。
 
 ## 初始化
 
 ```bash
-export OPENOCTA_GATEWAY_URL="http://127.0.0.1:18900"
-export OPENOCTA_GATEWAY_TOKEN="your-token"
+export LIMNO_GATEWAY_URL="http://127.0.0.1:18900"
+export LIMNO_GATEWAY_TOKEN="your-token"
 ./init.sh
 ```
 

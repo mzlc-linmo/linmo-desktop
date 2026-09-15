@@ -20,7 +20,7 @@ func BrowserRequestHandler(opts HandlerOpts) error {
 			return nil
 		}
 	}
-	var cfg *config.OpenOctaConfig
+	var cfg *config.LinmoConfig
 	if opts.Context != nil {
 		cfg = opts.Context.Config
 	}

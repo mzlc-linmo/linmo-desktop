@@ -5,7 +5,7 @@ import type { ApiKeyFormState } from "./controllers/api-keys.ts";
 export const DEFAULT_API_KEY_FORM: ApiKeyFormState = {
   editId: "",
   name: "",
-  allowedPaths: ["/openocta/open/v1/ping", "/openocta/open/v1/completion"],
+  allowedPaths: ["/linmo/open/v1/ping", "/linmo/open/v1/completion"],
   bindingMode: "resources",
   allowedModels: [],
   skillKeys: [],

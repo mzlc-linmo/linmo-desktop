@@ -44,7 +44,7 @@ func TestChromiumBinaryInDirDarwin(t *testing.T) {
 }
 
 func TestResolveChromiumExecutableMissing(t *testing.T) {
-	t.Setenv("OPENOCTA_BUNDLED_CHROMIUM_DIR", t.TempDir())
+	t.Setenv("LIMNO_BUNDLED_CHROMIUM_DIR", t.TempDir())
 	_, err := ResolveChromiumExecutable(nil, os.Getenv)
 	if err == nil {
 		t.Fatal("expected error when chromium dir is empty")
@@ -68,7 +68,7 @@ func TestValidateChromiumExecutableRejectsSystemChrome(t *testing.T) {
 func TestBundledDirCandidatesPrefersInstallDir(t *testing.T) {
 	home := t.TempDir()
 	t.Setenv("HOME", home)
-	t.Setenv("OPENOCTA_STATE_DIR", "")
+	t.Setenv("LIMNO_STATE_DIR", "")
 	env := os.Getenv
 	candidates := bundledDirCandidates(env)
 	if len(candidates) == 0 {

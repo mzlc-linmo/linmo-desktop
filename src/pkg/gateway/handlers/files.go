@@ -30,7 +30,7 @@ func parseFilesReadParams(params map[string]interface{}) (*FilesReadParams, erro
 
 // allowedReadRoots returns absolute directory paths under which file reads are allowed
 // (state dir and default agent workspace). Covers managed skills and workspace files.
-func allowedReadRoots(cfg *config.OpenOctaConfig, env func(string) string) []string {
+func allowedReadRoots(cfg *config.LinmoConfig, env func(string) string) []string {
 	var roots []string
 	stateDir := paths.ResolveStateDir(env)
 	if stateDir != "" {
@@ -71,7 +71,7 @@ func FilesReadHandler(opts HandlerOpts) error {
 	}
 
 	env := func(k string) string { return os.Getenv(k) }
-	var cfg *config.OpenOctaConfig
+	var cfg *config.LinmoConfig
 	if opts.Context != nil && opts.Context.Config != nil {
 		cfg = opts.Context.Config
 	} else {

@@ -85,9 +85,9 @@ func TestProviderConfigMaxTokens(t *testing.T) {
 	wantCtx, wantMax := catalogLimits(entry)
 
 	chat := ProviderConfig(18902, "qwen3-0.6b")
-	chatProv, ok := chat["openocta-embedded-chat"].(map[string]interface{})
+	chatProv, ok := chat["linmo-embedded-chat"].(map[string]interface{})
 	if !ok {
-		t.Fatal("expected openocta-embedded-chat provider")
+		t.Fatal("expected linmo-embedded-chat provider")
 	}
 	chatModels, ok := chatProv["models"].([]map[string]interface{})
 	if !ok || len(chatModels) == 0 {
@@ -107,9 +107,9 @@ func TestProviderConfigMaxTokens(t *testing.T) {
 	wantEmbedCtx, _ := catalogLimits(embedEntry)
 
 	embed := ProviderConfig(18903, "qwen3-embedding-0.6b")
-	embedProv, ok := embed["openocta-embedded-embedding"].(map[string]interface{})
+	embedProv, ok := embed["linmo-embedded-embedding"].(map[string]interface{})
 	if !ok {
-		t.Fatal("expected openocta-embedded-embedding provider")
+		t.Fatal("expected linmo-embedded-embedding provider")
 	}
 	embedModels, ok := embedProv["models"].([]map[string]interface{})
 	if !ok || len(embedModels) == 0 {

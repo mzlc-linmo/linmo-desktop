@@ -18,11 +18,11 @@ import (
 
 // Adapter sends messages via Feishu IM API.
 type Adapter struct {
-	loadConfig func() (*config.OpenOctaConfig, error)
+	loadConfig func() (*config.LinmoConfig, error)
 }
 
 // NewAdapter creates a Feishu outbound adapter.
-func NewAdapter(loadConfig func() (*config.OpenOctaConfig, error)) *Adapter {
+func NewAdapter(loadConfig func() (*config.LinmoConfig, error)) *Adapter {
 	return &Adapter{loadConfig: loadConfig}
 }
 

@@ -37,14 +37,14 @@ func FilterOutBrowserTools(tools []tool.Tool) []tool.Tool {
 }
 
 // BrowserToolsFromConfig registers the browser tool when enabled in config.
-func BrowserToolsFromConfig(cfg *config.OpenOctaConfig) []tool.Tool {
+func BrowserToolsFromConfig(cfg *config.LinmoConfig) []tool.Tool {
 	if !browserEnabled(cfg) {
 		return nil
 	}
 	return []tool.Tool{&BrowserTool{Config: cfg}}
 }
 
-func browserEnabled(cfg *config.OpenOctaConfig) bool {
+func browserEnabled(cfg *config.LinmoConfig) bool {
 	if cfg == nil || cfg.Browser == nil || cfg.Browser.Enabled == nil {
 		return true
 	}
@@ -53,7 +53,7 @@ func browserEnabled(cfg *config.OpenOctaConfig) bool {
 
 // BrowserTool exposes bundled Chromium automation via browser.request-compatible params.
 type BrowserTool struct {
-	Config *config.OpenOctaConfig
+	Config *config.LinmoConfig
 }
 
 func (BrowserTool) Name() string { return "browser" }

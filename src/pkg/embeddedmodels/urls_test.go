@@ -24,7 +24,7 @@ func TestDownloadURLsMirrorFirst(t *testing.T) {
 func TestDownloadURLsMirrorOff(t *testing.T) {
 	in := "https://huggingface.co/Qwen/Qwen3-0.6B-GGUF/resolve/main/Qwen3-0.6B-Q8_0.gguf"
 	env := func(k string) string {
-		if k == "OPENOCTA_HF_MIRROR" {
+		if k == "LIMNO_HF_MIRROR" {
 			return "off"
 		}
 		return ""
@@ -57,7 +57,7 @@ func TestGitHubDownloadURLsDefaultFallbacks(t *testing.T) {
 func TestGitHubDownloadURLsOff(t *testing.T) {
 	in := "https://github.com/ggml-org/llama.cpp/releases/download/b9934/llama-b9934-bin-ubuntu-x64.tar.gz"
 	env := func(k string) string {
-		if k == "OPENOCTA_GITHUB_PROXY" {
+		if k == "LIMNO_GITHUB_PROXY" {
 			return "off"
 		}
 		return ""
@@ -71,7 +71,7 @@ func TestGitHubDownloadURLsOff(t *testing.T) {
 func TestGitHubDownloadURLsCustomList(t *testing.T) {
 	in := "https://github.com/hybridgroup/llama-cpp-builder/releases/download/b9934/llama-b9934-bin-ubuntu-cuda-13-x64.tar.gz"
 	env := func(k string) string {
-		if k == "OPENOCTA_GITHUB_PROXY" {
+		if k == "LIMNO_GITHUB_PROXY" {
 			return "https://mirror.example.com"
 		}
 		return ""
@@ -88,7 +88,7 @@ func TestGitHubDownloadURLsCustomList(t *testing.T) {
 func TestApplyGitHubProxyOff(t *testing.T) {
 	in := "https://github.com/ggml-org/llama.cpp/releases/download/b9934/llama-b9934-bin-ubuntu-x64.tar.gz"
 	env := func(k string) string {
-		if k == "OPENOCTA_GITHUB_PROXY" {
+		if k == "LIMNO_GITHUB_PROXY" {
 			return "off"
 		}
 		return ""
@@ -101,7 +101,7 @@ func TestApplyGitHubProxyOff(t *testing.T) {
 func TestApplyGitHubProxyCustom(t *testing.T) {
 	in := "https://github.com/hybridgroup/llama-cpp-builder/releases/download/b9934/llama-b9934-bin-ubuntu-cuda-13-x64.tar.gz"
 	env := func(k string) string {
-		if k == "OPENOCTA_GITHUB_PROXY" {
+		if k == "LIMNO_GITHUB_PROXY" {
 			return "https://mirror.ghproxy.com"
 		}
 		return ""

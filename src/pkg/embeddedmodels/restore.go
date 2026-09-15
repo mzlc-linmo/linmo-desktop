@@ -89,7 +89,7 @@ func normalizeCatalogFiles(env func(string) string, entry CatalogEntry) error {
 	return nil
 }
 
-// PersistProviderConfig writes embedded model provider settings into openocta.json.
+// PersistProviderConfig writes embedded model provider settings into linmo.json.
 func PersistProviderConfig(env func(string) string, port int, modelID string) error {
 	_ = port
 	_ = modelID

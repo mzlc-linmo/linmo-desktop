@@ -1,6 +1,6 @@
 # Skill 上传与创意中心
 
-本文档说明 OpenOcta 控制台中 **Skill 上传向导** 与 **Skill 创意中心** 的功能、交互流程、后端接口及实现结构。
+本文档说明 Linmo 控制台中 **Skill 上传向导** 与 **Skill 创意中心** 的功能、交互流程、后端接口及实现结构。
 
 相关文档：
 
@@ -18,8 +18,8 @@
 | **上传 ZIP** | 上传已有 Skill 压缩包，经 AI 分析后填写元信息并发布到本地托管目录 |
 | **创意中心** | 与 AI 多轮对话，从零生成或迭代 `SKILL.md` 草稿，右侧实时预览，支持测试安装与发布 |
 
-两种方式的 **发布目标** 均为 Gateway 所在环境的 **托管 Skills 目录**（默认 `~/.openocta/skills/<name>/`），与 [skills.md](./skills.md) 中的 managed 来源一致。  
-**不是** 向 openocta.com 市场后台（`/api/v1/admin/skills`）提交。
+两种方式的 **发布目标** 均为 Gateway 所在环境的 **托管 Skills 目录**（默认 `~/.linmo/skills/<name>/`），与 [skills.md](./skills.md) 中的 managed 来源一致。  
+**不是** 向 linmo.xin 市场后台（`/api/v1/admin/skills`）提交。
 
 ---
 
@@ -88,7 +88,7 @@ my-skill.zip/
 | `tags` | 逗号分隔标签 |
 | `status` | `open` / `paid` / `private`，默认 `open` |
 
-点击 **发布** 后，Gateway 解压 ZIP 到 `~/.openocta/skills/<name>/`，并将上述元数据写入 `SKILL.md` frontmatter。
+点击 **发布** 后，Gateway 解压 ZIP 到 `~/.linmo/skills/<name>/`，并将上述元数据写入 `SKILL.md` frontmatter。
 
 ---
 
@@ -224,7 +224,7 @@ my-skill.zip/
 | `files` | `[{ path, content }]` |
 | `ready` | 草稿是否具备可发布的 name + description |
 
-后端会加载 `~/.openocta/skills/skill-create/SKILL.md`（若存在）或内置创作参考，注入 LLM 提示词。
+后端会加载 `~/.linmo/skills/skill-create/SKILL.md`（若存在）或内置创作参考，注入 LLM 提示词。
 
 **实现位置**：`pkg/gateway/http/skills_compose_http.go` → `handlers.ComposeSkill`
 
@@ -341,7 +341,7 @@ my-skill.zip/
 
 ### 8.5 发布后在哪里看到 Skill？
 
-发布到 **托管目录** `~/.openocta/skills/<name>/`。Runtime 重启或刷新 Skills 列表后即可在本地 Skills 报告中看到；优先级见 [skills.md](./skills.md)。
+发布到 **托管目录** `~/.linmo/skills/<name>/`。Runtime 重启或刷新 Skills 列表后即可在本地 Skills 报告中看到；优先级见 [skills.md](./skills.md)。
 
 ### 8.6 浏览器报 CORS / Referrer Policy（strict-origin-when-cross-origin）
 
@@ -362,7 +362,7 @@ Gateway 已为以下接口配置 CORS 与 OPTIONS 预检：
 
 ## 九、后续规划（未实现）
 
-- **市场同步**：将发布结果同步至 openocta.com 市场（当前仅本地 managed）
+- **市场同步**：将发布结果同步至 linmo.xin 市场（当前仅本地 managed）
 - **`/skills` 独立 Tab**：`renderSkills` 已支持新弹框，若需在非技能库路由使用，需在 `app-render.ts` 中额外接线
 
 ---
@@ -370,14 +370,14 @@ Gateway 已为以下接口配置 CORS 与 OPTIONS 预检：
 ## 十、相关源码索引
 
 ```
-openocta/src/pkg/gateway/
+linmo/src/pkg/gateway/
 ├── http/skills_analyze.go      # analyze / publish / publish-markdown
 ├── handlers/skill_analyze.go   # AnalyzeSkillContent, skills.analyze RPC
 ├── handlers/skill_compose.go   # skills.compose RPC
 ├── handlers/skill_llm.go       # 共享 LLM 调用
 └── http/server.go              # 路由注册
 
-openocta/ui/src/ui/
+linmo/ui/src/ui/
 ├── controllers/skill-create.ts
 ├── skill-create-handlers.ts
 ├── views/skill-create-modals.ts

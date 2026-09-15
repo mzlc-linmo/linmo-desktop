@@ -12,7 +12,7 @@ import (
 
 const (
 	// GatewayLaunchAgentLabel is the default launchd label for the Gateway.
-	GatewayLaunchAgentLabel = "ai.openocta.gateway"
+	GatewayLaunchAgentLabel = "ai.linmo.gateway"
 )
 
 // ResolvePlistPath returns the LaunchAgent plist path for the given label.

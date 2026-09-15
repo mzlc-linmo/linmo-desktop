@@ -10,7 +10,7 @@ export type DesktopUninstallResult = {
 };
 
 /**
- * POST /api/desktop/uninstall — 安排延迟卸载（需网关 Token；仅桌面模式或 OPENOCTA_ALLOW_UNINSTALL=1）。
+ * POST /api/desktop/uninstall — 安排延迟卸载（需网关 Token；仅桌面模式或 LIMNO_ALLOW_UNINSTALL=1）。
  */
 export async function requestDesktopUninstall(opts: {
   gatewayHost: string;
@@ -76,7 +76,7 @@ export async function requestDesktopUninstall(opts: {
 
 /**
  * POST /api/desktop/clear-workspace — 清空默认工作区目录（状态目录下的 workspace），需网关 Token；
- * 仅桌面模式或 OPENOCTA_ALLOW_UNINSTALL=1 时允许。
+ * 仅桌面模式或 LIMNO_ALLOW_UNINSTALL=1 时允许。
  */
 export async function requestDesktopClearWorkspace(opts: {
   gatewayHost: string;

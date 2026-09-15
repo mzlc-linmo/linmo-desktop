@@ -1,6 +1,6 @@
-# OpenOcta 内嵌模型（Embedded Models）
+# Linmo 内嵌模型（Embedded Models）
 
-本文档说明 OpenOcta **内嵌模型**功能：在本地通过 [yzma](https://github.com/hybridgroup/yzma) + llama.cpp 运行 GGUF 权重，无需依赖 Ollama 等外部服务。模型按用途分为 **Chat 对话模型** 与 **Embedding 向量模型** 两类。
+本文档说明 Linmo **内嵌模型**功能：在本地通过 [yzma](https://github.com/hybridgroup/yzma) + llama.cpp 运行 GGUF 权重，无需依赖 Ollama 等外部服务。模型按用途分为 **Chat 对话模型** 与 **Embedding 向量模型** 两类。
 
 ---
 
@@ -10,17 +10,17 @@
 |------|------|
 | **模型广场** | 顶栏「模型」→ 侧栏「内嵌模型」，浏览、下载内置与扩展 GGUF 模型 |
 | **类型区分** | **Chat**：生成式对话，供 Agent 使用；**Embedding**：文本向量化，供检索/知识库使用 |
-| **本地下载** | 权重保存至 `~/.openocta/embedded-models/`，带进度条与取消 |
+| **本地下载** | 权重保存至 `~/.linmo/embedded-models/`，带进度条与取消 |
 | **本地推理** | 每个运行中的模型在 `127.0.0.1:18902+` 独立监听；Agent 经 Gateway 代理按 `modelId` 路由 |
 | **多模型并行** | 可同时启动多个 Chat / Embedding 实例（共享 yzma 推理库，各自占用模型内存） |
-| **自动注册** | 启动/停止后合并写入 `openocta.json` 的 `models.providers`（经 Gateway 统一代理） |
+| **自动注册** | 启动/停止后合并写入 `linmo.json` 的 `models.providers`（经 Gateway 统一代理） |
 
 ### 模型类型对照
 
 | 类型 | `kind` 字段 | 用途 | 本地 API | 配置 Provider ID |
 |------|-------------|------|----------|------------------|
-| **Chat 对话** | `chat` | Agent 对话、工具调用、多模态识图（VLM） | `POST /v1/chat/completions` | `openocta-embedded-chat` |
-| **Embedding 向量** | `embedding` | 知识库索引、语义搜索、聚类 | `POST /v1/embeddings` | `openocta-embedded-embedding` |
+| **Chat 对话** | `chat` | Agent 对话、工具调用、多模态识图（VLM） | `POST /v1/chat/completions` | `linmo-embedded-chat` |
+| **Embedding 向量** | `embedding` | 知识库索引、语义搜索、聚类 | `POST /v1/embeddings` | `linmo-embedded-embedding` |
 
 > **性能提示**：内嵌模型会在有模型运行时显示横幅——同时运行多个模型会显著占用内存并降低推理速度，建议按需启动、用完即停。Chat 与 Embedding 也可以并行运行（例如一边对话一边做向量检索），但请确保本机内存充足。
 
@@ -28,10 +28,10 @@
 
 ## 二、目录结构
 
-默认状态目录为 `~/.openocta`（Windows：`%APPDATA%\openocta`）。
+默认状态目录为 `~/.linmo`（Windows：`%APPDATA%\linmo`）。
 
 ```
-~/.openocta/
+~/.linmo/
 ├── embedded-models/
 │   ├── manifest.json              # 已安装模型清单与运行状态
 │   ├── qwen3-0.6b/                # Chat 模型目录
@@ -41,7 +41,7 @@
 └── yzma-lib/                      # llama.cpp 预编译库（首次下载时自动安装）
 ```
 
-可通过环境变量 `OPENOCTA_STATE_DIR` 覆盖状态目录。
+可通过环境变量 `LIMNO_STATE_DIR` 覆盖状态目录。
 
 ---
 
@@ -53,11 +53,11 @@
 
 推荐等级（S–F）在前端本地计算，算法参考 [CanIRun.ai/why](https://www.canirun.ai/why)，不调用 CanIRun 在线 API。
 
-另含 3 个 OpenOcta 扩展条目（embedding、VLM、极小 Chat），与 CanIRun 列表按 `id` 合并。
+另含 3 个 Linmo 扩展条目（embedding、VLM、极小 Chat），与 CanIRun 列表按 `id` 合并。
 
 ### 3.2 内嵌可下载模型
 
-仅下列模型支持通过 OpenOcta **内嵌下载**（GGUF 写入 `~/.openocta/embedded-models/`）。其余模型在广场中可浏览与获取推荐，安装请使用 **Ollama**（`ollama pull <name>`）。
+仅下列模型支持通过 Linmo **内嵌下载**（GGUF 写入 `~/.linmo/embedded-models/`）。其余模型在广场中可浏览与获取推荐，安装请使用 **Ollama**（`ollama pull <name>`）。
 
 #### 对话模型（Chat）
 
@@ -95,23 +95,23 @@ node ui/scripts/generate-plaza-catalog.mjs
 
 | 变量 | 说明 |
 |------|------|
-| `OPENOCTA_HF_MIRROR` | 镜像站根地址，默认 `https://hf-mirror.com`；设为 `off` 禁用镜像 |
+| `LIMNO_HF_MIRROR` | 镜像站根地址，默认 `https://hf-mirror.com`；设为 `off` 禁用镜像 |
 | `HF_ENDPOINT` | 与 HuggingFace 生态兼容的镜像地址，会覆盖默认镜像 |
 
 **Ollama / ModelScope**：
 
 - **Ollama**：内嵌推理需要裸 GGUF 文件，无法直接复用 Ollama 的 blob 存储。若已用 `ollama pull` 安装，可在 **模型配置** 中添加 Ollama Provider 使用，无需走内嵌下载。
-- **ModelScope**：阿里系 GGUF 在魔搭有同步，但直链下载需登录/SDK。当前内嵌下载通过 **hf-mirror**（同步 HuggingFace 仓库）实现国内加速；也可手动从 [ModelScope](https://modelscope.cn) 下载 GGUF 后放入 `~/.openocta/embedded-models/{模型ID}/` 对应文件名。完整步骤见 **[手动导入说明](./embedded-models-manual-import.md)**。
+- **ModelScope**：阿里系 GGUF 在魔搭有同步，但直链下载需登录/SDK。当前内嵌下载通过 **hf-mirror**（同步 HuggingFace 仓库）实现国内加速；也可手动从 [ModelScope](https://modelscope.cn) 下载 GGUF 后放入 `~/.linmo/embedded-models/{模型ID}/` 对应文件名。完整步骤见 **[手动导入说明](./embedded-models-manual-import.md)**。
 
 ### 4.2 启动与停止
 
 1. 下载完成后点击 **启动**（可连续启动多个已安装模型）
 2. 后端为每个模型加载 GGUF 并监听独立本地端口（如 `18902`、`18903`…；端口冲突时自动顺延）
 3. 自动合并 patch 配置：
-   - 所有运行中的 Chat 模型 → `models.providers.openocta-embedded-chat.models[]`
-   - 所有运行中的 Embedding 模型 → `models.providers.openocta-embedded-embedding.models[]`
+   - 所有运行中的 Chat 模型 → `models.providers.linmo-embedded-chat.models[]`
+   - 所有运行中的 Embedding 模型 → `models.providers.linmo-embedded-embedding.models[]`
    - 两者共用 Gateway 代理地址（见下文「配置写入示例」），请求体中的 `model` 字段决定路由目标
-4. Agent 在模型列表中选择具体 modelId，例如 `openocta-embedded-chat/qwen3-0.6b`
+4. Agent 在模型列表中选择具体 modelId，例如 `linmo-embedded-chat/qwen3-0.6b`
 5. 点击 **停止** 仅释放该模型实例；`modelId` 为空时停止全部运行中实例
 6. 点击 **删除** 会先后停止服务并删除本地权重文件
 
@@ -242,13 +242,13 @@ X-Gateway-Token: <token>
 
 ## 六、配置写入示例
 
-启动多个模型后，`openocta.json` 中 **合并** 为两个 provider，**baseUrl 统一指向 Gateway 代理**（默认 Gateway 端口 `18900`，可通过 `gateway.port` 或 `OPENOCTA_GATEWAY_PORT` 修改）：
+启动多个模型后，`linmo.json` 中 **合并** 为两个 provider，**baseUrl 统一指向 Gateway 代理**（默认 Gateway 端口 `18900`，可通过 `gateway.port` 或 `LIMNO_GATEWAY_PORT` 修改）：
 
 ```json
 {
   "models": {
     "providers": {
-      "openocta-embedded-chat": {
+      "linmo-embedded-chat": {
         "baseUrl": "http://127.0.0.1:18900/api/embedded-models/v1",
         "apiKey": "local",
         "displayName": "内嵌对话",
@@ -269,7 +269,7 @@ X-Gateway-Token: <token>
           }
         ]
       },
-      "openocta-embedded-embedding": {
+      "linmo-embedded-embedding": {
         "baseUrl": "http://127.0.0.1:18900/api/embedded-models/v1",
         "apiKey": "local",
         "displayName": "内嵌向量",
@@ -287,9 +287,9 @@ X-Gateway-Token: <token>
 
 使用方式：
 
-- Agent 默认模型：`openocta-embedded-chat/qwen3-0.6b`（**provider/modelId** 格式，modelId 决定代理路由）
+- Agent 默认模型：`linmo-embedded-chat/qwen3-0.6b`（**provider/modelId** 格式，modelId 决定代理路由）
 - 切换对话模型：在模型选择器中选择同一 provider 下的其他 `id`
-- 知识库索引：指向 `openocta-embedded-embedding` 下对应 embedding modelId
+- 知识库索引：指向 `linmo-embedded-embedding` 下对应 embedding modelId
 
 全部停止后，上述两个 provider 会从配置中自动移除。
 
@@ -307,9 +307,9 @@ flowchart LR
   GW --> EM[pkg/embeddedmodels]
   EM --> DL[下载 job]
   EM --> REG[runtime_registry]
-  REG --> LIB["~/.openocta/yzma-lib 共享"]
-  DL --> FS["~/.openocta/embedded-models"]
-  GW --> CFG[openocta.json 合并 provider]
+  REG --> LIB["~/.linmo/yzma-lib 共享"]
+  DL --> FS["~/.linmo/embedded-models"]
+  GW --> CFG[linmo.json 合并 provider]
 ```
 
 ### 多实例运行时
@@ -358,13 +358,13 @@ flowchart LR
 ## 九、常见问题
 
 **Q: 选了 A 模型但报错连接 B 模型的端口（connection refused）？**  
-A: 通常是 `openocta.json` 里 `openocta-embedded-chat.baseUrl` 仍指向旧模型的直连地址（如 `http://127.0.0.1:18902/v1`）。多模型并存后应使用 Gateway 代理 `http://127.0.0.1:{gatewayPort}/api/embedded-models/v1`，由请求体 `model` 字段路由。打开 **模型广场**（会自动同步配置）或重新 **启动/停止** 内嵌模型即可修复；升级后 Agent 也会强制走 Gateway 代理，即使配置尚未刷新。
+A: 通常是 `linmo.json` 里 `linmo-embedded-chat.baseUrl` 仍指向旧模型的直连地址（如 `http://127.0.0.1:18902/v1`）。多模型并存后应使用 Gateway 代理 `http://127.0.0.1:{gatewayPort}/api/embedded-models/v1`，由请求体 `model` 字段路由。打开 **模型广场**（会自动同步配置）或重新 **启动/停止** 内嵌模型即可修复；升级后 Agent 也会强制走 Gateway 代理，即使配置尚未刷新。
 
 **Q: Chat 和 Embedding 可以同时运行吗？**  
-A: 可以。OpenOcta 支持多个内嵌实例并行（例如同时运行一个 Chat 和一个 Embedding，或多个 Chat）。每个实例独立占用模型权重对应的内存；模型广场会在运行数 ≥1 时提示性能影响，≥2 时显示更强警告。
+A: 可以。Linmo 支持多个内嵌实例并行（例如同时运行一个 Chat 和一个 Embedding，或多个 Chat）。每个实例独立占用模型权重对应的内存；模型广场会在运行数 ≥1 时提示性能影响，≥2 时显示更强警告。
 
 **Q: 主聊天如何指定使用哪个内嵌模型？**  
-A: 在模型选择器中选择 `openocta-embedded-chat/<modelId>`（如 `openocta-embedded-chat/qwen3-0.6b`）。底层 OpenAI 请求会把 `model` 设为 modelId，Gateway 代理据此转发。切换模型只需改选择器，无需重启 Gateway。
+A: 在模型选择器中选择 `linmo-embedded-chat/<modelId>`（如 `linmo-embedded-chat/qwen3-0.6b`）。底层 OpenAI 请求会把 `model` 设为 modelId，Gateway 代理据此转发。切换模型只需改选择器，无需重启 Gateway。
 
 **Q: 为什么 provider 的 baseUrl 不是 `18902` 而是 Gateway 地址？**  
 A: 多模型并存时每个实例端口不同。统一走 `http://127.0.0.1:{gatewayPort}/api/embedded-models/v1`，由 `model` 字段路由，Agent 才能在同一条 provider 下挂多个 modelId。
@@ -373,7 +373,7 @@ A: 多模型并存时每个实例端口不同。统一走 `http://127.0.0.1:{gat
 A: 该模型尚无官方 GGUF 发布。Chat 推荐 Qwen3-0.6B；多模态推荐 Qwen2.5-VL-3B；向量推荐 Qwen3-Embedding-0.6B。
 
 **Q: 下载失败怎么办？**  
-A: 检查网络与 Hugging Face 可达性，点击「取消下载」后重试。推理库安装失败时可手动将 llama.cpp 库放入 `~/.openocta/yzma-lib/`。
+A: 检查网络与 Hugging Face 可达性，点击「取消下载」后重试。推理库安装失败时可手动将 llama.cpp 库放入 `~/.linmo/yzma-lib/`。
 
 **Q: Embedding 模型能否用于 Agent 对话？**  
 A: 不能。Embedding 模型仅实现 `/v1/embeddings`，调用 `/v1/chat/completions` 会返回 400。

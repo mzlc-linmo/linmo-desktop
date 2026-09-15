@@ -11,9 +11,9 @@ import (
 
 const (
 	// EmbeddedChatProviderKey is the models.providers key for embedded chat models.
-	EmbeddedChatProviderKey = "openocta-embedded-chat"
+	EmbeddedChatProviderKey = "linmo-embedded-chat"
 	// EmbeddedEmbeddingProviderKey is the models.providers key for embedded embedding models.
-	EmbeddedEmbeddingProviderKey = "openocta-embedded-embedding"
+	EmbeddedEmbeddingProviderKey = "linmo-embedded-embedding"
 )
 
 // IsEmbeddedProvider reports whether provider uses the embedded gateway proxy.
@@ -22,7 +22,7 @@ func IsEmbeddedProvider(provider string) bool {
 }
 
 // GatewayProxyBaseURL returns the OpenAI-compatible proxy base URL for embedded models.
-func GatewayProxyBaseURL(cfg *config.OpenOctaConfig, env func(string) string) string {
+func GatewayProxyBaseURL(cfg *config.LinmoConfig, env func(string) string) string {
 	if env == nil {
 		env = os.Getenv
 	}
@@ -98,7 +98,7 @@ func MergedProviderConfig(env func(string) string, gatewayPort int) map[string]i
 	return out
 }
 
-// PersistMergedProviderConfig writes all running embedded models into openocta.json.
+// PersistMergedProviderConfig writes all running embedded models into linmo.json.
 func PersistMergedProviderConfig(env func(string) string, gatewayPort int) error {
 	if env == nil {
 		env = os.Getenv

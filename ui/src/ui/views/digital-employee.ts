@@ -440,7 +440,7 @@ export function renderDigitalEmployeeCreateModal(props: DigitalEmployeeCreateMod
                 <div class="card-title" style="font-size: 13px; margin-bottom: 8px;">高级配置</div>
                 <div class="list-sub muted" style="font-size: 12px; margin-bottom: 8px;">
                   预估 ID：<code>${employeeIdPreview}</code>（基于名称生成，用于专属技能目录
-                  ~/.openocta/employee_skills/${employeeIdPreview}/...）
+                  ~/.linmo/employee_skills/${employeeIdPreview}/...）
                 </div>
                 <div class="field" style="margin-top: 8px;">
                   <span>MCP 配置（可选）</span>
@@ -724,7 +724,7 @@ export function renderDigitalEmployee(props: DigitalEmployeeProps) {
                             </div>
                             <div class="list-sub muted" style="font-size: 12px; margin-bottom: 8px;">
                               预估 ID：<code>${employeeIdPreview}</code>（基于名称生成，用于专属技能目录
-                              ~/.openocta/employee_skills/${employeeIdPreview}/...）
+                              ~/.linmo/employee_skills/${employeeIdPreview}/...）
                             </div>
                             <div class="field" style="margin-top: 8px;">
                               <span>MCP 配置（可选）</span>

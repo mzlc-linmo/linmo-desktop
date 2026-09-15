@@ -10,7 +10,7 @@ import (
 )
 
 // InitKnowledgeEngine preloads the shared Bleve index at process startup.
-func InitKnowledgeEngine(ctx context.Context, cfg *config.OpenOctaConfig) error {
+func InitKnowledgeEngine(ctx context.Context, cfg *config.LinmoConfig) error {
 	if ctx == nil {
 		ctx = context.Background()
 	}
@@ -29,7 +29,7 @@ func InitKnowledgeEngine(ctx context.Context, cfg *config.OpenOctaConfig) error 
 }
 
 // RebuildKnowledgeIndex rescans the vault and rebuilds the shared Bleve index on disk.
-func RebuildKnowledgeIndex(ctx context.Context, cfg *config.OpenOctaConfig, agentID string) (fileCount, chunkCount int, err error) {
+func RebuildKnowledgeIndex(ctx context.Context, cfg *config.LinmoConfig, agentID string) (fileCount, chunkCount int, err error) {
 	if ctx == nil {
 		ctx = context.Background()
 	}

@@ -15,16 +15,16 @@ VERSION="${VERSION#v}"
 
 echo "Setting version: $VERSION"
 
-# 更新 src/.env 中的 OPENOCTA_BUNDLED_VERSION
+# 更新 src/.env 中的 LIMNO_BUNDLED_VERSION
 if [[ -f src/.env ]]; then
-  if grep -q "^OPENOCTA_BUNDLED_VERSION=" src/.env; then
+  if grep -q "^LIMNO_BUNDLED_VERSION=" src/.env; then
     if [[ "$(uname)" = "Darwin" ]]; then
-      sed -i '' "s|^OPENOCTA_BUNDLED_VERSION=.*|OPENOCTA_BUNDLED_VERSION=$VERSION|" src/.env
+      sed -i '' "s|^LIMNO_BUNDLED_VERSION=.*|LIMNO_BUNDLED_VERSION=$VERSION|" src/.env
     else
-      sed -i "s|^OPENOCTA_BUNDLED_VERSION=.*|OPENOCTA_BUNDLED_VERSION=$VERSION|" src/.env
+      sed -i "s|^LIMNO_BUNDLED_VERSION=.*|LIMNO_BUNDLED_VERSION=$VERSION|" src/.env
     fi
   else
-    echo "OPENOCTA_BUNDLED_VERSION=$VERSION" >> src/.env
+    echo "LIMNO_BUNDLED_VERSION=$VERSION" >> src/.env
   fi
 fi
 
@@ -49,4 +49,4 @@ if [[ -f ui/package.json ]]; then
   fi
 fi
 
-echo "Done. OPENOCTA_BUNDLED_VERSION=$VERSION, ui/package.json version=v$VERSION"
+echo "Done. LIMNO_BUNDLED_VERSION=$VERSION, ui/package.json version=v$VERSION"

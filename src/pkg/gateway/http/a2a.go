@@ -14,7 +14,7 @@ func a2aAgentCardExposed(cfgEnabled bool) bool {
 	if cfgEnabled {
 		return true
 	}
-	v := strings.TrimSpace(os.Getenv("OPENOCTA_A2A_AGENT_CARD"))
+	v := strings.TrimSpace(os.Getenv("LIMNO_A2A_AGENT_CARD"))
 	return v == "1" || strings.EqualFold(v, "true") || strings.EqualFold(v, "yes")
 }
 
@@ -39,7 +39,7 @@ func (s *Server) handleWellKnownAgentJSON(w http.ResponseWriter, r *http.Request
 	baseURL := scheme + "://" + host
 	agentID := "main"
 	ac := card.Build(card.BuildOpts{
-		Name:    "OpenOcta",
+		Name:    "Linmo",
 		AgentID: agentID,
 		URL:     baseURL,
 	})

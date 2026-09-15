@@ -1,6 +1,6 @@
 # 知识库（Knowledge Vault）产品说明
 
-OpenOcta **知识库**是一套面向个人与团队的长期知识管理能力：你在本地用 **Obsidian**（或任意 Markdown 编辑器）维护笔记，Agent 在对话中通过检索工具按需引用这些笔记，以及当前会话中的历史内容。
+Linmo **知识库**是一套面向个人与团队的长期知识管理能力：你在本地用 **Obsidian**（或任意 Markdown 编辑器）维护笔记，Agent 在对话中通过检索工具按需引用这些笔记，以及当前会话中的历史内容。
 
 与旧版「隐藏大部分工具、仅暴露检索入口」的 Skylark 渐进模式不同，知识库采用 **Vault + 按需检索** 设计：**Agent 始终拥有完整工具能力**（bash、读写文件、MCP 等不被隐藏），知识通过 `memory_search` 与 `session_search` 两个专用工具拉取。
 
@@ -110,15 +110,15 @@ flowchart LR
 
 | 资源 | 位置 |
 |------|------|
-| **Vault**（你编辑的笔记） | 若配置了 `agents.defaults.workspace`：`<workspace>/vault/`；否则 `~/.openocta/vault/` |
-| **索引**（自动生成） | `~/.openocta/knowledge-index/` |
+| **Vault**（你编辑的笔记） | 若配置了 `agents.defaults.workspace`：`<workspace>/vault/`；否则 `~/.linmo/vault/` |
+| **索引**（自动生成） | `~/.linmo/knowledge-index/` |
 
 首次启动会自动创建 Vault，并写入 `README.md` 简要说明。
 
 ### 6.2 三步上手
 
 1. **找到 Vault 目录**  
-   查看 `openocta.json` 中 `agents.defaults.workspace`，在其下打开 `vault/`；或使用 `~/.openocta/vault/`。
+   查看 `linmo.json` 中 `agents.defaults.workspace`，在其下打开 `vault/`；或使用 `~/.linmo/vault/`。
 
 2. **写笔记**  
    新建任意 `.md` 文件，例如 `ops/k8s-troubleshoot.md`。支持子目录与 Obsidian 双链语法（索引以纯文本为准）。
@@ -134,7 +134,7 @@ flowchart LR
 
 > **注意**：`.obsidian/` 配置目录不会被索引，不影响检索内容。
 
-### 6.4 在 OpenOcta 界面中浏览
+### 6.4 在 Linmo 界面中浏览
 
 顶栏 **知识库** 标签页提供 Obsidian 风格工作台（文档 / 图谱 / 全文搜索 / 同步索引等）。**操作步骤与界面说明**见 **[知识库用户使用手册](./knowledge-vault-user-guide.md)**。
 
@@ -208,7 +208,7 @@ Knowledge Vault **始终启用**，配置中不再提供 `enabled` 开关。旧�
 
 ### 8.2 Workspace 与 Vault 关系
 
-配置了 `agents.defaults.workspace`（或单个 Agent 的 `workspace`）时，Vault 位于 **该 workspace 下的 `vault/`**，便于与项目代码同仓管理。未配置 workspace 时，Vault 落在状态目录 `~/.openocta/vault/`。
+配置了 `agents.defaults.workspace`（或单个 Agent 的 `workspace`）时，Vault 位于 **该 workspace 下的 `vault/`**，便于与项目代码同仓管理。未配置 workspace 时，Vault 落在状态目录 `~/.linmo/vault/`。
 
 ### 8.3 Embedding（可选）
 
@@ -219,13 +219,13 @@ Knowledge Vault **始终启用**，配置中不再提供 `enabled` 开关。旧�
 - `OPENAI_API_KEY`
 - `SKYLARK_EMBEDDING_API_KEY` / `SKYLARK_EMBEDDING_BASE_URL` / `SKYLARK_EMBEDDING_MODEL`
 
-也可写在 `openocta.json` 的 `env.vars` 中，由 Gateway 注入进程环境。
+也可写在 `linmo.json` 的 `env.vars` 中，由 Gateway 注入进程环境。
 
 ---
 
 ## 九、与其他记忆能力的关系
 
-OpenOcta 存在多种「记忆」相关能力，职责不同，**请勿混淆**：
+Linmo 存在多种「记忆」相关能力，职责不同，**请勿混淆**：
 
 | 能力 | 存储位置 | 维护者 | 用途 |
 |------|----------|--------|------|
@@ -240,13 +240,13 @@ OpenOcta 存在多种「记忆」相关能力，职责不同，**请勿混淆**�
 
 ## 十、从旧版迁移
 
-以下配置与能力已在知识库重构中 **移除**，写入 `openocta.json` 时会被忽略，无需手动清理：
+以下配置与能力已在知识库重构中 **移除**，写入 `linmo.json` 时会被忽略，无需手动清理：
 
 | 已移除 | 替代方案 |
 |--------|----------|
 | `agents.defaults.memorySearch.*`（SQLite FTS 等） | 使用 Vault + `memory_search` |
 | `agents.defaults.skylark.*` | 已删除渐进式工具隐藏；改用 Knowledge |
-| `OPENOCTA_SKYLARK` 环境变量 | 删除；Knowledge 默认开启 |
+| `LIMNO_SKYLARK` 环境变量 | 删除；Knowledge 默认开启 |
 | `memory_get` 工具 | 用 `memory_search` 获取片段；原文在 Vault 文件中 |
 | `retrieve_knowledge` / `retrieve_capabilities` | 分别由 `memory_search` / 全量工具列表替代 |
 
@@ -254,7 +254,7 @@ OpenOcta 存在多种「记忆」相关能力，职责不同，**请勿混淆**�
 
 1. 将原 `MEMORY.md`、`memory/*.md` 或 SQLite 索引来源的文档 **复制到 Vault 目录**。
 2. 删除配置中的 `memorySearch`、`skylark` 字段（可选）。
-3. 重启 Gateway / Agent，确认 `~/.openocta/knowledge-index/` 或 workspace 下 Vault 已生成索引。
+3. 重启 Gateway / Agent，确认 `~/.linmo/knowledge-index/` 或 workspace 下 Vault 已生成索引。
 4. 在 UI **Agents → 工具策略** 中确认 `group:memory` 包含 `memory_search` 与 `session_search`。
 
 ---
@@ -279,7 +279,7 @@ OpenOcta 存在多种「记忆」相关能力，职责不同，**请勿混淆**�
 
 ### Q5：和 UI 里「记忆 / Memory」插件配置是什么关系？
 
-`openocta.json` 顶层的 `memory` 块（如 QMD 等插件型记忆后端）与 **Knowledge Vault 独立**。Knowledge 由 `agents.defaults.knowledge` 控制；若同时使用插件记忆，请分别理解其文档，避免重复索引同一内容。
+`linmo.json` 顶层的 `memory` 块（如 QMD 等插件型记忆后端）与 **Knowledge Vault 独立**。Knowledge 由 `agents.defaults.knowledge` 控制；若同时使用插件记忆，请分别理解其文档，避免重复索引同一内容。
 
 ---
 
@@ -301,5 +301,5 @@ OpenOcta 存在多种「记忆」相关能力，职责不同，**请勿混淆**�
 - **[知识库用户使用手册](./knowledge-vault-user-guide.md)** — 界面操作、快捷键、同步索引、FAQ（**推荐终端用户阅读**）
 - [配置说明](./configuration.md) — Gateway 与 Agent 全局配置
 - [环境变量说明](./environment-variables.md) — 运行时环境变量
-- [工具说明](./tools.md) / [OpenOcta 扩展工具](./tools-openocta.md) — 工具总览
+- [工具说明](./tools.md) / [Linmo 扩展工具](./tools-linmo.md) — 工具总览
 - agentsdk-go [skylark.md / Knowledge API](https://github.com/stellarlinkco/agentsdk-go/blob/main/docs/skylark.md) — 底层 Bleve 引擎与 SDK 选项

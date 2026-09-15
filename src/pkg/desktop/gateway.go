@@ -23,17 +23,17 @@ const (
 )
 
 // StartGateway starts the gateway server for desktop mode.
-// Sets OPENOCTA_RUN_MODE=desktop, uses port 18900, and paths.ResolveStateDir.
+// Sets LIMNO_RUN_MODE=desktop, uses port 18900, and paths.ResolveStateDir.
 // Returns the server (for shutdown) and any startup error.
 func StartGateway() (*gatewayhttp.Server, error) {
 	env := func(k string) string { return os.Getenv(k) }
 
 	// Ensure desktop mode and port
-	os.Setenv("OPENOCTA_RUN_MODE", "desktop")
-	os.Setenv("OPENOCTA_GATEWAY_PORT", fmt.Sprintf("%d", DesktopPort))
+	os.Setenv("LIMNO_RUN_MODE", "desktop")
+	os.Setenv("LIMNO_GATEWAY_PORT", fmt.Sprintf("%d", DesktopPort))
 	// 桌面模式跳过 Cron，减少后台定时任务带来的不稳定。
-	// Channels（含企业微信 WebSocket）不再默认跳过，以便 App 内可用；若需关闭可手动设置 OPENOCTA_SKIP_CHANNELS=1。
-	//os.Setenv("OPENOCTA_SKIP_CRON", "1")
+	// Channels（含企业微信 WebSocket）不再默认跳过，以便 App 内可用；若需关闭可手动设置 LIMNO_SKIP_CHANNELS=1。
+	//os.Setenv("LIMNO_SKIP_CRON", "1")
 
 	// Resolve state dir (used by config, gateway, and logs)
 	stateDir := paths.ResolveStateDir(env)
@@ -52,7 +52,7 @@ func StartGateway() (*gatewayhttp.Server, error) {
 	}
 
 	// Init global logger: console + rolling file in state dir
-	os.Setenv("OPENOCTA_LOG_DIR", logDir)
+	os.Setenv("LIMNO_LOG_DIR", logDir)
 	opts := logging.GlobalOpts{LogDir: logDir, Level: logging.LevelInfo, ConsoleLevel: logging.LevelTrace}
 	logging.InitGlobal(logDir, opts)
 	logging.RedirectStdLog(logging.LevelTrace)
@@ -106,5 +106,5 @@ func WaitForHealthy(ctx context.Context, timeout time.Duration) error {
 		}
 		time.Sleep(100 * time.Millisecond)
 	}
-	return fmt.Errorf("gateway not healthy within %v (port %d may be in use, check ~/.openocta/logs/)", timeout, DesktopPort)
+	return fmt.Errorf("gateway not healthy within %v (port %d may be in use, check ~/.linmo/logs/)", timeout, DesktopPort)
 }

@@ -14,7 +14,7 @@ const snapshotScript = `() => {
     const rect = el.getBoundingClientRect();
     if (rect.width <= 0 || rect.height <= 0) continue;
     ref += 1;
-    el.setAttribute("data-openocta-ref", String(ref));
+    el.setAttribute("data-linmo-ref", String(ref));
     const tag = el.tagName.toLowerCase();
     const role = el.getAttribute("role") || "";
     const name = (el.getAttribute("aria-label") || el.getAttribute("placeholder") || el.innerText || el.value || "").replace(/\s+/g, " ").trim().slice(0, 120);

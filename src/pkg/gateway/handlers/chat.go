@@ -1163,7 +1163,7 @@ func isCronSessionKey(sessionKey string) bool {
 }
 
 // writeCronSessionResult 将 cron 会话的最终结果写入
-// ~/.openocta/cron/runs/<sessionId>.jsonl，单行 JSON 结构与 cron.run 日志保持一致：
+// ~/.linmo/cron/runs/<sessionId>.jsonl，单行 JSON 结构与 cron.run 日志保持一致：
 // {"ts":..., "jobId":..., "action":"finished", "status":"ok", "summary": "...", "sessionId": "...", "sessionKey": "...", "runAtMs":..., "durationMs":...}
 // 注意：这里只做 best-effort 写入，任何错误只记录日志而不会向上冒泡。
 func writeCronSessionResult(sessionKey, sessionID, summary, status string, runAtMs, durationMs int64) {
@@ -1290,7 +1290,7 @@ func broadcastAgentEvent(ctx *Context, runId string, sessionKey string, stream s
 // 对于普通会话，直接基于 workspace 构建；对于数字员工会话（employee- 前缀），会优先加载该员工专属 skills。
 // 返回值形状与 SessionEntry.skillsSnapshot 一致（prompt, skills, resolvedSkills, version）。
 // Returns nil on error or when no skills.
-func buildSkillsSnapshotForSession(projectRoot string, cfg *config.OpenOctaConfig, sessionKey string) interface{} {
+func buildSkillsSnapshotForSession(projectRoot string, cfg *config.LinmoConfig, sessionKey string) interface{} {
 	if employeeID := parseEmployeeIDFromSessionKey(sessionKey); employeeID != "" {
 		if snap := buildSkillsSnapshotForEmployee(projectRoot, cfg, employeeID); snap != nil {
 			return snap
@@ -1339,9 +1339,9 @@ func buildSkillsSnapshotForSession(projectRoot string, cfg *config.OpenOctaConfi
 }
 
 // buildSkillsSnapshotForEmployee 针对数字员工会话构建 skills 快照：
-// 1) ~/.openocta/employees/<employeeID>/skills 下的用户自建 skills
+// 1) ~/.linmo/employees/<employeeID>/skills 下的用户自建 skills
 // 2) manifest.skillIds 中引用的全局 skills（基于 workspace 加载并按名称过滤）
-func buildSkillsSnapshotForEmployee(projectRoot string, cfg *config.OpenOctaConfig, employeeID string) interface{} {
+func buildSkillsSnapshotForEmployee(projectRoot string, cfg *config.LinmoConfig, employeeID string) interface{} {
 	entries := runtime.LoadEmployeeSkillEntries(projectRoot, cfg, employeeID, os.Getenv)
 	if len(entries) == 0 {
 		return nil
@@ -1386,7 +1386,7 @@ func buildSkillsSnapshotForEmployee(projectRoot string, cfg *config.OpenOctaConf
 
 // buildMCPForSession 为会话构建 MCP 规格列表。
 // 对于数字员工会话（employee- 前缀），会合并全局 mcp.servers 与员工 manifest.mcpServers（同 key 时员工覆盖）。
-func buildMCPForSession(sessionKey string, cfg *config.OpenOctaConfig) map[string]config.McpServerEntry {
+func buildMCPForSession(sessionKey string, cfg *config.LinmoConfig) map[string]config.McpServerEntry {
 	merged := &config.McpConfig{Servers: make(map[string]config.McpServerEntry)}
 	if cfg != nil && cfg.Mcp != nil {
 		for k, v := range cfg.Mcp.Servers {
@@ -2021,7 +2021,7 @@ func ChatSendHandler(opts HandlerOpts) error {
 		if cfg != nil && cfg.Env != nil && cfg.Env.Vars != nil {
 			chatLog.Info("chat.send timeout config: sessionKey=%s timeout=%s vars=%v",
 				sessionKey,
-				cfg.Env.Vars["OPENOCTA_AGENT_RUN_TIMEOUT"],
+				cfg.Env.Vars["LIMNO_AGENT_RUN_TIMEOUT"],
 				cfg.Env.Vars)
 		} else {
 			chatLog.Info("chat.send timeout config: sessionKey=%s cfgNil=%v envNil=%v varsNil=%v",
@@ -2030,7 +2030,7 @@ func ChatSendHandler(opts HandlerOpts) error {
 		if d := runtime.DefaultAgentRunDuration(os.Getenv, cfg); d > 0 {
 			timeoutMs = int(d / time.Millisecond)
 		} else {
-			timeoutMs = 600000 // OPENOCTA_AGENT_RUN_TIMEOUT=0 等：回退 10 分钟
+			timeoutMs = 600000 // LIMNO_AGENT_RUN_TIMEOUT=0 等：回退 10 分钟
 		}
 	}
 
@@ -2782,7 +2782,7 @@ func ChatSendHandler(opts HandlerOpts) error {
 					ts := time.Now().UTC().Format(time.RFC3339)
 					tsMs := time.Now().UnixMilli()
 					toolResultContent := []map[string]interface{}{
-						{"type": "text", "text": tools.StripOpenOctaAttachmentsMarker(outputStr)},
+						{"type": "text", "text": tools.StripLinmoAttachmentsMarker(outputStr)},
 					}
 					if !isErr {
 						for _, block := range tools.AttachmentBlocksFromDeliverableToolOutput(evt.Name, outputStr, projectRoot) {

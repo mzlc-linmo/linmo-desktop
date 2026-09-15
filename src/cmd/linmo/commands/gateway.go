@@ -33,7 +33,7 @@ func init() {
 var gatewayCmd = &cobra.Command{
 	Use:   "gateway",
 	Short: "Gateway control",
-	Long:  "Control the OpenOcta gateway (run, stop, install, restart, status, health).",
+	Long:  "Control the Linmo gateway (run, stop, install, restart, status, health).",
 }
 
 var gatewayPort int
@@ -80,7 +80,7 @@ var gatewayRunCmd = &cobra.Command{
 
 func runGateway(cmd *cobra.Command, _ []string) error {
 	env := func(k string) string { return os.Getenv(k) }
-	// Init global logger: console + /tmp/openocta/openocta-YYYY-MM-DD.log (JSON, daily rolling)
+	// Init global logger: console + /tmp/linmo/linmo-YYYY-MM-DD.log (JSON, daily rolling)
 	settings := logging.GetResolvedLoggerSettings(env, "")
 	logDir := filepath.Dir(settings.File)
 	opts := logging.GlobalOpts{LogDir: logDir, Level: logging.LevelInfo, ConsoleLevel: logging.LevelInfo}
@@ -93,7 +93,7 @@ func runGateway(cmd *cobra.Command, _ []string) error {
 	// so logs from dependencies using the default logger are captured consistently.
 	logging.RedirectStdLog(logging.LevelInfo)
 
-	appinstance.KillOtherOpenOctaProcesses()
+	appinstance.KillOtherLinmoProcesses()
 
 	port := paths.ResolveGatewayPort(nil, env)
 	if gatewayPort > 0 {
@@ -114,7 +114,7 @@ func runGateway(cmd *cobra.Command, _ []string) error {
 	}
 	verbose, _ := cmd.Flags().GetBool("verbose")
 	if verbose {
-		os.Setenv("OPENOCTA_VERBOSE", "1")
+		os.Setenv("LIMNO_VERBOSE", "1")
 	}
 
 	cfg, cfgErr := config.Load(env)
@@ -128,7 +128,7 @@ func runGateway(cmd *cobra.Command, _ []string) error {
 	runMode := paths.ResolveRunMode(env, cfgMode)
 	addr := paths.ResolveGatewayAddr(port, runMode)
 
-	cmd.Printf("Starting Gateway on %s (mode=%s, OpenOcta %s)\n", addr, runMode, version.Version)
+	cmd.Printf("Starting Gateway on %s (mode=%s, Linmo %s)\n", addr, runMode, version.Version)
 	logging.Info("Gateway starting addr=%s mode=%s version=%s", addr, runMode, version.Version)
 	srv := gatewayhttp.NewServer(addr, version.Version)
 
@@ -170,10 +170,10 @@ func runGatewayStatus(cmd *cobra.Command, _ []string) error {
 	token, _ := cmd.Flags().GetString("token")
 	password, _ := cmd.Flags().GetString("password")
 	if token == "" {
-		token = os.Getenv("OPENOCTA_GATEWAY_TOKEN")
+		token = os.Getenv("LIMNO_GATEWAY_TOKEN")
 	}
 	if password == "" {
-		password = os.Getenv("OPENOCTA_GATEWAY_PASSWORD")
+		password = os.Getenv("LIMNO_GATEWAY_PASSWORD")
 	}
 
 	// Service status (launchd on macOS)
@@ -256,10 +256,10 @@ func runGatewayHealth(cmd *cobra.Command, _ []string) error {
 	token, _ := cmd.Flags().GetString("token")
 	password, _ := cmd.Flags().GetString("password")
 	if token == "" {
-		token = os.Getenv("OPENOCTA_GATEWAY_TOKEN")
+		token = os.Getenv("LIMNO_GATEWAY_TOKEN")
 	}
 	if password == "" {
-		password = os.Getenv("OPENOCTA_GATEWAY_PASSWORD")
+		password = os.Getenv("LIMNO_GATEWAY_PASSWORD")
 	}
 
 	ctx, cancel := context.WithTimeout(cmd.Context(), 10*time.Second)
@@ -316,10 +316,10 @@ func runGatewayCall(cmd *cobra.Command, args []string) error {
 	token, _ := cmd.Flags().GetString("token")
 	password, _ := cmd.Flags().GetString("password")
 	if token == "" {
-		token = os.Getenv("OPENOCTA_GATEWAY_TOKEN")
+		token = os.Getenv("LIMNO_GATEWAY_TOKEN")
 	}
 	if password == "" {
-		password = os.Getenv("OPENOCTA_GATEWAY_PASSWORD")
+		password = os.Getenv("LIMNO_GATEWAY_PASSWORD")
 	}
 
 	var params interface{}
@@ -410,14 +410,14 @@ func runGatewayInstall(cmd *cobra.Command, _ []string) error {
 		Environment      map[string]string
 	}{
 		Label:            label,
-		Comment:          "OpenOcta Gateway",
+		Comment:          "Linmo Gateway",
 		ProgramArguments: []string{exe, "gateway", "run", "--port", strconv.Itoa(port)},
 		WorkingDirectory: filepath.Dir(stateDir),
 		StdoutPath:       stdoutPath,
 		StderrPath:       stderrPath,
 		Environment: map[string]string{
-			"OPENOCTA_CONFIG_PATH": configPath,
-			"OPENOCTA_STATE_DIR":   stateDir,
+			"LIMNO_CONFIG_PATH": configPath,
+			"LIMNO_STATE_DIR":   stateDir,
 		},
 	})
 
@@ -428,7 +428,7 @@ func runGatewayInstall(cmd *cobra.Command, _ []string) error {
 	// Unload if already running, then bootstrap
 	_ = daemon.Bootout(label)
 	if err := daemon.Bootstrap(label); err != nil {
-		cmd.Printf("Plist written; start with: openocta gateway restart\n")
+		cmd.Printf("Plist written; start with: linmo gateway restart\n")
 		return nil
 	}
 	cmd.Printf("Gateway service started.\n")
@@ -469,7 +469,7 @@ func runGatewayRestart(cmd *cobra.Command, _ []string) error {
 	label := daemon.GatewayLaunchAgentLabel
 	plistPath := daemon.ResolvePlistPath(label)
 	if _, err := os.Stat(plistPath); os.IsNotExist(err) {
-		return fmt.Errorf("gateway not installed; run openocta gateway install first")
+		return fmt.Errorf("gateway not installed; run linmo gateway install first")
 	}
 	loaded, _ := daemon.IsLoaded(label)
 	if !loaded {

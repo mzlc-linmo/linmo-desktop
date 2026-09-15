@@ -1,11 +1,11 @@
 # 工具系统总览（Tools）
 
-OpenOcta 的工具系统基于 [`agentsdk-go` 的 Tool 抽象](https://github.com/stellarlinkco/agentsdk-go/tree/main/docs)，并结合自身的 Gateway 与调度能力，向大模型暴露了一套统一的「可调用工具」界面。
+Linmo 的工具系统基于 [`agentsdk-go` 的 Tool 抽象](https://github.com/stellarlinkco/agentsdk-go/tree/main/docs)，并结合自身的 Gateway 与调度能力，向大模型暴露了一套统一的「可调用工具」界面。
 
 在运行时，工具主要分为三类：
 
 1. **内置通用工具**（文件/搜索/Web/任务等）  
-2. **OpenOcta 扩展工具**（cron、sessions、gateway_config、echo 等）  
+2. **Linmo 扩展工具**（cron、sessions、gateway_config、echo 等）  
 3. **用户自定义工具**（根据项目需求扩展）
 
 ---
@@ -32,7 +32,7 @@ tools := BuiltinTools(projectRoot)
 
 ---
 
-## 二、OpenOcta 扩展工具
+## 二、Linmo 扩展工具
 
 定义于 `pkg/agent/tools`，用于桥接 Gateway 与内部能力：
 
@@ -45,7 +45,7 @@ tools := BuiltinTools(projectRoot)
 
 详细说明见：
 
-- `tools-openocta.md`
+- `tools-linmo.md`
 
 ---
 
@@ -81,7 +81,7 @@ type Tool interface {
 
 具体示例与代码片段，请参考：
 
-- `tools-openocta.md` 中的「如何自定义一个工具并注册」小节。
+- `tools-linmo.md` 中的「如何自定义一个工具并注册」小节。
 
 ---
 

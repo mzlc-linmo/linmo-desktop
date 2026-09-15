@@ -1,4 +1,4 @@
-# OpenOcta 前后端一体镜像（单一二进制，前端与配置已嵌入）
+# Linmo 前后端一体镜像（单一二进制，前端与配置已嵌入）
 # 多阶段：1) 构建 Control UI  2) 构建 Go 二进制（含 embed） 3) 最终镜像
 
 # ------------------------------------------------------------------------------
@@ -27,12 +27,12 @@ RUN go mod download
 COPY src/ ./
 # 从 Stage 1 复制前端构建产物（vite 输出到 ../src/embed/frontend，即 /app/src/embed/frontend）
 COPY --from=ui-builder /app/src/embed/frontend ./embed/frontend
-COPY src/config-schema.json src/openocta.json.example src/.env ./embed/
+COPY src/config-schema.json src/linmo.json.example src/.env ./embed/
 
 ARG VERSION=0.0.1-dev
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
     -ldflags "-s -w -X github.com/openocta/openocta/pkg/version.Version=${VERSION}" \
-    -o /openocta ./cmd/openocta
+    -o /linmo ./cmd/linmo
 
 # ------------------------------------------------------------------------------
 # Stage 3: 最终运行镜像（单一二进制）
@@ -40,11 +40,11 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
 FROM alpine:3.20
 RUN apk add --no-cache ca-certificates tzdata
 
-COPY --from=go-builder /openocta /usr/local/bin/openocta
+COPY --from=go-builder /linmo /usr/local/bin/linmo
 
-ENV OPENOCTA_STATE_DIR=/root/.openocta
+ENV LIMNO_STATE_DIR=/root/.linmo
 
 EXPOSE 18900
 
-ENTRYPOINT ["openocta"]
+ENTRYPOINT ["linmo"]
 CMD ["gateway", "run", "--port", "18900"]

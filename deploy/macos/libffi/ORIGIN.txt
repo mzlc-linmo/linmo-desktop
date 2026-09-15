@@ -1,8 +1,8 @@
 libffi.8.dylib is copied from github.com/jupiterrider/ffi@v0.6.0
-(assets/libffi/darwin_*), which OpenOcta pulls in via github.com/hybridgroup/yzma.
+(assets/libffi/darwin_*), which Linmo pulls in via github.com/hybridgroup/yzma.
 
-Bundled into OpenOcta.app/Contents/Frameworks and codesigned with the
-Developer ID identity during `OPENOCTA_GON=1` packaging so Hardened Runtime
+Bundled into Linmo.app/Contents/Frameworks and codesigned with the
+Developer ID identity during `LIMNO_GON=1` packaging so Hardened Runtime
 / AMFI can load it (runtime extract to ~/Library/Caches is unsigned).
 
 When upgrading jupiterrider/ffi, refresh these dylibs and keep

@@ -1,23 +1,23 @@
 <p align="center">
-  <img src="./imgs/readmePIC/QQ20260710-140337.png" alt="OpenOcta IT Ops Agent" width="250" height="320">
+  <img src="./imgs/readmePIC/QQ20260710-140337.png" alt="Linmo IT Ops Agent" width="250" height="320">
 </p>
 
 <p align="center">
   <a href="https://github.com/openocta/openocta/stargazers">
-    <img src="https://img.shields.io/github/stars/openocta/openocta?style=flat&logo=github" alt="GitHub stars">
+    <img src="https://img.shields.io/github/stars/linmo/linmo?style=flat&logo=github" alt="GitHub stars">
   </a>
   <a href="https://github.com/openocta/openocta/forks">
-    <img src="https://img.shields.io/github/forks/openocta/openocta?style=flat&logo=github" alt="GitHub forks">
+    <img src="https://img.shields.io/github/forks/linmo/linmo?style=flat&logo=github" alt="GitHub forks">
   </a>
   <a href="https://github.com/openocta/openocta/releases/latest">
-    <img src="https://img.shields.io/github/v/release/openocta/openocta?label=release" alt="Latest release">
+    <img src="https://img.shields.io/github/v/release/linmo/linmo?label=release" alt="Latest release">
   </a>
   <img src="https://img.shields.io/badge/Go-1.24+-00ADD8?logo=go&logoColor=white" alt="Go 1.24+">
   <img src="https://img.shields.io/badge/AIOps-IT%20Ops%20Agent-0A7B3E" alt="AIOps IT Ops Agent">
   <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="Apache-2.0">
 </p>
 
-<h1 align="center">OpenOcta — AIOps Agent (ITOps AIAgent)</h1>
+<h1 align="center">Linmo — AIOps Agent (ITOps AIAgent)</h1>
 
 <p align="center">
   <b>Mission: the strongest ITOps Agent</b><br/>
@@ -25,9 +25,9 @@
 </p>
 
 <p align="center">
-  <a href="https://openocta.com">Website</a> ·
-  <a href="https://openocta.com/#download">Download</a> ·
-  <a href="https://resource.openocta.com">Skills Marketplace</a> ·
+  <a href="https://linmo.xin">Website</a> ·
+  <a href="https://linmo.xin/#download">Download</a> ·
+  <a href="https://resource.linmo.xin">Skills Marketplace</a> ·
   <a href="./docs/architecture.md">Architecture</a> ·
   <a href="README.cn.md">简体中文</a>
 </p>
@@ -38,7 +38,7 @@
 
 ## One-line positioning
 
-**OpenOcta is a desktop IT Ops Agent for Windows / macOS**: ops engineers install it locally with a double-click and assign work in natural language. The Agent connects your monitoring, logs, cloud platforms, databases, and script toolchains to run **application / server / network / desktop / DB / cloud** jobs across the stack — **installed on Windows / Mac, not limited to operating only Windows / Mac**.
+**Linmo is a desktop IT Ops Agent for Windows / macOS**: ops engineers install it locally with a double-click and assign work in natural language. The Agent connects your monitoring, logs, cloud platforms, databases, and script toolchains to run **application / server / network / desktop / DB / cloud** jobs across the stack — **installed on Windows / Mac, not limited to operating only Windows / Mac**.
 
 > The goal is not “yet another chatbot,” but AI inside a real ops loop: **auto inspection → alert analysis → intelligent data Q&A → remediation advice / execution**.
 
@@ -52,7 +52,7 @@
 
 General Agents are strong at “writing docs, editing code, chatting.” Ops needs something that **connects to live tooling, understands alert context, and closes the inspection & troubleshooting loop**.
 
-| Ops pain | How OpenOcta puts AI to work |
+| Ops pain | How Linmo puts AI to work |
 |----------|------------------------------|
 | Alert storms, hard root-cause | Aggregate alerts + correlate metrics / logs / changes; output root-cause hypotheses and remediation steps |
 | Manual inspections, hard to retain results | Define inspection tasks in natural language; run on schedule and summarize risk lists |
@@ -101,7 +101,7 @@ General Agents are strong at “writing docs, editing code, chatting.” Ops nee
 
 🔧 **Fully self-developed Go runtime** — Native Gateway, Agent, and Channels; single binary with embedded Control UI.
 
-🧩 **Extensible Skills & MCP** — Built-in tools + MCP protocol + [skills marketplace](https://resource.openocta.com); keep adding capabilities for your enterprise stack.
+🧩 **Extensible Skills & MCP** — Built-in tools + MCP protocol + [skills marketplace](https://resource.linmo.xin); keep adding capabilities for your enterprise stack.
 
 ---
 
@@ -120,9 +120,9 @@ General Agents are strong at “writing docs, editing code, chatting.” Ops nee
 
 ## vs. OpenClaw & Hermes
 
-OpenOcta is built around **IT ops as the primary domain**: desktop double-click install, full client UI, ops toolchain adapters, and China-local IM channels — putting AI into real inspection, alerting, and data-Q&A work. Versus OpenClaw (Node / self-hosted Gateway) and Hermes (Python / CLI-oriented), OpenOcta ships a **self-developed Go single binary** runtime with built-in **L4 autonomous evolution** and **Knowledge Vault**.
+Linmo is built around **IT ops as the primary domain**: desktop double-click install, full client UI, ops toolchain adapters, and China-local IM channels — putting AI into real inspection, alerting, and data-Q&A work. Versus OpenClaw (Node / self-hosted Gateway) and Hermes (Python / CLI-oriented), Linmo ships a **self-developed Go single binary** runtime with built-in **L4 autonomous evolution** and **Knowledge Vault**.
 
-| | OpenOcta | OpenClaw | Hermes |
+| | Linmo | OpenClaw | Hermes |
 |---|:---:|:---:|:---:|
 | Positioning | **IT Ops Agent / AIOps Agent** | General Gateway Agent | General CLI Agent |
 | Install form | Windows / macOS double-click | CLI deploy | CLI deploy |
@@ -140,14 +140,14 @@ OpenOcta is built around **IT ops as the primary domain**: desktop double-click 
 
 ## Feature gallery
 
-OpenOcta puts inspection, alerting, data Q&A, skills, and knowledge retention into one desktop client — so the ops loop is installable, connectable, and usable.
+Linmo puts inspection, alerting, data Q&A, skills, and knowledge retention into one desktop client — so the ops loop is installable, connectable, and usable.
 
 #### Agent chat
 
 Assign inspection, alert analysis, data Q&A, and remediation in natural language. The Agent correlates context and calls your ops toolchain.
 
 <p align="left">
-  <img alt="OpenOcta Agent chat for natural-language inspection, alert analysis, data Q&A, and remediation" src="./imgs/readmePIC/QQ20260709-211128.png" width="900">
+  <img alt="Linmo Agent chat for natural-language inspection, alert analysis, data Q&A, and remediation" src="./imgs/readmePIC/QQ20260709-211128.png" width="900">
 </p>
 
 Learn more: [Scenarios](./docs/scenarios.md) · [Architecture](./docs/architecture.md)
@@ -157,7 +157,7 @@ Learn more: [Scenarios](./docs/scenarios.md) · [Architecture](./docs/architectu
 One-click install role-based digital employees such as Zabbix SRE, Prometheus, and MySQL DBA — compose capabilities by scenario instead of assembling prompts from scratch.
 
 <p align="left">
-  <img alt="OpenOcta employee marketplace for one-click ops digital employees" src="./imgs/readmePIC/QQ20260709-211216.png" width="900">
+  <img alt="Linmo employee marketplace for one-click ops digital employees" src="./imgs/readmePIC/QQ20260709-211216.png" width="900">
 </p>
 
 Learn more: [Digital employees](./docs/digital-employees.md) · [Built-in employees](./docs/builtin-employees.md)
@@ -167,17 +167,17 @@ Learn more: [Digital employees](./docs/digital-employees.md) · [Built-in employ
 Enable 766+ Skills across monitoring, DevOps, and databases to connect your live stack, and keep extending via MCP.
 
 <p align="left">
-  <img alt="OpenOcta Skills library across monitoring, DevOps, and databases" src="./imgs/readmePIC/QQ20260709-211148.png" width="900">
+  <img alt="Linmo Skills library across monitoring, DevOps, and databases" src="./imgs/readmePIC/QQ20260709-211148.png" width="900">
 </p>
 
-Learn more: [Skills](./docs/skills.md) · [MCP configuration](./docs/mcp-configuration.md) · [Skills marketplace](https://resource.openocta.com)
+Learn more: [Skills](./docs/skills.md) · [MCP configuration](./docs/mcp-configuration.md) · [Skills marketplace](https://resource.linmo.xin)
 
 #### Knowledge Vault
 
 Retain Runbooks, standards, and historical cases for semantic retrieval — so the Agent learns your environment and remediation preferences over time.
 
 <p align="left">
-  <img alt="OpenOcta Knowledge Vault for Runbooks and historical case retrieval" src="./imgs/readmePIC/QQ20260709-211804.png" width="900">
+  <img alt="Linmo Knowledge Vault for Runbooks and historical case retrieval" src="./imgs/readmePIC/QQ20260709-211804.png" width="900">
 </p>
 
 Learn more: [Knowledge Vault](./docs/knowledge-vault.md) · [User guide](./docs/knowledge-vault-user-guide.md)
@@ -187,7 +187,7 @@ Learn more: [Knowledge Vault](./docs/knowledge-vault.md) · [User guide](./docs/
 Connect public or local models for intranet deployment and data-compliance needs. First launch can finish setup through the guided wizard.
 
 <p align="left">
-  <img alt="OpenOcta model configuration for public and local model access" src="./imgs/readmePIC/QQ20260709-211248.png" width="900">
+  <img alt="Linmo model configuration for public and local model access" src="./imgs/readmePIC/QQ20260709-211248.png" width="900">
 </p>
 
 Learn more: [Model providers](./docs/model-providers.md)
@@ -197,12 +197,12 @@ Learn more: [Model providers](./docs/model-providers.md)
 Windows / Mac quick start and hands-on ops courses — so frontline teams can go from install to real work in about 30 seconds.
 
 <p align="left">
-  <img alt="OpenOcta tutorials for Windows / Mac quick start and hands-on ops" src="./imgs/readmePIC/QQ20260709-211257.png" width="900">
+  <img alt="Linmo tutorials for Windows / Mac quick start and hands-on ops" src="./imgs/readmePIC/QQ20260709-211257.png" width="900">
 </p>
 
-Learn more: [Website](https://openocta.com) · [Start in 30 seconds](#start-in-30-seconds-windows--macos)
+Learn more: [Website](https://linmo.xin) · [Start in 30 seconds](#start-in-30-seconds-windows--macos)
 
-Also includes: [**Tools**](./docs/tools.md), [**scheduled inspection / Cron**](./docs/configuration.md), [**IM channels**](./docs/channels-overview.md), and [**Webhooks**](./docs/webhooks.md). More capabilities on [openocta.com](https://openocta.com).
+Also includes: [**Tools**](./docs/tools.md), [**scheduled inspection / Cron**](./docs/configuration.md), [**IM channels**](./docs/channels-overview.md), and [**Webhooks**](./docs/webhooks.md). More capabilities on [linmo.xin](https://linmo.xin).
 
 ---
 
@@ -239,18 +239,18 @@ Also includes: [**Tools**](./docs/tools.md), [**scheduled inspection / Cron**](.
 **Cloud ops** — Cloud resources, permissions, billing, and autoscaling triage.  
 *Example: “List cloud resources with abnormal cost growth this week and explain likely causes.”*
 
-More cases: [openocta.com/cases](https://openocta.com/cases) · [scenario docs](./docs/scenarios.md)
+More cases: [linmo.xin/cases](https://linmo.xin/cases) · [scenario docs](./docs/scenarios.md)
 
 ---
 
 ## Start in 30 seconds (Windows / macOS)
 
-1. **Download** — [GitHub Releases](https://github.com/openocta/openocta/releases/latest) or the [openocta.com download page](https://openocta.com/#download)
+1. **Download** — [GitHub Releases](https://github.com/openocta/openocta/releases/latest) or the [linmo.xin download page](https://linmo.xin/#download)
 2. **Install & open** — Double-click to install the desktop client (~30 seconds)
 3. **Connect a model → start ops chat** — Describe tasks in **Messages**; then install Zabbix / Prometheus Skills or digital employees as needed to connect your live toolchain
 
 <p align="left">
-  <img src="./imgs/screenshots/demo.gif" width="720" alt="OpenOcta IT Ops Agent demo">
+  <img src="./imgs/screenshots/demo.gif" width="720" alt="Linmo IT Ops Agent demo">
   <br/>
   <sub>Product demo · Messages → Skills → Knowledge Vault → Ops Agent (to be added)</sub>
 </p>
@@ -265,15 +265,15 @@ After install, connect a large language model before chatting. Choose either pat
 Open the client **Models** tab, or follow the first-run **setup wizard**, enter an API Key, and pick a model.
 
 <p align="left">
-  <img src="./imgs/readmePIC/QQ20260709-220423.png" width="780" alt="OpenOcta model setup wizard">
+  <img src="./imgs/readmePIC/QQ20260709-220423.png" width="780" alt="Linmo model setup wizard">
 </p>
 
 **Option B — Edit the config file**
 
 | Platform | Config path |
 |----------|-------------|
-| macOS | `~/.openocta/openocta.json` |
-| Windows | `%APPDATA%\openocta\openocta.json` |
+| macOS | `~/.linmo/linmo.json` |
+| Windows | `%APPDATA%\linmo\linmo.json` |
 
 Minimal example ([Moonshot](https://platform.moonshot.cn/); for DeepSeek / Qwen / Doubao and more, see [model provider docs](./docs/model-providers.md)):
 
@@ -302,7 +302,7 @@ After connecting monitoring, try:
 
 ---
 
-## Why choose OpenOcta
+## Why choose Linmo
 
 | | |
 |---|---|
@@ -321,39 +321,39 @@ After connecting monitoring, try:
 
 ## Download & install
 
-Visit the **[openocta.com download page](https://openocta.com/#download)**:
+Visit the **[linmo.xin download page](https://linmo.xin/#download)**:
 
 | Platform | Package |
 |----------|---------|
-| Windows | `OpenOcta-amd64-installer.exe` |
-| macOS (Apple Silicon) | `OpenOcta-arm64.dmg` |
-| macOS (Intel) | `OpenOcta-amd64.dmg` |
+| Windows | `Linmo-amd64-installer.exe` |
+| macOS (Apple Silicon) | `Linmo-arm64.dmg` |
+| macOS (Intel) | `Linmo-amd64.dmg` |
 
 | Platform | Default config directory |
 |----------|--------------------------|
-| macOS | `~/.openocta/openocta.json` |
-| Windows | `%APPDATA%\openocta\openocta.json` |
+| macOS | `~/.linmo/linmo.json` |
+| Windows | `%APPDATA%\linmo\linmo.json` |
 
 macOS: drag from the `.dmg` into Applications; see [`deploy/dist-README.md`](./deploy/dist-README.md).
 
 **Online resources**
 
-- Website: https://openocta.com  
-- Skills / MCP / digital employee marketplace: https://resource.openocta.com  
-- Enterprise AMC: https://amc.openocta.com  
+- Website: https://linmo.xin  
+- Skills / MCP / digital employee marketplace: https://resource.linmo.xin  
+- Enterprise AMC: https://amc.linmo.xin  
 
 ---
 
 ## FAQ
 
-**Q: What is OpenOcta?**  
-A: OpenOcta is an open-source **IT Ops Agent / AIOps Agent**: install on Windows / macOS desktops and use natural language for inspection, alert analysis, intelligent data Q&A, and other ops jobs.
+**Q: What is Linmo?**  
+A: Linmo is an open-source **IT Ops Agent / AIOps Agent**: install on Windows / macOS desktops and use natural language for inspection, alert analysis, intelligent data Q&A, and other ops jobs.
 
 **Q: Does it only operate Windows / Mac?**  
 A: **No.** The client installs on Windows / Mac; work targets can be Linux servers, Kubernetes, databases, networks, cloud resources, and other full-stack IT assets.
 
 **Q: How is it different from ChatGPT / general Agents?**  
-A: General Agents lean toward chat and office work; OpenOcta targets the ops closed loop — toolchain integration (Zabbix, Prometheus, etc.), digital employees, scheduled inspection, IM on-call, and local knowledge retention.
+A: General Agents lean toward chat and office work; Linmo targets the ops closed loop — toolchain integration (Zabbix, Prometheus, etc.), digital employees, scheduled inspection, IM on-call, and local knowledge retention.
 
 **Q: Which ops systems can it connect to?**  
 A: Extend via Skills, MCP, and digital employees; common ones include Zabbix, Prometheus, Grafana, Kubernetes, MySQL/PostgreSQL, Ansible, ELK/Loki, and cloud APIs — keep adding for your environment.
@@ -362,7 +362,7 @@ A: Extend via Skills, MCP, and digital employees; common ones include Zabbix, Pr
 A: Local-first by default: sessions and memory stay on your machine; model calls depend on the public / local models and network policy you configure; intranet deployment is supported.
 
 **Q: How do individuals and teams use it?**  
-A: Individuals install the client directly; teams can standardize capabilities via the skills marketplace; for enterprise scenarios, see [AMC](https://amc.openocta.com).
+A: Individuals install the client directly; teams can standardize capabilities via the skills marketplace; for enterprise scenarios, see [AMC](https://amc.linmo.xin).
 
 ---
 
@@ -380,7 +380,7 @@ Ops users should prefer the installers above. The following is for secondary dev
 
 ```bash
 make build
-./openocta gateway run
+./linmo gateway run
 ```
 
 Gateway defaults to `http://127.0.0.1:18900`; the frontend is embedded via `go:embed` — open the Control UI directly in a browser.
@@ -388,7 +388,7 @@ Gateway defaults to `http://127.0.0.1:18900`; the frontend is embedded via `go:e
 ### Dev mode
 
 ```bash
-./openocta gateway run    # terminal 1
+./linmo gateway run    # terminal 1
 make run-ui               # terminal 2 → http://localhost:5173
 ```
 
@@ -396,7 +396,7 @@ make run-ui               # terminal 2 → http://localhost:5173
 
 ```bash
 export ANTHROPIC_API_KEY=your-key
-./openocta agent -m "Hello, echo test"
+./linmo agent -m "Hello, echo test"
 ```
 
 ---
@@ -425,7 +425,7 @@ Upstream references: [OpenClaw](https://github.com/openclaw/openclaw) · [docs.o
 ## Project structure
 
 ```text
-OpenOcta/
+Linmo/
 ├── src/                    # Go backend (Gateway, Agent, Channels, Cron)
 ├── ui/                     # Control UI (Lit + Vite)
 ├── deploy/                 # Installers, Docker, systemd
@@ -445,12 +445,12 @@ If you are building **AIOps / intelligent ops**, join us in making “the strong
 - 🐛 [File ops-scenario Issues](https://github.com/openocta/openocta/issues) (alerts, inspection, and toolchain integration are most valuable)  
 - 🔧 [Good first issues](https://github.com/openocta/openocta/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)  
 - 🤝 Read [CONTRIBUTING.md](./CONTRIBUTING.md) and open a PR  
-- 💬 Scan the QR or visit [openocta.com](https://openocta.com)
+- 💬 Scan the QR or visit [linmo.xin](https://linmo.xin)
 
 <p align="center">
-  <img src="./imgs/wechat.png" alt="OpenOcta community WeChat QR" width="220" height="220">
+  <img src="./imgs/wechat.png" alt="Linmo community WeChat QR" width="220" height="220">
   <br/>
-  <sub>Scan to join the OpenOcta discussion group · ops scenario co-building and support</sub>
+  <sub>Scan to join the Linmo discussion group · ops scenario co-building and support</sub>
 </p>
 
 ---

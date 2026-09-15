@@ -1,8 +1,8 @@
-# OpenOcta 场景模板规范（第三方）
+# Linmo 场景模板规范（第三方）
 
 本文档说明 `deploy/scenarios/` 目录下**场景模板**的结构、字段语义与集成方式，供第三方开发者、集成商与离线部署团队参考。
 
-场景模板用于一次性完成某类业务场景的初始化：安装所需 Skill / MCP / 数字员工，声明环境变量，并可选携带离线工具包。同一套清单可在 **OpenOcta 安装引导（图形界面）**、**命令行脚本** 或 **CI/CD 流水线** 中复用。
+场景模板用于一次性完成某类业务场景的初始化：安装所需 Skill / MCP / 数字员工，声明环境变量，并可选携带离线工具包。同一套清单可在 **Linmo 安装引导（图形界面）**、**命令行脚本** 或 **CI/CD 流水线** 中复用。
 
 ---
 
@@ -13,8 +13,8 @@
 | 场景（Scenario） | 一组可重复执行的初始化任务，对应目录 `deploy/scenarios/<scenario-id>/` |
 | 场景 ID | 目录名，全局唯一，仅允许小写字母、数字与连字符（建议 `kebab-case`） |
 | 任务（Task） | 场景内单步操作：安装资源、配置环境变量或声明离线工具 |
-| 资源 | 来自 OpenOcta 官网市场的 Skill、MCP 或数字员工 |
-| Gateway | OpenOcta 网关服务，提供安装 API 并写入本地配置 |
+| 资源 | 来自 Linmo 官网市场的 Skill、MCP 或数字员工 |
+| Gateway | Linmo 网关服务，提供安装 API 并写入本地配置 |
 
 ---
 
@@ -79,7 +79,7 @@ deploy/scenarios/<scenario-id>/
   "id": "host-inspection",
   "name": "host-inspection",
   "description": "主机巡检与指标采集技能",
-  "downloadUrl": "https://openocta.com/skills/host-inspection",
+  "downloadUrl": "https://linmo.xin/skills/host-inspection",
   "category": "运维"
 }
 ```
@@ -105,15 +105,15 @@ deploy/scenarios/<scenario-id>/
 
 | 字段 | 类型 | 必填 | 说明 |
 |------|------|------|------|
-| `name` | string | 是 | 环境变量名，写入 `openocta.json` → `env.vars.<name>` |
+| `name` | string | 是 | 环境变量名，写入 `linmo.json` → `env.vars.<name>` |
 | `description` | string | 是 | 配置说明 |
 | `required` | boolean | 否 | 是否必填；引导页会标注 |
 | `example` | string | 否 | 示例值，便于用户理解 |
 
 **运行时行为：**
 
-- 安装引导中用户填写的值会通过 Gateway 合并写入 `openocta.json` 的 `env.vars`。
-- 初始化脚本**不会**自动写入配置文件，仅打印需配置的变量列表；请自行 export 或修改 `openocta.json`。
+- 安装引导中用户填写的值会通过 Gateway 合并写入 `linmo.json` 的 `env.vars`。
+- 初始化脚本**不会**自动写入配置文件，仅打印需配置的变量列表；请自行 export 或修改 `linmo.json`。
 
 ### 3.4 离线工具包（`bundledTools`）
 
@@ -143,13 +143,13 @@ deploy/scenarios/<scenario-id>/
 | `macos` | macOS 安装包或脚本 |
 | `any` | 跨平台或文档占位 |
 
-当前 OpenOcta **不会**自动安装 `bundledTools` 中的文件；脚本与引导页仅作声明与提示，由运维在目标机手动安装或使用自有 CM 工具下发。
+当前 Linmo **不会**自动安装 `bundledTools` 中的文件；脚本与引导页仅作声明与提示，由运维在目标机手动安装或使用自有 CM 工具下发。
 
 ---
 
 ## 4. 任务类型与执行语义
 
-OpenOcta 将 `scenario.json` 展开为有序任务列表（见 `ui/src/ui/scenario-templates.ts`）。任务种类与行为如下：
+Linmo 将 `scenario.json` 展开为有序任务列表（见 `ui/src/ui/scenario-templates.ts`）。任务种类与行为如下：
 
 | 任务 kind | 来源 | 执行行为 |
 |-----------|------|----------|
@@ -169,8 +169,8 @@ OpenOcta 将 `scenario.json` 展开为有序任务列表（见 `ui/src/ui/scenar
 
 | 变量 | 默认值 | 说明 |
 |------|--------|------|
-| `OPENOCTA_GATEWAY_URL` | `http://127.0.0.1:18900` | Gateway 根 URL |
-| `OPENOCTA_GATEWAY_TOKEN` | 空 | 可选；配置后作为 `Authorization: Bearer <token>` |
+| `LIMNO_GATEWAY_URL` | `http://127.0.0.1:18900` | Gateway 根 URL |
+| `LIMNO_GATEWAY_TOKEN` | 空 | 可选；配置后作为 `Authorization: Bearer <token>` |
 
 ### 5.2 脚本职责
 
@@ -189,9 +189,9 @@ OpenOcta 将 `scenario.json` 展开为有序任务列表（见 `ui/src/ui/scenar
 **请求**
 
 ```http
-POST {OPENOCTA_GATEWAY_URL}/api/v1/install
+POST {LIMNO_GATEWAY_URL}/api/v1/install
 Content-Type: application/json
-Authorization: Bearer {OPENOCTA_GATEWAY_TOKEN}   # 若 Gateway 启用了 Token 认证
+Authorization: Bearer {LIMNO_GATEWAY_TOKEN}   # 若 Gateway 启用了 Token 认证
 
 {
   "kind": "skill",
@@ -217,7 +217,7 @@ Authorization: Bearer {OPENOCTA_GATEWAY_TOKEN}   # 若 Gateway 启用了 Token �
 }
 ```
 
-Gateway 会从 OpenOcta 官网下载资源包，写入本地目录，并更新 `openocta.json` / 安装元数据。
+Gateway 会从 Linmo 官网下载资源包，写入本地目录，并更新 `linmo.json` / 安装元数据。
 
 > **注意**：部分内置 `init.sh` 历史版本使用路径 `/api/v1/site/install`，请以 **`/api/v1/install`** 为准；新场景请直接使用正确路径。
 
@@ -235,9 +235,9 @@ install_kind() {
 
 ---
 
-## 6. 与 OpenOcta 控制端（安装引导）集成
+## 6. 与 Linmo 控制端（安装引导）集成
 
-图形界面**不会**自动扫描 `deploy/scenarios/` 目录。要在「场景初始化」步骤中展示新场景，需在 OpenOcta 源码中注册模板：
+图形界面**不会**自动扫描 `deploy/scenarios/` 目录。要在「场景初始化」步骤中展示新场景，需在 Linmo 源码中注册模板：
 
 **文件**：`ui/src/ui/scenario-templates.ts`
 
@@ -262,7 +262,7 @@ install_kind() {
 - `scenario.json` 与 `scenario-templates.ts` 中的资源、环境变量、离线包声明应保持一致。
 - 修改场景内容后，若仅更新 `scenario.json` 而不同步 TS，引导页执行结果可能与 CLI 脚本不一致。
 
-**仅使用 CLI / 离线包、不修改 OpenOcta 源码的第三方**：只需交付 `deploy/scenarios/<id>/` 目录，用户配置 Gateway 后运行 `init.sh` 即可，无需注册 TS。
+**仅使用 CLI / 离线包、不修改 Linmo 源码的第三方**：只需交付 `deploy/scenarios/<id>/` 目录，用户配置 Gateway 后运行 `init.sh` 即可，无需注册 TS。
 
 ---
 
@@ -271,8 +271,8 @@ install_kind() {
 | 内容 | 写入位置 |
 |------|----------|
 | Skill / MCP / 员工 | Gateway 安装逻辑写入对应配置段与本地目录 |
-| 场景环境变量 | `openocta.json` → `env.vars` |
-| 引导完成状态 | `openocta.json` → `wizard.setup`（版本、状态、时间） |
+| 场景环境变量 | `linmo.json` → `env.vars` |
+| 引导完成状态 | `linmo.json` → `wizard.setup`（版本、状态、时间） |
 
 环境变量示例：
 
@@ -298,7 +298,7 @@ install_kind() {
 - [ ] 实现 `init.sh` / `init.ps1`（及可选 cmd/bat），调用 `/api/v1/install`
 - [ ] 如需离线部署，将安装包放入 `bundled/` 并在 `bundledTools` 中声明
 - [ ] 在目标环境验证：Gateway 可访问、Token 正确、资源 ID 在官网存在
-- [ ] （可选）向 OpenOcta 上游提交 `scenario-templates.ts` 注册，以支持安装引导
+- [ ] （可选）向 Linmo 上游提交 `scenario-templates.ts` 注册，以支持安装引导
 
 ---
 
@@ -318,8 +318,8 @@ install_kind() {
 ## 10. 版本与兼容性
 
 - 场景清单格式当前为 **v1**（无独立 schema 版本字段）；新增字段应保持向后兼容（旧客户端忽略未知字段）。
-- 安装 API 与官网市场绑定；资源 `id` 必须在 OpenOcta 市场存在，否则安装返回 4xx/5xx。
-- 引导场景步骤版本由 OpenOcta 产品版本管理（`SETUP_WIZARD_VERSION`），与单个 `scenario.json` 无直接耦合。
+- 安装 API 与官网市场绑定；资源 `id` 必须在 Linmo 市场存在，否则安装返回 4xx/5xx。
+- 引导场景步骤版本由 Linmo 产品版本管理（`SETUP_WIZARD_VERSION`），与单个 `scenario.json` 无直接耦合。
 
 ---
 
@@ -332,7 +332,7 @@ A：可以调用 Gateway API 手动安装，但推荐连同 `init.*` 与 `bundle
 A：不会。安装始终经 Gateway 从官网拉取；`downloadUrl` 仅作文档链接。
 
 **Q：如何在不改 UI 的情况下让用户使用我的场景？**  
-A：提供场景目录 + 文档，用户设置 `OPENOCTA_GATEWAY_*` 后执行 `init.sh` / `init.ps1`。
+A：提供场景目录 + 文档，用户设置 `LIMNO_GATEWAY_*` 后执行 `init.sh` / `init.ps1`。
 
 **Q：employees 在 init 脚本里未安装？**  
 A：内置脚本当前仅遍历 `skills` 与 `mcps`；若场景含数字员工，请在自定义脚本中增加对 `employees` 数组的安装逻辑，或在引导页注册模板由 UI 执行。

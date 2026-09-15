@@ -337,7 +337,7 @@ func httpDownloadFile(ctx context.Context, url, dest string) error {
 	if err != nil {
 		return err
 	}
-	req.Header.Set("User-Agent", "openocta-embedded-models/1.0")
+	req.Header.Set("User-Agent", "linmo-embedded-models/1.0")
 
 	client := &http.Client{
 		Timeout: 2 * time.Hour,

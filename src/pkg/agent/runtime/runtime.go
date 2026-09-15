@@ -1,4 +1,4 @@
-// Package runtime wraps Eino DeepAgent for OPENOCTA agent execution.
+// Package runtime wraps Eino DeepAgent for LIMNO agent execution.
 package runtime
 
 import (
@@ -24,7 +24,7 @@ import (
 	"github.com/openocta/openocta/pkg/paths"
 )
 
-// Runtime wraps the Eino engine for OPENOCTA.
+// Runtime wraps the Eino engine for LIMNO.
 type Runtime struct {
 	eng            *eino.Engine
 	agentRunBudget time.Duration
@@ -173,7 +173,7 @@ func augmentEvolutionPrompt(projectRoot string, opts Options, base string) strin
 		}
 	}
 	if opts.Env != nil {
-		if ws := strings.TrimSpace(opts.Env("OPENOCTA_WORKSPACE")); ws != "" {
+		if ws := strings.TrimSpace(opts.Env("LIMNO_WORKSPACE")); ws != "" {
 			evoDir = ws
 		}
 	}
@@ -187,7 +187,7 @@ func augmentEvolutionPrompt(projectRoot string, opts Options, base string) strin
 }
 
 // ApprovalQueueEnabled reports whether security.approvalQueue.enabled is explicitly true.
-func ApprovalQueueEnabled(cfg *config.OpenOctaConfig) bool {
+func ApprovalQueueEnabled(cfg *config.LinmoConfig) bool {
 	if cfg == nil || cfg.Security == nil || cfg.Security.ApprovalQueue == nil {
 		return false
 	}
@@ -199,7 +199,7 @@ type Options struct {
 	ModelFactory          eino.ChatModelFactory
 	Tools                 []tool.Tool
 	ProjectRoot           string
-	Config                *config.OpenOctaConfig
+	Config                *config.LinmoConfig
 	EnableSkills          bool
 	EmployeeID            string
 	EnableSubagents       bool
@@ -462,7 +462,7 @@ func resolveAgentRunTimeout(opts Options) time.Duration {
 	if opts.AgentRunTimeout > 0 {
 		return opts.AgentRunTimeout
 	}
-	if v := strings.TrimSpace(os.Getenv("OPENOCTA_AGENT_RUN_TIMEOUT")); v != "" {
+	if v := strings.TrimSpace(os.Getenv("LIMNO_AGENT_RUN_TIMEOUT")); v != "" {
 		if d, err := time.ParseDuration(v); err == nil && d > 0 {
 			return d
 		}

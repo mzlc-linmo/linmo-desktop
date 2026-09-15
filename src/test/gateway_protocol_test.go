@@ -14,8 +14,8 @@ import (
 )
 
 func TestGatewayProtocol_ConnectHelloOk(t *testing.T) {
-	t.Setenv("OPENOCTA_SKIP_CHANNELS", "1")
-	t.Setenv("OPENOCTA_SKIP_CRON", "1")
+	t.Setenv("LIMNO_SKIP_CHANNELS", "1")
+	t.Setenv("LIMNO_SKIP_CRON", "1")
 
 	srv := gatewayhttp.NewServer(":0", "test-0.0.0")
 	ts := httptest.NewServer(srv.Handler())
@@ -70,8 +70,8 @@ func TestGatewayProtocol_ConnectHelloOk(t *testing.T) {
 }
 
 func TestGatewayProtocol_HealthRequest(t *testing.T) {
-	t.Setenv("OPENOCTA_SKIP_CHANNELS", "1")
-	t.Setenv("OPENOCTA_SKIP_CRON", "1")
+	t.Setenv("LIMNO_SKIP_CHANNELS", "1")
+	t.Setenv("LIMNO_SKIP_CRON", "1")
 
 	srv := gatewayhttp.NewServer(":0", "test-0.0.0")
 	ts := httptest.NewServer(srv.Handler())
@@ -133,8 +133,8 @@ func TestGatewayProtocol_HealthRequest(t *testing.T) {
 }
 
 func TestGatewayHTTP_Health(t *testing.T) {
-	t.Setenv("OPENOCTA_SKIP_CHANNELS", "1")
-	t.Setenv("OPENOCTA_SKIP_CRON", "1")
+	t.Setenv("LIMNO_SKIP_CHANNELS", "1")
+	t.Setenv("LIMNO_SKIP_CRON", "1")
 
 	srv := gatewayhttp.NewServer(":0", "test-0.0.0")
 	ts := httptest.NewServer(srv.Handler())
@@ -151,8 +151,8 @@ func TestGatewayHTTP_Health(t *testing.T) {
 }
 
 func TestGatewayHTTP_HealthAPIPath(t *testing.T) {
-	t.Setenv("OPENOCTA_SKIP_CHANNELS", "1")
-	t.Setenv("OPENOCTA_SKIP_CRON", "1")
+	t.Setenv("LIMNO_SKIP_CHANNELS", "1")
+	t.Setenv("LIMNO_SKIP_CRON", "1")
 
 	srv := gatewayhttp.NewServer(":0", "test-0.0.0")
 	ts := httptest.NewServer(srv.Handler())
@@ -237,8 +237,8 @@ func TestGatewayProtocol_ResponseFrame(t *testing.T) {
 }
 
 func TestGatewayProtocol_AgentInvalidParams(t *testing.T) {
-	t.Setenv("OPENOCTA_SKIP_CHANNELS", "1")
-	t.Setenv("OPENOCTA_SKIP_CRON", "1")
+	t.Setenv("LIMNO_SKIP_CHANNELS", "1")
+	t.Setenv("LIMNO_SKIP_CRON", "1")
 
 	srv := gatewayhttp.NewServer(":0", "test-0.0.0")
 	ts := httptest.NewServer(srv.Handler())

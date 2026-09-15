@@ -33,7 +33,7 @@ type approvalRecord struct {
 	AutoApproved bool       `json:"auto_approved"`
 }
 
-func resolveApprovalStoreFile(cfg *config.OpenOctaConfig, env func(string) string) (string, int) {
+func resolveApprovalStoreFile(cfg *config.LinmoConfig, env func(string) string) (string, int) {
 	timeoutSeconds := 300
 	var (
 		queueCfg      *config.SandboxApprovalQueue

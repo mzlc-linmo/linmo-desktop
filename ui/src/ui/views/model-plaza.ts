@@ -628,7 +628,7 @@ function renderTierChart(
   return html`
     <div class="plaza-tier-chart" id="plaza-tier-chart-export">
       <div class="plaza-tier-chart__header">
-        <span class="plaza-tier-chart__brand">OpenOcta</span>
+        <span class="plaza-tier-chart__brand">Linmo</span>
         <span class="plaza-tier-chart__hw">${formatHardwareSummary(hw)}</span>
       </div>
       <div class="plaza-tier-chart__body">

@@ -7,7 +7,7 @@ import {
   type ComponentRecord,
 } from "./a2ui-components.ts";
 import { renderTextFilePreviewBody } from "./file-preview-content.ts";
-import { parseOpenOctaFileAttachmentsFromText } from "./openocta-attachments.ts";
+import { parseLinmoFileAttachmentsFromText } from "./linmo-attachments.ts";
 import { extractReferencedImagePaths } from "./attachment-images.ts";
 
 export type FileBlock = {
@@ -201,7 +201,7 @@ export function extractFileBlocksFromA2UIBlocks(blocks: unknown[]): FileBlock[] 
       if (type === "Text") {
         const text = readComponentString(comp, "text");
         if (text) {
-          for (const parsed of parseOpenOctaFileAttachmentsFromText(text)) {
+          for (const parsed of parseLinmoFileAttachmentsFromText(text)) {
             pushFileBlock(files, {
               filename: parsed.filename,
               mimeType: parsed.mimeType,
@@ -238,7 +238,7 @@ export function extractFileBlocks(message: unknown): FileBlock[] {
   const files: FileBlock[] = [];
 
   if (typeof content === "string") {
-    for (const parsed of parseOpenOctaFileAttachmentsFromText(content)) {
+    for (const parsed of parseLinmoFileAttachmentsFromText(content)) {
       pushFileBlock(files, {
         filename: parsed.filename,
         mimeType: parsed.mimeType,
@@ -261,7 +261,7 @@ export function extractFileBlocks(message: unknown): FileBlock[] {
     const kind = (typeof b.type === "string" ? b.type : "").toLowerCase();
 
     if (kind === "text" && typeof b.text === "string") {
-      for (const parsed of parseOpenOctaFileAttachmentsFromText(b.text)) {
+      for (const parsed of parseLinmoFileAttachmentsFromText(b.text)) {
         pushFileBlock(files, {
           filename: parsed.filename,
           mimeType: parsed.mimeType,

@@ -45,7 +45,7 @@ function mapCapabilities(useCase, model) {
   return caps;
 }
 
-/** OpenOcta-only models not present in CanIRun.ai STATIC_MODELS. */
+/** Linmo-only models not present in CanIRun.ai STATIC_MODELS. */
 const EXTRA_CATALOG = [
   {
     id: "qwen3-embedding-0.6b",

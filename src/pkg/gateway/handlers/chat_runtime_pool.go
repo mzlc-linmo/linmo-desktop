@@ -52,7 +52,7 @@ func boolToken(v bool) string {
 	return "0"
 }
 
-func buildMergedMCPServers(runtimeConfig *config.OpenOctaConfig, mcpServers map[string]config.McpServerEntry) map[string]config.McpServerEntry {
+func buildMergedMCPServers(runtimeConfig *config.LinmoConfig, mcpServers map[string]config.McpServerEntry) map[string]config.McpServerEntry {
 	if len(mcpServers) == 0 {
 		return nil
 	}

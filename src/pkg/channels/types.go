@@ -49,7 +49,7 @@ type ChannelPlugin interface {
 
 // LogoutContext is passed to ChannelGatewayPlugin.LogoutAccount.
 type LogoutContext struct {
-	Config    interface{} // *config.OpenOctaConfig
+	Config    interface{} // *config.LinmoConfig
 	AccountID string
 	Account   interface{} // resolved account config
 }

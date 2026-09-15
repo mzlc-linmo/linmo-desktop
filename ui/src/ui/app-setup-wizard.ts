@@ -8,12 +8,7 @@ import {
   startBrowserInstall,
   type BrowserInstallProgress,
 } from "./controllers/browser-install.ts";
-import {
-  fetchEmployees,
-  fetchMcps,
-  fetchSkills,
-  installFromSite,
-} from "./controllers/remote-market.ts";
+import { installFromSite } from "./controllers/remote-market.ts";
 import { getScenarioTemplate, scenarioTaskLabel } from "./scenario-templates.ts";
 import type { SetupWizardProps } from "./views/setup-wizard.ts";
 import type { ModelsProps, ModelProvider } from "./views/models.ts";
@@ -443,7 +438,7 @@ function seedSetupWizardEnabledProviders(state: AppViewState) {
     (state.configForm ?? state.configSnapshot?.config) as Record<string, unknown> | null | undefined,
   );
   const enabled = new Set<string>();
-  // 升级用户：本地 openocta.json 已有厂商配置则默认开启并回显
+  // 升级用户：本地 linmo.json 已有厂商配置则默认开启并回显
   for (const key of Object.keys(providers ?? {})) {
     enabled.add(key);
   }
@@ -581,37 +576,10 @@ export async function handleSetupWizardScenarioEnvSave(state: AppViewState) {
   state.setupWizardScenarioEnvPanelOpen = false;
 }
 
-export async function loadSetupWizardResources(state: AppViewState, options?: { silent?: boolean }) {
-  if (state.setupWizardResourcesLoading) {
-    return;
-  }
-  const silent = options?.silent === true;
-  const hasCachedItems =
-    state.setupWizardSkillItems.length > 0 ||
-    state.setupWizardEmployeeItems.length > 0 ||
-    state.setupWizardMcpItems.length > 0;
-  if (!silent || !hasCachedItems) {
-    state.setupWizardResourcesLoading = true;
-  }
+export async function loadSetupWizardResources(state: AppViewState, _options?: { silent?: boolean }) {
+  // 市场功能已隐藏（原功能 8），不再从站点 API 拉取技能/员工/MCP 资源。
+  state.setupWizardResourcesLoading = false;
   state.setupWizardResourcesError = null;
-  const opts = {
-    gatewayHost: state.settings?.gatewayUrl?.trim(),
-    token: state.settings?.token?.trim(),
-  };
-  try {
-    const [skills, employees, mcps] = await Promise.all([
-      fetchSkills({ q: state.setupWizardSkillQuery }, opts),
-      fetchEmployees({ q: state.setupWizardEmployeeQuery }, opts),
-      fetchMcps({ q: state.setupWizardMcpQuery }, opts),
-    ]);
-    state.setupWizardSkillItems = skills;
-    state.setupWizardEmployeeItems = employees;
-    state.setupWizardMcpItems = mcps;
-  } catch (err) {
-    state.setupWizardResourcesError = err instanceof Error ? err.message : String(err);
-  } finally {
-    state.setupWizardResourcesLoading = false;
-  }
 }
 
 function currentStepId(state: AppViewState): SetupWizardStepId {
@@ -764,12 +732,12 @@ export function setupWizardStopScenarios(state: AppViewState) {
 function requireSetupWizardVersion(state: AppViewState): string {
   const version = resolveSetupWizardVersion(state.configSchemaVersion, state.hello);
   if (!version) {
-    throw new Error("OpenOcta version unavailable; wait for gateway connection.");
+    throw new Error("Linmo version unavailable; wait for gateway connection.");
   }
   return version;
 }
 
-/** 引导完成：写入 openocta.json 的 wizard.setup（版本/状态/时间），并保存未提交的表单变更 */
+/** 引导完成：写入 linmo.json 的 wizard.setup（版本/状态/时间），并保存未提交的表单变更 */
 export async function persistSetupWizardCompletion(state: AppViewState) {
   syncSetupWizardModelsSession(state);
   syncSetupWizardChannelsSession(state);
@@ -791,7 +759,7 @@ export async function persistSetupWizardCompletion(state: AppViewState) {
   markSetupWizardCompleted(version);
 }
 
-/** 将 wizard.setup（status=skipped）写入 openocta.json；网关未就绪时返回 false */
+/** 将 wizard.setup（status=skipped）写入 linmo.json；网关未就绪时返回 false */
 export async function flushSetupWizardSkipToConfig(state: AppViewState): Promise<boolean> {
   if (!state.connected || !state.client) {
     return false;
@@ -1148,7 +1116,7 @@ export function buildSetupWizardProps(state: AppViewState): SetupWizardProps {
 export function initSetupWizardSession(state: AppViewState) {
   state.setupWizardSession = createEmptySetupWizardSession();
   state.setupWizardStepIndex = 0;
-  state.setupWizardResourceTab = "skills";
+  state.setupWizardResourceTab = "channels";
   state.setupWizardModelSearchQuery = "";
   state.setupWizardModelTab = "embedded";
   state.setupWizardSkillQuery = "";

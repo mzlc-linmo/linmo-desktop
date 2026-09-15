@@ -1,8 +1,8 @@
-# OpenOcta 架构概览
+# Linmo 架构概览
 
 本项目在整体设计上大量借鉴了 [`agentsdk-go` 的架构设计文档](https://github.com/stellarlinkco/agentsdk-go/tree/main/docs)，并结合 Gateway、Webhook、技能系统等扩展能力，形成一套面向「聊天网关 + Agent 运行时」的完整方案。
 
-本文从宏观到细节，介绍 OpenOcta 的：
+本文从宏观到细节，介绍 Linmo 的：
 
 - **整体分层与目录结构**
 - **Agent 运行时与会话/记忆管理**
@@ -20,7 +20,7 @@
 
 ```text
 ┌──────────────────────────────────────────────────────────┐
-│                     OpenOcta                          │
+│                     Linmo                          │
 ├──────────────────────────────────────────────────────────┤
 │                                                          │
 │  ┌────────────────────────────────────────────────────┐  │
@@ -135,7 +135,7 @@ Webhook 模块的设计目标：
 
 ### 4.1 Agent 核心循环（对标 agentsdk-go）
 
-类似 `agentsdk-go` 的 `pkg/agent/agent.go`，OpenOcta 的 Runtime 负责：
+类似 `agentsdk-go` 的 `pkg/agent/agent.go`，Linmo 的 Runtime 负责：
 
 - 将用户消息与历史上下文转换为模型请求（Prompt）。
 - 驱动模型多轮生成（包含 Tool Calls / Tool Results）。
@@ -150,7 +150,7 @@ Webhook 模块的设计目标：
 
 ### 4.2 会话与 Memory 管理
 
-结合 `agentsdk-go` 中的三层记忆理念（短期记忆 / Working Memory / 语义记忆），OpenOcta 在会话与 Memory 上的设计要点包括：
+结合 `agentsdk-go` 中的三层记忆理念（短期记忆 / Working Memory / 语义记忆），Linmo 在会话与 Memory 上的设计要点包括：
 
 - **会话键 (sessionKey)**：
   - Gateway 层（包括 `/hooks/agent`、`/hooks/alert`）使用字符串 `sessionKey` 作为会话标识。
@@ -166,7 +166,7 @@ Webhook 模块的设计目标：
 
 ### 4.3 事件与追踪
 
-OpenOcta 借鉴 `agentsdk-go` 的事件总线与 OTEL 追踪思路：
+Linmo 借鉴 `agentsdk-go` 的事件总线与 OTEL 追踪思路：
 
 - 针对工具调用前后、上下文压缩前后、会话开始/结束等场景，发出结构化事件。
 - 允许外部订阅组件基于事件做扩展、集成或治理。
@@ -200,7 +200,7 @@ OpenOcta 借鉴 `agentsdk-go` 的事件总线与 OTEL 追踪思路：
 - 在运行时注册 MCP 工具到工具注册表中。
 - 使用单一接口执行「本地工具」与「MCP 工具」，对 Agent 来说透明。
 
-OpenOcta 侧重于「Gateway + Agent 运行时」的场景，因此 MCP 更多用于：
+Linmo 侧重于「Gateway + Agent 运行时」的场景，因此 MCP 更多用于：
 
 - 调用外部监控/告警系统（例如 Prometheus）。
 - 与现有运维/业务系统进行集成。
@@ -226,7 +226,7 @@ Skills 是 Project 级别的「能力包」，通常以 `SKILL.md` 的形式存�
 
 ### 6.2 扩展运行时能力
 
-借鉴 `agentsdk-go` 的 Runtime 扩展思想，OpenOcta 的 Runtime 未来可以增量支持：
+借鉴 `agentsdk-go` 的 Runtime 扩展思想，Linmo 的 Runtime 未来可以增量支持：
 
 - **子 Agent（Subagents）**：针对复杂任务拆分为多个专职 Agent。
 - **Tasks 系统**：跨会话跟踪长任务的状态与依赖。
@@ -242,7 +242,7 @@ Skills 是 Project 级别的「能力包」，通常以 `SKILL.md` 的形式存�
 
 ## 七、小结
 
-- **继承**：OpenOcta 继承了 `agentsdk-go` 在 Agent 循环、工具抽象、MCP 集成、事件与追踪等方面的架构优势。
+- **继承**：Linmo 继承了 `agentsdk-go` 在 Agent 循环、工具抽象、MCP 集成、事件与追踪等方面的架构优势。
 - **扩展**：在此基础上，重点扩展了 **Gateway HTTP 接入层**、**标准化 Webhooks（包括告警专用 `/hooks/alert`）** 以及 **工程化的 Skills 管理机制**。
 - **目标**：提供一套可以直接部署在生产环境中的「多渠道聊天网关 + Agent 平台」，同时保持代码层面的简洁、可维护与安全性。
 

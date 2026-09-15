@@ -2338,7 +2338,7 @@
   font-size: 11px;
 }
 
-.chat-compose__field openocta-chat-input .textarea {
+.chat-compose__field linmo-chat-input .textarea {
   position: relative;
   flex-direction: column;
 }

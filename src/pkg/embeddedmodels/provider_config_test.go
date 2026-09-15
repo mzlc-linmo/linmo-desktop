@@ -9,7 +9,7 @@ import (
 
 func TestGatewayProxyBaseURL(t *testing.T) {
 	port := 18999
-	cfg := &config.OpenOctaConfig{
+	cfg := &config.LinmoConfig{
 		Gateway: &config.GatewayConfig{Port: &port},
 	}
 	got := GatewayProxyBaseURL(cfg, os.Getenv)
@@ -33,7 +33,7 @@ func TestIsEmbeddedProvider(t *testing.T) {
 
 func TestMergedProviderConfigUsesGatewayProxy(t *testing.T) {
 	port := 18900
-	cfg := &config.OpenOctaConfig{
+	cfg := &config.LinmoConfig{
 		Gateway: &config.GatewayConfig{Port: &port},
 	}
 	env := os.Getenv

@@ -18,10 +18,10 @@ import (
 	"github.com/openocta/openocta/pkg/config"
 )
 
-// Service manages a single headed Chromium instance for OpenOcta.
+// Service manages a single headed Chromium instance for Linmo.
 type Service struct {
 	mu      sync.Mutex
-	cfg     *config.OpenOctaConfig
+	cfg     *config.LinmoConfig
 	env     func(string) string
 	browser *rod.Browser
 	l       *launcher.Launcher
@@ -39,7 +39,7 @@ type tabEntry struct {
 }
 
 // NewService creates a browser service bound to config.
-func NewService(cfg *config.OpenOctaConfig, env func(string) string) *Service {
+func NewService(cfg *config.LinmoConfig, env func(string) string) *Service {
 	return &Service{
 		cfg:     cfg,
 		env:     env,
@@ -54,7 +54,7 @@ var (
 )
 
 // DefaultService returns the process-wide browser service.
-func DefaultService(cfg *config.OpenOctaConfig, env func(string) string) *Service {
+func DefaultService(cfg *config.LinmoConfig, env func(string) string) *Service {
 	defaultSvcMu.Lock()
 	defer defaultSvcMu.Unlock()
 	if defaultSvc == nil {
@@ -69,7 +69,7 @@ func DefaultService(cfg *config.OpenOctaConfig, env func(string) string) *Servic
 }
 
 // HandleRequest dispatches browser.request actions (OpenClaw-compatible subset).
-func HandleRequest(ctx context.Context, cfg *config.OpenOctaConfig, env func(string) string, params map[string]interface{}) (map[string]interface{}, error) {
+func HandleRequest(ctx context.Context, cfg *config.LinmoConfig, env func(string) string, params map[string]interface{}) (map[string]interface{}, error) {
 	svc := DefaultService(cfg, env)
 	action, _ := params["action"].(string)
 	action = strings.TrimSpace(strings.ToLower(action))
@@ -109,7 +109,7 @@ func (s *Service) status(_ context.Context) (map[string]interface{}, error) {
 	out := map[string]interface{}{
 		"ok":      true,
 		"running": running,
-		"driver":  "openocta-bundled-chromium",
+		"driver":  "linmo-bundled-chromium",
 	}
 	if running {
 		out["cdpUrl"] = s.cdpURL
@@ -373,7 +373,7 @@ func (s *Service) act(ctx context.Context, params map[string]interface{}) (map[s
 		if ref == "" {
 			return nil, fmt.Errorf("request.ref is required for click")
 		}
-		script := fmt.Sprintf(`() => { const el = document.querySelector('[data-openocta-ref=%q]'); if (!el) throw new Error('ref not found'); el.click(); return true; }`, ref)
+		script := fmt.Sprintf(`() => { const el = document.querySelector('[data-linmo-ref=%q]'); if (!el) throw new Error('ref not found'); el.click(); return true; }`, ref)
 		if _, err := page.Eval(script); err != nil {
 			return nil, err
 		}
@@ -388,7 +388,7 @@ func (s *Service) act(ctx context.Context, params map[string]interface{}) (map[s
 		if err != nil {
 			return nil, err
 		}
-		script := fmt.Sprintf(`() => { const el = document.querySelector('[data-openocta-ref=%q]'); if (!el) throw new Error('ref not found'); el.focus(); const v = %s; if ('value' in el) el.value = v; else el.textContent = v; el.dispatchEvent(new Event('input', { bubbles: true })); return true; }`, ref, string(textJSON))
+		script := fmt.Sprintf(`() => { const el = document.querySelector('[data-linmo-ref=%q]'); if (!el) throw new Error('ref not found'); el.focus(); const v = %s; if ('value' in el) el.value = v; else el.textContent = v; el.dispatchEvent(new Event('input', { bubbles: true })); return true; }`, ref, string(textJSON))
 		if _, err := page.Eval(script); err != nil {
 			return nil, err
 		}

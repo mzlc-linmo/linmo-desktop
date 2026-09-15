@@ -118,7 +118,7 @@ func listRepoGGUFFiles(repo string, env func(string) string) ([]ggufCandidate, e
 		return nil, err
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", "openocta-embedded-models/1.0")
+	req.Header.Set("User-Agent", "linmo-embedded-models/1.0")
 
 	res, err := client.Do(req)
 	if err != nil {

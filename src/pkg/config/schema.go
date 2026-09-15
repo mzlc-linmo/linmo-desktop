@@ -1,5 +1,5 @@
-// Package config defines the full OpenOcta configuration schema.
-// Compatible with ~/.openocta/openocta.json and zod schemas in src/config/.
+// Package config defines the full Linmo configuration schema.
+// Compatible with ~/.linmo/linmo.json and zod schemas in src/config/.
 package config
 
 import (
@@ -17,9 +17,9 @@ type LoggingConfig struct {
 	RedactPatterns  []string `json:"redactPatterns,omitempty"`
 }
 
-// OpenOctaConfig is the root configuration structure.
-// Mirrors OpenOctaConfig from src/config/types.openclaw.ts.
-type OpenOctaConfig struct {
+// LinmoConfig is the root configuration structure.
+// Mirrors LinmoConfig from src/config/types.openclaw.ts.
+type LinmoConfig struct {
 	Meta        *ConfigMeta        `json:"meta,omitempty"`
 	Auth        *AuthConfig        `json:"auth,omitempty"`
 	Env         *EnvConfig         `json:"env,omitempty"`
@@ -58,7 +58,7 @@ type OpenOctaConfig struct {
 	LocalAgents *LocalAgentsConfig `json:"localAgents,omitempty"`
 }
 
-// Default CozeLoop settings when openocta.json omits the cozeloop section.
+// Default CozeLoop settings when linmo.json omits the cozeloop section.
 const (
 	DefaultCozeLoopWorkspaceID = "7631578048566919169"
 	DefaultCozeLoopAPIToken    = "79a3aa5e0522fc865bb67233a8bca9b4b9cf641cb384cceba25ffb7776e76602"
@@ -1573,7 +1573,7 @@ type SessionHistoryConfig struct {
 	// Roles maps to SessionHistoryRoles (non-empty filters by message role, case-insensitive).
 	Roles []string `json:"roles,omitempty"`
 	// LoadFromTranscript defaults to true when nil; when true, after projectRoot .claude/history/<session>.json
-	// yields no messages, load user/assistant turns from ~/.openocta/agents/<agentId>/sessions/<sessionId>.jsonl.
+	// yields no messages, load user/assistant turns from ~/.linmo/agents/<agentId>/sessions/<sessionId>.jsonl.
 	LoadFromTranscript *bool `json:"loadFromTranscript,omitempty"`
 }
 

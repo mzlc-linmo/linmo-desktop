@@ -1,4 +1,4 @@
-# OpenOcta 发版 Checklist
+# Linmo 发版 Checklist
 
 每次发版前、发版中、发版后按本清单逐项确认。建议复制到 Issue / MR 描述中，勾选完成项。
 
@@ -16,7 +16,7 @@
 - [ ] 无已知 P0/P1 阻塞缺陷；遗留问题已在 Issue 中标注「延后至 x.y.z+1」
 - [ ] 依赖版本无已知安全漏洞（`go mod`、`ui/package.json`）
 - [ ] 配置 schema 变更已同步：`src/config-schema.json` 与文档一致
-- [ ] 嵌入资源示例配置已更新：`src/openocta.json.example`
+- [ ] 嵌入资源示例配置已更新：`src/linmo.json.example`
 
 ### 1.2 自动化测试
 
@@ -31,7 +31,7 @@ cd ui && npm test
 - [ ] 后端 `go test ./...` 全部通过
 - [ ] 前端 `npm test`（Vitest）全部通过
 - [ ] 本地完整构建通过：`make clean && make build`
-- [ ] 本地 Gateway 可启动：`./openocta gateway run`，控制台可访问 `http://127.0.0.1:18900`
+- [ ] 本地 Gateway 可启动：`./linmo gateway run`，控制台可访问 `http://127.0.0.1:18900`
 
 ### 1.3 版本与 Changelog 草稿
 
@@ -53,8 +53,8 @@ make clean
 ```
 
 - [ ] 快照构建无报错
-- [ ] `dist/` 产物完整：Linux `tar.gz` / `deb` / `rpm`、`openocta-docs_*.tar.gz`
-- [ ] 解压 tar.gz 后 `./openocta gateway run` 可正常启动
+- [ ] `dist/` 产物完整：Linux `tar.gz` / `deb` / `rpm`、`linmo-docs_*.tar.gz`
+- [ ] 解压 tar.gz 后 `./linmo gateway run` 可正常启动
 - [ ] 归档内 `README.md`（来自 `deploy/dist-README.md`）与 `docs/` 目录存在
 
 ### 2.2 Linux 服务端（GoReleaser / CI）
@@ -76,10 +76,10 @@ make clean
 # 需 AC_USERNAME / AC_PASSWORD / AC_TEAM_ID
 ```
 
-- [ ] `OpenOcta.app` 可双击启动，内嵌前端加载正常
+- [ ] `Linmo.app` 可双击启动，内嵌前端加载正常
 - [ ] `.dmg` 可挂载、拖入「应用程序」后正常运行
 - [ ] （对外版）签名与公证通过，Gatekeeper 无拦截
-- [ ] （CI 集成）`GORELEASER_INCLUDE_DMG=1` 时 `dist-mac/OpenOcta*.dmg` 已附加到 Release
+- [ ] （CI 集成）`GORELEASER_INCLUDE_DMG=1` 时 `dist-mac/Linmo*.dmg` 已附加到 Release
 
 ### 2.4 Windows 桌面版
 
@@ -89,8 +89,8 @@ make clean
 ./build.sh wails-nsis
 ```
 
-- [ ] `OpenOcta.exe` 可启动
-- [ ] `OpenOcta-amd64-installer.exe`（NSIS）安装流程正常
+- [ ] `Linmo.exe` 可启动
+- [ ] `Linmo-amd64-installer.exe`（NSIS）安装流程正常
 - [ ] 未安装 WebView2 时安装器引导正常
 - [ ] 安装后开机自启、开始菜单 / 桌面快捷方式正确
 
@@ -111,19 +111,19 @@ make clean
 | 平台 | 升级方式 | 确认 |
 |------|----------|------|
 | Linux deb/rpm | 直接安装新包覆盖 | [ ] |
-| Linux tar.gz | 替换二进制，保留 `~/.openocta/` | [ ] |
+| Linux tar.gz | 替换二进制，保留 `~/.linmo/` | [ ] |
 | macOS .dmg | 覆盖安装到 `/Applications` | [ ] |
 | Windows 安装器 | 运行新 Setup 覆盖 | [ ] |
 | Docker | 拉取新 tag 镜像，挂载原配置卷 | [ ] |
 
 ### 3.2 配置与数据迁移
 
-- [ ] 旧版 `~/.openocta/openocta.json` 可被新版正常读取，无需手工改配置
+- [ ] 旧版 `~/.linmo/linmo.json` 可被新版正常读取，无需手工改配置
 - [ ] 会话历史（transcript / jsonl）仍可加载
 - [ ] 已安装的 Skill / MCP / 数字员工配置保留
 - [ ] API Key、渠道凭据、环境变量未丢失
 - [ ] `wizard.setup` 状态正确：老用户不重复弹出安装引导（除非刻意重置）
-- [ ] systemd 服务升级后自动重启：`systemctl status openocta`
+- [ ] systemd 服务升级后自动重启：`systemctl status linmo`
 
 ### 3.3 回滚预案
 
@@ -151,7 +151,7 @@ make clean
 - [ ] 附件上传：普通文件（≤5MB）、视频（mp4/mov/avi，≤50MB）
 - [ ] 交付物路径识别与预览（Markdown / CSV / JSON / 代码等）
 - [ ] `@` 本地协同工具委派（Cursor、Codex 等，按本机实际安装情况测）
-- [ ] Agent CLI：`./openocta agent -m "echo test"` 有正常回复
+- [ ] Agent CLI：`./linmo agent -m "echo test"` 有正常回复
 
 ### 4.3 开放 API
 
@@ -202,7 +202,7 @@ make clean
 
 - [ ] macOS：`.dmg` 安装后首次运行弹窗、菜单栏 / Dock 行为
 - [ ] Windows：安装目录、卸载程序、WebView2 依赖
-- [ ] 托盘 / launcher（`openocta-launcher`）若随包分发需单独验证
+- [ ] 托盘 / launcher（`linmo-launcher`）若随包分发需单独验证
 - [ ] 自动更新：每日检查、跳过版本、手动「检查更新」、安装重启（见 [app-update.md](./app-update.md)）
 
 ---

@@ -53,8 +53,8 @@ async function persistEmbeddedProviderPatch(state: Host, provider: Record<string
   if (provider && Object.keys(provider).length > 0) {
     Object.assign(next, provider);
   } else {
-    delete next["openocta-embedded-chat"];
-    delete next["openocta-embedded-embedding"];
+    delete next["linmo-embedded-chat"];
+    delete next["linmo-embedded-embedding"];
   }
   await saveConfigPatch(state, {
     models: {

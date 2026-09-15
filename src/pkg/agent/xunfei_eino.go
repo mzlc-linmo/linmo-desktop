@@ -102,7 +102,7 @@ func schemaMessagesToXunfeiRequest(msgs []*schema.Message) octmodel.Request {
 }
 
 // CreateXunfeiImageFactory returns an Eino ChatModelFactory for Xunfei image understanding.
-func CreateXunfeiImageFactory(cfg *config.OpenOctaConfig) eino.ChatModelFactory {
+func CreateXunfeiImageFactory(cfg *config.LinmoConfig) eino.ChatModelFactory {
 	env := os.Getenv
 	if cfg != nil && cfg.Env != nil && cfg.Env.Vars != nil {
 		env = func(k string) string {

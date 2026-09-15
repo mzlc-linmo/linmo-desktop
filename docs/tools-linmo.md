@@ -1,6 +1,6 @@
-# OpenOcta 扩展工具说明（gateway/cron/sessions 等）
+# Linmo 扩展工具说明（gateway/cron/sessions 等）
 
-在内置通用工具之外，OpenOcta 还通过 `pkg/agent/tools` 暴露了一组与网关和调度系统紧密结合的工具。这些工具以 [`agentsdk-go` 的 tool.Tool 接口](https://github.com/stellarlinkco/agentsdk-go/tree/main/docs) 为基础，由 Gateway 通过 `GatewayInvoker` 实现实际调用。
+在内置通用工具之外，Linmo 还通过 `pkg/agent/tools` 暴露了一组与网关和调度系统紧密结合的工具。这些工具以 [`agentsdk-go` 的 tool.Tool 接口](https://github.com/stellarlinkco/agentsdk-go/tree/main/docs) 为基础，由 Gateway 通过 `GatewayInvoker` 实现实际调用。
 
 本文介绍：
 
@@ -157,7 +157,7 @@ type GatewayTool struct {
 }
 
 func (GatewayTool) Name() string        { return "gateway_config" }
-func (GatewayTool) Description() string { return "Read OpenOcta config or config schema. Actions: get, schema." }
+func (GatewayTool) Description() string { return "Read Linmo config or config schema. Actions: get, schema." }
 ```
 
 ### 4.2 参数 Schema
@@ -299,6 +299,6 @@ Runtime 启动后，模型即可通过工具调用机制使用 `"my_tool"`。
 
 ## 七、小结
 
-- `pkg/agent/tools` 提供了一个简洁的桥接层，将 OpenOcta 自身能力（配置、会话、调度等）暴露为工具；
+- `pkg/agent/tools` 提供了一个简洁的桥接层，将 Linmo 自身能力（配置、会话、调度等）暴露为工具；
 - 扩展工具与内置工具共享相同的接口与调用机制；
 - 你可以很方便地在本项目中实现自定义工具，并在 Runtime 启动时注册进去，使大模型能够直接操控你的业务逻辑与基础设施。

@@ -110,8 +110,8 @@ func NewServer(addr string, version string) *Server {
 	mux := http.NewServeMux()
 	env := func(k string) string { return os.Getenv(k) }
 	stateDir := paths.ResolveStateDir(env)
-	skipCron := isTruthyEnv(env, "OPENOCTA_SKIP_CRON")
-	skipChannels := isTruthyEnv(env, "OPENOCTA_SKIP_CHANNELS") || isTruthyEnv(env, "OPENOCTA_SKIP_PROVIDERS")
+	skipCron := isTruthyEnv(env, "LIMNO_SKIP_CRON")
+	skipChannels := isTruthyEnv(env, "LIMNO_SKIP_CHANNELS") || isTruthyEnv(env, "LIMNO_SKIP_PROVIDERS")
 
 	var cronSvc *cron.Service
 	if !skipCron {
@@ -145,7 +145,7 @@ func NewServer(addr string, version string) *Server {
 	cfg, err := config.Load(env)
 	if err != nil {
 		// Log error but continue with default config
-		cfg = &config.OpenOctaConfig{}
+		cfg = &config.LinmoConfig{}
 	}
 
 	// Apply environment variables from config.env.vars
@@ -274,7 +274,7 @@ func NewServer(addr string, version string) *Server {
 	enqueueSystemEvent := func(text string) {
 		hub.Broadcast("system-event", map[string]interface{}{"text": text, "sessionKey": mainKey}, nil)
 	}
-	requestHeartbeatNow := func(reason string) {} // no-op: OpenOcta 无独立心跳循环
+	requestHeartbeatNow := func(reason string) {} // no-op: Linmo 无独立心跳循环
 
 	ctx.HooksWake = func(text string, mode string) {
 		enqueueSystemEvent(text)
@@ -498,22 +498,20 @@ func (s *Server) registerRoutes() {
 	s.mux.HandleFunc("POST /api/desktop/browser", s.requireGatewayToken(s.handleDesktopBrowser))
 	s.mux.HandleFunc("OPTIONS /api/desktop/browser", s.handleDesktopBrowserOptions)
 
-	// Site API proxies (employee market / skills / mcps).
-	// Frontend calls Gateway same-origin; Gateway forwards to OPENOCTA_SITE_API_BASE_URL.
-	// CORS: allow dev UI (e.g. localhost:5173) to call gateway (e.g. 127.0.0.1:18900).
-	s.mux.HandleFunc("OPTIONS /api/v1/", s.handleSiteOptions)
-	s.mux.HandleFunc("GET /api/v1/employees", s.requireGatewayToken(s.handleSiteEmployees))
-	s.mux.HandleFunc("GET /api/v1/employees/{id}", s.requireGatewayToken(s.handleSiteEmployeeDetail))
-	s.mux.HandleFunc("GET /api/v1/employees/{id}/download", s.requireGatewayToken(s.handleSiteEmployeeDownload))
-	s.mux.HandleFunc("GET /api/v1/mcps", s.requireGatewayToken(s.handleSiteMcps))
-	s.mux.HandleFunc("GET /api/v1/mcps/{id}", s.requireGatewayToken(s.handleSiteMcpDetail))
-	s.mux.HandleFunc("GET /api/v1/mcps/{id}/download", s.requireGatewayToken(s.handleSiteMcpDownload))
-	s.mux.HandleFunc("GET /api/v1/skills", s.requireGatewayToken(s.handleSiteSkills))
-	s.mux.HandleFunc("GET /api/v1/skills/{folder}", s.requireGatewayToken(s.handleSiteSkillDetail))
-	s.mux.HandleFunc("GET /api/v1/skills/{folder}/download", s.requireGatewayToken(s.handleSiteSkillDownload))
-	s.mux.HandleFunc("GET /api/v1/categories", s.requireGatewayToken(s.handleSiteCategories))
-	s.mux.HandleFunc("GET /api/v1/site/uploads/{path...}", s.handleSiteUploads)
-	s.mux.HandleFunc("POST /api/v1/install", s.requireGatewayToken(s.handleSiteInstall))
+	// Site API proxies (employee market / skills / mcps) — 已隐藏（原功能 8：市场/站点 API）。
+	// s.mux.HandleFunc("OPTIONS /api/v1/", s.handleSiteOptions)
+	// s.mux.HandleFunc("GET /api/v1/employees", s.requireGatewayToken(s.handleSiteEmployees))
+	// s.mux.HandleFunc("GET /api/v1/employees/{id}", s.requireGatewayToken(s.handleSiteEmployeeDetail))
+	// s.mux.HandleFunc("GET /api/v1/employees/{id}/download", s.requireGatewayToken(s.handleSiteEmployeeDownload))
+	// s.mux.HandleFunc("GET /api/v1/mcps", s.requireGatewayToken(s.handleSiteMcps))
+	// s.mux.HandleFunc("GET /api/v1/mcps/{id}", s.requireGatewayToken(s.handleSiteMcpDetail))
+	// s.mux.HandleFunc("GET /api/v1/mcps/{id}/download", s.requireGatewayToken(s.handleSiteMcpDownload))
+	// s.mux.HandleFunc("GET /api/v1/skills", s.requireGatewayToken(s.handleSiteSkills))
+	// s.mux.HandleFunc("GET /api/v1/skills/{folder}", s.requireGatewayToken(s.handleSiteSkillDetail))
+	// s.mux.HandleFunc("GET /api/v1/skills/{folder}/download", s.requireGatewayToken(s.handleSiteSkillDownload))
+	// s.mux.HandleFunc("GET /api/v1/categories", s.requireGatewayToken(s.handleSiteCategories))
+	// s.mux.HandleFunc("GET /api/v1/site/uploads/{path...}", s.handleSiteUploads)
+	// s.mux.HandleFunc("POST /api/v1/install", s.requireGatewayToken(s.handleSiteInstall))
 
 	//s.mux.HandleFunc("/api/", s.handleAPICatchAll)
 	//s.mux.HandleFunc("POST /v1/chat/completions", s.handleNotImplemented)
@@ -522,8 +520,8 @@ func (s *Server) registerRoutes() {
 	s.mux.HandleFunc("POST /hooks/", s.handleHooks)
 	s.mux.HandleFunc("POST /hooks", s.handleHooks)
 	s.mux.HandleFunc("POST /ping", s.handleOpenAPI)
-	s.mux.HandleFunc("GET /openocta/open/v1/ping", s.handleOpenAPI)
-	s.mux.HandleFunc("POST /openocta/open/v1/{subpath...}", s.handleOpenAPI)
+	s.mux.HandleFunc("GET /linmo/open/v1/ping", s.handleOpenAPI)
+	s.mux.HandleFunc("POST /linmo/open/v1/{subpath...}", s.handleOpenAPI)
 	// s.mux.HandleFunc("GET /debug/pprof/", pprof.Index)
 
 	// 为了支持 cmdline 和 profile 等特定功能，建议也显式注册这几个（Index 里其实包含了大部分，但显式注册更稳妥）
@@ -534,10 +532,10 @@ func (s *Server) registerRoutes() {
 }
 
 // resolveDistDirFile resolves the frontend dist directory from the file system.
-// Order: 1) OPENOCTA_FRONTEND_DIR env; 2) cwd/dist/control-ui; 3) cwd/embed/frontend; 4) parent(cwd)/dist/control-ui.
+// Order: 1) LIMNO_FRONTEND_DIR env; 2) cwd/dist/control-ui; 3) cwd/embed/frontend; 4) parent(cwd)/dist/control-ui.
 func resolveDistDirFile() (string, error) {
 	var candidates []string
-	if env := strings.TrimSpace(os.Getenv("OPENOCTA_FRONTEND_DIR")); env != "" {
+	if env := strings.TrimSpace(os.Getenv("LIMNO_FRONTEND_DIR")); env != "" {
 		p := filepath.Clean(env)
 		if !strings.HasSuffix(p, "control-ui") {
 			p = filepath.Join(p, "control-ui")
@@ -718,12 +716,12 @@ func (s *Server) handleWSUpgrade(w http.ResponseWriter, r *http.Request) {
 // 若某个通道配置不合法，会记录日志并继续处理其它通道。
 func registerChannelRuntimesFromConfig(
 	mgr *channels.Manager,
-	cfg *config.OpenOctaConfig,
+	cfg *config.LinmoConfig,
 	sink channels.InboundSink,
 	skipChannels bool,
 ) {
 	if skipChannels {
-		logging.Info("gateway: channel runtimes skipped (OPENOCTA_SKIP_CHANNELS or OPENOCTA_SKIP_PROVIDERS set)")
+		logging.Info("gateway: channel runtimes skipped (LIMNO_SKIP_CHANNELS or LIMNO_SKIP_PROVIDERS set)")
 		return
 	}
 	if cfg == nil || cfg.Channels == nil {

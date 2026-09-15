@@ -12,7 +12,7 @@ func TestResolveContextMiddlewareSettingsFromConfig(t *testing.T) {
 	maxChars := 4096
 	keepLast := 6
 	reserve := 20000
-	cfg := &config.OpenOctaConfig{
+	cfg := &config.LinmoConfig{
 		Agents: &config.AgentsConfig{
 			Defaults: &config.AgentDefaultsConfig{
 				ContextTokens: &contextTokens,

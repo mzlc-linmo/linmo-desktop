@@ -1,4 +1,4 @@
-// Package tools bridges OpenOcta tools to the agent tool interface.
+// Package tools bridges Linmo tools to the agent tool interface.
 package tools
 
 import (

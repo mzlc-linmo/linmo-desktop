@@ -1,4 +1,4 @@
-// Package tool defines the OpenOcta agent tool interface.
+// Package tool defines the Linmo agent tool interface.
 package tool
 
 import "context"

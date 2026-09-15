@@ -11,7 +11,7 @@ func init() {
 var nodeCmd = &cobra.Command{
 	Use:   "node",
 	Short: "Node control",
-	Long:  "Install, start, or stop the OpenOcta node.",
+	Long:  "Install, start, or stop the Linmo node.",
 }
 
 var nodeInstallCmd = &cobra.Command{

@@ -15,7 +15,7 @@ import (
 )
 
 // DesktopQuit 由 Wails 主程序注入：在已安排延迟卸载后退出桌面宿主进程，以便清理脚本能够删到 .app 等文件。
-// 仅在 OPENOCTA_RUN_MODE=desktop 时由 handleDesktopUninstall 调用。
+// 仅在 LIMNO_RUN_MODE=desktop 时由 handleDesktopUninstall 调用。
 var DesktopQuit func()
 
 type uninstallRequestBody struct {
@@ -40,7 +40,7 @@ func (s *Server) handleDesktopUninstallOptions(w http.ResponseWriter, r *http.Re
 }
 
 // handleDesktopUninstall removes user data and/or schedules removal of the install bundle/binary after exit.
-// Requires gateway token. Allowed when OPENOCTA_RUN_MODE=desktop or OPENOCTA_ALLOW_UNINSTALL=1.
+// Requires gateway token. Allowed when LIMNO_RUN_MODE=desktop or LIMNO_ALLOW_UNINSTALL=1.
 func (s *Server) handleDesktopUninstall(w http.ResponseWriter, r *http.Request) {
 	setSiteProxyCORSHeaders(w)
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
@@ -56,7 +56,7 @@ func (s *Server) handleDesktopUninstall(w http.ResponseWriter, r *http.Request) 
 		_ = json.NewEncoder(w).Encode(uninstallResponse{
 			OK:      false,
 			Message: "当前环境不允许通过 API 卸载",
-			Detail:  "请在桌面应用中操作，或设置环境变量 OPENOCTA_ALLOW_UNINSTALL=1（仅限本机可信环境）",
+			Detail:  "请在桌面应用中操作，或设置环境变量 LIMNO_ALLOW_UNINSTALL=1（仅限本机可信环境）",
 		})
 		return
 	}
@@ -115,10 +115,10 @@ func (s *Server) handleDesktopUninstall(w http.ResponseWriter, r *http.Request) 
 	}
 
 	msg := "已安排卸载任务，数秒后删除选定内容。"
-	if strings.EqualFold(strings.TrimSpace(os.Getenv("OPENOCTA_RUN_MODE")), "desktop") {
+	if strings.EqualFold(strings.TrimSpace(os.Getenv("LIMNO_RUN_MODE")), "desktop") {
 		msg += "桌面应用将自动退出。"
 	} else {
-		msg += "请结束本机上的 OpenOcta / 网关进程后再进行其他操作。"
+		msg += "请结束本机上的 Linmo / 网关进程后再进行其他操作。"
 	}
 	if rootKind != "" {
 		msg += fmt.Sprintf("（安装位置：%s）", rootKind)
@@ -126,7 +126,7 @@ func (s *Server) handleDesktopUninstall(w http.ResponseWriter, r *http.Request) 
 	_ = json.NewEncoder(w).Encode(uninstallResponse{OK: true, Message: msg})
 	rc := http.NewResponseController(w)
 	_ = rc.Flush()
-	if DesktopQuit != nil && strings.EqualFold(strings.TrimSpace(os.Getenv("OPENOCTA_RUN_MODE")), "desktop") {
+	if DesktopQuit != nil && strings.EqualFold(strings.TrimSpace(os.Getenv("LIMNO_RUN_MODE")), "desktop") {
 		go func() {
 			time.Sleep(300 * time.Millisecond)
 			DesktopQuit()
@@ -135,10 +135,10 @@ func (s *Server) handleDesktopUninstall(w http.ResponseWriter, r *http.Request) 
 }
 
 func uninstallAllowed() bool {
-	if strings.EqualFold(strings.TrimSpace(os.Getenv("OPENOCTA_RUN_MODE")), "desktop") {
+	if strings.EqualFold(strings.TrimSpace(os.Getenv("LIMNO_RUN_MODE")), "desktop") {
 		return true
 	}
-	if isTruthyEnv(func(k string) string { return os.Getenv(k) }, "OPENOCTA_ALLOW_UNINSTALL") {
+	if isTruthyEnv(func(k string) string { return os.Getenv(k) }, "LIMNO_ALLOW_UNINSTALL") {
 		return true
 	}
 	return false
@@ -153,7 +153,7 @@ func fileExists(p string) bool {
 func resolveInstallRoot(exe string) (path string, kind string) {
 	switch runtime.GOOS {
 	case "darwin":
-		// .../OpenOcta.app/Contents/MacOS/OpenOcta -> .../OpenOcta.app
+		// .../Linmo.app/Contents/MacOS/Linmo -> .../Linmo.app
 		const marker = ".app/Contents/MacOS"
 		if i := strings.Index(exe, marker); i > 0 {
 			return filepath.Clean(exe[:i+4]), "macOS 应用程序包"
@@ -162,9 +162,9 @@ func resolveInstallRoot(exe string) (path string, kind string) {
 	case "windows":
 		dir := filepath.Dir(exe)
 		base := strings.ToLower(filepath.Base(exe))
-		if base == "openocta.exe" {
-			// 仅当 exe 直接位于名为 OpenOcta 的文件夹内时，才删除整个安装目录，避免误删上级目录（如单独放在某盘根目录）。
-			if strings.EqualFold(filepath.Base(dir), "OpenOcta") {
+		if base == "linmo.exe" {
+			// 仅当 exe 直接位于名为 Linmo 的文件夹内时，才删除整个安装目录，避免误删上级目录（如单独放在某盘根目录）。
+			if strings.EqualFold(filepath.Base(dir), "Linmo") {
 				return dir, "Windows 安装目录"
 			}
 		}

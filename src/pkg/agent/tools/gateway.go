@@ -19,7 +19,7 @@ func (GatewayTool) Name() string {
 
 // Description returns the tool description.
 func (GatewayTool) Description() string {
-	return "Read or patch OpenOcta config (~/.openocta/openocta.json). Actions: get (returns hash), schema, env, patch (requires baseHash from get)."
+	return "Read or patch Linmo config (~/.linmo/linmo.json). Actions: get (returns hash), schema, env, patch (requires baseHash from get)."
 }
 
 // Schema returns the parameter schema.

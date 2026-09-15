@@ -295,8 +295,8 @@ function renderWizardBrand(props: SetupWizardProps) {
   return html`
     <div class="setup-wizard__brand-row">
       <div class="setup-wizard__brand">
-        <img class="setup-wizard__brand-logo" src=${logoSrc} alt="OpenOcta" />
-        <span class="setup-wizard__brand-version">OpenOcta ${props.appVersion}</span>
+        <img class="setup-wizard__brand-logo" src=${logoSrc} alt="Linmo" />
+        <span class="setup-wizard__brand-version">Linmo ${props.appVersion}</span>
       </div>
       <button
         type="button"
@@ -634,9 +634,6 @@ function renderModelStep(props: SetupWizardProps) {
 }
 
 const RESOURCE_TABS: { id: SetupWizardResourceTab; label: string }[] = [
-  { id: "skills", label: "技能" },
-  { id: "employees", label: "数字员工" },
-  { id: "mcp", label: "MCP" },
   { id: "channels", label: "IM 通道" },
 ];
 
@@ -690,7 +687,7 @@ function renderResourcesStep(props: SetupWizardProps) {
   return html`
     <div class="setup-wizard__section">
       <p class="setup-wizard__hint setup-wizard__hint--inline">
-        资源列表来自 openocta.com 官网，安装后将写入 openocta.json。
+        IM 通道凭据配置完成后将写入 linmo.json。
       </p>
       <div class="setup-wizard__tabs" role="tablist">
         ${RESOURCE_TABS.map((t) => html`
@@ -709,7 +706,7 @@ function renderResourcesStep(props: SetupWizardProps) {
         ? html`<p class="setup-wizard__error">${props.resourcesError}</p>`
         : nothing}
       ${showInitialLoading
-        ? html`<p class="setup-wizard__hint">从 openocta.com 加载资源列表…</p>`
+        ? html`<p class="setup-wizard__hint">正在加载…</p>`
         : tabBody}
       ${props.resourcesLoading && hasCachedItems
         ? html`<p class="setup-wizard__hint setup-wizard__hint--inline">正在刷新资源列表…</p>`
@@ -812,7 +809,7 @@ function renderWizardChannelPanel(props: SetupWizardProps) {
 
 function renderChannelsTab(props: SetupWizardProps) {
   return html`
-    <p class="setup-wizard__hint">开启 IM 通道并配置参数，保存后写入 openocta.json。</p>
+    <p class="setup-wizard__hint">开启 IM 通道并配置参数，保存后写入 linmo.json。</p>
     <div class="setup-wizard__channel-grid">
       ${props.channelIds.map((id) => {
         const enabled = props.channelEnabled(id);
@@ -903,7 +900,7 @@ function renderScenarioEnvPrompt(props: SetupWizardProps) {
         ? html`<p class="setup-wizard__hint">${prompt.description}</p>`
         : nothing}
       <p class="setup-wizard__hint setup-wizard__hint--inline">
-        点击「继续」后将继续执行初始化；未填写的变量不会写入 openocta.json，可在控制台的「环境变量」中后续配置。
+        点击「继续」后将继续执行初始化；未填写的变量不会写入 linmo.json，可在控制台的「环境变量」中后续配置。
       </p>
       <div class="setup-wizard__env-kv">
         <div class="setup-wizard__env-kv-row">
@@ -966,7 +963,7 @@ function renderScenarioEnvPanel(props: SetupWizardProps) {
         </div>
         <div class="channel-panel-content">
           <p class="setup-wizard__hint">
-            配置后将写入 openocta.json 的 env.vars。Value 可留空，留空项请稍后在「环境变量」页面补充。
+            配置后将写入 linmo.json 的 env.vars。Value 可留空，留空项请稍后在「环境变量」页面补充。
           </p>
           ${envTasks.length === 0
             ? html`<p class="setup-wizard__empty">该场景无需环境变量。</p>`
@@ -1277,7 +1274,7 @@ function renderSummaryStep(session: SetupWizardSession) {
             `
           : nothing}
       <p class="setup-wizard__hint setup-wizard__hint--footer">
-        以上配置将保存到 openocta.json，点击「开始使用」进入系统。
+        以上配置将保存到 linmo.json，点击「开始使用」进入系统。
       </p>
     </div>
   `;
@@ -1294,9 +1291,9 @@ function renderSetupWizardWelcome(props: SetupWizardProps) {
     >
       <div class="setup-wizard__backdrop"></div>
       <div class="setup-wizard__welcome card" @click=${(e: Event) => e.stopPropagation()}>
-        <img class="setup-wizard__welcome-logo" src=${logoSrc} alt="OpenOcta" />
+        <img class="setup-wizard__welcome-logo" src=${logoSrc} alt="Linmo" />
         <p class="setup-wizard__welcome-desc">
-          引导配置已完成，模型、资源与场景已写入 openocta.json。你现在可以开始使用 OpenOcta
+          引导配置已完成，模型、资源与场景已写入 linmo.json。你现在可以开始使用 Linmo
           构建智能体、连接 IM 通道，并在控制台中继续调整配置。
         </p>
         <button

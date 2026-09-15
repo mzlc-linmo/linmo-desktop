@@ -134,7 +134,7 @@ export class CategoryTreeSidebar extends LitElement {
     this.loading = true;
     this.error = "";
     try {
-      // openocta 工具库对应官网 MCP 广场，scope 需映射为 mcp
+      // linmo 工具库对应官网 MCP 广场，scope 需映射为 mcp
       const apiScope = this.scope === "tool" ? "mcp" : this.scope;
       const tree = await fetchCategories(apiScope, {
         gatewayHost: this.gatewayHost,

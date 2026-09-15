@@ -16,7 +16,7 @@ type TranscriptLoadOptions struct {
 	Roles       []string
 }
 
-func sessionHistoryConfig(cfg *config.OpenOctaConfig) *config.SessionHistoryConfig {
+func sessionHistoryConfig(cfg *config.LinmoConfig) *config.SessionHistoryConfig {
 	if cfg == nil || cfg.Session == nil {
 		return nil
 	}
@@ -24,7 +24,7 @@ func sessionHistoryConfig(cfg *config.OpenOctaConfig) *config.SessionHistoryConf
 }
 
 // SessionHistoryEnabled reports whether transcript history should hydrate model input.
-func SessionHistoryEnabled(cfg *config.OpenOctaConfig) bool {
+func SessionHistoryEnabled(cfg *config.LinmoConfig) bool {
 	sh := sessionHistoryConfig(cfg)
 	if sh == nil {
 		return true
@@ -39,7 +39,7 @@ func SessionHistoryEnabled(cfg *config.OpenOctaConfig) bool {
 }
 
 // SessionHistoryMaxMessages returns configured max transcript turns (0 = unlimited).
-func SessionHistoryMaxMessages(cfg *config.OpenOctaConfig) int {
+func SessionHistoryMaxMessages(cfg *config.LinmoConfig) int {
 	sh := sessionHistoryConfig(cfg)
 	if sh == nil {
 		return 0
@@ -51,7 +51,7 @@ func SessionHistoryMaxMessages(cfg *config.OpenOctaConfig) int {
 }
 
 // SessionHistoryRoles returns allowed transcript roles (empty = user, assistant, toolResult).
-func SessionHistoryRoles(cfg *config.OpenOctaConfig) []string {
+func SessionHistoryRoles(cfg *config.LinmoConfig) []string {
 	sh := sessionHistoryConfig(cfg)
 	if sh == nil {
 		return nil
@@ -305,7 +305,7 @@ func assistantTranscriptToSchema(m session.TranscriptMessage) *schema.Message {
 		typ := strings.ToLower(strings.TrimSpace(block.Type))
 		switch typ {
 		case "text":
-			text := strings.TrimSpace(tools.StripOpenOctaAttachmentsMarker(block.Text))
+			text := strings.TrimSpace(tools.StripLinmoAttachmentsMarker(block.Text))
 			if text != "" {
 				textParts = append(textParts, text)
 			}
@@ -356,7 +356,7 @@ func transcriptToolResultText(m session.TranscriptMessage) string {
 		typ := strings.ToLower(strings.TrimSpace(block.Type))
 		switch typ {
 		case "text", "toolresult", "tool_result":
-			if t := strings.TrimSpace(tools.StripOpenOctaAttachmentsMarker(block.Text)); t != "" {
+			if t := strings.TrimSpace(tools.StripLinmoAttachmentsMarker(block.Text)); t != "" {
 				parts = append(parts, t)
 			}
 		default:

@@ -1,6 +1,6 @@
 # Feishu 通道配置说明
 
-本文说明如何在 `openocta.json` 中配置 Feishu（飞书/Lark）通道，并与 Runtime 对应起来。
+本文说明如何在 `linmo.json` 中配置 Feishu（飞书/Lark）通道，并与 Runtime 对应起来。
 
 ## 配置位置
 
@@ -67,7 +67,7 @@ Feishu 通道使用 **WebSocket 长连接** 模式：
 
 1. 在飞书后台创建自建应用，开通 IM 消息权限，获取 `appId` / `appSecret`。
 2. 配置事件订阅，拿到 `encryptKey` 与 `verificationToken`（如有需要）。
-3. 在 `openocta.json` 中填入上述字段，并设置 `channels.feishu.enabled = true`。
-4. 启动 Gateway：`make run` 或 `go run ./cmd/openocta gateway run`。
+3. 在 `linmo.json` 中填入上述字段，并设置 `channels.feishu.enabled = true`。
+4. 启动 Gateway：`make run` 或 `go run ./cmd/linmo gateway run`。
 5. 在 Control UI 中确认 `channels.status` 返回的列表中包含 `feishu`。
 6. 在飞书中向机器人发送消息，检查 Agent 是否能够收到并回复。

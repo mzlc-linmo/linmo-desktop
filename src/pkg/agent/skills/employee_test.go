@@ -37,7 +37,7 @@ func TestLoadEmployeeEntriesExclusiveOnlyWhenNoSkillIDs(t *testing.T) {
 	}
 	m := &employees.Manifest{ID: empID, Name: "Sales", Enabled: true}
 	if err := employees.SaveManifest(m, func(k string) string {
-		if k == "OPENOCTA_STATE_DIR" || k == "OPENCLAW_STATE_DIR" {
+		if k == "LIMNO_STATE_DIR" || k == "OPENCLAW_STATE_DIR" {
 			return state
 		}
 		return ""
@@ -46,7 +46,7 @@ func TestLoadEmployeeEntriesExclusiveOnlyWhenNoSkillIDs(t *testing.T) {
 	}
 
 	env := func(k string) string {
-		if k == "OPENOCTA_STATE_DIR" || k == "OPENCLAW_STATE_DIR" {
+		if k == "LIMNO_STATE_DIR" || k == "OPENCLAW_STATE_DIR" {
 			return state
 		}
 		return ""
@@ -74,7 +74,7 @@ func TestLoadEmployeeEntriesSkillIDsPlusExclusive(t *testing.T) {
 	writeSkill(t, empDir, "emp-only", "employee exclusive")
 
 	env := func(k string) string {
-		if k == "OPENOCTA_STATE_DIR" || k == "OPENCLAW_STATE_DIR" {
+		if k == "LIMNO_STATE_DIR" || k == "OPENCLAW_STATE_DIR" {
 			return state
 		}
 		return ""

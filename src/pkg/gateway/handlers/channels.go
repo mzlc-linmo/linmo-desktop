@@ -60,7 +60,7 @@ func buildChannelUiCatalog(plugins []channels.ChannelPlugin) (entries []ChannelU
 }
 
 // listChannelAccountIds returns account IDs for a channel. Uses ChannelConfigPlugin when available.
-func listChannelAccountIds(cfg *config.OpenOctaConfig, channelId string, plugin channels.ChannelPlugin) []string {
+func listChannelAccountIds(cfg *config.LinmoConfig, channelId string, plugin channels.ChannelPlugin) []string {
 	if configPlugin, ok := plugin.(channels.ChannelConfigPlugin); ok && cfg != nil {
 		ids := configPlugin.ListAccountIds(cfg)
 		if len(ids) > 0 {
@@ -89,7 +89,7 @@ func listChannelAccountIds(cfg *config.OpenOctaConfig, channelId string, plugin 
 }
 
 // isChannelAccountConfigured returns whether the channel/account has meaningful config.
-func isChannelAccountConfigured(cfg *config.OpenOctaConfig, channelId, accountId string) bool {
+func isChannelAccountConfigured(cfg *config.LinmoConfig, channelId, accountId string) bool {
 	if cfg == nil || cfg.Channels == nil {
 		return false
 	}
@@ -110,7 +110,7 @@ func isChannelAccountConfigured(cfg *config.OpenOctaConfig, channelId, accountId
 
 // buildAccountSnapshot builds ChannelAccountSnapshot. Uses ChannelStatusPlugin when available.
 // runtimeStatus 为 nil 时仅基于配置构建；非 nil 时会将运行状态合并进快照。
-func buildAccountSnapshot(cfg *config.OpenOctaConfig, plugin channels.ChannelPlugin, channelId, accountId string, runtimeStatus *channels.RuntimeStatus) *channels.ChannelAccountSnapshot {
+func buildAccountSnapshot(cfg *config.LinmoConfig, plugin channels.ChannelPlugin, channelId, accountId string, runtimeStatus *channels.RuntimeStatus) *channels.ChannelAccountSnapshot {
 	configured := isChannelAccountConfigured(cfg, channelId, accountId)
 	var snap *channels.ChannelAccountSnapshot
 	if statusPlugin, ok := plugin.(channels.ChannelStatusPlugin); ok && cfg != nil {
@@ -194,7 +194,7 @@ func mergeRuntimeStatusIntoSnapshot(snap *channels.ChannelAccountSnapshot, statu
 	}
 }
 
-func resolveAccountForStatus(plugin channels.ChannelPlugin, cfg *config.OpenOctaConfig, channelId, accountId string) interface{} {
+func resolveAccountForStatus(plugin channels.ChannelPlugin, cfg *config.LinmoConfig, channelId, accountId string) interface{} {
 	if configPlugin, ok := plugin.(channels.ChannelConfigPlugin); ok {
 		return configPlugin.ResolveAccount(cfg, accountId)
 	}
@@ -217,7 +217,7 @@ func resolveAccountForStatus(plugin channels.ChannelPlugin, cfg *config.OpenOcta
 }
 
 // buildChannelSummary builds channel summary for channels map. Uses ChannelStatusPlugin when available.
-func buildChannelSummary(cfg *config.OpenOctaConfig, plugin channels.ChannelPlugin, defaultAccountId string, accounts []channels.ChannelAccountSnapshot) map[string]interface{} {
+func buildChannelSummary(cfg *config.LinmoConfig, plugin channels.ChannelPlugin, defaultAccountId string, accounts []channels.ChannelAccountSnapshot) map[string]interface{} {
 	var defaultSnapshot *channels.ChannelAccountSnapshot
 	for i := range accounts {
 		if accounts[i].AccountID == defaultAccountId {
@@ -498,7 +498,7 @@ func ChannelsLogoutHandler(opts HandlerOpts) error {
 	return nil
 }
 
-func resolveAccountForLogout(cfg *config.OpenOctaConfig, plugin channels.ChannelPlugin, channelId, accountId string) interface{} {
+func resolveAccountForLogout(cfg *config.LinmoConfig, plugin channels.ChannelPlugin, channelId, accountId string) interface{} {
 	if configPlugin, ok := plugin.(channels.ChannelConfigPlugin); ok && cfg != nil {
 		return configPlugin.ResolveAccount(cfg, accountId)
 	}

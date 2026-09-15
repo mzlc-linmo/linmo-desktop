@@ -154,7 +154,7 @@ export class OpenClawApp extends LitElement implements NativeDialogInvoker {
   @state() setupWizardActive = false;
   @state() setupWizardStepIndex = 0;
   @state() setupWizardSession = createEmptySetupWizardSession();
-  @state() setupWizardResourceTab: import("./setup-wizard.ts").SetupWizardResourceTab = "skills";
+  @state() setupWizardResourceTab: import("./setup-wizard.ts").SetupWizardResourceTab = "channels";
   @state() setupWizardModelSearchQuery = "";
   @state() setupWizardModelTab: import("./setup-wizard.ts").SetupWizardModelTab = "embedded";
   @state() setupWizardEnabledProviders = new Set<string>();

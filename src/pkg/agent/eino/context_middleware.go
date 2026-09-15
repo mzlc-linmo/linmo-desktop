@@ -96,13 +96,13 @@ func resolveContextMiddlewareSettings(cfg BuildConfig) contextMiddlewareSettings
 	enableReduction := true
 	enableSummarization := compactionEnabled(cfg.Config)
 	enableToolSearch := true
-	if v := strings.TrimSpace(strings.ToLower(env("OPENOCTA_ADK_REDUCTION"))); v == "0" || v == "false" || v == "off" {
+	if v := strings.TrimSpace(strings.ToLower(env("LIMNO_ADK_REDUCTION"))); v == "0" || v == "false" || v == "off" {
 		enableReduction = false
 	}
-	if v := strings.TrimSpace(strings.ToLower(env("OPENOCTA_ADK_SUMMARIZATION"))); v == "0" || v == "false" || v == "off" {
+	if v := strings.TrimSpace(strings.ToLower(env("LIMNO_ADK_SUMMARIZATION"))); v == "0" || v == "false" || v == "off" {
 		enableSummarization = false
 	}
-	if v := strings.TrimSpace(strings.ToLower(env("OPENOCTA_ADK_TOOLSEARCH"))); v == "0" || v == "false" || v == "off" {
+	if v := strings.TrimSpace(strings.ToLower(env("LIMNO_ADK_TOOLSEARCH"))); v == "0" || v == "false" || v == "off" {
 		enableToolSearch = false
 	}
 
@@ -120,7 +120,7 @@ func resolveContextMiddlewareSettings(cfg BuildConfig) contextMiddlewareSettings
 	}
 }
 
-func compactionEnabled(cfg *config.OpenOctaConfig) bool {
+func compactionEnabled(cfg *config.LinmoConfig) bool {
 	if cfg == nil || cfg.Agents == nil || cfg.Agents.Defaults == nil || cfg.Agents.Defaults.Compaction == nil {
 		return true
 	}

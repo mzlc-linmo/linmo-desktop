@@ -1,6 +1,6 @@
 export const SHELL_MODE_QUERY_PARAM = "_shell";
 export const DESKTOP_SHELL_QUERY_VALUE = "d";
-export const SHELL_MODE_SESSION_KEY = "openocta.shell";
+export const SHELL_MODE_SESSION_KEY = "linmo.shell";
 
 export type ShellMode = "browser" | "desktop";
 

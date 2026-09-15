@@ -1,4 +1,4 @@
-# OpenOcta 场景配置模板
+# Linmo 场景配置模板
 
 本目录包含可在 **安装引导** 或 **离线初始化** 中使用的场景模板。
 
@@ -20,7 +20,7 @@ deploy/scenarios/<scenario-id>/
 
 ### 1. 图形界面（推荐）
 
-首次启动 OpenOcta 控制端时，若当前版本尚未完成引导，会弹出 **安装引导**  wizard。在「场景初始化」步骤中选择场景并执行即可。
+首次启动 Linmo 控制端时，若当前版本尚未完成引导，会弹出 **安装引导**  wizard。在「场景初始化」步骤中选择场景并执行即可。
 
 ### 2. 命令行 / CI
 
@@ -28,8 +28,8 @@ deploy/scenarios/<scenario-id>/
 
 ```bash
 cd deploy/scenarios/host-inspection
-export OPENOCTA_GATEWAY_URL="http://127.0.0.1:18900"
-export OPENOCTA_GATEWAY_TOKEN="your-token"
+export LIMNO_GATEWAY_URL="http://127.0.0.1:18900"
+export LIMNO_GATEWAY_TOKEN="your-token"
 ./init.sh
 ```
 
@@ -37,14 +37,14 @@ Windows PowerShell:
 
 ```powershell
 cd deploy\scenarios\host-inspection
-$env:OPENOCTA_GATEWAY_URL = "http://127.0.0.1:18900"
-$env:OPENOCTA_GATEWAY_TOKEN = "your-token"
+$env:LIMNO_GATEWAY_URL = "http://127.0.0.1:18900"
+$env:LIMNO_GATEWAY_TOKEN = "your-token"
 .\init.ps1
 ```
 
 ### 3. 复制到其他环境
 
-将整个 `deploy/scenarios/<id>/` 目录复制到目标机器，配置 `OPENOCTA_GATEWAY_URL` 与 `OPENOCTA_GATEWAY_TOKEN` 后运行脚本即可完成同等初始化。
+将整个 `deploy/scenarios/<id>/` 目录复制到目标机器，配置 `LIMNO_GATEWAY_URL` 与 `LIMNO_GATEWAY_TOKEN` 后运行脚本即可完成同等初始化。
 
 ## 内置场景
 

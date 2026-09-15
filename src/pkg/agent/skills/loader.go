@@ -59,7 +59,7 @@ type InstallSpec struct {
 
 // LoadOptions configures skill loading.
 type LoadOptions struct {
-	Config           *config.OpenOctaConfig
+	Config           *config.LinmoConfig
 	ManagedSkillsDir string
 	BundledSkillsDir string
 }
@@ -373,7 +373,7 @@ func parseFrontmatter(content string) map[string]string {
 	return result
 }
 
-// parseMetadata parses OpenOcta metadata from frontmatter.
+// parseMetadata parses Linmo metadata from frontmatter.
 func parseMetadata(frontmatter map[string]string) *Metadata {
 	// TODO: Parse JSON5 metadata field
 	m := &Metadata{

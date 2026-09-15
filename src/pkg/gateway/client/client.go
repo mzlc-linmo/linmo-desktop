@@ -69,7 +69,7 @@ func (c *Client) Connect(ctx context.Context) error {
 			MinProtocol: 3,
 			MaxProtocol: 3,
 			Client: protocol.ConnectClientInfo{
-				ID:       "openocta-cli",
+				ID:       "linmo-cli",
 				Version:  "0.0.0",
 				Platform: "cli",
 				Mode:     "cli",

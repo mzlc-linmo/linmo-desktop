@@ -10,7 +10,7 @@ import (
 
 // BuildLocalAgentSystemHint returns extra system instructions when the user @mentions local CLI agents.
 // The main agent should analyze intent and delegate via the local_agent tool instead of direct CLI invocation.
-func BuildLocalAgentSystemHint(message string, cfg *config.OpenOctaConfig) string {
+func BuildLocalAgentSystemHint(message string, cfg *config.LinmoConfig) string {
 	if cfg != nil && cfg.LocalAgents != nil && cfg.LocalAgents.Enabled != nil && !*cfg.LocalAgents.Enabled {
 		return ""
 	}

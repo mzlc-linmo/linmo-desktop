@@ -25,7 +25,7 @@
 }
 
 /* Custom element wrapper must preserve the flex scroll chain to .chat-thread */
-.chat-main > openocta-chat-thread {
+.chat-main > linmo-chat-thread {
   display: flex;
   flex-direction: column;
   flex: 1 1 0;

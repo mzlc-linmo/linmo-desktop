@@ -18,7 +18,7 @@ func init() {
 var agentCmd = &cobra.Command{
 	Use:   "agent",
 	Short: "Run an agent",
-	Long:  "Execute the OpenOcta agent with optional message and thinking mode.",
+	Long:  "Execute the Linmo agent with optional message and thinking mode.",
 	RunE:  runAgent,
 }
 

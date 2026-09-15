@@ -1,4 +1,4 @@
-# OpenOcta Control UI
+# Linmo Control UI
 
 与 [OpenClaw Gateway](https://docs.openclaw.ai/gateway) WebSocket 协议兼容的 Control UI 前端。基于 Lit + Vite 的单页应用，通过 WebSocket 连接 Gateway，管理会话、配置、通道、Cron、Skills、Nodes 等。
 
@@ -38,7 +38,7 @@ pnpm test
 
 ```
 ui/
-├── index.html              # 入口 HTML（标题：OpenOcta Control）
+├── index.html              # 入口 HTML（标题：Linmo Control）
 ├── vite.config.ts          # Vite 配置（base、端口 5173、输出 dist/control-ui）
 ├── src/
 │   ├── main.ts             # 入口脚本

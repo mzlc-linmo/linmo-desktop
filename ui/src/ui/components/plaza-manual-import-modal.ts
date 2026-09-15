@@ -38,16 +38,16 @@ export function renderPlazaManualImportModal(props: PlazaManualImportModalProps)
 
           <section class="plaza-guide-section">
             <h3 class="plaza-guide-section__title">一、目录位置</h3>
-            <p>默认状态目录为 <code>~/.openocta</code>（Windows：<code>%APPDATA%\\openocta</code>）。</p>
-            ${renderPre(`~/.openocta/embedded-models/
+            <p>默认状态目录为 <code>~/.linmo</code>（Windows：<code>%APPDATA%\\linmo</code>）。</p>
+            ${renderPre(`~/.linmo/embedded-models/
 ├── manifest.json              # 自动维护，勿手动改
 ├── qwen3-0.6b/                # 与广场 ID 一致
 │   └── Qwen3-0.6B-Q4_K_M.gguf
 └── my-local-qwen/             # 自定义 ID
     └── My-Local-Qwen-Q4_K_M.gguf`)}
             <p class="muted">
-              可通过环境变量 <code>OPENOCTA_STATE_DIR</code> 修改状态根目录；内嵌模型始终在
-              <code>{OPENOCTA_STATE_DIR}/embedded-models/</code> 下。
+              可通过环境变量 <code>LIMNO_STATE_DIR</code> 修改状态根目录；内嵌模型始终在
+              <code>{LIMNO_STATE_DIR}/embedded-models/</code> 下。
             </p>
           </section>
 
@@ -61,7 +61,7 @@ export function renderPlazaManualImportModal(props: PlazaManualImportModalProps)
               </li>
               <li>
                 <strong>下载并放置 GGUF</strong>：创建
-                <code>~/.openocta/embedded-models/&lt;模型ID&gt;/</code>，放入
+                <code>~/.linmo/embedded-models/&lt;模型ID&gt;/</code>，放入
                 <code>.gguf</code> 文件（非 Ollama blob、非 safetensors）。
                 <ul>
                   <li><strong>Chat</strong>：至少一个非 <code>mmproj</code> 的权重文件。</li>
@@ -73,8 +73,8 @@ export function renderPlazaManualImportModal(props: PlazaManualImportModalProps)
               <li><strong>启动 / 停止 / 删除</strong>：与在线下载模型相同；删除会移除整个模型目录。</li>
               <li>
                 <strong>在对话中使用</strong>：启动 Chat 模型后选择
-                <code>openocta-embedded-chat/&lt;模型ID&gt;</code>，例如
-                <code>openocta-embedded-chat/my-local-qwen</code>。
+                <code>linmo-embedded-chat/&lt;模型ID&gt;</code>，例如
+                <code>linmo-embedded-chat/my-local-qwen</code>。
               </li>
             </ol>
           </section>
@@ -91,11 +91,11 @@ export function renderPlazaManualImportModal(props: PlazaManualImportModalProps)
               <tbody>
                 <tr>
                   <td>macOS / Linux</td>
-                  <td><code>~/.openocta/embedded-models/</code></td>
+                  <td><code>~/.linmo/embedded-models/</code></td>
                 </tr>
                 <tr>
                   <td>Windows</td>
-                  <td><code>%APPDATA%\\openocta\\embedded-models\\</code></td>
+                  <td><code>%APPDATA%\\linmo\\embedded-models\\</code></td>
                 </tr>
               </tbody>
             </table>

@@ -104,7 +104,7 @@ function renderPathsTable(props: ApiKeysProps) {
       <thead>
         <tr>
           <th style="width: 48px;">#</th>
-          <th>路径前缀（完整 URI 前缀，含 /openocta/open/v1）</th>
+          <th>路径前缀（完整 URI 前缀，含 /linmo/open/v1）</th>
           <th style="width: 72px;">操作</th>
         </tr>
       </thead>
@@ -117,7 +117,7 @@ function renderPathsTable(props: ApiKeysProps) {
                 <span class="input"><input
                   type="text"
                   .value=${path}
-                  placeholder="/openocta/open/v1/ping"
+                  placeholder="/linmo/open/v1/ping"
                   ?disabled=${!props.connected}
                   @input=${(e: Event) => updatePath(index, (e.target as HTMLInputElement).value)}
                 /></span>
@@ -429,7 +429,7 @@ function exampleModelKey(props: ApiKeysProps): string {
 }
 
 function buildPingCurl(base: string, apiKey: string): string {
-  return `curl -X POST "${base}/openocta/open/v1/ping" \\
+  return `curl -X POST "${base}/linmo/open/v1/ping" \\
   -H "Authorization: Bearer ${apiKey}" \\
   -H "Content-Type: application/json"`;
 }
@@ -437,7 +437,7 @@ function buildPingCurl(base: string, apiKey: string): string {
 function buildPingPython(base: string, apiKey: string): string {
   return `import requests
 
-url = "${base}/openocta/open/v1/ping"
+url = "${base}/linmo/open/v1/ping"
 headers = {"Authorization": f"Bearer ${apiKey}"}
 
 resp = requests.post(url, headers=headers, timeout=30)
@@ -446,7 +446,7 @@ print(resp.json())`;
 }
 
 function buildCompletionCurl(base: string, apiKey: string, model: string): string {
-  return `curl -X POST "${base}/openocta/open/v1/completion" \\
+  return `curl -X POST "${base}/linmo/open/v1/completion" \\
   -H "Authorization: Bearer ${apiKey}" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -461,7 +461,7 @@ function buildCompletionCurl(base: string, apiKey: string, model: string): strin
 function buildCompletionPython(base: string, apiKey: string, model: string): string {
   return `import requests
 
-url = "${base}/openocta/open/v1/completion"
+url = "${base}/linmo/open/v1/completion"
 headers = {
     "Authorization": f"Bearer ${apiKey}",
     "Content-Type": "application/json",
@@ -555,7 +555,7 @@ export function renderApiKeysExamplesModal(props: ApiKeysProps) {
             </p>
             <ul class="api-keys-examples__list">
               <li><code>Authorization: Bearer &lt;api-key&gt;</code></li>
-              <li><code>X-OpenOcta-Api-Key: &lt;api-key&gt;</code></li>
+              <li><code>X-Linmo-Api-Key: &lt;api-key&gt;</code></li>
             </ul>
             <p class="muted api-keys-examples__desc">
               每个 Key 可配置允许访问的路径前缀；请求路径不在白名单内将返回 <code>403</code>。
@@ -563,7 +563,7 @@ export function renderApiKeysExamplesModal(props: ApiKeysProps) {
           </section>
 
           <section class="api-keys-examples__section">
-            <h2 class="api-keys-examples__title">POST /openocta/open/v1/ping</h2>
+            <h2 class="api-keys-examples__title">POST /linmo/open/v1/ping</h2>
             <p class="muted api-keys-examples__desc">连通性测试，无需请求体。别名：<code>POST /ping</code>。</p>
             <table class="env-vars__table api-keys-examples__params">
               <thead>
@@ -571,7 +571,7 @@ export function renderApiKeysExamplesModal(props: ApiKeysProps) {
               </thead>
               <tbody>
                 <tr>
-                  <td><code>Authorization</code> 或 <code>X-OpenOcta-Api-Key</code></td>
+                  <td><code>Authorization</code> 或 <code>X-Linmo-Api-Key</code></td>
                   <td>Header</td>
                   <td>是</td>
                   <td>API Key</td>
@@ -584,7 +584,7 @@ export function renderApiKeysExamplesModal(props: ApiKeysProps) {
           </section>
 
           <section class="api-keys-examples__section">
-            <h2 class="api-keys-examples__title">POST /openocta/open/v1/completion</h2>
+            <h2 class="api-keys-examples__title">POST /linmo/open/v1/completion</h2>
             <p class="muted api-keys-examples__desc">
               Chat 补全接口，内部走与 Web 聊天 / IM 相同的 <code>chat.send</code> 流程。若 Key 配置了模型白名单，<code>model</code> 须匹配允许项；Skill/MCP/数字员工绑定在创建 Key 时配置。
             </p>
@@ -594,7 +594,7 @@ export function renderApiKeysExamplesModal(props: ApiKeysProps) {
               </thead>
               <tbody>
                 <tr>
-                  <td><code>Authorization</code> 或 <code>X-OpenOcta-Api-Key</code></td>
+                  <td><code>Authorization</code> 或 <code>X-Linmo-Api-Key</code></td>
                   <td>Header</td>
                   <td>是</td>
                   <td>API Key</td>
@@ -684,9 +684,9 @@ export function renderApiKeys(props: ApiKeysProps) {
           第三方可通过
           <code>Authorization: Bearer &lt;api-key&gt;</code>
           或
-          <code>X-OpenOcta-Api-Key</code>
+          <code>X-Linmo-Api-Key</code>
           调用开放接口。连通性测试：
-          <code>POST /openocta/open/v1/ping</code>
+          <code>POST /linmo/open/v1/ping</code>
           或
           <code>POST /ping</code>。
           <button class="api-keys__doc-link" type="button" @click=${props.onOpenExamplesModal}>请求样例</button>

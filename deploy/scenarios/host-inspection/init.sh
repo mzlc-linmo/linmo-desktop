@@ -2,8 +2,8 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 SCENARIO_JSON="${ROOT}/scenario.json"
-GATEWAY_URL="${OPENOCTA_GATEWAY_URL:-http://127.0.0.1:18900}"
-TOKEN="${OPENOCTA_GATEWAY_TOKEN:-}"
+GATEWAY_URL="${LIMNO_GATEWAY_URL:-http://127.0.0.1:18900}"
+TOKEN="${LIMNO_GATEWAY_TOKEN:-}"
 
 if [[ ! -f "$SCENARIO_JSON" ]]; then
   echo "missing scenario.json" >&2

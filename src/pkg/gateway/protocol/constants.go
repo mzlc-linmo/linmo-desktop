@@ -3,17 +3,17 @@ package protocol
 // Gateway client IDs (from client-info.ts).
 const (
 	ClientIDWebchatUI   = "webchat-ui"
-	ClientIDControlUI   = "openocta-control-ui"
+	ClientIDControlUI   = "linmo-control-ui"
 	ClientIDWebchat     = "webchat"
 	ClientIDCLI         = "cli"
 	ClientIDGateway     = "gateway-client"
-	ClientIDMacOSApp    = "openocta-macos"
-	ClientIDIOSApp      = "openocta-ios"
-	ClientIDAndroidApp  = "openocta-android"
+	ClientIDMacOSApp    = "linmo-macos"
+	ClientIDIOSApp      = "linmo-ios"
+	ClientIDAndroidApp  = "linmo-android"
 	ClientIDNodeHost    = "node-host"
 	ClientIDTest        = "test"
 	ClientIDFingerprint = "fingerprint"
-	ClientIDProbe       = "openocta-probe"
+	ClientIDProbe       = "linmo-probe"
 )
 
 // Gateway client modes.

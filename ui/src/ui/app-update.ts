@@ -6,23 +6,16 @@ import {
   startAppUpdateInstall,
   type AppUpdateCheckResult,
 } from "./controllers/app-update.ts";
-import { isLocalGatewayHost } from "./gateway-url.ts";
 import { nativeAlert } from "./native-dialog-bridge.ts";
 import { loadConfig } from "./controllers/config.ts";
-import { isDesktopShell } from "./open-external-url.ts";
 
 let installPollTimer: number | null = null;
 
 type UpdateHost = AppViewState;
 
-export function isAppUpdateUIAvailable(state: AppViewState): boolean {
-  if (!state.connected) {
-    return false;
-  }
-  if (isDesktopShell()) {
-    return true;
-  }
-  return isLocalGatewayHost(state.settings.gatewayUrl);
+export function isAppUpdateUIAvailable(_state: AppViewState): boolean {
+  // 更新检查功能已隐藏（原功能 6/7）。
+  return false;
 }
 
 function gatewayOpts(state: AppViewState) {

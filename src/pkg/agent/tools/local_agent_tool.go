@@ -160,7 +160,7 @@ func (t LocalAgentTool) runSegments(ctx context.Context, segments []localagents.
 }
 
 // AppendLocalAgentTool adds the local_agent tool when delegation is enabled.
-func AppendLocalAgentTool(base []tool.Tool, cfg *config.OpenOctaConfig, workDir string, env func(string) string) []tool.Tool {
+func AppendLocalAgentTool(base []tool.Tool, cfg *config.LinmoConfig, workDir string, env func(string) string) []tool.Tool {
 	if cfg == nil || !cfg.LocalAgents.IsEnabled() {
 		return base
 	}

@@ -31,7 +31,7 @@ func TestFilterOutBrowserTools(t *testing.T) {
 
 func TestBrowserToolsFromConfigDisabled(t *testing.T) {
 	enabled := false
-	cfg := &config.OpenOctaConfig{
+	cfg := &config.LinmoConfig{
 		Browser: &config.BrowserConfig{Enabled: &enabled},
 	}
 	if len(tools.BrowserToolsFromConfig(cfg)) != 0 {

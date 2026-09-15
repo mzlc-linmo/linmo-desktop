@@ -3,7 +3,7 @@ import { decodeFileText, extractFileBlocks, extractFileBlocksFromA2UIBlocks } fr
 import { parseCsvTable, resolveTextFilePreviewKind } from "./file-preview-content.ts";
 
 describe("extractFileBlocksFromA2UIBlocks", () => {
-  it("parses @@OPENOCTA_ATTACHMENTS@@ from A2UI Text components", () => {
+  it("parses @@LIMNO_ATTACHMENTS@@ from A2UI Text components", () => {
     const blocks = [
       {
         version: "v0.9",
@@ -17,7 +17,7 @@ describe("extractFileBlocksFromA2UIBlocks", () => {
             {
               id: "root",
               component: "Text",
-              text: '已生成报告\n@@OPENOCTA_ATTACHMENTS@@\n[{"type":"file","filename":"report.html","mimeType":"text/html","data":"PGgxPm9rPC9oMT4="}]',
+              text: '已生成报告\n@@LIMNO_ATTACHMENTS@@\n[{"type":"file","filename":"report.html","mimeType":"text/html","data":"PGgxPm9rPC9oMT4="}]',
             },
           ],
         },
@@ -71,7 +71,7 @@ describe("extractFileBlocksFromA2UIBlocks", () => {
                 {
                   id: "root",
                   component: "Text",
-                  text: '@@OPENOCTA_ATTACHMENTS@@\n[{"type":"file","filename":"notes.txt","mimeType":"text/plain","data":"aGk="}]',
+                  text: '@@LIMNO_ATTACHMENTS@@\n[{"type":"file","filename":"notes.txt","mimeType":"text/plain","data":"aGk="}]',
                 },
               ],
             },

@@ -19,7 +19,7 @@ type Manifest struct {
 	CreatedAt int64 `json:"createdAt,omitempty"`
 	// Builtin 标记是否为内置员工（历史兼容，后端不再 embed 默认员工）。
 	Builtin bool `json:"builtin"`
-	// SkillIDs 是与该员工关联的全局 skill 名称（可来自 ~/.openocta/skills 或 workspace skills）。
+	// SkillIDs 是与该员工关联的全局 skill 名称（可来自 ~/.linmo/skills 或 workspace skills）。
 	SkillIDs []string `json:"skillIds,omitempty"`
 	// McpServers 为该员工专属的 MCP 服务器配置，与会话时与全局 mcp.servers 合并（同 key 时员工覆盖全局）。
 	McpServers map[string]config.McpServerEntry `json:"mcpServers,omitempty"`

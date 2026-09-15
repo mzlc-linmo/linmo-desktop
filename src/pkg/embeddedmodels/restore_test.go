@@ -11,7 +11,7 @@ import (
 func TestFindModelsToRestore(t *testing.T) {
 	root := t.TempDir()
 	env := func(k string) string {
-		if k == "OPENOCTA_STATE_DIR" {
+		if k == "LIMNO_STATE_DIR" {
 			return root
 		}
 		return ""

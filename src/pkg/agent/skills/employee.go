@@ -13,14 +13,14 @@ import (
 // LoadEmployeeEntries loads skills for a digital-employee session.
 //
 // Sources (later overrides earlier on name conflict):
-//  1. ~/.openocta/employees/<id>/skills (legacy)
-//  2. ~/.openocta/employee_skills/<id> (uploaded / site-install exclusive skills)
+//  1. ~/.linmo/employees/<id>/skills (legacy)
+//  2. ~/.linmo/employee_skills/<id> (uploaded / site-install exclusive skills)
 //  3. When manifest.skillIds is non-empty: matching skills from the workspace pool
 //     (workspace / managed / bundled). Employee-exclusive skills are always kept
 //     even if not listed in skillIds.
 //
 // When skillIds is empty, the workspace pool is NOT loaded — only exclusive dirs.
-func LoadEmployeeEntries(workspaceDir string, cfg *config.OpenOctaConfig, employeeID string, env func(string) string) []Entry {
+func LoadEmployeeEntries(workspaceDir string, cfg *config.LinmoConfig, employeeID string, env func(string) string) []Entry {
 	employeeID = strings.TrimSpace(employeeID)
 	if employeeID == "" {
 		return nil
@@ -33,12 +33,12 @@ func LoadEmployeeEntries(workspaceDir string, cfg *config.OpenOctaConfig, employ
 	var entries []Entry
 
 	legacyDir := filepath.Join(stateDir, "employees", employeeID, "skills")
-	if legacy, err := LoadEntriesFromDir(legacyDir, "openocta-employee-legacy"); err == nil {
+	if legacy, err := LoadEntriesFromDir(legacyDir, "linmo-employee-legacy"); err == nil {
 		entries = MergeEntries(entries, legacy)
 	}
 
 	empDir := filepath.Join(stateDir, "employee_skills", employeeID)
-	if emp, err := LoadEntriesFromDir(empDir, "openocta-employee"); err == nil {
+	if emp, err := LoadEntriesFromDir(empDir, "linmo-employee"); err == nil {
 		entries = MergeEntries(entries, emp)
 	}
 
@@ -127,7 +127,7 @@ func FilterEntriesByNames(entries []Entry, allowed []string) []Entry {
 	return out
 }
 
-// EmployeeSkillsDir returns ~/.openocta/employee_skills/<employeeID>.
+// EmployeeSkillsDir returns ~/.linmo/employee_skills/<employeeID>.
 func EmployeeSkillsDir(employeeID string, env func(string) string) string {
 	employeeID = strings.TrimSpace(employeeID)
 	if employeeID == "" {

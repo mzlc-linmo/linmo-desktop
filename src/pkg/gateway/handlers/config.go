@@ -40,7 +40,7 @@ type ConfigSnapshot struct {
 	Raw          string                  `json:"raw,omitempty"`
 	Parsed       interface{}             `json:"parsed,omitempty"`
 	Valid        bool                    `json:"valid"`
-	Config       *config.OpenOctaConfig  `json:"config"`
+	Config       *config.LinmoConfig  `json:"config"`
 	Hash         string                  `json:"hash,omitempty"`
 	Issues       []ConfigValidationIssue `json:"issues"`
 	Warnings     []ConfigValidationIssue `json:"warnings"`
@@ -207,7 +207,7 @@ func ConfigSetHandler(opts HandlerOpts) error {
 		}, nil)
 		return nil
 	}
-	var cfg config.OpenOctaConfig
+	var cfg config.LinmoConfig
 	if err := json.Unmarshal([]byte(raw), &cfg); err != nil {
 		opts.Respond(false, nil, &protocol.ErrorShape{
 			Code:    protocol.ErrCodeInvalidRequest,
@@ -345,7 +345,7 @@ func ConfigPatchHandler(opts HandlerOpts) error {
 		}, nil)
 		return nil
 	}
-	var cfg config.OpenOctaConfig
+	var cfg config.LinmoConfig
 	_ = json.Unmarshal(data, &cfg) // best-effort for response; extra keys ignored
 	if opts.Context != nil {
 		opts.Context.Config = &cfg
@@ -439,7 +439,7 @@ func McpServersDeleteHandler(opts HandlerOpts) error {
 		}, nil)
 		return nil
 	}
-	var cfg config.OpenOctaConfig
+	var cfg config.LinmoConfig
 	_ = json.Unmarshal(data, &cfg)
 	if opts.Context != nil {
 		opts.Context.Config = &cfg
@@ -491,7 +491,7 @@ func WriteConfigMap(path string, m map[string]interface{}) error {
 	return nil
 }
 
-func configToMap(cfg *config.OpenOctaConfig) map[string]interface{} {
+func configToMap(cfg *config.LinmoConfig) map[string]interface{} {
 	if cfg == nil {
 		return map[string]interface{}{}
 	}
@@ -646,7 +646,7 @@ func LoadConfigSnapshot(env func(string) string) (*ConfigSnapshot, error) {
 			Raw:          raw,
 			Hash:         configHash(raw),
 			Valid:        false,
-			Config:       &config.OpenOctaConfig{},
+			Config:       &config.LinmoConfig{},
 			Issues:       []ConfigValidationIssue{{Path: "", Message: err.Error()}},
 			Warnings:     []ConfigValidationIssue{},
 			LegacyIssues: []LegacyConfigIssue{},

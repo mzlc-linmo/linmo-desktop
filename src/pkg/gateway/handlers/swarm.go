@@ -11,7 +11,7 @@ import (
 )
 
 // IsAgentToAgentEnabled returns whether tools.agentToAgent.enabled is true.
-func IsAgentToAgentEnabled(cfg *config.OpenOctaConfig) bool {
+func IsAgentToAgentEnabled(cfg *config.LinmoConfig) bool {
 	if cfg == nil || cfg.Tools == nil || cfg.Tools.AgentToAgent == nil || cfg.Tools.AgentToAgent.Enabled == nil {
 		return false
 	}

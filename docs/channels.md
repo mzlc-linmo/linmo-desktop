@@ -51,8 +51,8 @@
 步骤概览：
 
 1. 在飞书后台创建自建应用，获取 `appId/appSecret/encryptKey/verificationToken`。  
-2. 在本地编辑 `openocta.json`，按上述示例填入 `channels.feishu` 与 `hooks` 段。
-3. 启动 Gateway：`make run` 或 `cd src && go run ./cmd/openocta gateway run`。
+2. 在本地编辑 `linmo.json`，按上述示例填入 `channels.feishu` 与 `hooks` 段。
+3. 启动 Gateway：`make run` 或 `cd src && go run ./cmd/linmo gateway run`。
 4. 在 Control UI 中通过 Channels 页面确认 `feishu` 已加载。  
 5. 在飞书中向机器人发送消息，观察 Agent 是否能够收到并回复。  
 

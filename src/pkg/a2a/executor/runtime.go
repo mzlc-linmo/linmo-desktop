@@ -1,4 +1,4 @@
-// Package executor runs A2A tasks against the OpenOcta agent runtime.
+// Package executor runs A2A tasks against the Linmo agent runtime.
 package executor
 
 import (

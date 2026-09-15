@@ -9,7 +9,7 @@ import (
 
 // ApplyEnvOverrides applies skill environment variable overrides.
 // Returns a function to restore original environment.
-func ApplyEnvOverrides(entries []Entry, cfg *config.OpenOctaConfig) func() {
+func ApplyEnvOverrides(entries []Entry, cfg *config.LinmoConfig) func() {
 	restore := make(map[string]string)
 
 	for _, entry := range entries {

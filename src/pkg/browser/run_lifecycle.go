@@ -39,7 +39,7 @@ func runUsedBrowser(runID string) bool {
 }
 
 // StopForRun closes Chromium when the given run had used the browser tool.
-func StopForRun(ctx context.Context, cfg *config.OpenOctaConfig, env func(string) string, runID string) {
+func StopForRun(ctx context.Context, cfg *config.LinmoConfig, env func(string) string, runID string) {
 	if !runUsedBrowser(runID) {
 		return
 	}

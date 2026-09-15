@@ -18,7 +18,7 @@ var (
 )
 
 // Init creates the global swarm orchestrator.
-func Init(runner executor.Runner, broadcast swarm.Broadcaster, cfg *config.OpenOctaConfig, env func(string) string) error {
+func Init(runner executor.Runner, broadcast swarm.Broadcaster, cfg *config.LinmoConfig, env func(string) string) error {
 	if env == nil {
 		env = os.Getenv
 	}

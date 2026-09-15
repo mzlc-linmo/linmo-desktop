@@ -10,7 +10,7 @@ import (
 )
 
 // LoadSkillRegistrationsWithBaseDirs returns skill base dirs for sandbox allowlists.
-func LoadSkillRegistrationsWithBaseDirs(workspaceDir string, cfg *config.OpenOctaConfig) ([]string, []string) {
+func LoadSkillRegistrationsWithBaseDirs(workspaceDir string, cfg *config.LinmoConfig) ([]string, []string) {
 	entries, err := LoadWorkspaceSkillEntries(workspaceDir, cfg)
 	if err != nil || len(entries) == 0 {
 		return nil, nil
@@ -18,17 +18,17 @@ func LoadSkillRegistrationsWithBaseDirs(workspaceDir string, cfg *config.OpenOct
 	return nil, uniqueAbsSkillBaseDirs(entries)
 }
 
-func LoadWorkspaceSkillEntries(workspaceDir string, cfg *config.OpenOctaConfig) ([]agentSkills.Entry, error) {
+func LoadWorkspaceSkillEntries(workspaceDir string, cfg *config.LinmoConfig) ([]agentSkills.Entry, error) {
 	opts := &agentSkills.LoadOptions{Config: cfg}
 	return agentSkills.LoadWorkspaceEntries(workspaceDir, opts)
 }
 
 // LoadSkillsForWorkspace loads skill entries from workspace, managed, and bundled dirs.
-func LoadSkillsForWorkspace(workspaceDir string, cfg *config.OpenOctaConfig) ([]agentSkills.Entry, error) {
+func LoadSkillsForWorkspace(workspaceDir string, cfg *config.LinmoConfig) ([]agentSkills.Entry, error) {
 	return LoadWorkspaceSkillEntries(workspaceDir, cfg)
 }
 
-func LoadEmployeeSkillEntries(workspaceDir string, cfg *config.OpenOctaConfig, employeeID string, env func(string) string) []agentSkills.Entry {
+func LoadEmployeeSkillEntries(workspaceDir string, cfg *config.LinmoConfig, employeeID string, env func(string) string) []agentSkills.Entry {
 	return agentSkills.LoadEmployeeEntries(workspaceDir, cfg, employeeID, env)
 }
 
@@ -96,12 +96,12 @@ func BuildSystemPromptSkillsSection(projectRoot string, opts Options) string {
 }
 
 // BuildSkillsPrompt is used by tests and callers.
-func BuildSkillsPrompt(entries []agentSkills.Entry, cfg *config.OpenOctaConfig) string {
+func BuildSkillsPrompt(entries []agentSkills.Entry, cfg *config.LinmoConfig) string {
 	_ = cfg
 	return agentSkills.BuildPrompt(entries)
 }
 
 // ApplySkillEnvOverrides applies skill environment variable overrides.
-func ApplySkillEnvOverrides(entries []agentSkills.Entry, cfg *config.OpenOctaConfig) func() {
+func ApplySkillEnvOverrides(entries []agentSkills.Entry, cfg *config.LinmoConfig) func() {
 	return agentSkills.ApplyEnvOverrides(entries, cfg)
 }

@@ -1,6 +1,6 @@
 # DingTalk 通道配置说明
 
-本文说明如何在 `openocta.json` 中配置 DingTalk（钉钉）通道，并与 Runtime 对应起来。
+本文说明如何在 `linmo.json` 中配置 DingTalk（钉钉）通道，并与 Runtime 对应起来。
 
 ## 配置位置
 
@@ -57,7 +57,7 @@
 
 1. 在[钉钉开放平台](https://open.dingtalk.com/)创建应用，获取 `clientId` 与 `clientSecret`。
 2. 开通机器人能力，配置消息接收方式为 **Stream 模式**。
-3. 在 `openocta.json` 中填入 `channels.dingtalk.credentials`，并设置 `enabled: true`。
-4. 启动 Gateway：`make run` 或 `go run ./cmd/openocta gateway run`。
+3. 在 `linmo.json` 中填入 `channels.dingtalk.credentials`，并设置 `enabled: true`。
+4. 启动 Gateway：`make run` 或 `go run ./cmd/linmo gateway run`。
 5. 在 Control UI 中确认 `channels.status` 返回的列表中包含 `dingtalk`。
 6. 在钉钉中向机器人发送消息，检查 Agent 是否能够收到并回复。

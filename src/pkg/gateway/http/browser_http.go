@@ -67,7 +67,7 @@ func (s *Server) handleDesktopBrowser(w http.ResponseWriter, r *http.Request) {
 	s.handleBrowserRequest(w, r)
 }
 
-func (s *Server) browserConfig() *config.OpenOctaConfig {
+func (s *Server) browserConfig() *config.LinmoConfig {
 	if s != nil && s.ctx != nil {
 		return s.ctx.Config
 	}

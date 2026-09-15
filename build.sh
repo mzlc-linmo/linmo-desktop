@@ -1,5 +1,5 @@
 #!/bin/bash
-# OpenOcta 构建脚本
+# Linmo 构建脚本
 # 用法: ./build.sh [ui|embed|go|build|clean|snapshot|release|docker|wails|wails-dmg|wails-dmg-signed|wails-nsis]
 # 默认: build（完整构建）
 
@@ -16,7 +16,7 @@ do_embed() {
   ./scripts/set-version.sh
   do_ui
   echo "==> 复制 embed 资源..."
-  for f in src/config-schema.json src/openocta.json.example src/.env; do
+  for f in src/config-schema.json src/linmo.json.example src/.env; do
     if [ -f "$f" ]; then
       cp "$f" src/embed/
     fi
@@ -26,8 +26,8 @@ do_embed() {
 do_go() {
   do_embed
   echo "==> 构建 Go 二进制..."
-  cd src && go build -ldflags "-s -w" -o ../openocta ./cmd/openocta && cd ..
-  echo "==> 完成: ./openocta"
+  cd src && go build -ldflags "-s -w" -o ../linmo ./cmd/linmo && cd ..
+  echo "==> 完成: ./linmo"
 }
 
 do_build() {
@@ -42,12 +42,12 @@ do_clean() {
     build \
     src/embed/frontend \
     src/embed/config-schema.json \
-    src/embed/openocta.json.example \
+    src/embed/linmo.json.example \
     src/build/bin \
-    openocta \
-    openocta.exe \
-    openocta-launcher \
-    openocta-launcher.exe
+    linmo \
+    linmo.exe \
+    linmo-launcher \
+    linmo-launcher.exe
   echo "==> 清理完成"
 }
 
@@ -65,7 +65,7 @@ do_release() {
 
 do_docker() {
   echo "==> Docker 构建..."
-  docker build -f deploy/Dockerfile -t openocta:local .
+  docker build -f deploy/Dockerfile -t linmo:local .
 }
 
 do_after() {
@@ -160,7 +160,7 @@ do_wails_nsis() {
   fi
   local nsis_root
   nsis_root="$(resolve_nsis_parent)" || {
-    echo "ERROR: 未找到 NSIS 的 makensis.exe。Wails 会跳过安装包，仅生成 OpenOcta.exe。"
+    echo "ERROR: 未找到 NSIS 的 makensis.exe。Wails 会跳过安装包，仅生成 Linmo.exe。"
     echo "       请安装 NSIS: https://nsis.sourceforge.io/Download"
     echo "       并确认存在: \"C:\\Program Files (x86)\\NSIS\\makensis.exe\"（或对应安装路径）。"
     exit 1
